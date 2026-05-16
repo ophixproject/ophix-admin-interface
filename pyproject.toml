@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ophix-admin-interface"
+version = "2026.05.16.01"
+description = "Ophix fork of django-admin-interface: theme management, extended CSS vars, namespaced media, bundled theme API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Ophix Project" }
+]
+dependencies = [
+    "Django>=4.2",
+    "django-colorfield>=0.11",
+]
+
+[project.entry-points."ophix.plugins"]
+ophix_admin_interface = "admin_interface"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"admin_interface" = [
+    "templates/**/*.html",
+    "static/**/*",
+    "locale/**/*",
+    "fixtures/**/*",
+]
