@@ -29,6 +29,7 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "admin_interface" = [
+    "OPHIX_RELEASE_NOTES.md",
     "templates/**/*.html",
     "static/**/*",
     "locale/**/*",
