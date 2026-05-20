@@ -1,5 +1,17 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.20.02
+
+- Fixed bundled Ophix theme media path: logo file was copied to the wrong
+  destination under `MEDIA_ROOT`. Restructured bundled `media/` directory to
+  use the flat `media/<field>/` layout that `install_bundled_theme` expects.
+- `install_bundled_theme` now always copies media files on every migrate run,
+  not only when the theme is first installed. Fixes missing assets on existing
+  installs after an upgrade.
+- Bundled Ophix theme title is now populated from `SERVER_NAME` on first
+  install (e.g. "Ophix credserver"). Only fills a blank title — never
+  overwrites a value the operator has already set.
+
 ## 2026.05.20.01
 
 - Bundled "Ophix" default theme with Ophix Project branding; installed automatically

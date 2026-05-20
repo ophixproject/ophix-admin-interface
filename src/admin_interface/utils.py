@@ -73,33 +73,35 @@ def install_bundled_theme(app_config):
             continue
 
         theme_name = data[0]["fields"]["name"]
+        already_exists = Theme.objects.filter(name=theme_name).exists()
 
-        if Theme.objects.filter(name=theme_name).exists():
-            continue  # already installed — nothing to do
+        if not already_exists:
+            # Force inactive on install; strip pk for portability
+            for obj in data:
+                obj["fields"]["active"] = False
+                obj.pop("pk", None)
 
-        # Force inactive on install; strip pk for portability
-        for obj in data:
-            obj["fields"]["active"] = False
-            obj.pop("pk", None)
+                # Ensure media paths use the namespaced convention
+                for field_name in ("logo", "logo_dark", "favicon"):
+                    media_path = obj["fields"].get(field_name)
+                    if media_path:
+                        filename = Path(media_path).name
+                        obj["fields"][field_name] = "admin-interface/themes/{}/{}/{}".format(
+                            theme_name, field_name, filename
+                        )
 
-            # Ensure media paths use the namespaced convention
-            for field_name in ("logo", "logo_dark", "favicon"):
-                media_path = obj["fields"].get(field_name)
-                if media_path:
-                    filename = Path(media_path).name
-                    obj["fields"][field_name] = "admin-interface/themes/{}/{}/{}".format(
-                        theme_name, field_name, filename
-                    )
+            fd, temp_path = tempfile.mkstemp(suffix=".json")
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8") as f:
+                    json.dump(data, f)
+                management.call_command("loaddata", temp_path, verbosity=0)
+            finally:
+                os.unlink(temp_path)
 
-        fd, temp_path = tempfile.mkstemp(suffix=".json")
-        try:
-            with os.fdopen(fd, "w", encoding="utf-8") as f:
-                json.dump(data, f)
-            management.call_command("loaddata", temp_path, verbosity=0)
-        finally:
-            os.unlink(temp_path)
+            installed.append(theme_name)
 
-        # Copy media files to namespaced paths under MEDIA_ROOT
+        # Always copy media files — ensures assets land correctly even if the
+        # theme row existed already (e.g. after a package upgrade or path fix).
         media_dir = theme_dir / "media"
         media_root = getattr(settings, "MEDIA_ROOT", None)
 
@@ -108,8 +110,8 @@ def install_bundled_theme(app_config):
                 media_root = Path(media_root)
                 for src in media_dir.rglob("*"):
                     if src.is_file():
-                        # Place under admin-interface/themes/<name>/<field>/<filename>
-                        # Infer field type from the source subdirectory name
+                        # Infer field type from the first subdirectory under media/
+                        # Expected layout: media/<field_name>/<filename>
                         parts = src.relative_to(media_dir).parts
                         field_name = parts[0] if len(parts) > 1 else "logo"
                         dst = (
@@ -122,14 +124,12 @@ def install_bundled_theme(app_config):
                         )
                         dst.parent.mkdir(parents=True, exist_ok=True)
                         shutil.copy2(src, dst)
-            else:
+            elif not already_exists:
                 import warnings
                 warnings.warn(
                     "Theme '{}' installed but MEDIA_ROOT is not configured — "
                     "logo and favicon will not be served.".format(theme_name),
                     stacklevel=2,
                 )
-
-        installed.append(theme_name)
 
     return installed
