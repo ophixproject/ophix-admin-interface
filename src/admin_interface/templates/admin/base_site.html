@@ -172,11 +172,14 @@ admin-interface
 {% get_admin_interface_theme as theme %}
 <h1 id="site-name">
     <a href="{% url 'admin:index' %}">
-        {% if theme.logo_visible %}
-            {% if theme.logo %}
-            <img class="logo" style="display:none;" src="{{ theme.logo.url }}" {% if theme.logo.width %}width="{{ theme.logo.width }}"{% endif %} {% if theme.logo.height %}height="{{ theme.logo.height }}"{% endif %}>
+        {% if theme.logo_visible and theme.logo %}
+            {% if theme.logo_dark %}
+            <picture>
+                <source srcset="{{ theme.logo_dark.url }}" media="(prefers-color-scheme: dark)">
+                <img class="logo" style="display:none;" src="{{ theme.logo.url }}" {% if theme.logo.width %}width="{{ theme.logo.width }}"{% endif %} {% if theme.logo.height %}height="{{ theme.logo.height }}"{% endif %}>
+            </picture>
             {% else %}
-            <img class="logo default" style="display:none;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="104" height="36">
+            <img class="logo" style="display:none;" src="{{ theme.logo.url }}" {% if theme.logo.width %}width="{{ theme.logo.width }}"{% endif %} {% if theme.logo.height %}height="{{ theme.logo.height }}"{% endif %}>
             {% endif %}
         {% endif %}
         {% if theme.title_visible %}

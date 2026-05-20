@@ -14,6 +14,10 @@ def _logo_upload_to(instance, filename):
     return "admin-interface/themes/{}/logo/{}".format(instance.name, filename)
 
 
+def _logo_dark_upload_to(instance, filename):
+    return "admin-interface/themes/{}/logo_dark/{}".format(instance.name, filename)
+
+
 def _favicon_upload_to(instance, filename):
     return "admin-interface/themes/{}/favicon/{}".format(instance.name, filename)
 
@@ -102,6 +106,17 @@ class Theme(models.Model):
     logo_visible = models.BooleanField(
         default=True,
         verbose_name=_("visible"),
+    )
+    logo_dark = models.FileField(
+        upload_to=_logo_dark_upload_to,
+        blank=True,
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=["gif", "jpg", "jpeg", "png", "svg"]
+            )
+        ],
+        help_text=_("Optional logo for dark mode. Shown when the OS/browser is in dark mode. Leave blank to use the standard logo in all modes."),
+        verbose_name=_("dark mode logo"),
     )
 
     favicon = models.FileField(

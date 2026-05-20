@@ -105,12 +105,13 @@ class Command(BaseCommand):
                 if env_override is not None:
                     fields["env_name"] = env_override
 
-                for field_name in ("logo", "favicon"):
+                for field_name in ("logo", "logo_dark", "favicon"):
                     media_path = fields.get(field_name)
                     if media_path:
                         media_path = str(media_path)
                         match = re.match(
-                            r"^admin-interface/themes/([^/]+)/(logo|favicon)/(.+)$", media_path
+                            r"^admin-interface/themes/([^/]+)/(logo|logo_dark|favicon)/(.+)$",
+                            media_path,
                         )
                         if match:
                             fields[field_name] = (
@@ -133,17 +134,14 @@ class Command(BaseCommand):
             if media_dir.exists():
                 for file_path in media_dir.rglob("*"):
                     if file_path.is_file():
-                        rel_path = None
-                        for obj in data:
-                            for field_name in ("logo", "favicon"):
-                                field_val = obj["fields"].get(field_name)
-                                if field_val and Path(field_val).name == file_path.name:
-                                    rel_path = Path(field_val)
-                                    break
-                            if rel_path:
-                                break
-                        if not rel_path:
-                            rel_path = Path(file_path.name)
+                        # Derive destination by substituting the theme name into
+                        # the path rather than matching by filename — handles any
+                        # field (logo, logo_dark, favicon) without enumeration.
+                        parts = list(file_path.relative_to(media_dir).parts)
+                        # parts: ['admin-interface', 'themes', '<original>', '<field>', '<file>']
+                        if len(parts) >= 3 and parts[1] == "themes":
+                            parts[2] = theme_name
+                        rel_path = Path(*parts)
                         dst_path = Path(settings.MEDIA_ROOT) / rel_path
                         dst_path.parent.mkdir(parents=True, exist_ok=True)
                         shutil.copy2(file_path, dst_path)

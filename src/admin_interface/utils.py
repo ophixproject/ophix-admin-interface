@@ -26,8 +26,9 @@ def install_bundled_theme(app_config):
     containing a ``theme.json`` fixture and an optional ``media/``
     subdirectory.
 
-    Media files are copied to ``MEDIA_ROOT`` under the namespaced path
-    ``admin-interface/themes/<ThemeName>/logo/`` and
+    Media files are copied to ``MEDIA_ROOT`` under namespaced paths
+    ``admin-interface/themes/<ThemeName>/logo/``,
+    ``admin-interface/themes/<ThemeName>/logo_dark/``, and
     ``admin-interface/themes/<ThemeName>/favicon/`` — consistent with the
     upload_to paths set on the Theme model.
 
@@ -82,7 +83,7 @@ def install_bundled_theme(app_config):
             obj.pop("pk", None)
 
             # Ensure media paths use the namespaced convention
-            for field_name in ("logo", "favicon"):
+            for field_name in ("logo", "logo_dark", "favicon"):
                 media_path = obj["fields"].get(field_name)
                 if media_path:
                     filename = Path(media_path).name

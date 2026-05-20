@@ -11,3 +11,11 @@ class AdminInterfaceConfig(AppConfig):
         from admin_interface import settings
 
         settings.check_installed_apps()
+
+        from django.db.models.signals import post_migrate
+        post_migrate.connect(_install_ophix_theme, sender=self)
+
+
+def _install_ophix_theme(sender, **kwargs):
+    from admin_interface.utils import install_bundled_theme
+    install_bundled_theme(sender)

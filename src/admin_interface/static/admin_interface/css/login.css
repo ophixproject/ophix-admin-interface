@@ -29,11 +29,13 @@
     margin-right:0;
 }
 
-.admin-interface.login #header #branding h1 img.logo {
+.admin-interface.login #header #branding h1 img.logo,
+.admin-interface.login #header #branding h1 picture {
     margin-right: 0;
 }
 
-.admin-interface.login #header #branding h1 img.logo+span {
+.admin-interface.login #header #branding h1 img.logo+span,
+.admin-interface.login #header #branding h1 picture+span {
     display: block;
 }
 

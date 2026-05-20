@@ -19,11 +19,18 @@
     display: inline-block !important; /* override inline display:none; */
 }
 
+.admin-interface #branding h1 picture {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
 .admin-interface #branding h1 span {
     display: inline-block;
 }
 
-.admin-interface #branding h1 img.logo+span {
+.admin-interface #branding h1 img.logo+span,
+.admin-interface #branding h1 picture+span {
     white-space: nowrap;
 }
 

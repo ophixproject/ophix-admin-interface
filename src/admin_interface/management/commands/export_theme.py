@@ -89,12 +89,13 @@ class Command(BaseCommand):
                 if rename:
                     fields["name"] = rename
 
-                for field_name in ("logo", "favicon"):
+                for field_name in ("logo", "logo_dark", "favicon"):
                     media_path = fields.get(field_name)
                     if media_path:
                         media_path = str(media_path)
                         match = re.match(
-                            r"^admin-interface/themes/([^/]+)/(logo|favicon)/(.+)$", media_path
+                            r"^admin-interface/themes/([^/]+)/(logo|logo_dark|favicon)/(.+)$",
+                            media_path,
                         )
                         filename = Path(media_path).name
                         if match:
@@ -109,7 +110,7 @@ class Command(BaseCommand):
             with open(json_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
 
-            for field_name in ("logo", "favicon"):
+            for field_name in ("logo", "logo_dark", "favicon"):
                 field_file = getattr(theme, field_name)
                 if field_file and field_file.name:
                     src_path = Path(field_file.path)
