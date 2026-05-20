@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.05.20.01
 
 - Bundled "Ophix" default theme with Ophix Project branding; installed automatically
   on `migrate` — active by default on fresh installs, inactive alongside existing themes.
