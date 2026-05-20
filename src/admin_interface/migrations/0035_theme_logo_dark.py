@@ -1,3 +1,4 @@
+import admin_interface.models
 from django.core.validators import FileExtensionValidator
 from django.db import migrations, models
 
@@ -15,7 +16,7 @@ class Migration(migrations.Migration):
             field=models.FileField(
                 blank=True,
                 help_text="Optional logo for dark mode. Shown when the OS/browser is in dark mode. Leave blank to use the standard logo in all modes.",
-                upload_to="admin-interface/themes/",
+                upload_to=admin_interface.models._logo_dark_upload_to,
                 validators=[
                     FileExtensionValidator(
                         allowed_extensions=["gif", "jpg", "jpeg", "png", "svg"]

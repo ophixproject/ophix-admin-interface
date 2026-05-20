@@ -1,5 +1,11 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Fixed migration 0035: `logo_dark` `upload_to` was stored as a static string
+  instead of the callable, causing Django to report pending model changes after
+  the migration had already been applied.
+
 ## 2026.05.20.02
 
 - Fixed bundled Ophix theme media path: logo file was copied to the wrong
