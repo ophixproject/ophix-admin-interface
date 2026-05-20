@@ -34,4 +34,5 @@ where = ["src"]
     "static/**/*",
     "locale/**/*",
     "fixtures/**/*",
+    "themes/**/*",
 ]
