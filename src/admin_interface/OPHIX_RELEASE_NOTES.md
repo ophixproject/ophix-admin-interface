@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.05.21.01
 
 - Fixed migration 0035: `logo_dark` `upload_to` was stored as a static string
   instead of the callable, causing Django to report pending model changes after
