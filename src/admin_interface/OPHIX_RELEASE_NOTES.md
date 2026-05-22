@@ -1,5 +1,12 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.22.01
+
+- Theme deletion now removes the namespaced media directory (`MEDIA_ROOT/admin-interface/themes/<name>/`)
+  via `post_delete` signal, covering both UI deletion and the `delete_theme` management command.
+  Previously, UI-initiated deletions left media files on disk. `delete_theme --preserve-media` still
+  suppresses cleanup when needed.
+
 ## 2026.05.21.01
 
 - Fixed migration 0035: `logo_dark` `upload_to` was stored as a static string
