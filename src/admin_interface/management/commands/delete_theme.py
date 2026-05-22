@@ -1,4 +1,3 @@
-import shutil
 from pathlib import Path
 
 from django.apps import apps
@@ -52,25 +51,16 @@ class Command(BaseCommand):
             ))
             return
 
-        deleted = []
+        theme_media_dir = Path(settings.MEDIA_ROOT) / "admin-interface" / "themes" / theme_name
+        has_media = theme_media_dir.exists()
 
-        if not preserve_media:
-            theme_media_dir = (
-                Path(settings.MEDIA_ROOT) / "admin-interface" / "themes" / theme_name
-            )
-            if theme_media_dir.exists():
-                shutil.rmtree(theme_media_dir)
-                deleted.append(str(theme_media_dir))
-
+        theme._preserve_media = preserve_media
         theme.delete()
-        self.stdout.write(self.style.SUCCESS(f"Deleted theme '{theme_name}'."))
 
-        if not preserve_media:
-            if deleted:
-                self.stdout.write("Deleted media directories:")
-                for d in deleted:
-                    self.stdout.write(f"  {d}")
-            else:
-                self.stdout.write("No media directories to delete.")
-        else:
+        self.stdout.write(self.style.SUCCESS(f"Deleted theme '{theme_name}'."))
+        if preserve_media:
             self.stdout.write("Preserved media files/directories.")
+        elif has_media:
+            self.stdout.write(f"Deleted media: {theme_media_dir}")
+        else:
+            self.stdout.write("No media directory found.")
