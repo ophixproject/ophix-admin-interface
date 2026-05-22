@@ -1,4 +1,8 @@
+import shutil
+from pathlib import Path
+
 from colorfield.fields import ColorField
+from django.conf import settings
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_delete, post_save, pre_save
@@ -474,6 +478,10 @@ class Theme(models.Model):
 def post_delete_handler(sender, instance, **kwargs):
     del_cached_active_theme()
     Theme.objects.get_active()
+    if not getattr(instance, "_preserve_media", False):
+        theme_dir = Path(settings.MEDIA_ROOT) / "admin-interface" / "themes" / instance.name
+        if theme_dir.exists():
+            shutil.rmtree(theme_dir)
 
 
 @receiver(post_save, sender=Theme)
