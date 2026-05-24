@@ -1,7 +1,7 @@
 # Ophix Admin Interface Release Notes
 
 
-## Unreleased
+## 2026.05.25.01
 
 - Remove `logo_dark` field — the header background colour is fixed per theme, so a dark-mode logo variant is never needed
 
