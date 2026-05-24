@@ -1,5 +1,10 @@
 # Ophix Admin Interface Release Notes
 
+
+## 2026.05.24.01
+
+- Update logo, logo_dark and favicon to match new Ophix branding
+
 ## 2026.05.22.01
 
 - Theme deletion now removes the namespaced media directory (`MEDIA_ROOT/admin-interface/themes/<name>/`)
