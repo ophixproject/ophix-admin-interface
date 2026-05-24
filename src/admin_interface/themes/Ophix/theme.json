@@ -2,7 +2,7 @@
   {
     "model": "admin_interface.theme",
     "fields": {
-      "name": "Imago",
+      "name": "Ophix",
       "active": true,
       "title": "",
       "title_color": "#FFFFFF",
