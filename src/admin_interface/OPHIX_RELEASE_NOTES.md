@@ -1,9 +1,14 @@
 # Ophix Admin Interface Release Notes
 
 
+## Unreleased
+
+- Remove `logo_dark` field — the header background colour is fixed per theme, so a dark-mode logo variant is never needed
+
 ## 2026.05.24.01
 
-- Update logo, logo_dark and favicon to match new Ophix branding
+- Add bundled Ophix theme (logo, favicon) installed automatically on migrate
+- Update logo and favicon to match new Ophix branding
 
 ## 2026.05.22.01
 

@@ -82,7 +82,7 @@ def install_bundled_theme(app_config):
                 obj.pop("pk", None)
 
                 # Ensure media paths use the namespaced convention
-                for field_name in ("logo", "logo_dark", "favicon"):
+                for field_name in ("logo", "favicon"):
                     media_path = obj["fields"].get(field_name)
                     if media_path:
                         filename = Path(media_path).name

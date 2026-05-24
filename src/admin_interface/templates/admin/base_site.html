@@ -173,14 +173,7 @@ admin-interface
 <h1 id="site-name">
     <a href="{% url 'admin:index' %}">
         {% if theme.logo_visible and theme.logo %}
-            {% if theme.logo_dark %}
-            <picture>
-                <source srcset="{{ theme.logo_dark.url }}" media="(prefers-color-scheme: dark)">
-                <img class="logo" style="display:none;" src="{{ theme.logo.url }}" {% if theme.logo.width %}width="{{ theme.logo.width }}"{% endif %} {% if theme.logo.height %}height="{{ theme.logo.height }}"{% endif %}>
-            </picture>
-            {% else %}
             <img class="logo" style="display:none;" src="{{ theme.logo.url }}" {% if theme.logo.width %}width="{{ theme.logo.width }}"{% endif %} {% if theme.logo.height %}height="{{ theme.logo.height }}"{% endif %}>
-            {% endif %}
         {% endif %}
         {% if theme.title_visible %}
         <span>{% if theme.title %}{% translate theme.title %}{% else %}{{ site_header|default:_('Django administration') }}{% endif %}</span>
