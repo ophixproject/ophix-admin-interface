@@ -23,7 +23,7 @@ as part of any Ophix server deployment. Operators do not normally need to instal
 
 ## Theme packages
 
-Ophix theme packages (`ophix-theme-midnight`, `ophix-theme-imago`, etc.) depend on this
+Ophix theme packages (`ophix-theme-midnight`, `ophix-theme-ocean`, etc.) depend on this
 package and use `install_bundled_theme()` to register themes on `post_migrate`. Themes
 install inactive; the operator activates one via the admin UI or the `set_theme` management
 command.

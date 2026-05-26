@@ -4,7 +4,7 @@ admin_interface.utils
 Python-callable utilities for installing bundled themes from pip packages.
 
 Call install_bundled_theme() from AppConfig.ready() via a post_migrate
-signal in theme packages (e.g. ophix-theme-imago).
+signal in theme packages (e.g. ophix-theme-midnight).
 """
 
 import json
