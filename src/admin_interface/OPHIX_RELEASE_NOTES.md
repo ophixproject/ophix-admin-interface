@@ -1,5 +1,16 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.27.05
+
+- Added `set_title` management command — prompts for a new title on the active theme.
+  Enter keeps the existing value; `--clear` removes it; `--use-existing` copies the title
+  from a previously active (now inactive) theme.
+- `set_theme` and `set_title` now print the correct `systemctl restart` command using
+  `SERVICE_NAME` from settings rather than a generic `<slug>` placeholder.
+- `set_theme` hints to run `set_title` if the newly activated theme has no title set.
+- Removed "Django administration" fallback from `base_site.html` — blank title now renders
+  blank in both the browser tab and the branding header.
+
 ## 2026.05.27.01
 
 - Fixed `install_bundled_theme` media path detection — field name (`logo`/`favicon`) is now
