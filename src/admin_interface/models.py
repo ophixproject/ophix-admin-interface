@@ -18,6 +18,11 @@ def _logo_upload_to(instance, filename):
     return "admin-interface/themes/{}/logo/{}".format(instance.name, filename)
 
 
+def _logo_dark_upload_to(instance, filename):
+    # Retained for migration 0035 compatibility — field removed in 0036.
+    return "admin-interface/themes/{}/logo_dark/{}".format(instance.name, filename)
+
+
 def _favicon_upload_to(instance, filename):
     return "admin-interface/themes/{}/favicon/{}".format(instance.name, filename)
 
