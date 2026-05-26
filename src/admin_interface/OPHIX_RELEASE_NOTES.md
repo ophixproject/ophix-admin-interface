@@ -1,5 +1,14 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Fixed `install_bundled_theme` media path detection — field name (`logo`/`favicon`) is now
+  read from the correct position in the namespaced layout used by all theme packages
+  (`media/admin-interface/themes/<name>/<field>/<file>`). Previously files landed under
+  `…/admin-interface/` instead of `…/logo/` or `…/favicon/`.
+- `Theme.title` default changed from `"Django administration"` to `""` so new installs
+  start with no title unless the operator sets one.
+
 ## 2026.05.26.01
 
 - Removed remaining `logo_dark` source references (export_theme, import_theme, utils)
