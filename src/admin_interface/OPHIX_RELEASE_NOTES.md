@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.05.26.01
 
 - Removed remaining `logo_dark` source references (export_theme, import_theme, utils)
   that were left over after migration 0036 dropped the field
