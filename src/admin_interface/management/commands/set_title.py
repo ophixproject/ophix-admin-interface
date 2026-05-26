@@ -14,6 +14,11 @@ class Command(BaseCommand):
                 "rather than prompting for a new one"
             ),
         )
+        parser.add_argument(
+            "--clear",
+            action="store_true",
+            help="Clear the title on the active theme without prompting",
+        )
 
     def handle(self, *args, **options):
         Theme = apps.get_model("admin_interface", "Theme")
@@ -23,7 +28,9 @@ class Command(BaseCommand):
             self.stderr.write(self.style.ERROR("No active theme found."))
             return
 
-        if options["use_existing"]:
+        if options["clear"]:
+            new_title = ""
+        elif options["use_existing"]:
             candidates = list(
                 Theme.objects.filter(active=False)
                 .exclude(title="")
@@ -50,7 +57,8 @@ class Command(BaseCommand):
         else:
             current = active.title or ""
             prompt = f"Title [{current}]: " if current else "Title: "
-            new_title = input(prompt).strip()
+            entered = input(prompt).strip()
+            new_title = entered if entered else current
 
         active.title = new_title
         active.save()
