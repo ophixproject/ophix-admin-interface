@@ -105,12 +105,12 @@ class Command(BaseCommand):
                 if env_override is not None:
                     fields["env_name"] = env_override
 
-                for field_name in ("logo", "logo_dark", "favicon"):
+                for field_name in ("logo", "favicon"):
                     media_path = fields.get(field_name)
                     if media_path:
                         media_path = str(media_path)
                         match = re.match(
-                            r"^admin-interface/themes/([^/]+)/(logo|logo_dark|favicon)/(.+)$",
+                            r"^admin-interface/themes/([^/]+)/(logo|favicon)/(.+)$",
                             media_path,
                         )
                         if match:
@@ -136,7 +136,7 @@ class Command(BaseCommand):
                     if file_path.is_file():
                         # Derive destination by substituting the theme name into
                         # the path rather than matching by filename — handles any
-                        # field (logo, logo_dark, favicon) without enumeration.
+                        # field (logo, favicon) without enumeration.
                         parts = list(file_path.relative_to(media_dir).parts)
                         # parts: ['admin-interface', 'themes', '<original>', '<field>', '<file>']
                         if len(parts) >= 3 and parts[1] == "themes":

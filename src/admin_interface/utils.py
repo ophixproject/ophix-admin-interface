@@ -27,8 +27,7 @@ def install_bundled_theme(app_config):
     subdirectory.
 
     Media files are copied to ``MEDIA_ROOT`` under namespaced paths
-    ``admin-interface/themes/<ThemeName>/logo/``,
-    ``admin-interface/themes/<ThemeName>/logo_dark/``, and
+    ``admin-interface/themes/<ThemeName>/logo/`` and
     ``admin-interface/themes/<ThemeName>/favicon/`` — consistent with the
     upload_to paths set on the Theme model.
 
