@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.05.27.01
 
 - Fixed `install_bundled_theme` media path detection — field name (`logo`/`favicon`) is now
   read from the correct position in the namespaced layout used by all theme packages
