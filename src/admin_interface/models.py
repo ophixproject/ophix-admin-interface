@@ -64,7 +64,7 @@ class Theme(models.Model):
 
     title = models.CharField(
         max_length=50,
-        default=_("Django administration"),
+        default="",
         blank=True,
         verbose_name=_("title"),
     )
