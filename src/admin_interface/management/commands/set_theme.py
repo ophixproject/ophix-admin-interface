@@ -3,6 +3,8 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
+Theme = apps.get_model("admin_interface", "Theme")
+
 
 class Command(BaseCommand):
     help = "Set the active Theme by name"
@@ -20,7 +22,6 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        Theme = apps.get_model("admin_interface", "Theme")
         theme_name = options["theme_name"]
 
         try:
@@ -52,9 +53,10 @@ class Command(BaseCommand):
         if not settings.DEBUG and not options["no_collectstatic"]:
             self.stdout.write("Running collectstatic...")
             call_command("collectstatic", "--noinput", verbosity=1)
+            service_name = getattr(settings, "SERVICE_NAME", "").strip()
+            restart_cmd = f"sudo systemctl restart {service_name}" if service_name else "sudo systemctl restart <service-name>"
             self.stdout.write(self.style.WARNING(
-                "Restart the service for the updated static files to take effect: "
-                "sudo systemctl restart <slug>"
+                f"Restart the service for the updated static files to take effect: {restart_cmd}"
             ))
         elif settings.DEBUG:
             self.stdout.write(self.style.WARNING(
