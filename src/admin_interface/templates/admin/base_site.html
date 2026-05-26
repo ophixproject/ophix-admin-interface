@@ -3,7 +3,7 @@
 
 {% block title %}
 {% get_admin_interface_theme as theme %}
-{% if title %}{{ title }} | {% endif %}{% if theme.title %}{% translate theme.title %}{% else %}{{ site_title|default:_('Django administration') }}{% endif %}
+{% if title %}{{ title }} | {% endif %}{% if theme.title %}{% translate theme.title %}{% endif %}
 {% endblock title %}
 
 {% block extrastyle %}
@@ -176,7 +176,7 @@ admin-interface
             <img class="logo" style="display:none;" src="{{ theme.logo.url }}" {% if theme.logo.width %}width="{{ theme.logo.width }}"{% endif %} {% if theme.logo.height %}height="{{ theme.logo.height }}"{% endif %}>
         {% endif %}
         {% if theme.title_visible %}
-        <span>{% if theme.title %}{% translate theme.title %}{% else %}{{ site_header|default:_('Django administration') }}{% endif %}</span>
+        <span>{% if theme.title %}{% translate theme.title %}{% endif %}</span>
         {% endif %}
     </a>
 </h1>
