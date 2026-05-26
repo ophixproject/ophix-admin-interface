@@ -1,5 +1,11 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Removed remaining `logo_dark` source references (export_theme, import_theme, utils)
+  that were left over after migration 0036 dropped the field
+- Added classifiers, keywords, and project URLs to `pyproject.toml` for PyPI publishing
+- Added `README.md`
 
 ## 2026.05.25.01
 
