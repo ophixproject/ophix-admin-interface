@@ -50,6 +50,11 @@ class Command(BaseCommand):
                 f"Activated theme '{new_theme.name}'."
             ))
 
+        if not new_theme.title:
+            self.stdout.write(self.style.WARNING(
+                "This theme has no title set. Run: ophix-manage set_title"
+            ))
+
         if not settings.DEBUG and not options["no_collectstatic"]:
             self.stdout.write("Running collectstatic...")
             call_command("collectstatic", "--noinput", verbosity=1)
