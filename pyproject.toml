@@ -55,4 +55,5 @@ where = ["src"]
     "locale/**/*",
     "fixtures/**/*",
     "themes/**/*",
+    "docs/**/*",
 ]
