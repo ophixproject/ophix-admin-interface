@@ -1,6 +1,11 @@
 # Ophix Admin Interface Release Notes
 
-## 2026.05.27.07
+## 2026.05.27.08
+
+- `set_title` now accepts an optional positional argument — `ophix-manage set_title "My Title"`
+  sets the title directly without prompting.
+
+## 2026.05.27.0
 
 - `set_theme` now shows a numbered interactive picker when called without a theme name,
   with `[active]` marking the current theme. Ctrl+C cancels cleanly.
