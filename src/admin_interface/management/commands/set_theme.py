@@ -12,8 +12,9 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             "theme_name",
+            nargs="?",
             type=str,
-            help="Name of the theme to activate",
+            help="Name of the theme to activate (omit to pick interactively)",
         )
         parser.add_argument(
             "--no-collectstatic",
@@ -24,11 +25,31 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         theme_name = options["theme_name"]
 
-        try:
-            new_theme = Theme.objects.get(name=theme_name)
-        except Theme.DoesNotExist:
-            self.stderr.write(self.style.ERROR(f"Theme '{theme_name}' not found."))
-            return
+        if not theme_name:
+            themes = list(Theme.objects.order_by("name"))
+            if not themes:
+                self.stderr.write(self.style.ERROR("No themes found."))
+                return
+            for i, t in enumerate(themes, 1):
+                marker = " [active]" if t.active else ""
+                self.stdout.write(f"  {i}. {t.name}{marker}")
+            try:
+                choice = input(f"Select theme to activate (1-{len(themes)}): ").strip()
+            except KeyboardInterrupt:
+                self.stdout.write("")
+                self.stdout.write("Cancelled. No changes made.")
+                return
+            try:
+                new_theme = themes[int(choice) - 1]
+            except (ValueError, IndexError):
+                self.stderr.write(self.style.ERROR("Invalid choice."))
+                return
+        else:
+            try:
+                new_theme = Theme.objects.get(name=theme_name)
+            except Theme.DoesNotExist:
+                self.stderr.write(self.style.ERROR(f"Theme '{theme_name}' not found."))
+                return
 
         if new_theme.active:
             self.stdout.write(f"Theme '{theme_name}' is already active.")
