@@ -1,5 +1,10 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.27.06
+
+- `set_title` prompt now reads `Enter new title [current]:` and Ctrl+C exits cleanly
+  with "Cancelled. No changes made." rather than a traceback.
+
 ## 2026.05.27.05
 
 - Added `set_title` management command — prompts for a new title on the active theme.
