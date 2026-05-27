@@ -1,5 +1,12 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.27.07
+
+- `set_theme` now shows a numbered interactive picker when called without a theme name,
+  with `[active]` marking the current theme. Ctrl+C cancels cleanly.
+- `set_theme` falls back to the interactive picker when the supplied name is not found,
+  printing the error before showing the list.
+
 ## 2026.05.27.06
 
 - `set_title` prompt now reads `Enter new title [current]:` and Ctrl+C exits cleanly
