@@ -7,6 +7,12 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
+            "title",
+            nargs="?",
+            type=str,
+            help="New title to set (omit to be prompted)",
+        )
+        parser.add_argument(
             "--use-existing",
             action="store_true",
             help=(
@@ -30,6 +36,8 @@ class Command(BaseCommand):
 
         if options["clear"]:
             new_title = ""
+        elif options["title"]:
+            new_title = options["title"]
         elif options["use_existing"]:
             candidates = list(
                 Theme.objects.filter(active=False)
