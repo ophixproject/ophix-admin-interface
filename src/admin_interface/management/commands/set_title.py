@@ -48,7 +48,12 @@ class Command(BaseCommand):
                 self.stdout.write("Multiple titles found on inactive themes:")
                 for i, title in enumerate(candidates, 1):
                     self.stdout.write(f"  {i}. {title}")
-                choice = input("Enter number: ").strip()
+                try:
+                    choice = input("Enter number: ").strip()
+                except KeyboardInterrupt:
+                    self.stdout.write("")
+                    self.stdout.write("Cancelled. No changes made.")
+                    return
                 try:
                     new_title = candidates[int(choice) - 1]
                 except (ValueError, IndexError):
@@ -56,8 +61,13 @@ class Command(BaseCommand):
                     return
         else:
             current = active.title or ""
-            prompt = f"Title [{current}]: " if current else "Title: "
-            entered = input(prompt).strip()
+            prompt = f"Enter new title [{current}]: " if current else "Enter new title: "
+            try:
+                entered = input(prompt).strip()
+            except KeyboardInterrupt:
+                self.stdout.write("")
+                self.stdout.write("Cancelled. No changes made.")
+                return
             new_title = entered if entered else current
 
         active.title = new_title
