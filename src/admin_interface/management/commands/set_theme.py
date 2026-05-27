@@ -25,11 +25,19 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         theme_name = options["theme_name"]
 
+        if theme_name:
+            try:
+                new_theme = Theme.objects.get(name=theme_name)
+            except Theme.DoesNotExist:
+                self.stderr.write(self.style.ERROR(f"Theme '{theme_name}' not found."))
+                theme_name = None
+
         if not theme_name:
             themes = list(Theme.objects.order_by("name"))
             if not themes:
                 self.stderr.write(self.style.ERROR("No themes found."))
                 return
+            self.stdout.write("Available themes:")
             for i, t in enumerate(themes, 1):
                 marker = " [active]" if t.active else ""
                 self.stdout.write(f"  {i}. {t.name}{marker}")
@@ -43,12 +51,6 @@ class Command(BaseCommand):
                 new_theme = themes[int(choice) - 1]
             except (ValueError, IndexError):
                 self.stderr.write(self.style.ERROR("Invalid choice."))
-                return
-        else:
-            try:
-                new_theme = Theme.objects.get(name=theme_name)
-            except Theme.DoesNotExist:
-                self.stderr.write(self.style.ERROR(f"Theme '{theme_name}' not found."))
                 return
 
         if new_theme.active:
