@@ -315,6 +315,13 @@ class Theme(models.Model):
         verbose_name=_("text color"),
     )
 
+    css_success_color = ColorField(
+        blank=True,
+        default="#28A745",
+        help_text=_("#28A745 — used for OK/healthy states in plugin dashboards"),
+        max_length=10,
+        verbose_name=_("success / OK color"),
+    )
     css_warning_color = ColorField(
         blank=True,
         default="#E67E22",

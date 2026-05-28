@@ -138,6 +138,7 @@ class ThemeAdmin(admin.ModelAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
+                    "css_success_color",
                     "css_warning_color",
                     "css_muted_color",
                 ),
