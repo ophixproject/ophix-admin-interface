@@ -1,5 +1,12 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Added inline docs page (Theme Tools) in the Getting Started section, covering all theme
+  management commands: `set_theme`, `set_title`, `list_themes`, `export_theme`,
+  `import_theme`, `delete_theme`. Loaded automatically by `run_install`; load manually
+  with `ophix-manage update_docs --include-app-docs admin_interface`.
+
 ## 2026.05.27.08
 
 - `set_title` now accepts an optional positional argument — `ophix-manage set_title "My Title"`
