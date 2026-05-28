@@ -1,11 +1,12 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.05.28.02
 
 - Added inline docs page (Theme Tools) in the Getting Started section, covering all theme
   management commands: `set_theme`, `set_title`, `list_themes`, `export_theme`,
   `import_theme`, `delete_theme`. Loaded automatically by `run_install`; load manually
   with `ophix-manage update_docs --include-app-docs admin_interface`.
+- Added `--admin-interface-success-color` to themes
 
 ## 2026.05.27.08
 
