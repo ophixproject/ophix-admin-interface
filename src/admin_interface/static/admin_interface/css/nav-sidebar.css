@@ -19,6 +19,15 @@
     /*transition: left .3s;*/
 }
 
+[data-theme="dark"] .admin-interface #toggle-nav-sidebar {
+    background-color: var(--darkened-bg);
+    border-color: var(--border-color);
+    color: var(--body-fg);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
 .admin-interface .toggle-nav-sidebar::before {
     margin-top: -2px;
 }
