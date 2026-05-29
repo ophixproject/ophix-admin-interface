@@ -11,9 +11,11 @@ class ThemeAdmin(admin.ModelAdmin):
         "active",
     )
     list_editable = ("active",)
-    actions = []
     list_per_page = 100
     show_full_result_count = False
+
+    def get_actions(self, request):
+        return {}
 
     fieldsets = (
         (
