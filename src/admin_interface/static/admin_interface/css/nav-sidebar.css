@@ -87,11 +87,10 @@
     }
 }
 
-/* Remove right-side rounding on nav links so they sit flush against the Add button. */
-.admin-interface #nav-sidebar .module th a,
-.admin-interface #nav-sidebar .module td a {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+/* Model-link rows (tbody th) should not inherit the module heading border-radius.
+   Section headers use caption, so this only affects model name cells. */
+.admin-interface #nav-sidebar .module tbody th {
+    border-radius: 0;
 }
 
 /* Hide the app element when all its models filtered-out (hidden) by quick-search. */
