@@ -590,10 +590,3 @@
     transition: none;
     filter: invert(100%);
 }
-
-/* Themes list: hide the action checkbox column that list_editable forces on.
-   Actions are disabled via get_actions(); this removes the visual remnant. */
-.admin-interface.app-admin_interface.model-theme th.action-checkbox-column,
-.admin-interface.app-admin_interface.model-theme td.action-checkbox {
-    display: none;
-}
