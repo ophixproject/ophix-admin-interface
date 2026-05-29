@@ -87,6 +87,12 @@
     }
 }
 
+/* Remove rounded corners from nav link selected/hover state. */
+.admin-interface #nav-sidebar .module th a,
+.admin-interface #nav-sidebar .module td a {
+    border-radius: 0;
+}
+
 /* Hide the app element when all its models filtered-out (hidden) by quick-search. */
 .admin-interface #nav-sidebar .module[class^="app-"]:has([class^="model-"][style="display: none;"]) {
     display: none;
