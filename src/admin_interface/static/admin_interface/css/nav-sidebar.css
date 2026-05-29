@@ -8,14 +8,15 @@
     height: 45px;
     margin-top: 10px;
     margin-right: -30px;
-    background-color: #FFFFFF;
+    background-color: var(--body-bg, #FFFFFF);
+    color: var(--admin-interface-module-background-color);
     font-size: 16px;
-    border: 1px solid #eaeaea;
+    border: 1px solid var(--hairline-color, #eaeaea);
     border-left: none;
     outline: none;
-    -webkit-box-shadow: 4px 4px 8px -4px #DBDBDB;
-    -moz-box-shadow: 4px 4px 8px -4px #DBDBDB;
-    box-shadow: 4px 4px 8px -4px #DBDBDB;
+    -webkit-box-shadow: 4px 4px 8px -4px var(--hairline-color, #DBDBDB);
+    -moz-box-shadow: 4px 4px 8px -4px var(--hairline-color, #DBDBDB);
+    box-shadow: 4px 4px 8px -4px var(--hairline-color, #DBDBDB);
     /*transition: left .3s;*/
 }
 
