@@ -47,6 +47,21 @@
     --admin-interface-generic-link-color: color-mix(in srgb, var(--admin-interface-module-background-color) 70%, #fff 30%);
 }
 
+[data-theme="dark"] .admin-interface select,
+[data-theme="dark"] .admin-interface input[type="text"],
+[data-theme="dark"] .admin-interface input[type="search"],
+[data-theme="dark"] .admin-interface input[type="email"],
+[data-theme="dark"] .admin-interface input[type="number"],
+[data-theme="dark"] .admin-interface input[type="password"],
+[data-theme="dark"] .admin-interface input[type="url"],
+[data-theme="dark"] .admin-interface input[type="date"],
+[data-theme="dark"] .admin-interface input[type="datetime-local"],
+[data-theme="dark"] .admin-interface textarea {
+    background-color: var(--darkened-bg);
+    color: var(--body-fg);
+    border-color: var(--border-color);
+}
+
 .admin-interface {
     overflow-x: hidden;
 }
