@@ -9,6 +9,8 @@ class ThemeAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "active",
+        "title",
+        "env_name",
     )
     list_editable = ("active",)
     actions = None

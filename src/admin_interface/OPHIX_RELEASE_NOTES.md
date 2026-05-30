@@ -1,5 +1,9 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.30.08
+
+- Added `title` and `env_name` columns to the Themes list view.
+
 ## 2026.05.30.07
 
 - Added missing migration `0040`: `dark_mode_link_lightness` verbose name was renamed
