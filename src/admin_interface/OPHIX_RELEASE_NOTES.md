@@ -1,5 +1,10 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.30.09
+
+- Themes list view: `env_name` column now shows with header "Env Name" rather than the
+  field's default verbose name ("Name"), which was ambiguous alongside the theme name column.
+
 ## 2026.05.30.08
 
 - Added `title` and `env_name` columns to the Themes list view.

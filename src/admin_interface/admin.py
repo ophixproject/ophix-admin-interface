@@ -10,8 +10,12 @@ class ThemeAdmin(admin.ModelAdmin):
         "name",
         "active",
         "title",
-        "env_name",
+        "get_env_name",
     )
+
+    @admin.display(description=_("Env Name"))
+    def get_env_name(self, obj):
+        return obj.env_name
     list_editable = ("active",)
     actions = None
     list_per_page = 100
