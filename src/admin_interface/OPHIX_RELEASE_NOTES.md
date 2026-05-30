@@ -1,8 +1,20 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.30.04
+
+- Standardised theme package media layout to `media/<field>/<filename>` (flat) across all
+  Ophix theme packages. External theme packages previously used a redundant deep layout
+  (`media/admin-interface/themes/<name>/<field>/<filename>`) that mirrored the MEDIA_ROOT
+  destination — unnecessary since `install_bundled_theme` constructs the destination path
+  itself. All external packages (ocean, midnight, forest, desert, fastrack, imago, seasons)
+  updated to the flat layout in the same release cycle. `install_bundled_theme` code
+  simplified accordingly.
+
 ## 2026.05.30.03
 
-- Fixed `install_bundled_theme`: favicon was always copied to the `logo/` subdirectory instead of `favicon/` because the path-part index assumed a 5-level deep media layout that does not exist. Now reads `parts[0]` (the immediate subdirectory name) to determine the target folder.
+- Fixed `install_bundled_theme`: the built-in Ophix theme favicon was always copied to
+  `logo/` instead of `favicon/` because the code used `parts[3]`, which only worked for
+  the (now-retired) deep layout used by external theme packages.
 
 ## 2026.05.30.02
 
