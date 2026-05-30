@@ -1,5 +1,11 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.30.07
+
+- Added missing migration `0040`: `dark_mode_link_lightness` verbose name was renamed
+  from `"link lightness"` to `"accent lightness"` in 2026.05.30.02 but no migration was
+  created, causing `migrate` to report pending model changes.
+
 ## 2026.05.30.06
 
 - Documented that the built-in Ophix theme is reinstalled automatically on every
