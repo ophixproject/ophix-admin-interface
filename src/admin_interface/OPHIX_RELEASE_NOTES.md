@@ -1,5 +1,11 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.30.06
+
+- Documented that the built-in Ophix theme is reinstalled automatically on every
+  `migrate` run — operators who delete it should expect it to return. Note added to
+  the `delete_theme` section of the Theme Tools docs page.
+
 ## 2026.05.30.05
 
 - Fixed language chooser dropdown in dark mode: the OS-rendered options popup showed

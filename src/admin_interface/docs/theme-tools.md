@@ -204,6 +204,13 @@ refused regardless of flags.
 | `--preserve-media` | Remove the database record but leave media files on disk |
 | `--force` | Allow deletion of the active theme |
 
+**Note — bundled themes return on next migrate:** The built-in **Ophix** theme is
+reinstalled automatically every time `ophix-manage migrate` runs (via the `post_migrate`
+signal in `ophix-admin-interface`). If you delete it, it will come back on the next
+migration or upgrade. This is by design — the bundled theme is always available as a
+fallback. To use a different theme permanently, activate it with `set_theme` and leave
+the Ophix theme inactive; there is no need to delete it.
+
 ---
 
 ## Server settings
