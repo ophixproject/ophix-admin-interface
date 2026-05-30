@@ -1,5 +1,12 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.30.05
+
+- Fixed language chooser dropdown in dark mode: the OS-rendered options popup showed
+  near-invisible text (light header colours on white popup background). Added
+  `color-scheme: dark` on the `select` and explicit `background-color`/`color` on
+  `option` elements so the popup renders with dark background and readable text.
+
 ## 2026.05.30.04
 
 - Standardised theme package media layout to `media/<field>/<filename>` (flat) across all

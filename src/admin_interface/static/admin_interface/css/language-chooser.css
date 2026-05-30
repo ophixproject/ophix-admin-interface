@@ -70,3 +70,15 @@
     margin: 0;
     padding: 0 15px 0 0;
 }
+
+/* Dark mode: the OS-rendered dropdown popup inherits the select's colour,
+   making light header text invisible against the white popup background.
+   Override option colours directly and hint the browser to use dark rendering. */
+[data-theme="dark"] .admin-interface .language-chooser select {
+    color-scheme: dark;
+}
+
+[data-theme="dark"] .admin-interface .language-chooser select option {
+    background-color: var(--darkened-bg);
+    color: var(--body-fg);
+}
