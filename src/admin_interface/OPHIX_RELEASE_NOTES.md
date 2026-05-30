@@ -1,5 +1,9 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.30.03
+
+- Fixed `install_bundled_theme`: favicon was always copied to the `logo/` subdirectory instead of `favicon/` because the path-part index assumed a 5-level deep media layout that does not exist. Now reads `parts[0]` (the immediate subdirectory name) to determine the target folder.
+
 ## 2026.05.30.02
 
 - Dark mode accent lightness now applies to docs index section headings and toggle

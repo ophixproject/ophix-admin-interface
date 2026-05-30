@@ -109,10 +109,10 @@ def install_bundled_theme(app_config):
                 media_root = Path(media_root)
                 for src in media_dir.rglob("*"):
                     if src.is_file():
-                        # Expected layout: media/admin-interface/themes/<name>/<field_name>/<filename>
+                        # Expected layout: media/<field_name>/<filename>
                         # field_name is "logo" or "favicon".
                         parts = src.relative_to(media_dir).parts
-                        field_name = parts[3] if len(parts) >= 5 else "logo"
+                        field_name = parts[0] if parts[0] in ("logo", "favicon") else "logo"
                         dst = (
                             media_root
                             / "admin-interface"
