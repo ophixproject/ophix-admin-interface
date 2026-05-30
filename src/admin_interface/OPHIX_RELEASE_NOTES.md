@@ -1,5 +1,18 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.05.30.02
+
+- Dark mode accent lightness now applies to docs index section headings and toggle
+  buttons as well as generic links; field label renamed from "link lightness" to
+  "accent lightness".
+
+## 2026.05.30.01
+
+- Added per-theme `dark_mode_link_lightness` setting: controls how much white is
+  mixed into link and heading colours in dark mode. Default 30%. Increase for themes
+  with darker accent colours.
+- Removed bulk action checkboxes from Themes list view (`actions = None`).
+
 ## 2026.05.28.02
 
 - Added inline docs page (Theme Tools) in the Getting Started section, covering all theme

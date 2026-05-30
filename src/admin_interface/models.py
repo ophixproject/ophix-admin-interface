@@ -457,7 +457,7 @@ class Theme(models.Model):
         choices=dark_mode_link_lightness_choices,
         default="30",
         help_text=_("How much white to mix into link and heading colours when dark mode is active. Increase for themes with darker accent colours."),
-        verbose_name=_("link lightness"),
+        verbose_name=_("accent lightness"),
     )
 
     custom_css_vars = models.JSONField(
