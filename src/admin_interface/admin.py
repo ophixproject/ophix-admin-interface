@@ -218,6 +218,13 @@ class ThemeAdmin(admin.ModelAdmin):
             },
         ),
         (
+            _("Dark Mode"),
+            {
+                "classes": ("wide",),
+                "fields": ("dark_mode_link_lightness",),
+            },
+        ),
+        (
             _("Custom CSS Variables"),
             {
                 "classes": ("wide",),

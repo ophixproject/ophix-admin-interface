@@ -44,7 +44,7 @@
 }
 
 [data-theme="dark"] .admin-interface {
-    --admin-interface-generic-link-color: color-mix(in srgb, var(--admin-interface-module-background-color) 70%, #fff 30%);
+    --admin-interface-generic-link-color: color-mix(in srgb, var(--admin-interface-module-background-color) calc(100% - var(--admin-interface-dark-link-lightness)), #fff var(--admin-interface-dark-link-lightness));
 }
 
 [data-theme="dark"] .admin-interface select,

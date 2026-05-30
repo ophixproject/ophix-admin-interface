@@ -442,6 +442,24 @@ class Theme(models.Model):
         verbose_name=_("sticky pagination"),
     )
 
+    dark_mode_link_lightness_choices = (
+        ("10", "10%"),
+        ("20", "20%"),
+        ("30", "30%"),
+        ("40", "40%"),
+        ("50", "50%"),
+        ("60", "60%"),
+        ("70", "70%"),
+        ("80", "80%"),
+    )
+    dark_mode_link_lightness = models.CharField(
+        max_length=2,
+        choices=dark_mode_link_lightness_choices,
+        default="30",
+        help_text=_("How much white to mix into link and heading colours when dark mode is active. Increase for themes with darker accent colours."),
+        verbose_name=_("link lightness"),
+    )
+
     custom_css_vars = models.JSONField(
         default=dict,
         blank=True,
