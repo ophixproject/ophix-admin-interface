@@ -64,7 +64,7 @@ class Theme(models.Model):
     title_color = ColorField(
         blank=True,
         default="#F5DD5D",
-        help_text="#F5DD5D",
+        help_text=_("Colour of the title text in the header bar"),
         max_length=10,
         verbose_name=_("color"),
     )
@@ -82,7 +82,7 @@ class Theme(models.Model):
     logo_color = ColorField(
         blank=True,
         default="#FFFFFF",
-        help_text="#FFFFFF",
+        help_text=_("Tint applied to the logo SVG; white shows the logo unchanged"),
         max_length=10,
         verbose_name=_("color"),
     )
@@ -125,28 +125,28 @@ class Theme(models.Model):
     css_header_background_color = ColorField(
         blank=True,
         default="#0C4B33",
-        help_text="#0C4B33",
+        help_text=_("Background colour of the top header bar"),
         max_length=10,
         verbose_name=_("background color"),
     )
     css_header_text_color = ColorField(
         blank=True,
         default="#44B78B",
-        help_text="#44B78B",
+        help_text=_("Colour of plain text in the header bar"),
         max_length=10,
         verbose_name=_("text color"),
     )
     css_header_link_color = ColorField(
         blank=True,
         default="#FFFFFF",
-        help_text="#FFFFFF",
+        help_text=_("Colour of navigation links in the header bar"),
         max_length=10,
         verbose_name=_("link color"),
     )
     css_header_link_hover_color = ColorField(
         blank=True,
         default="#C9F0DD",
-        help_text="#C9F0DD",
+        help_text=_("Header link colour on hover"),
         max_length=10,
         verbose_name=_("link hover color"),
     )
@@ -154,42 +154,42 @@ class Theme(models.Model):
     css_module_background_color = ColorField(
         blank=True,
         default="#44B78B",
-        help_text="#44B78B",
+        help_text=_("Background colour of section header bars (module titles)"),
         max_length=10,
         verbose_name=_("background color"),
     )
     css_module_background_selected_color = ColorField(
         blank=True,
         default="#FFFFCC",
-        help_text="#FFFFCC",
+        help_text=_("Background colour of selected / highlighted rows"),
         max_length=10,
         verbose_name=_("background selected color"),
     )
     css_module_text_color = ColorField(
         blank=True,
         default="#FFFFFF",
-        help_text="#FFFFFF",
+        help_text=_("Text colour inside section header bars"),
         max_length=10,
         verbose_name=_("text color"),
     )
     css_module_link_color = ColorField(
         blank=True,
         default="#FFFFFF",
-        help_text="#FFFFFF",
+        help_text=_("Link colour inside section header bars"),
         max_length=10,
         verbose_name=_("link color"),
     )
     css_module_link_selected_color = ColorField(
         blank=True,
         default="#FFFFFF",
-        help_text="#FFFFFF",
+        help_text=_("Link colour for selected items inside section header bars"),
         max_length=10,
         verbose_name=_("link selected color"),
     )
     css_module_link_hover_color = ColorField(
         blank=True,
         default="#C9F0DD",
-        help_text="#C9F0DD",
+        help_text=_("Link colour on hover inside section header bars"),
         max_length=10,
         verbose_name=_("link hover color"),
     )
@@ -218,21 +218,21 @@ class Theme(models.Model):
     css_generic_link_color = ColorField(
         blank=True,
         default="#0C3C26",
-        help_text="#0C3C26",
+        help_text=_("Default link colour in page content"),
         max_length=10,
         verbose_name=_("link color"),
     )
     css_generic_link_hover_color = ColorField(
         blank=True,
         default="#156641",
-        help_text="#156641",
+        help_text=_("Page content link colour on hover"),
         max_length=10,
         verbose_name=_("link hover color"),
     )
     css_generic_link_active_color = ColorField(
         blank=True,
         default="#29B864",
-        help_text="#29B864",
+        help_text=_("Page content link colour when active / pressed"),
         max_length=10,
         verbose_name=_("link active color"),
     )
@@ -240,21 +240,21 @@ class Theme(models.Model):
     css_save_button_background_color = ColorField(
         blank=True,
         default="#0C4B33",
-        help_text="#0C4B33",
+        help_text=_("Background colour of Save / primary action buttons"),
         max_length=10,
         verbose_name=_("background color"),
     )
     css_save_button_background_hover_color = ColorField(
         blank=True,
         default="#0C3C26",
-        help_text="#0C3C26",
+        help_text=_("Save button background colour on hover"),
         max_length=10,
         verbose_name=_("background hover color"),
     )
     css_save_button_text_color = ColorField(
         blank=True,
         default="#FFFFFF",
-        help_text="#FFFFFF",
+        help_text=_("Text colour on Save / primary action buttons"),
         max_length=10,
         verbose_name=_("text color"),
     )
@@ -276,21 +276,21 @@ class Theme(models.Model):
     css_delete_button_background_color = ColorField(
         blank=True,
         default="#BA2121",
-        help_text="#BA2121",
+        help_text=_("Background colour of Delete / danger buttons"),
         max_length=10,
         verbose_name=_("background color"),
     )
     css_delete_button_background_hover_color = ColorField(
         blank=True,
         default="#A41515",
-        help_text="#A41515",
+        help_text=_("Delete button background colour on hover"),
         max_length=10,
         verbose_name=_("background hover color"),
     )
     css_delete_button_text_color = ColorField(
         blank=True,
         default="#FFFFFF",
-        help_text="#FFFFFF",
+        help_text=_("Text colour on Delete / danger buttons"),
         max_length=10,
         verbose_name=_("text color"),
     )
@@ -331,7 +331,7 @@ class Theme(models.Model):
     related_modal_background_color = ColorField(
         blank=True,
         default="#000000",
-        help_text="#000000",
+        help_text=_("Colour of the overlay behind related-object popups"),
         max_length=10,
         verbose_name=_("background color"),
     )
@@ -350,7 +350,7 @@ class Theme(models.Model):
         max_length=5,
         choices=related_modal_background_opacity_choices,
         default="0.3",
-        help_text="20%",
+        help_text=_("Opacity of the overlay behind related-object popups"),
         verbose_name=_("background opacity"),
     )
     related_modal_rounded_corners = models.BooleanField(
