@@ -43,6 +43,21 @@
     }
 }
 
+/* Body font — only applied when operator sets a value in the theme editor */
+.admin-interface body {
+    font-family: var(--admin-interface-body-font-family, inherit);
+    font-size: var(--admin-interface-body-font-size, inherit);
+}
+
+/* Button font size and border radius */
+.admin-interface .button,
+.admin-interface input[type="submit"],
+.admin-interface input[type="button"],
+.admin-interface a.button {
+    font-size: var(--admin-interface-button-font-size, 13px);
+    border-radius: var(--admin-interface-button-border-radius, initial);
+}
+
 [data-theme="dark"] .admin-interface select,
 [data-theme="dark"] .admin-interface input[type="text"],
 [data-theme="dark"] .admin-interface input[type="search"],

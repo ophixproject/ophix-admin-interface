@@ -193,11 +193,28 @@ class Theme(models.Model):
         max_length=10,
         verbose_name=_("link hover color"),
     )
-    css_module_rounded_corners = models.BooleanField(
-        default=True,
-        verbose_name=_("rounded corners"),
+    css_module_border_radius = models.CharField(
+        max_length=20,
+        blank=True,
+        default="4px",
+        help_text=_("e.g. 4px · 0px · 0.5rem"),
+        verbose_name=_("border radius"),
     )
 
+    css_body_font_family = models.CharField(
+        max_length=200,
+        blank=True,
+        default="",
+        help_text=_("e.g. Arial, sans-serif · Leave blank to use the browser default."),
+        verbose_name=_("font family"),
+    )
+    css_body_font_size = models.CharField(
+        max_length=20,
+        blank=True,
+        default="",
+        help_text=_("e.g. 14px · 0.875rem · Leave blank to use the browser default."),
+        verbose_name=_("font size"),
+    )
     css_generic_link_color = ColorField(
         blank=True,
         default="#0C3C26",
@@ -240,6 +257,20 @@ class Theme(models.Model):
         help_text="#FFFFFF",
         max_length=10,
         verbose_name=_("text color"),
+    )
+    css_button_font_size = models.CharField(
+        max_length=20,
+        blank=True,
+        default="",
+        help_text=_("e.g. 13px · Leave blank to use the browser default (13px)."),
+        verbose_name=_("font size"),
+    )
+    css_button_border_radius = models.CharField(
+        max_length=20,
+        blank=True,
+        default="",
+        help_text=_("e.g. 4px · 50% · Leave blank for no rounding."),
+        verbose_name=_("border radius"),
     )
 
     css_delete_button_background_color = ColorField(
@@ -284,6 +315,13 @@ class Theme(models.Model):
         help_text=_("#999999 — used for disabled items, secondary text, and muted UI states"),
         max_length=10,
         verbose_name=_("muted / disabled color"),
+    )
+    css_alert_color = ColorField(
+        blank=True,
+        default="#BA2121",
+        help_text=_("#BA2121 — used for dangerous actions, error states, and alert buttons"),
+        max_length=10,
+        verbose_name=_("alert / danger color"),
     )
 
     related_modal_active = models.BooleanField(

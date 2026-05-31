@@ -1,6 +1,20 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## Unreleased (theme editor structural changes)
+
+- Theme editor section renames: "Generic Links" → **Body Text**, "Save Buttons" → **Buttons**,
+  "Delete Buttons" → **Alert Buttons**, "Extended Colors" → **Notification Colors**.
+- New theme fields: body font family, body font size, button font size, button border radius,
+  module/panel border radius, alert/danger color.
+- `css_module_rounded_corners` (boolean) replaced by `css_module_border_radius` (CharField,
+  default `4px`). Existing themes retain 4px rounded corners. Theme packages with the old
+  boolean key in `theme.json` are unaffected — the key is silently ignored.
+- Related Modal fieldset: description added explaining the background overlay concept.
+- Logo and favicon fields now show a thumbnail preview of the current image in the editor.
+- Color picker: clicking the text input now positions the cursor for direct hex editing only.
+  The colour swatch button (to the left of the input) opens the picker as before.
+
+## Unreleased (settings split)
 
 - Moved server identity settings (title, title_visible, env_name, env_visible_in_header,
   env_visible_in_favicon) and language chooser settings to the new `ophix-admin-settings`

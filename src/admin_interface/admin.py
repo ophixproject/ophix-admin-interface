@@ -1,7 +1,24 @@
 from django.contrib import admin
+from django.forms import ClearableFileInput
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 from admin_interface.models import Theme
+
+
+class ImagePreviewWidget(ClearableFileInput):
+    def render(self, name, value, attrs=None, renderer=None):
+        output = super().render(name, value, attrs, renderer)
+        if value and hasattr(value, "url"):
+            output = format_html(
+                '<div class="image-preview">'
+                '<img src="{}" alt="" style="max-height:80px;max-width:200px;'
+                'display:block;margin-bottom:6px;border:1px solid #ccc;border-radius:3px;">'
+                "</div>{}",
+                value.url,
+                output,
+            )
+        return output
 
 
 @admin.register(Theme)
@@ -14,6 +31,11 @@ class ThemeAdmin(admin.ModelAdmin):
     actions = None
     list_per_page = 100
     show_full_result_count = False
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name in ("logo", "favicon"):
+            kwargs["widget"] = ImagePreviewWidget
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
 
     fieldsets = (
         (
@@ -78,15 +100,17 @@ class ThemeAdmin(admin.ModelAdmin):
                     "css_module_link_color",
                     "css_module_link_selected_color",
                     "css_module_link_hover_color",
-                    "css_module_rounded_corners",
+                    "css_module_border_radius",
                 ),
             },
         ),
         (
-            _("Generic Links"),
+            _("Body Text"),
             {
                 "classes": ("wide",),
                 "fields": (
+                    "css_body_font_family",
+                    "css_body_font_size",
                     "css_generic_link_color",
                     "css_generic_link_hover_color",
                     "css_generic_link_active_color",
@@ -94,18 +118,20 @@ class ThemeAdmin(admin.ModelAdmin):
             },
         ),
         (
-            _("Save Buttons"),
+            _("Buttons"),
             {
                 "classes": ("wide",),
                 "fields": (
                     "css_save_button_background_color",
                     "css_save_button_background_hover_color",
                     "css_save_button_text_color",
+                    "css_button_font_size",
+                    "css_button_border_radius",
                 ),
             },
         ),
         (
-            _("Delete Buttons"),
+            _("Alert Buttons"),
             {
                 "classes": ("wide",),
                 "fields": (
@@ -116,13 +142,14 @@ class ThemeAdmin(admin.ModelAdmin):
             },
         ),
         (
-            _("Extended Colors"),
+            _("Notification Colors"),
             {
                 "classes": ("wide",),
                 "fields": (
                     "css_success_color",
                     "css_warning_color",
                     "css_muted_color",
+                    "css_alert_color",
                 ),
             },
         ),
@@ -137,6 +164,10 @@ class ThemeAdmin(admin.ModelAdmin):
             _("Related Modal"),
             {
                 "classes": ("wide",),
+                "description": _(
+                    "The background overlay dims the page behind the modal popup. "
+                    "Background overlay colour and opacity control its appearance."
+                ),
                 "fields": (
                     "related_modal_active",
                     "related_modal_background_color",
@@ -201,3 +232,6 @@ class ThemeAdmin(admin.ModelAdmin):
     )
 
     save_on_top = True
+
+    class Media:
+        js = ("admin_interface/colorfield/colorfield-swatch.js",)
