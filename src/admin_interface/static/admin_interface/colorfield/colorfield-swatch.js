@@ -17,7 +17,7 @@
                 textEl.name = colorisEl.name;   // takes over form submission
                 textEl.value = colorisEl.value;
                 textEl.className = 'colorfield-text';
-                textEl.style.width = '8em';
+                textEl.style.width = '4em';
                 textEl.placeholder = '#000000';
                 if (colorisEl.required) { textEl.required = true; }
                 if (colorisEl.disabled) { textEl.disabled = true; }
