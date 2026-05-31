@@ -8,6 +8,7 @@
         // Cursor positioning still works because that is browser-native, not event-driven.
         document.querySelectorAll('.colorfield_field.coloris').forEach(function (input) {
             input.addEventListener('click', function (e) {
+                if (!e.isTrusted) { return; } // synthetic click from swatch — let it through
                 e.stopImmediatePropagation(); // blocks Coloris's direct element listener
                 e.stopPropagation();           // blocks Coloris's document-level delegation
                 // default is not prevented — text cursor positioning still works
