@@ -1,47 +1,30 @@
 (function () {
     'use strict';
 
-    window.addEventListener('load', function () {
-        setTimeout(function () {
-            document.querySelectorAll('.clr-field').forEach(function (wrapper) {
-                var colorisEl = wrapper.querySelector('.colorfield_field.coloris');
-                if (!colorisEl) { return; }
+    // Coloris wraps each colorfield input in .clr-field with an absolutely-positioned
+    // swatch button (30px, right edge, pointer-events:none). Clicks on the button area
+    // fall through to the underlying input, which Coloris listens to for openPicker().
+    // We intercept clicks in the TEXT area (left of the swatch) only, so cursor
+    // positioning works normally there. Swatch-area clicks pass through to Coloris.
 
-                // Build a plain text input for manual hex editing.
-                // Inserted INSIDE the wrapper after the swatch button so it sits
-                // in the same layout context — the button's absolute CSS positions
-                // it at the right edge of the wrapper, textEl fills the rest.
-                var textEl = document.createElement('input');
-                textEl.type = 'text';
-                textEl.name = colorisEl.name;
-                textEl.value = colorisEl.value;
-                textEl.className = 'colorfield-text';
-                textEl.placeholder = '#000000';
-                if (colorisEl.required) { textEl.required = true; }
-                if (colorisEl.disabled) { textEl.disabled = true; }
+    var SWATCH_WIDTH = 30; // matches .clr-field button { width: 30px } in coloris.css
 
-                var swatchBtn = wrapper.querySelector('button');
-                wrapper.insertBefore(textEl, swatchBtn ? swatchBtn.nextSibling : colorisEl);
+    function initSwatchOnlyPicker() {
+        document.querySelectorAll('.colorfield_field.coloris').forEach(function (input) {
+            input.addEventListener('click', function (e) {
+                if (e.offsetX < input.offsetWidth - SWATCH_WIDTH) {
+                    // Text area — suppress Coloris's openPicker listener
+                    e.stopImmediatePropagation();
+                    e.stopPropagation();
+                }
+                // Swatch zone — let Coloris open the picker
+            }, true); // capture phase fires before Coloris's bubble-phase listener
+        });
+    }
 
-                // Collapse colorisEl to zero width — keeps it in the flow so
-                // Coloris can read its position for picker placement, but invisible.
-                colorisEl.removeAttribute('name');
-                colorisEl.style.cssText = (
-                    'visibility:hidden;pointer-events:none;' +
-                    'width:0;min-width:0;padding:0;border:none;margin:0;'
-                );
-
-                // Coloris picked a colour → sync to textEl.
-                colorisEl.addEventListener('input', function () {
-                    textEl.value = colorisEl.value;
-                });
-
-                // User typed a hex value → sync to colorisEl so Coloris updates the swatch.
-                textEl.addEventListener('input', function () {
-                    colorisEl.value = textEl.value;
-                    colorisEl.dispatchEvent(new Event('input', { bubbles: true }));
-                });
-            });
-        }, 0);
-    });
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSwatchOnlyPicker);
+    } else {
+        initSwatchOnlyPicker();
+    }
 })();
