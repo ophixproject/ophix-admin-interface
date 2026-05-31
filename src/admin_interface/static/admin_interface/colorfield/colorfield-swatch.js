@@ -1,9 +1,6 @@
 (function () {
     'use strict';
 
-    // Run after window.load so Coloris has wrapped all [data-coloris] inputs
-    // with .clr-field divs and swatch buttons, and colorfield.js has called setInstance.
-    // setTimeout 0 defers us past all synchronous load handlers.
     window.addEventListener('load', function () {
         setTimeout(function () {
             document.querySelectorAll('.clr-field').forEach(function (wrapper) {
@@ -11,27 +8,27 @@
                 if (!colorisEl) { return; }
 
                 // Build a plain text input for manual hex editing.
-                // Inserted BEFORE the wrapper so it appears left of the swatch.
+                // Inserted INSIDE the wrapper after the swatch button so it sits
+                // in the same layout context — the button's absolute CSS positions
+                // it at the right edge of the wrapper, textEl fills the rest.
                 var textEl = document.createElement('input');
                 textEl.type = 'text';
-                textEl.name = colorisEl.name;   // takes over form submission
+                textEl.name = colorisEl.name;
                 textEl.value = colorisEl.value;
                 textEl.className = 'colorfield-text';
-                textEl.style.width = '4em';
                 textEl.placeholder = '#000000';
                 if (colorisEl.required) { textEl.required = true; }
                 if (colorisEl.disabled) { textEl.disabled = true; }
 
-                wrapper.parentNode.insertBefore(textEl, wrapper);
+                var swatchBtn = wrapper.querySelector('button');
+                wrapper.insertBefore(textEl, swatchBtn ? swatchBtn.nextSibling : colorisEl);
 
-                // Remove name from colorisEl so only textEl submits.
-                // Keep colorisEl positioned and sized so Coloris can locate it
-                // for picker positioning — but invisible and non-interactive.
+                // Collapse colorisEl to zero width — keeps it in the flow so
+                // Coloris can read its position for picker placement, but invisible.
                 colorisEl.removeAttribute('name');
-                wrapper.style.position = 'relative';
                 colorisEl.style.cssText = (
-                    'position:absolute;top:0;left:0;width:100%;height:100%;' +
-                    'opacity:0;pointer-events:none;z-index:-1;'
+                    'visibility:hidden;pointer-events:none;' +
+                    'width:0;min-width:0;padding:0;border:none;margin:0;'
                 );
 
                 // Coloris picked a colour → sync to textEl.
