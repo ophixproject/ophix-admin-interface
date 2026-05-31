@@ -42,6 +42,9 @@
             --admin-interface-related-modal-background-opacity: {{ theme.related_modal_background_opacity }};
             --admin-interface-alert-color: {{ theme.css_alert_color }};
             --message-alert-bg: color-mix(in srgb, {{ theme.css_alert_color }} 15%, #fff 85%);
+            --close-button-bg: var(--admin-interface-save-button-background-color);
+            --close-button-hover-bg: var(--admin-interface-save-button-background-hover-color);
+            --close-button-fg: var(--admin-interface-save-button-text-color);
         {% if theme.css_body_font_family %}
             --admin-interface-body-font-family: {{ theme.css_body_font_family }};
         {% endif %}
