@@ -2,8 +2,7 @@
 {% load admin_interface_tags i18n static %}
 
 {% block title %}
-{% get_admin_interface_theme as theme %}
-{% if title %}{{ title }} | {% endif %}{% if theme.title %}{% translate theme.title %}{% endif %}
+{% if title %}{{ title }} | {% endif %}{% if server_settings.title %}{% translate server_settings.title %}{% endif %}
 {% endblock title %}
 
 {% block extrastyle %}
@@ -39,7 +38,6 @@
             --message-warning-bg: color-mix(in srgb, {{ theme.css_warning_color }} 20%, #fff 80%);
             --message-error-bg: color-mix(in srgb, {{ theme.css_delete_button_background_color }} 15%, #fff 85%);
             --admin-interface-muted-color: {{ theme.css_muted_color }};
-            --admin-interface-dark-link-lightness: {{ theme.dark_mode_link_lightness }}%;
             --admin-interface-related-modal-background-color: {{ theme.related_modal_background_color }};
             --admin-interface-related-modal-background-opacity: {{ theme.related_modal_background_opacity }};
 
@@ -180,22 +178,20 @@ admin-interface
         {% if theme.logo_visible and theme.logo %}
             <img class="logo" style="display:none;" src="{{ theme.logo.url }}" {% if theme.logo.width %}width="{{ theme.logo.width }}"{% endif %} {% if theme.logo.height %}height="{{ theme.logo.height }}"{% endif %}>
         {% endif %}
-        {% if theme.title_visible %}
-        <span>{% if theme.title %}{% translate theme.title %}{% endif %}</span>
+        {% if server_settings.title_visible %}
+        <span>{% if server_settings.title %}{% translate server_settings.title %}{% endif %}</span>
         {% endif %}
     </a>
 </h1>
 {% endblock branding %}
 
 {% block welcome-msg %}
-{% get_admin_interface_theme as theme %}
-{% if theme.env_visible_in_header %}<span class="environment-label {{ theme.env_name }}">{{ theme.env_name }}</span><br>{% endif %}{{ block.super }}<br>
+{% if server_settings.env_visible_in_header %}<span class="environment-label {{ server_settings.env_name }}">{{ server_settings.env_name }}</span><br>{% endif %}{{ block.super }}<br>
 {% endblock welcome-msg %}
 
 {% block userlinks %}
 {{ block.super }}
-{% get_admin_interface_theme as theme %}
-{% if theme.language_chooser_active %}
+{% if server_settings.language_chooser_active %}
     {% admin_interface_language_chooser %}
 {% endif %}
 {% endblock userlinks %}

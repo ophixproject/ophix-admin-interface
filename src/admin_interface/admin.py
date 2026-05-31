@@ -9,13 +9,7 @@ class ThemeAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "active",
-        "title",
-        "get_env_name",
     )
-
-    @admin.display(description=_("Env Name"))
-    def get_env_name(self, obj):
-        return obj.env_name
     list_editable = ("active",)
     actions = None
     list_per_page = 100
@@ -29,29 +23,6 @@ class ThemeAdmin(admin.ModelAdmin):
                 "fields": (
                     "name",
                     "active",
-                ),
-            },
-        ),
-        (
-            _("Environment"),
-            {
-                "classes": ("wide",),
-                "fields": (
-                    "env_name",
-                    "env_color",
-                    "env_visible_in_header",
-                    "env_visible_in_favicon",
-                ),
-            },
-        ),
-        (
-            _("Language chooser"),
-            {
-                "classes": ("wide",),
-                "fields": (
-                    "language_chooser_active",
-                    "language_chooser_control",
-                    "language_chooser_display",
                 ),
             },
         ),
@@ -74,9 +45,7 @@ class ThemeAdmin(admin.ModelAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
-                    "title",
                     "title_color",
-                    "title_visible",
                 ),
             },
         ),
@@ -89,6 +58,12 @@ class ThemeAdmin(admin.ModelAdmin):
                     "css_header_text_color",
                     "css_header_link_color",
                     "css_header_link_hover_color",
+                    "env_color",
+                ),
+                "description": _(
+                    "env_color is the colour of the environment badge "
+                    "(e.g. Production / Staging). The badge text and visibility "
+                    "are configured in Server Settings."
                 ),
             },
         ),
@@ -221,20 +196,6 @@ class ThemeAdmin(admin.ModelAdmin):
             {
                 "classes": ("wide",),
                 "fields": ("recent_actions_visible",),
-            },
-        ),
-        (
-            _("Dark Mode"),
-            {
-                "classes": ("wide",),
-                "fields": ("dark_mode_link_lightness",),
-            },
-        ),
-        (
-            _("Custom CSS Variables"),
-            {
-                "classes": ("wide",),
-                "fields": ("custom_css_vars",),
             },
         ),
     )

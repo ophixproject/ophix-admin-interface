@@ -1,5 +1,20 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Moved server identity settings (title, title_visible, env_name, env_visible_in_header,
+  env_visible_in_favicon) and language chooser settings to the new `ophix-admin-settings`
+  package. These are now configured in the **Settings** admin section and apply
+  server-wide, independent of the active theme.
+- `ophix-admin-settings` is now a required dependency — install it alongside this package.
+- Removed `dark_mode_link_lightness` field (full per-colour dark mode coming in a
+  future release).
+- Removed `custom_css_vars` field.
+- Retired `set_title` management command — title is now managed directly in the
+  Server Settings admin page.
+- `env_color` (environment badge colour) remains in the theme editor under the
+  Header section.
+
 ## 2026.05.30.09
 
 - Themes list view: `env_name` column now shows with header "Env Name" rather than the

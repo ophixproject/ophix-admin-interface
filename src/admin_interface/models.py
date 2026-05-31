@@ -11,7 +11,6 @@ from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
 from .cache import del_cached_active_theme
-from .validators import validate_custom_css_vars
 
 
 def _logo_upload_to(instance, filename):
@@ -62,12 +61,6 @@ class Theme(models.Model):
         verbose_name=_("active"),
     )
 
-    title = models.CharField(
-        max_length=50,
-        default="",
-        blank=True,
-        verbose_name=_("title"),
-    )
     title_color = ColorField(
         blank=True,
         default="#F5DD5D",
@@ -75,11 +68,6 @@ class Theme(models.Model):
         max_length=10,
         verbose_name=_("color"),
     )
-    title_visible = models.BooleanField(
-        default=True,
-        verbose_name=_("visible"),
-    )
-
     logo = models.FileField(
         upload_to=_logo_upload_to,
         blank=True,
@@ -124,11 +112,6 @@ class Theme(models.Model):
         verbose_name=_("favicon"),
     )
 
-    env_name = models.CharField(
-        blank=True,
-        max_length=50,
-        verbose_name=_("name"),
-    )
     env_color = ColorField(
         blank=True,
         default="#E74C3C",
@@ -139,40 +122,6 @@ class Theme(models.Model):
         max_length=10,
         verbose_name=_("color"),
     )
-    env_visible_in_header = models.BooleanField(
-        default=True,
-        verbose_name=_("visible in header (marker and name)"),
-    )
-    env_visible_in_favicon = models.BooleanField(
-        default=True,
-        verbose_name=_("visible in favicon (marker)"),
-    )
-
-    language_chooser_active = models.BooleanField(
-        default=True,
-        verbose_name=_("active"),
-    )
-    language_chooser_control_choices = (
-        ("default-select", _("Default Select")),
-        ("minimal-select", _("Minimal Select")),
-    )
-    language_chooser_control = models.CharField(
-        max_length=20,
-        choices=language_chooser_control_choices,
-        default="default-select",
-        verbose_name=_("control"),
-    )
-    language_chooser_display_choices = (
-        ("code", _("code")),
-        ("name", _("name")),
-    )
-    language_chooser_display = models.CharField(
-        max_length=10,
-        choices=language_chooser_display_choices,
-        default="code",
-        verbose_name=_("display"),
-    )
-
     css_header_background_color = ColorField(
         blank=True,
         default="#0C4B33",
@@ -440,37 +389,6 @@ class Theme(models.Model):
     form_pagination_sticky = models.BooleanField(
         default=True,
         verbose_name=_("sticky pagination"),
-    )
-
-    dark_mode_link_lightness_choices = (
-        ("10", "10%"),
-        ("20", "20%"),
-        ("30", "30%"),
-        ("40", "40%"),
-        ("50", "50%"),
-        ("60", "60%"),
-        ("70", "70%"),
-        ("80", "80%"),
-    )
-    dark_mode_link_lightness = models.CharField(
-        max_length=2,
-        choices=dark_mode_link_lightness_choices,
-        default="30",
-        help_text=_("How much white to mix into link and heading colours when dark mode is active. Increase for themes with darker accent colours."),
-        verbose_name=_("accent lightness"),
-    )
-
-    custom_css_vars = models.JSONField(
-        default=dict,
-        blank=True,
-        validators=[validate_custom_css_vars],
-        help_text=_(
-            'Additional CSS custom properties as a JSON object. '
-            'Keys must be valid CSS variable names starting with "--". '
-            'Example: {"--my-accent": "#c0392b", "--my-spacing": "8px"}. '
-            'Values must not contain ; { } or CSS functions (url, expression).'
-        ),
-        verbose_name=_("custom CSS variables"),
     )
 
     objects = ThemeQuerySet.as_manager()
