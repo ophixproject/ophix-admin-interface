@@ -1,26 +1,43 @@
 (function () {
     'use strict';
 
-    function initSwatchOnlyPicker() {
-        // Coloris wraps each colorfield input in a .clr-field div and adds a <button>
-        // swatch. That button already triggers the picker via document-level delegation.
-        // We suppress clicks on the text input itself so only the swatch opens the picker.
-        // Cursor positioning still works because that is browser-native, not event-driven.
-        document.querySelectorAll('.colorfield_field.coloris').forEach(function (input) {
-            input.addEventListener('click', function (e) {
-                if (!e.isTrusted) { return; } // synthetic click from swatch — let it through
-                e.stopImmediatePropagation(); // blocks Coloris's direct element listener
-                e.stopPropagation();           // blocks Coloris's document-level delegation
-                // default is not prevented — text cursor positioning still works
-            }, true); // capture phase fires before any bubble-phase listener
-        });
-    }
+    // Run after window.load so Coloris has already wrapped all [data-coloris] inputs
+    // with .clr-field divs and swatch buttons, and colorfield.js has called setInstance.
+    // setTimeout 0 defers us past all synchronous load handlers.
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            document.querySelectorAll('.clr-field').forEach(function (wrapper) {
+                var colorisEl = wrapper.querySelector('.colorfield_field.coloris');
+                if (!colorisEl) { return; }
 
-    // Run at DOMContentLoaded so our capture listeners are in place before
-    // colorfield.js's window.load handler initialises Coloris on the inputs.
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSwatchOnlyPicker);
-    } else {
-        initSwatchOnlyPicker();
-    }
+                // Build a plain text input for manual hex editing.
+                var textEl = document.createElement('input');
+                textEl.type = 'text';
+                textEl.name = colorisEl.name;   // carries the field value on submit
+                textEl.value = colorisEl.value;
+                textEl.className = 'colorfield-text vTextField';
+                textEl.placeholder = '#000000';
+                if (colorisEl.required) { textEl.required = true; }
+                if (colorisEl.disabled) { textEl.disabled = true; }
+
+                // Hand off the name so only textEl submits (colorisEl is hidden).
+                colorisEl.removeAttribute('name');
+                colorisEl.style.display = 'none';
+
+                // Insert the text input immediately after the .clr-field wrapper.
+                wrapper.parentNode.insertBefore(textEl, wrapper.nextSibling);
+
+                // Coloris picked a colour → sync to the text input.
+                colorisEl.addEventListener('input', function () {
+                    textEl.value = colorisEl.value;
+                });
+
+                // User typed a hex value → sync to colorisEl so Coloris updates the swatch.
+                textEl.addEventListener('input', function () {
+                    colorisEl.value = textEl.value;
+                    colorisEl.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            });
+        }, 0);
+    });
 })();
