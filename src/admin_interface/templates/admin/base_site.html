@@ -2,7 +2,7 @@
 {% load admin_interface_tags i18n static %}
 
 {% block title %}
-{% if title %}{{ title }} | {% endif %}{% if server_settings.title %}{% translate server_settings.title %}{% endif %}
+{% if server_settings.title %}{% translate server_settings.title %}{% if title %} | {% endif %}{% endif %}{% if title %}{{ title }}{% endif %}
 {% endblock title %}
 
 {% block extrastyle %}
