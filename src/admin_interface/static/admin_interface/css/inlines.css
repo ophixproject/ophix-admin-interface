@@ -29,7 +29,7 @@
 
 /* begin fix tabular inlines horizontal scroll */
 .admin-interface .inline-related.tabular {
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 }
 .admin-interface .inline-related.tabular fieldset.module {
