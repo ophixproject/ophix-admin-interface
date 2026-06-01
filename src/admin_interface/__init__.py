@@ -1,3 +1,6 @@
+plugin_category = "core"
+plugin_sort = 20
+
 from admin_interface.metadata import (
     __author__,
     __copyright__,
