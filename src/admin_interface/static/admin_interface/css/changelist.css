@@ -14,6 +14,18 @@
     padding: 2px 5px 3px 5px;
 }
 
+/* apply theme button colours to the Search submit button */
+.admin-interface #changelist #changelist-search input[type="submit"] {
+    background: var(--admin-interface-save-button-background-color);
+    color: var(--admin-interface-save-button-text-color);
+}
+
+.admin-interface #changelist #changelist-search input[type="submit"]:hover,
+.admin-interface #changelist #changelist-search input[type="submit"]:focus {
+    background: var(--admin-interface-save-button-background-hover-color);
+    color: var(--admin-interface-save-button-text-color);
+}
+
 @media (min-width: 1024px) {
     .admin-interface #changelist #changelist-search #searchbar,
     .admin-interface #changelist #changelist-search input[type="submit"],

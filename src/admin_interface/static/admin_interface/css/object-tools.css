@@ -26,7 +26,9 @@
 .admin-interface .object-tools li + li {
     margin-left: 6px;
 }
-.admin-interface .object-tools a {
+.admin-interface .object-tools a,
+.admin-interface .object-tools a:visited,
+.admin-interface .object-tools a:active {
     color: #FFFFFF;
     white-space: nowrap;
 }
