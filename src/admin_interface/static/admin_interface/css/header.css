@@ -29,6 +29,8 @@
 .admin-interface #branding h1 span {
     display: block;
     white-space: nowrap;
+    font-size: var(--admin-interface-title-font-size, 30px);
+    font-weight: var(--admin-interface-title-font-weight, 300);
 }
 
 /* User tools: let parent align-items:center do the work */
