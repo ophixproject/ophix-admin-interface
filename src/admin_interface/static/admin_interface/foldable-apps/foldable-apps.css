@@ -21,8 +21,8 @@
 
 .admin-interface.foldable-apps [class^="app-"].module > table > caption > a {
     display: inline-block;
-    /* pointer-events: all !important; */
     margin-right: 30px;
+    cursor: pointer;
 }
 
 .admin-interface.foldable-apps [class^="app-"].module > table > caption::after {

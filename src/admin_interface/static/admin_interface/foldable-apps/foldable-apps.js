@@ -17,11 +17,12 @@
                 } else {
                     moduleEl.classList.remove(moduleCollapsedClass);
                 }
-                // attach click for togggle collapsed class
+                // attach click for toggle collapsed class
                 for (let captionEl of moduleEl.querySelectorAll('caption')) {
                     captionEl.onclick = function(event) {
-                        // only when not clicking on the app name link
-                        if (event.target.tagName.toLowerCase() === 'caption') {
+                        var tag = event.target.tagName.toLowerCase();
+                        if (tag === 'caption' || tag === 'a') {
+                            event.preventDefault();
                             moduleEl.classList.toggle(moduleCollapsedClass);
                             moduleCollapsed = moduleEl.classList.contains(moduleCollapsedClass);
                             localStorage.setItem(moduleAppKey, (moduleCollapsed ? 1 : 0));
