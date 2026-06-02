@@ -15,6 +15,7 @@
   </h2>
   <div class="theme-section-body">
     {{ form.active.as_hidden }}
+    {{ form.foldable_apps.as_hidden }}
     <div class="simple-row">
       <div class="col-label">{{ form.name.label }}</div>
       <div class="col-field">
@@ -390,20 +391,8 @@
   </div>
 </fieldset>
 
-<!-- ============================================================
-     NAVIGATION BAR
-     ============================================================ -->
+<!-- Navigation Bar: foldable_apps rendered as hidden in identity section; skip here -->
 {% elif fieldset.name == "Navigation Bar" %}
-<fieldset class="module aligned wide theme-custom-section" id="section-navigation">
-  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
-  <div class="theme-section-body">
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.foldable_apps.errors }}{{ form.foldable_apps }} <label for="{{ form.foldable_apps.id_for_label }}">{{ form.foldable_apps.label }}</label></div>
-    </div>
-    {% if form.foldable_apps.help_text %}<div class="help-row"><div class="col-help">{{ form.foldable_apps.help_text }}</div></div>{% endif %}
-  </div>
-</fieldset>
 
 <!-- ============================================================
      RELATED MODAL
