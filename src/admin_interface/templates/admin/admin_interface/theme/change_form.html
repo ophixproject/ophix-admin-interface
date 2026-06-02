@@ -6,13 +6,37 @@
 {% for fieldset in adminform %}
 
 <!-- ============================================================
+     IDENTITY  (fieldset.name == None)
+     ============================================================ -->
+{% if not fieldset.name %}
+<fieldset class="module aligned wide theme-custom-section" id="section-identity">
+  <h2 class="theme-section-heading">
+    {% if original %}{% trans "Theme:" %} {{ original.name }}{% else %}{% trans "New Theme" %}{% endif %}
+  </h2>
+  <div class="theme-section-body">
+    {{ form.active.as_hidden }}
+    <div class="simple-row">
+      <div class="col-label">{{ form.name.label }}</div>
+      <div class="col-field">
+        {{ form.name.errors }}{{ form.name }}
+        {% if original %}
+        <label class="rename-label">
+          <input type="checkbox" id="name-unlock-checkbox"> {% trans "Rename" %}
+        </label>
+        {% endif %}
+      </div>
+    </div>
+    {% if form.name.help_text %}<div class="help-row"><div class="col-help">{{ form.name.help_text }}</div></div>{% endif %}
+  </div>
+</fieldset>
+
+<!-- ============================================================
      LOGO
      ============================================================ -->
-{% if fieldset.name == "Logo" %}
+{% elif fieldset.name == "Logo" %}
 <fieldset class="module aligned wide theme-custom-section" id="section-logo">
   <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
   <div class="theme-section-body">
-
     <div class="simple-row">
       <div class="col-label">{{ form.logo.label }}</div>
       <div class="col-field">{{ form.logo.errors }}{{ form.logo }}</div>
@@ -27,7 +51,6 @@
       <div class="col-field">{{ form.logo_max_height.errors }}{{ form.logo_max_height }}</div>
     </div>
     {% if form.logo_max_height.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_height.help_text }}</div></div>{% endif %}
-
     <div class="color-table">
       <div class="color-header-row">
         <div class="col-label"></div>
@@ -42,13 +65,25 @@
       </div>
       {% if form.logo_color.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_color.help_text }}</div></div>{% endif %}
     </div>
-
     <div class="simple-row boolean-row">
       <div class="col-label"></div>
       <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }} <label for="{{ form.logo_visible.id_for_label }}">{{ form.logo_visible.label }}</label></div>
     </div>
     {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
+  </div>
+</fieldset>
 
+<!-- ============================================================
+     FAVICON
+     ============================================================ -->
+{% elif fieldset.name == "Favicon" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-favicon">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="simple-row">
+      <div class="col-label">{{ form.favicon.label }}</div>
+      <div class="col-field">{{ form.favicon.errors }}{{ form.favicon }}</div>
+    </div>
   </div>
 </fieldset>
 
@@ -184,13 +219,11 @@
       </div>
       {% if form.css_module_link_hover_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_link_hover_color.help_text }}</div></div>{% endif %}
     </div>
-
     <div class="simple-row">
       <div class="col-label">{{ form.css_module_border_radius.label }}</div>
       <div class="col-field">{{ form.css_module_border_radius.errors }}{{ form.css_module_border_radius }}</div>
     </div>
     {% if form.css_module_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_border_radius.help_text }}</div></div>{% endif %}
-
   </div>
 </fieldset>
 
@@ -201,7 +234,6 @@
 <fieldset class="module aligned wide theme-custom-section" id="section-body-text">
   <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
   <div class="theme-section-body">
-
     <div class="simple-row">
       <div class="col-label">{{ form.css_body_font_family.label }}</div>
       <div class="col-field">{{ form.css_body_font_family.errors }}{{ form.css_body_font_family }}</div>
@@ -212,7 +244,6 @@
       <div class="col-field">{{ form.css_body_font_size.errors }}{{ form.css_body_font_size }}</div>
     </div>
     {% if form.css_body_font_size.help_text %}<div class="help-row"><div class="col-help">{{ form.css_body_font_size.help_text }}</div></div>{% endif %}
-
     <div class="color-table">
       <div class="color-header-row">
         <div class="col-label"></div>
@@ -241,7 +272,6 @@
       </div>
       {% if form.css_generic_link_active_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_generic_link_active_color.help_text }}</div></div>{% endif %}
     </div>
-
   </div>
 </fieldset>
 
@@ -280,7 +310,6 @@
       </div>
       {% if form.css_save_button_text_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_save_button_text_color.help_text }}</div></div>{% endif %}
     </div>
-
     <div class="simple-row">
       <div class="col-label">{{ form.css_button_font_size.label }}</div>
       <div class="col-field">{{ form.css_button_font_size.errors }}{{ form.css_button_font_size }}</div>
@@ -291,7 +320,6 @@
       <div class="col-field">{{ form.css_button_border_radius.errors }}{{ form.css_button_border_radius }}</div>
     </div>
     {% if form.css_button_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_button_border_radius.help_text }}</div></div>{% endif %}
-
   </div>
 </fieldset>
 
@@ -379,6 +407,21 @@
 </fieldset>
 
 <!-- ============================================================
+     NAVIGATION BAR
+     ============================================================ -->
+{% elif fieldset.name == "Navigation Bar" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-navigation">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.foldable_apps.errors }}{{ form.foldable_apps }} <label for="{{ form.foldable_apps.id_for_label }}">{{ form.foldable_apps.label }}</label></div>
+    </div>
+    {% if form.foldable_apps.help_text %}<div class="help-row"><div class="col-help">{{ form.foldable_apps.help_text }}</div></div>{% endif %}
+  </div>
+</fieldset>
+
+<!-- ============================================================
      RELATED MODAL
      ============================================================ -->
 {% elif fieldset.name == "Related Modal" %}
@@ -386,13 +429,11 @@
   <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
   <div class="theme-section-body">
     {% if fieldset.description %}<p class="help theme-section-desc">{{ fieldset.description }}</p>{% endif %}
-
     <div class="simple-row boolean-row">
       <div class="col-label"></div>
       <div class="col-field">{{ form.related_modal_active.errors }}{{ form.related_modal_active }} <label for="{{ form.related_modal_active.id_for_label }}">{{ form.related_modal_active.label }}</label></div>
     </div>
     {% if form.related_modal_active.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_active.help_text }}</div></div>{% endif %}
-
     <div class="color-table">
       <div class="color-header-row">
         <div class="col-label"></div>
@@ -407,7 +448,6 @@
       </div>
       {% if form.related_modal_background_color.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_background_color.help_text }}</div></div>{% endif %}
     </div>
-
     <div class="simple-row">
       <div class="col-label">{{ form.related_modal_background_opacity.label }}</div>
       <div class="col-field">{{ form.related_modal_background_opacity.errors }}{{ form.related_modal_background_opacity }}</div>
@@ -423,15 +463,130 @@
       <div class="col-field">{{ form.related_modal_close_button_visible.errors }}{{ form.related_modal_close_button_visible }} <label for="{{ form.related_modal_close_button_visible.id_for_label }}">{{ form.related_modal_close_button_visible.label }}</label></div>
     </div>
     {% if form.related_modal_close_button_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_close_button_visible.help_text }}</div></div>{% endif %}
-
   </div>
 </fieldset>
 
 <!-- ============================================================
-     ALL OTHER SECTIONS — standard Django fieldset rendering
-     (Favicon, None/identity, Navigation Bar, Form Controls,
-      List Filter, Change Form, Inlines, Recent Actions)
+     FORM CONTROLS
      ============================================================ -->
+{% elif fieldset.name == "Form Controls" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-form-controls">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.form_actions_sticky.errors }}{{ form.form_actions_sticky }} <label for="{{ form.form_actions_sticky.id_for_label }}">{{ form.form_actions_sticky.label }}</label></div>
+    </div>
+    {% if form.form_actions_sticky.help_text %}<div class="help-row"><div class="col-help">{{ form.form_actions_sticky.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.form_submit_sticky.errors }}{{ form.form_submit_sticky }} <label for="{{ form.form_submit_sticky.id_for_label }}">{{ form.form_submit_sticky.label }}</label></div>
+    </div>
+    {% if form.form_submit_sticky.help_text %}<div class="help-row"><div class="col-help">{{ form.form_submit_sticky.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.form_pagination_sticky.errors }}{{ form.form_pagination_sticky }} <label for="{{ form.form_pagination_sticky.id_for_label }}">{{ form.form_pagination_sticky.label }}</label></div>
+    </div>
+    {% if form.form_pagination_sticky.help_text %}<div class="help-row"><div class="col-help">{{ form.form_pagination_sticky.help_text }}</div></div>{% endif %}
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     LIST FILTER
+     ============================================================ -->
+{% elif fieldset.name == "List Filter" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-list-filter">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.list_filter_highlight.errors }}{{ form.list_filter_highlight }} <label for="{{ form.list_filter_highlight.id_for_label }}">{{ form.list_filter_highlight.label }}</label></div>
+    </div>
+    {% if form.list_filter_highlight.help_text %}<div class="help-row"><div class="col-help">{{ form.list_filter_highlight.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.list_filter_dropdown.errors }}{{ form.list_filter_dropdown }} <label for="{{ form.list_filter_dropdown.id_for_label }}">{{ form.list_filter_dropdown.label }}</label></div>
+    </div>
+    {% if form.list_filter_dropdown.help_text %}<div class="help-row"><div class="col-help">{{ form.list_filter_dropdown.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.list_filter_sticky.errors }}{{ form.list_filter_sticky }} <label for="{{ form.list_filter_sticky.id_for_label }}">{{ form.list_filter_sticky.label }}</label></div>
+    </div>
+    {% if form.list_filter_sticky.help_text %}<div class="help-row"><div class="col-help">{{ form.list_filter_sticky.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.list_filter_removal_links.errors }}{{ form.list_filter_removal_links }} <label for="{{ form.list_filter_removal_links.id_for_label }}">{{ form.list_filter_removal_links.label }}</label></div>
+    </div>
+    {% if form.list_filter_removal_links.help_text %}<div class="help-row"><div class="col-help">{{ form.list_filter_removal_links.help_text }}</div></div>{% endif %}
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     CHANGE FORM
+     ============================================================ -->
+{% elif fieldset.name == "Change Form" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-change-form">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.show_fieldsets_as_tabs.errors }}{{ form.show_fieldsets_as_tabs }} <label for="{{ form.show_fieldsets_as_tabs.id_for_label }}">{{ form.show_fieldsets_as_tabs.label }}</label></div>
+    </div>
+    {% if form.show_fieldsets_as_tabs.help_text %}<div class="help-row"><div class="col-help">{{ form.show_fieldsets_as_tabs.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.show_inlines_as_tabs.errors }}{{ form.show_inlines_as_tabs }} <label for="{{ form.show_inlines_as_tabs.id_for_label }}">{{ form.show_inlines_as_tabs.label }}</label></div>
+    </div>
+    {% if form.show_inlines_as_tabs.help_text %}<div class="help-row"><div class="col-help">{{ form.show_inlines_as_tabs.help_text }}</div></div>{% endif %}
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     INLINES
+     ============================================================ -->
+{% elif fieldset.name == "Inlines" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-inlines">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.collapsible_stacked_inlines.errors }}{{ form.collapsible_stacked_inlines }} <label for="{{ form.collapsible_stacked_inlines.id_for_label }}">{{ form.collapsible_stacked_inlines.label }}</label></div>
+    </div>
+    {% if form.collapsible_stacked_inlines.help_text %}<div class="help-row"><div class="col-help">{{ form.collapsible_stacked_inlines.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.collapsible_stacked_inlines_collapsed.errors }}{{ form.collapsible_stacked_inlines_collapsed }} <label for="{{ form.collapsible_stacked_inlines_collapsed.id_for_label }}">{{ form.collapsible_stacked_inlines_collapsed.label }}</label></div>
+    </div>
+    {% if form.collapsible_stacked_inlines_collapsed.help_text %}<div class="help-row"><div class="col-help">{{ form.collapsible_stacked_inlines_collapsed.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.collapsible_tabular_inlines.errors }}{{ form.collapsible_tabular_inlines }} <label for="{{ form.collapsible_tabular_inlines.id_for_label }}">{{ form.collapsible_tabular_inlines.label }}</label></div>
+    </div>
+    {% if form.collapsible_tabular_inlines.help_text %}<div class="help-row"><div class="col-help">{{ form.collapsible_tabular_inlines.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.collapsible_tabular_inlines_collapsed.errors }}{{ form.collapsible_tabular_inlines_collapsed }} <label for="{{ form.collapsible_tabular_inlines_collapsed.id_for_label }}">{{ form.collapsible_tabular_inlines_collapsed.label }}</label></div>
+    </div>
+    {% if form.collapsible_tabular_inlines_collapsed.help_text %}<div class="help-row"><div class="col-help">{{ form.collapsible_tabular_inlines_collapsed.help_text }}</div></div>{% endif %}
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     RECENT ACTIONS
+     ============================================================ -->
+{% elif fieldset.name == "Recent Actions" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-recent-actions">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.recent_actions_visible.errors }}{{ form.recent_actions_visible }} <label for="{{ form.recent_actions_visible.id_for_label }}">{{ form.recent_actions_visible.label }}</label></div>
+    </div>
+    {% if form.recent_actions_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.recent_actions_visible.help_text }}</div></div>{% endif %}
+  </div>
+</fieldset>
+
+<!-- Fallback for any future fieldsets not yet converted -->
 {% else %}
   {% include "admin/includes/fieldset.html" %}
 {% endif %}

@@ -182,6 +182,24 @@
     color: var(--body-quiet-color, #666);
 }
 
+/* Theme name — locked state */
+#id_name.theme-name-locked {
+    background: var(--darkened-bg, #f8f8f8);
+    color: var(--body-quiet-color, #666);
+    cursor: default;
+}
+
+.rename-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 10px;
+    font-size: 0.85em;
+    color: var(--body-quiet-color, #666);
+    cursor: pointer;
+    user-select: none;
+}
+
 /* Simple (non-colour) field rows — label + input, consistent with colour table alignment */
 .simple-row {
     display: flex;
