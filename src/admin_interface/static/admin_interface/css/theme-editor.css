@@ -217,6 +217,107 @@
     min-width: 0;
 }
 
+/* ---- Theme editor: Logo / Favicon two-column layout ---- */
+
+.logo-favicon-row {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+}
+
+.logo-col {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.favicon-col {
+    flex: 0 0 240px;
+}
+
+.file-col-heading {
+    font-weight: bold;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--body-quiet-color, #666);
+    margin-bottom: 8px;
+}
+
+/* File meta row: Filename label + name + X button */
+.file-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0 6px 0;
+    font-size: 0.9em;
+}
+
+.file-meta-label {
+    color: var(--body-quiet-color, #666);
+    white-space: nowrap;
+}
+
+.file-name-display {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--body-fg, #333);
+}
+
+/* X clear button */
+.file-clear-btn {
+    flex: 0 0 auto;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: var(--delete-button-bg, #ba2121);
+    cursor: pointer;
+    font-size: 0.85em;
+    line-height: 1;
+    padding: 2px 5px;
+}
+
+.file-clear-btn:hover {
+    background: rgba(186, 33, 33, 0.08);
+    border-color: var(--delete-button-bg, #ba2121);
+}
+
+/* Styled Choose File button */
+.theme-file-btn {
+    background-color: var(--primary, #79aec8);
+    color: var(--button-fg, #fff);
+    border: none;
+    border-radius: var(--admin-interface-button-border-radius, 4px);
+    padding: 6px 14px;
+    font-size: var(--admin-interface-button-font-size, 0.9375rem);
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.theme-file-btn:hover {
+    background-color: var(--primary-hover, #609ab6);
+}
+
+/* Settings below the logo file widget */
+.file-settings {
+    margin-top: 12px;
+    border-top: 1px solid var(--hairline-color, #e8e8e8);
+    padding-top: 8px;
+}
+
+/* Favicon preview image */
+.favicon-preview-container img.favicon-preview-img {
+    display: block;
+    max-height: 64px;
+    max-width: 64px;
+    margin-bottom: 6px;
+    border: 1px solid var(--hairline-color, #ccc);
+    border-radius: 4px;
+}
+
 /* ---- Theme editor: image previews sit above the file input ---- */
 
 .image-preview,

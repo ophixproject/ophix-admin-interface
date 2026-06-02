@@ -46,32 +46,79 @@
   <h2 class="theme-section-heading">{% trans "Header &amp; Logo" %}</h2>
   <div class="theme-section-body">
 
-    <!-- Logo -->
-    <div class="simple-row">
-      <div class="col-label">{{ form.logo.label }}</div>
-      <div class="col-field">{{ form.logo.errors }}{{ form.logo }}</div>
-    </div>
-    <div class="simple-row">
-      <div class="col-label">{{ form.logo_max_width.label }}</div>
-      <div class="col-field">{{ form.logo_max_width.errors }}{{ form.logo_max_width }}</div>
-    </div>
-    {% if form.logo_max_width.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_width.help_text }}</div></div>{% endif %}
-    <div class="simple-row">
-      <div class="col-label">{{ form.logo_max_height.label }}</div>
-      <div class="col-field">{{ form.logo_max_height.errors }}{{ form.logo_max_height }}</div>
-    </div>
-    {% if form.logo_max_height.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_height.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }} <label for="{{ form.logo_visible.id_for_label }}">{{ form.logo_visible.label }}</label></div>
-    </div>
-    {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
+    <!-- Logo and Favicon side by side -->
+    <div class="logo-favicon-row">
 
-    <!-- Favicon -->
-    <div class="simple-row">
-      <div class="col-label">{{ form.favicon.label }}</div>
-      <div class="col-field">{{ form.favicon.errors }}{{ form.favicon }}</div>
-    </div>
+      <!-- Logo column -->
+      <div class="logo-col">
+        <div class="file-col-heading">{% trans "Logo" %}</div>
+
+        <!-- Live preview (IDs kept for logo-preview.js) -->
+        <div class="logo-preview-container" id="logo-preview-container">
+          <img id="logo-preview-img" class="logo-preview-img"
+               src="{% if form.logo.value %}{{ form.logo.value.url }}{% endif %}"
+               alt="" {% if not form.logo.value %}style="display:none"{% endif %}>
+        </div>
+
+        <!-- Filename + clear -->
+        <div class="file-meta" id="logo-meta" {% if not form.logo.value %}style="display:none"{% endif %}>
+          <span class="file-meta-label">{% trans "Filename:" %}</span>
+          <span class="file-name-display" id="logo-name">{% if form.logo.value %}{{ form.logo.value.name }}{% endif %}</span>
+          <button type="button" class="file-clear-btn" data-widget="logo" title="{% trans 'Remove' %}">✕</button>
+        </div>
+        <input type="checkbox" name="logo-clear" id="logo-clear_id" style="display:none" aria-hidden="true">
+        {{ form.logo.errors }}
+
+        <!-- Choose file -->
+        <input type="file" name="logo" id="id_logo" style="display:none">
+        <button type="button" class="theme-file-btn" data-target="id_logo">{% trans "Choose File" %}</button>
+
+        <!-- Logo-specific settings -->
+        <div class="file-settings">
+          <div class="simple-row">
+            <div class="col-label">{% trans "Logo max width" %}</div>
+            <div class="col-field">{{ form.logo_max_width.errors }}{{ form.logo_max_width }}</div>
+          </div>
+          {% if form.logo_max_width.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_width.help_text }}</div></div>{% endif %}
+          <div class="simple-row">
+            <div class="col-label">{% trans "Logo max height" %}</div>
+            <div class="col-field">{{ form.logo_max_height.errors }}{{ form.logo_max_height }}</div>
+          </div>
+          {% if form.logo_max_height.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_height.help_text }}</div></div>{% endif %}
+          <div class="simple-row boolean-row">
+            <div class="col-label"></div>
+            <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }} <label for="{{ form.logo_visible.id_for_label }}">{{ form.logo_visible.label }}</label></div>
+          </div>
+          {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
+        </div>
+      </div>
+
+      <!-- Favicon column -->
+      <div class="favicon-col">
+        <div class="file-col-heading">{% trans "Favicon" %}</div>
+
+        <!-- Current favicon preview -->
+        <div class="favicon-preview-container" id="favicon-preview-container">
+          {% if form.favicon.value %}
+          <img src="{{ form.favicon.value.url }}" alt="" class="favicon-preview-img">
+          {% endif %}
+        </div>
+
+        <!-- Filename + clear -->
+        <div class="file-meta" id="favicon-meta" {% if not form.favicon.value %}style="display:none"{% endif %}>
+          <span class="file-meta-label">{% trans "Filename:" %}</span>
+          <span class="file-name-display" id="favicon-name">{% if form.favicon.value %}{{ form.favicon.value.name }}{% endif %}</span>
+          <button type="button" class="file-clear-btn" data-widget="favicon" title="{% trans 'Remove' %}">✕</button>
+        </div>
+        <input type="checkbox" name="favicon-clear" id="favicon-clear_id" style="display:none" aria-hidden="true">
+        {{ form.favicon.errors }}
+
+        <!-- Choose file -->
+        <input type="file" name="favicon" id="id_favicon" style="display:none">
+        <button type="button" class="theme-file-btn" data-target="id_favicon">{% trans "Choose File" %}</button>
+      </div>
+
+    </div><!-- /logo-favicon-row -->
 
     <!-- Header bar colours -->
     <div class="color-table">
