@@ -18,6 +18,45 @@
     display: block;
 }
 
+/* ---- Theme editor: dark pair rows — three fixed columns ---- */
+
+/*
+ * Each dark-pair row contains three fieldBox divs: (light color) | (Dark? checkbox) | (Dark: color).
+ * :has() targets form-rows that contain a _dark_use fieldBox and sets them as flex containers
+ * so the two dark columns are consistently positioned regardless of the light label width.
+ */
+.form-row:has(> .fieldBox[class*="_dark_use"]) {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+
+.form-row:has(> .fieldBox[class*="_dark_use"]) > .fieldBox:nth-child(1) {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Dark? checkbox column */
+.form-row:has(> .fieldBox[class*="_dark_use"]) > .fieldBox:nth-child(2) {
+    flex: 0 0 130px;
+    padding-left: 16px;
+}
+
+/* Dark color column */
+.form-row:has(> .fieldBox[class*="_dark_use"]) > .fieldBox:nth-child(3) {
+    flex: 0 0 240px;
+    padding-left: 16px;
+}
+
+/* Reset Django's wide-fieldset 7em label width inside the compact dark columns */
+.form-row:has(> .fieldBox[class*="_dark_use"]) > .fieldBox:nth-child(2) label,
+.form-row:has(> .fieldBox[class*="_dark_use"]) > .fieldBox:nth-child(3) label {
+    width: auto;
+    min-width: 0;
+    float: none;
+    display: inline;
+}
+
 /* ---- Theme editor: image previews sit above the file input ---- */
 
 .image-preview,

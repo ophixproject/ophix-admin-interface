@@ -2,8 +2,9 @@
     'use strict';
 
     function getDarkFieldBox(checkbox) {
-        var fieldBox = checkbox.closest('.fieldBox');
-        return fieldBox ? fieldBox.nextElementSibling : null;
+        var darkName = checkbox.name.replace(/_dark_use$/, '_dark');
+        var darkInput = document.querySelector('[name="' + darkName + '"]');
+        return darkInput ? darkInput.closest('.fieldBox') : null;
     }
 
     function applyToggle(checkbox) {
