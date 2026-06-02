@@ -23,19 +23,10 @@
             });
         });
 
-        // Theme name protection — readonly by default for existing themes
+        // Theme name Rename toggle — readonly is set in HTML; JS only handles the checkbox
         var nameUnlock = document.getElementById('name-unlock-checkbox');
         var nameInput  = document.getElementById('id_name');
         if (nameUnlock && nameInput) {
-            var nameErrors = nameInput.closest('.col-field') &&
-                             nameInput.closest('.col-field').querySelector('.errorlist');
-            if (nameErrors) {
-                // Form was re-displayed with errors — auto-unlock so user can correct
-                nameUnlock.checked = true;
-            } else {
-                nameInput.setAttribute('readonly', 'readonly');
-                nameInput.classList.add('theme-name-locked');
-            }
             nameUnlock.addEventListener('change', function () {
                 if (this.checked) {
                     nameInput.removeAttribute('readonly');

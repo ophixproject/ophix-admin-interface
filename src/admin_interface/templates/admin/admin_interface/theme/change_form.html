@@ -19,11 +19,17 @@
     <div class="simple-row">
       <div class="col-label">{{ form.name.label }}</div>
       <div class="col-field">
-        {{ form.name.errors }}{{ form.name }}
+        {{ form.name.errors }}
         {% if original %}
-        <label class="rename-label">
-          <input type="checkbox" id="name-unlock-checkbox"> {% trans "Rename" %}
-        </label>
+          {% if form.name.errors %}
+            <input type="text" name="name" id="id_name" value="{{ form.name.value }}" class="vTextField">
+            <label class="rename-label"><input type="checkbox" id="name-unlock-checkbox" checked> {% trans "Rename" %}</label>
+          {% else %}
+            <input type="text" name="name" id="id_name" value="{{ form.name.value }}" readonly class="vTextField theme-name-locked">
+            <label class="rename-label"><input type="checkbox" id="name-unlock-checkbox"> {% trans "Rename" %}</label>
+          {% endif %}
+        {% else %}
+          {{ form.name }}
         {% endif %}
       </div>
     </div>
