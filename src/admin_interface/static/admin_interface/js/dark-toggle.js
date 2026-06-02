@@ -16,6 +16,8 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('input[name$="_dark_use"]').forEach(function (checkbox) {
+            var formRow = checkbox.closest('.form-row');
+            if (formRow) formRow.classList.add('dark-pair-row');
             applyToggle(checkbox);
             checkbox.addEventListener('change', function () {
                 applyToggle(checkbox);
