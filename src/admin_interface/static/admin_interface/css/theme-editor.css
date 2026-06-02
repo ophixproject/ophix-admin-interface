@@ -94,6 +94,11 @@
     margin-bottom: 10px;
 }
 
+/* Breathing room between the fieldset h2 and the colour table header row */
+.theme-section-body {
+    padding-top: 10px;
+}
+
 /* Colour table */
 .color-table {
     width: 100%;

@@ -15,8 +15,8 @@
 
         <div class="color-header-row">
           <div class="col-label"></div>
-          <div class="col-light col-header">{% trans "Colour" %}</div>
-          <div class="col-dark-span col-header">{% trans "Specify different dark mode colour" %}</div>
+          <div class="col-light col-header">{% trans "Value" %}</div>
+          <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
         </div>
 
         <div class="color-row">
@@ -24,7 +24,6 @@
           <div class="col-light">{{ form.css_header_background_color.errors }}{{ form.css_header_background_color }}</div>
           <div class="col-toggle">
             {{ form.css_header_background_color_dark_use }}
-            <label for="{{ form.css_header_background_color_dark_use.id_for_label }}">{% trans "Dark?" %}</label>
           </div>
           <div class="col-dark" id="dark-css_header_background_color">
             {{ form.css_header_background_color_dark.errors }}{{ form.css_header_background_color_dark }}
@@ -39,7 +38,6 @@
           <div class="col-light">{{ form.css_header_text_color.errors }}{{ form.css_header_text_color }}</div>
           <div class="col-toggle">
             {{ form.css_header_text_color_dark_use }}
-            <label for="{{ form.css_header_text_color_dark_use.id_for_label }}">{% trans "Dark?" %}</label>
           </div>
           <div class="col-dark" id="dark-css_header_text_color">
             {{ form.css_header_text_color_dark.errors }}{{ form.css_header_text_color_dark }}
@@ -54,7 +52,6 @@
           <div class="col-light">{{ form.css_header_link_color.errors }}{{ form.css_header_link_color }}</div>
           <div class="col-toggle">
             {{ form.css_header_link_color_dark_use }}
-            <label for="{{ form.css_header_link_color_dark_use.id_for_label }}">{% trans "Dark?" %}</label>
           </div>
           <div class="col-dark" id="dark-css_header_link_color">
             {{ form.css_header_link_color_dark.errors }}{{ form.css_header_link_color_dark }}
@@ -69,7 +66,6 @@
           <div class="col-light">{{ form.css_header_link_hover_color.errors }}{{ form.css_header_link_hover_color }}</div>
           <div class="col-toggle">
             {{ form.css_header_link_hover_color_dark_use }}
-            <label for="{{ form.css_header_link_hover_color_dark_use.id_for_label }}">{% trans "Dark?" %}</label>
           </div>
           <div class="col-dark" id="dark-css_header_link_hover_color">
             {{ form.css_header_link_hover_color_dark.errors }}{{ form.css_header_link_hover_color_dark }}
@@ -84,7 +80,6 @@
           <div class="col-light">{{ form.env_color.errors }}{{ form.env_color }}</div>
           <div class="col-toggle">
             {{ form.env_color_dark_use }}
-            <label for="{{ form.env_color_dark_use.id_for_label }}">{% trans "Dark?" %}</label>
           </div>
           <div class="col-dark" id="dark-env_color">
             {{ form.env_color_dark.errors }}{{ form.env_color_dark }}
@@ -95,10 +90,6 @@
         {% endif %}
 
       </div><!-- /color-table -->
-
-      {% if fieldset.description %}
-      <p class="help theme-section-footer-note">{{ fieldset.description }}</p>
-      {% endif %}
 
     </div><!-- /theme-section-body -->
   </fieldset>
