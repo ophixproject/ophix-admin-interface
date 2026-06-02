@@ -3,14 +3,23 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
-        // Collapsible section headings
+        // Collapsible section headings with localStorage persistence
         document.querySelectorAll('.theme-section-heading').forEach(function (heading) {
+            var body    = heading.nextElementSibling;
+            var section = heading.closest('fieldset.theme-custom-section');
+            var key     = section ? 'theme-section-' + section.id : null;
+
+            // Restore saved state
+            if (key && localStorage.getItem(key) === 'collapsed') {
+                heading.classList.add('section-collapsed');
+                if (body) body.classList.add('section-collapsed');
+            }
+
             heading.addEventListener('click', function (e) {
-                // Don't collapse when clicking the Rename checkbox inside the heading area
                 if (e.target.type === 'checkbox') return;
-                heading.classList.toggle('section-collapsed');
-                var body = heading.nextElementSibling;
+                var nowCollapsed = heading.classList.toggle('section-collapsed');
                 if (body) body.classList.toggle('section-collapsed');
+                if (key) localStorage.setItem(key, nowCollapsed ? 'collapsed' : 'expanded');
             });
         });
 
