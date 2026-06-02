@@ -5,100 +5,437 @@
 {% with form=adminform.form %}
 {% for fieldset in adminform %}
 
-{% if fieldset.name == "Header" %}
+<!-- ============================================================
+     LOGO
+     ============================================================ -->
+{% if fieldset.name == "Logo" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-logo">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
 
-  <fieldset class="module aligned wide theme-custom-section" id="section-header">
-    <h2 class="theme-section-heading">{% trans "Header" %}</h2>
-    <div class="theme-section-body">
+    <div class="simple-row">
+      <div class="col-label">{{ form.logo.label }}</div>
+      <div class="col-field">{{ form.logo.errors }}{{ form.logo }}</div>
+    </div>
+    <div class="simple-row">
+      <div class="col-label">{{ form.logo_max_width.label }}</div>
+      <div class="col-field">{{ form.logo_max_width.errors }}{{ form.logo_max_width }}</div>
+    </div>
+    {% if form.logo_max_width.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_width.help_text }}</div></div>{% endif %}
+    <div class="simple-row">
+      <div class="col-label">{{ form.logo_max_height.label }}</div>
+      <div class="col-field">{{ form.logo_max_height.errors }}{{ form.logo_max_height }}</div>
+    </div>
+    {% if form.logo_max_height.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_height.help_text }}</div></div>{% endif %}
 
-      <div class="color-table">
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Logo color" %}</div>
+        <div class="col-light">{{ form.logo_color.errors }}{{ form.logo_color }}</div>
+        <div class="col-toggle">{{ form.logo_color_dark_use }}</div>
+        <div class="col-dark" id="dark-logo_color">{{ form.logo_color_dark.errors }}{{ form.logo_color_dark }}</div>
+      </div>
+      {% if form.logo_color.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_color.help_text }}</div></div>{% endif %}
+    </div>
 
-        <div class="color-header-row">
-          <div class="col-label"></div>
-          <div class="col-light col-header">{% trans "Value" %}</div>
-          <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
-        </div>
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }} <label for="{{ form.logo_visible.id_for_label }}">{{ form.logo_visible.label }}</label></div>
+    </div>
+    {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
 
-        <div class="color-row">
-          <div class="col-label">{% trans "Background color" %}</div>
-          <div class="col-light">{{ form.css_header_background_color.errors }}{{ form.css_header_background_color }}</div>
-          <div class="col-toggle">
-            {{ form.css_header_background_color_dark_use }}
-          </div>
-          <div class="col-dark" id="dark-css_header_background_color">
-            {{ form.css_header_background_color_dark.errors }}{{ form.css_header_background_color_dark }}
-          </div>
-        </div>
-        {% if form.css_header_background_color.help_text %}
-        <div class="help-row"><div class="col-help">{{ form.css_header_background_color.help_text }}</div></div>
-        {% endif %}
+  </div>
+</fieldset>
 
-        <div class="color-row">
-          <div class="col-label">{% trans "Text color" %}</div>
-          <div class="col-light">{{ form.css_header_text_color.errors }}{{ form.css_header_text_color }}</div>
-          <div class="col-toggle">
-            {{ form.css_header_text_color_dark_use }}
-          </div>
-          <div class="col-dark" id="dark-css_header_text_color">
-            {{ form.css_header_text_color_dark.errors }}{{ form.css_header_text_color_dark }}
-          </div>
-        </div>
-        {% if form.css_header_text_color.help_text %}
-        <div class="help-row"><div class="col-help">{{ form.css_header_text_color.help_text }}</div></div>
-        {% endif %}
+<!-- ============================================================
+     TITLE
+     ============================================================ -->
+{% elif fieldset.name == "Title" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-title">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Title color" %}</div>
+        <div class="col-light">{{ form.title_color.errors }}{{ form.title_color }}</div>
+        <div class="col-toggle">{{ form.title_color_dark_use }}</div>
+        <div class="col-dark" id="dark-title_color">{{ form.title_color_dark.errors }}{{ form.title_color_dark }}</div>
+      </div>
+      {% if form.title_color.help_text %}<div class="help-row"><div class="col-help">{{ form.title_color.help_text }}</div></div>{% endif %}
+    </div>
+  </div>
+</fieldset>
 
-        <div class="color-row">
-          <div class="col-label">{% trans "Link color" %}</div>
-          <div class="col-light">{{ form.css_header_link_color.errors }}{{ form.css_header_link_color }}</div>
-          <div class="col-toggle">
-            {{ form.css_header_link_color_dark_use }}
-          </div>
-          <div class="col-dark" id="dark-css_header_link_color">
-            {{ form.css_header_link_color_dark.errors }}{{ form.css_header_link_color_dark }}
-          </div>
-        </div>
-        {% if form.css_header_link_color.help_text %}
-        <div class="help-row"><div class="col-help">{{ form.css_header_link_color.help_text }}</div></div>
-        {% endif %}
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+{% elif fieldset.name == "Header" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-header">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Background color" %}</div>
+        <div class="col-light">{{ form.css_header_background_color.errors }}{{ form.css_header_background_color }}</div>
+        <div class="col-toggle">{{ form.css_header_background_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_header_background_color">{{ form.css_header_background_color_dark.errors }}{{ form.css_header_background_color_dark }}</div>
+      </div>
+      {% if form.css_header_background_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_header_background_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Text color" %}</div>
+        <div class="col-light">{{ form.css_header_text_color.errors }}{{ form.css_header_text_color }}</div>
+        <div class="col-toggle">{{ form.css_header_text_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_header_text_color">{{ form.css_header_text_color_dark.errors }}{{ form.css_header_text_color_dark }}</div>
+      </div>
+      {% if form.css_header_text_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_header_text_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Link color" %}</div>
+        <div class="col-light">{{ form.css_header_link_color.errors }}{{ form.css_header_link_color }}</div>
+        <div class="col-toggle">{{ form.css_header_link_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_header_link_color">{{ form.css_header_link_color_dark.errors }}{{ form.css_header_link_color_dark }}</div>
+      </div>
+      {% if form.css_header_link_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_header_link_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Link hover color" %}</div>
+        <div class="col-light">{{ form.css_header_link_hover_color.errors }}{{ form.css_header_link_hover_color }}</div>
+        <div class="col-toggle">{{ form.css_header_link_hover_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_header_link_hover_color">{{ form.css_header_link_hover_color_dark.errors }}{{ form.css_header_link_hover_color_dark }}</div>
+      </div>
+      {% if form.css_header_link_hover_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_header_link_hover_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Env badge color" %}</div>
+        <div class="col-light">{{ form.env_color.errors }}{{ form.env_color }}</div>
+        <div class="col-toggle">{{ form.env_color_dark_use }}</div>
+        <div class="col-dark" id="dark-env_color">{{ form.env_color_dark.errors }}{{ form.env_color_dark }}</div>
+      </div>
+      {% if form.env_color.help_text %}<div class="help-row"><div class="col-help">{{ form.env_color.help_text }}</div></div>{% endif %}
+    </div>
+  </div>
+</fieldset>
 
-        <div class="color-row">
-          <div class="col-label">{% trans "Link hover color" %}</div>
-          <div class="col-light">{{ form.css_header_link_hover_color.errors }}{{ form.css_header_link_hover_color }}</div>
-          <div class="col-toggle">
-            {{ form.css_header_link_hover_color_dark_use }}
-          </div>
-          <div class="col-dark" id="dark-css_header_link_hover_color">
-            {{ form.css_header_link_hover_color_dark.errors }}{{ form.css_header_link_hover_color_dark }}
-          </div>
-        </div>
-        {% if form.css_header_link_hover_color.help_text %}
-        <div class="help-row"><div class="col-help">{{ form.css_header_link_hover_color.help_text }}</div></div>
-        {% endif %}
+<!-- ============================================================
+     BREADCRUMBS / MODULE HEADERS
+     ============================================================ -->
+{% elif fieldset.name == "Breadcrumbs / Module headers" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-breadcrumbs">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Background color" %}</div>
+        <div class="col-light">{{ form.css_module_background_color.errors }}{{ form.css_module_background_color }}</div>
+        <div class="col-toggle">{{ form.css_module_background_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_module_background_color">{{ form.css_module_background_color_dark.errors }}{{ form.css_module_background_color_dark }}</div>
+      </div>
+      {% if form.css_module_background_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_background_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Selected background" %}</div>
+        <div class="col-light">{{ form.css_module_background_selected_color.errors }}{{ form.css_module_background_selected_color }}</div>
+        <div class="col-toggle">{{ form.css_module_background_selected_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_module_background_selected_color">{{ form.css_module_background_selected_color_dark.errors }}{{ form.css_module_background_selected_color_dark }}</div>
+      </div>
+      {% if form.css_module_background_selected_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_background_selected_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Text color" %}</div>
+        <div class="col-light">{{ form.css_module_text_color.errors }}{{ form.css_module_text_color }}</div>
+        <div class="col-toggle">{{ form.css_module_text_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_module_text_color">{{ form.css_module_text_color_dark.errors }}{{ form.css_module_text_color_dark }}</div>
+      </div>
+      {% if form.css_module_text_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_text_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Link color" %}</div>
+        <div class="col-light">{{ form.css_module_link_color.errors }}{{ form.css_module_link_color }}</div>
+        <div class="col-toggle">{{ form.css_module_link_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_module_link_color">{{ form.css_module_link_color_dark.errors }}{{ form.css_module_link_color_dark }}</div>
+      </div>
+      {% if form.css_module_link_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_link_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Link selected color" %}</div>
+        <div class="col-light">{{ form.css_module_link_selected_color.errors }}{{ form.css_module_link_selected_color }}</div>
+        <div class="col-toggle">{{ form.css_module_link_selected_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_module_link_selected_color">{{ form.css_module_link_selected_color_dark.errors }}{{ form.css_module_link_selected_color_dark }}</div>
+      </div>
+      {% if form.css_module_link_selected_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_link_selected_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Link hover color" %}</div>
+        <div class="col-light">{{ form.css_module_link_hover_color.errors }}{{ form.css_module_link_hover_color }}</div>
+        <div class="col-toggle">{{ form.css_module_link_hover_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_module_link_hover_color">{{ form.css_module_link_hover_color_dark.errors }}{{ form.css_module_link_hover_color_dark }}</div>
+      </div>
+      {% if form.css_module_link_hover_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_link_hover_color.help_text }}</div></div>{% endif %}
+    </div>
 
-        <div class="color-row">
-          <div class="col-label">{% trans "Env badge color" %}</div>
-          <div class="col-light">{{ form.env_color.errors }}{{ form.env_color }}</div>
-          <div class="col-toggle">
-            {{ form.env_color_dark_use }}
-          </div>
-          <div class="col-dark" id="dark-env_color">
-            {{ form.env_color_dark.errors }}{{ form.env_color_dark }}
-          </div>
-        </div>
-        {% if form.env_color.help_text %}
-        <div class="help-row"><div class="col-help">{{ form.env_color.help_text }}</div></div>
-        {% endif %}
+    <div class="simple-row">
+      <div class="col-label">{{ form.css_module_border_radius.label }}</div>
+      <div class="col-field">{{ form.css_module_border_radius.errors }}{{ form.css_module_border_radius }}</div>
+    </div>
+    {% if form.css_module_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_border_radius.help_text }}</div></div>{% endif %}
 
-      </div><!-- /color-table -->
+  </div>
+</fieldset>
 
-    </div><!-- /theme-section-body -->
-  </fieldset>
+<!-- ============================================================
+     BODY TEXT
+     ============================================================ -->
+{% elif fieldset.name == "Body Text" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-body-text">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
 
+    <div class="simple-row">
+      <div class="col-label">{{ form.css_body_font_family.label }}</div>
+      <div class="col-field">{{ form.css_body_font_family.errors }}{{ form.css_body_font_family }}</div>
+    </div>
+    {% if form.css_body_font_family.help_text %}<div class="help-row"><div class="col-help">{{ form.css_body_font_family.help_text }}</div></div>{% endif %}
+    <div class="simple-row">
+      <div class="col-label">{{ form.css_body_font_size.label }}</div>
+      <div class="col-field">{{ form.css_body_font_size.errors }}{{ form.css_body_font_size }}</div>
+    </div>
+    {% if form.css_body_font_size.help_text %}<div class="help-row"><div class="col-help">{{ form.css_body_font_size.help_text }}</div></div>{% endif %}
+
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Link color" %}</div>
+        <div class="col-light">{{ form.css_generic_link_color.errors }}{{ form.css_generic_link_color }}</div>
+        <div class="col-toggle">{{ form.css_generic_link_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_generic_link_color">{{ form.css_generic_link_color_dark.errors }}{{ form.css_generic_link_color_dark }}</div>
+      </div>
+      {% if form.css_generic_link_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_generic_link_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Link hover color" %}</div>
+        <div class="col-light">{{ form.css_generic_link_hover_color.errors }}{{ form.css_generic_link_hover_color }}</div>
+        <div class="col-toggle">{{ form.css_generic_link_hover_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_generic_link_hover_color">{{ form.css_generic_link_hover_color_dark.errors }}{{ form.css_generic_link_hover_color_dark }}</div>
+      </div>
+      {% if form.css_generic_link_hover_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_generic_link_hover_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Link active color" %}</div>
+        <div class="col-light">{{ form.css_generic_link_active_color.errors }}{{ form.css_generic_link_active_color }}</div>
+        <div class="col-toggle">{{ form.css_generic_link_active_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_generic_link_active_color">{{ form.css_generic_link_active_color_dark.errors }}{{ form.css_generic_link_active_color_dark }}</div>
+      </div>
+      {% if form.css_generic_link_active_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_generic_link_active_color.help_text }}</div></div>{% endif %}
+    </div>
+
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     BUTTONS
+     ============================================================ -->
+{% elif fieldset.name == "Buttons" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-buttons">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Background color" %}</div>
+        <div class="col-light">{{ form.css_save_button_background_color.errors }}{{ form.css_save_button_background_color }}</div>
+        <div class="col-toggle">{{ form.css_save_button_background_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_save_button_background_color">{{ form.css_save_button_background_color_dark.errors }}{{ form.css_save_button_background_color_dark }}</div>
+      </div>
+      {% if form.css_save_button_background_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_save_button_background_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Hover background" %}</div>
+        <div class="col-light">{{ form.css_save_button_background_hover_color.errors }}{{ form.css_save_button_background_hover_color }}</div>
+        <div class="col-toggle">{{ form.css_save_button_background_hover_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_save_button_background_hover_color">{{ form.css_save_button_background_hover_color_dark.errors }}{{ form.css_save_button_background_hover_color_dark }}</div>
+      </div>
+      {% if form.css_save_button_background_hover_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_save_button_background_hover_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Text color" %}</div>
+        <div class="col-light">{{ form.css_save_button_text_color.errors }}{{ form.css_save_button_text_color }}</div>
+        <div class="col-toggle">{{ form.css_save_button_text_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_save_button_text_color">{{ form.css_save_button_text_color_dark.errors }}{{ form.css_save_button_text_color_dark }}</div>
+      </div>
+      {% if form.css_save_button_text_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_save_button_text_color.help_text }}</div></div>{% endif %}
+    </div>
+
+    <div class="simple-row">
+      <div class="col-label">{{ form.css_button_font_size.label }}</div>
+      <div class="col-field">{{ form.css_button_font_size.errors }}{{ form.css_button_font_size }}</div>
+    </div>
+    {% if form.css_button_font_size.help_text %}<div class="help-row"><div class="col-help">{{ form.css_button_font_size.help_text }}</div></div>{% endif %}
+    <div class="simple-row">
+      <div class="col-label">{{ form.css_button_border_radius.label }}</div>
+      <div class="col-field">{{ form.css_button_border_radius.errors }}{{ form.css_button_border_radius }}</div>
+    </div>
+    {% if form.css_button_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_button_border_radius.help_text }}</div></div>{% endif %}
+
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     ALERT BUTTONS
+     ============================================================ -->
+{% elif fieldset.name == "Alert Buttons" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-alert-buttons">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Background color" %}</div>
+        <div class="col-light">{{ form.css_delete_button_background_color.errors }}{{ form.css_delete_button_background_color }}</div>
+        <div class="col-toggle">{{ form.css_delete_button_background_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_delete_button_background_color">{{ form.css_delete_button_background_color_dark.errors }}{{ form.css_delete_button_background_color_dark }}</div>
+      </div>
+      {% if form.css_delete_button_background_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_delete_button_background_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Hover background" %}</div>
+        <div class="col-light">{{ form.css_delete_button_background_hover_color.errors }}{{ form.css_delete_button_background_hover_color }}</div>
+        <div class="col-toggle">{{ form.css_delete_button_background_hover_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_delete_button_background_hover_color">{{ form.css_delete_button_background_hover_color_dark.errors }}{{ form.css_delete_button_background_hover_color_dark }}</div>
+      </div>
+      {% if form.css_delete_button_background_hover_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_delete_button_background_hover_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Text color" %}</div>
+        <div class="col-light">{{ form.css_delete_button_text_color.errors }}{{ form.css_delete_button_text_color }}</div>
+        <div class="col-toggle">{{ form.css_delete_button_text_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_delete_button_text_color">{{ form.css_delete_button_text_color_dark.errors }}{{ form.css_delete_button_text_color_dark }}</div>
+      </div>
+      {% if form.css_delete_button_text_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_delete_button_text_color.help_text }}</div></div>{% endif %}
+    </div>
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     NOTIFICATION COLORS
+     ============================================================ -->
+{% elif fieldset.name == "Notification Colors" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-notification-colors">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Success" %}</div>
+        <div class="col-light">{{ form.css_success_color.errors }}{{ form.css_success_color }}</div>
+        <div class="col-toggle">{{ form.css_success_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_success_color">{{ form.css_success_color_dark.errors }}{{ form.css_success_color_dark }}</div>
+      </div>
+      {% if form.css_success_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_success_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Warning" %}</div>
+        <div class="col-light">{{ form.css_warning_color.errors }}{{ form.css_warning_color }}</div>
+        <div class="col-toggle">{{ form.css_warning_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_warning_color">{{ form.css_warning_color_dark.errors }}{{ form.css_warning_color_dark }}</div>
+      </div>
+      {% if form.css_warning_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_warning_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Muted" %}</div>
+        <div class="col-light">{{ form.css_muted_color.errors }}{{ form.css_muted_color }}</div>
+        <div class="col-toggle">{{ form.css_muted_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_muted_color">{{ form.css_muted_color_dark.errors }}{{ form.css_muted_color_dark }}</div>
+      </div>
+      {% if form.css_muted_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_muted_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Alert" %}</div>
+        <div class="col-light">{{ form.css_alert_color.errors }}{{ form.css_alert_color }}</div>
+        <div class="col-toggle">{{ form.css_alert_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_alert_color">{{ form.css_alert_color_dark.errors }}{{ form.css_alert_color_dark }}</div>
+      </div>
+      {% if form.css_alert_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_alert_color.help_text }}</div></div>{% endif %}
+    </div>
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     RELATED MODAL
+     ============================================================ -->
+{% elif fieldset.name == "Related Modal" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-related-modal">
+  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
+  <div class="theme-section-body">
+    {% if fieldset.description %}<p class="help theme-section-desc">{{ fieldset.description }}</p>{% endif %}
+
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.related_modal_active.errors }}{{ form.related_modal_active }} <label for="{{ form.related_modal_active.id_for_label }}">{{ form.related_modal_active.label }}</label></div>
+    </div>
+    {% if form.related_modal_active.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_active.help_text }}</div></div>{% endif %}
+
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Background color" %}</div>
+        <div class="col-light">{{ form.related_modal_background_color.errors }}{{ form.related_modal_background_color }}</div>
+        <div class="col-toggle">{{ form.related_modal_background_color_dark_use }}</div>
+        <div class="col-dark" id="dark-related_modal_background_color">{{ form.related_modal_background_color_dark.errors }}{{ form.related_modal_background_color_dark }}</div>
+      </div>
+      {% if form.related_modal_background_color.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_background_color.help_text }}</div></div>{% endif %}
+    </div>
+
+    <div class="simple-row">
+      <div class="col-label">{{ form.related_modal_background_opacity.label }}</div>
+      <div class="col-field">{{ form.related_modal_background_opacity.errors }}{{ form.related_modal_background_opacity }}</div>
+    </div>
+    {% if form.related_modal_background_opacity.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_background_opacity.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.related_modal_rounded_corners.errors }}{{ form.related_modal_rounded_corners }} <label for="{{ form.related_modal_rounded_corners.id_for_label }}">{{ form.related_modal_rounded_corners.label }}</label></div>
+    </div>
+    {% if form.related_modal_rounded_corners.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_rounded_corners.help_text }}</div></div>{% endif %}
+    <div class="simple-row boolean-row">
+      <div class="col-label"></div>
+      <div class="col-field">{{ form.related_modal_close_button_visible.errors }}{{ form.related_modal_close_button_visible }} <label for="{{ form.related_modal_close_button_visible.id_for_label }}">{{ form.related_modal_close_button_visible.label }}</label></div>
+    </div>
+    {% if form.related_modal_close_button_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_close_button_visible.help_text }}</div></div>{% endif %}
+
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     ALL OTHER SECTIONS — standard Django fieldset rendering
+     (Favicon, None/identity, Navigation Bar, Form Controls,
+      List Filter, Change Form, Inlines, Recent Actions)
+     ============================================================ -->
 {% else %}
-
   {% include "admin/includes/fieldset.html" %}
-
 {% endif %}
+
 {% endfor %}
 {% endwith %}
 {% endblock field_sets %}
