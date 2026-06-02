@@ -1,0 +1,32 @@
+/* ---- Theme editor: logo contextual preview ---- */
+
+.logo-preview-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+    min-height: 40px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    /* background-color, height, and max-width are set live by logo-preview.js */
+}
+
+.logo-preview-img {
+    object-fit: contain;
+    display: block;
+}
+
+/* ---- Theme editor: image previews sit above the file input ---- */
+
+.image-preview,
+.file-input-wrap {
+    display: block;
+}
+
+.image-preview img {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 6px;
+}

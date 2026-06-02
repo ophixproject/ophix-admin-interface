@@ -98,6 +98,94 @@
         {% endfor %}
         {% endif %}
         }
+
+        [data-theme="dark"] .admin-interface {
+        {% if theme.title_color_dark_use and theme.title_color_dark %}
+            --admin-interface-title-color: {{ theme.title_color_dark }};
+        {% endif %}
+        {% if theme.logo_color_dark_use and theme.logo_color_dark %}
+            --admin-interface-logo-color: {{ theme.logo_color_dark }};
+        {% endif %}
+        {% if theme.env_color_dark_use and theme.env_color_dark %}
+            --admin-interface-env-color: {{ theme.env_color_dark }};
+        {% endif %}
+        {% if theme.css_header_background_color_dark_use and theme.css_header_background_color_dark %}
+            --admin-interface-header-background-color: {{ theme.css_header_background_color_dark }};
+        {% endif %}
+        {% if theme.css_header_text_color_dark_use and theme.css_header_text_color_dark %}
+            --admin-interface-header-text-color: {{ theme.css_header_text_color_dark }};
+        {% endif %}
+        {% if theme.css_header_link_color_dark_use and theme.css_header_link_color_dark %}
+            --admin-interface-header-link-color: {{ theme.css_header_link_color_dark }};
+        {% endif %}
+        {% if theme.css_header_link_hover_color_dark_use and theme.css_header_link_hover_color_dark %}
+            --admin-interface-header-link-hover-color: {{ theme.css_header_link_hover_color_dark }};
+        {% endif %}
+        {% if theme.css_module_background_color_dark_use and theme.css_module_background_color_dark %}
+            --admin-interface-module-background-color: {{ theme.css_module_background_color_dark }};
+        {% endif %}
+        {% if theme.css_module_background_selected_color_dark_use and theme.css_module_background_selected_color_dark %}
+            --admin-interface-module-background-selected-color: {{ theme.css_module_background_selected_color_dark }};
+        {% endif %}
+        {% if theme.css_module_text_color_dark_use and theme.css_module_text_color_dark %}
+            --admin-interface-module-text-color: {{ theme.css_module_text_color_dark }};
+        {% endif %}
+        {% if theme.css_module_link_color_dark_use and theme.css_module_link_color_dark %}
+            --admin-interface-module-link-color: {{ theme.css_module_link_color_dark }};
+        {% endif %}
+        {% if theme.css_module_link_selected_color_dark_use and theme.css_module_link_selected_color_dark %}
+            --admin-interface-module-link-selected-color: {{ theme.css_module_link_selected_color_dark }};
+        {% endif %}
+        {% if theme.css_module_link_hover_color_dark_use and theme.css_module_link_hover_color_dark %}
+            --admin-interface-module-link-hover-color: {{ theme.css_module_link_hover_color_dark }};
+        {% endif %}
+        {% if theme.css_generic_link_color_dark_use and theme.css_generic_link_color_dark %}
+            --admin-interface-generic-link-color: {{ theme.css_generic_link_color_dark }};
+        {% endif %}
+        {% if theme.css_generic_link_hover_color_dark_use and theme.css_generic_link_hover_color_dark %}
+            --admin-interface-generic-link-hover-color: {{ theme.css_generic_link_hover_color_dark }};
+        {% endif %}
+        {% if theme.css_generic_link_active_color_dark_use and theme.css_generic_link_active_color_dark %}
+            --admin-interface-generic-link-active-color: {{ theme.css_generic_link_active_color_dark }};
+        {% endif %}
+        {% if theme.css_save_button_background_color_dark_use and theme.css_save_button_background_color_dark %}
+            --admin-interface-save-button-background-color: {{ theme.css_save_button_background_color_dark }};
+        {% endif %}
+        {% if theme.css_save_button_background_hover_color_dark_use and theme.css_save_button_background_hover_color_dark %}
+            --admin-interface-save-button-background-hover-color: {{ theme.css_save_button_background_hover_color_dark }};
+        {% endif %}
+        {% if theme.css_save_button_text_color_dark_use and theme.css_save_button_text_color_dark %}
+            --admin-interface-save-button-text-color: {{ theme.css_save_button_text_color_dark }};
+        {% endif %}
+        {% if theme.css_delete_button_background_color_dark_use and theme.css_delete_button_background_color_dark %}
+            --admin-interface-delete-button-background-color: {{ theme.css_delete_button_background_color_dark }};
+            --message-error-bg: color-mix(in srgb, {{ theme.css_delete_button_background_color_dark }} 15%, #fff 85%);
+        {% endif %}
+        {% if theme.css_delete_button_background_hover_color_dark_use and theme.css_delete_button_background_hover_color_dark %}
+            --admin-interface-delete-button-background-hover-color: {{ theme.css_delete_button_background_hover_color_dark }};
+        {% endif %}
+        {% if theme.css_delete_button_text_color_dark_use and theme.css_delete_button_text_color_dark %}
+            --admin-interface-delete-button-text-color: {{ theme.css_delete_button_text_color_dark }};
+        {% endif %}
+        {% if theme.css_success_color_dark_use and theme.css_success_color_dark %}
+            --admin-interface-success-color: {{ theme.css_success_color_dark }};
+            --message-success-bg: color-mix(in srgb, {{ theme.css_success_color_dark }} 20%, #fff 80%);
+        {% endif %}
+        {% if theme.css_warning_color_dark_use and theme.css_warning_color_dark %}
+            --admin-interface-warning-color: {{ theme.css_warning_color_dark }};
+            --message-warning-bg: color-mix(in srgb, {{ theme.css_warning_color_dark }} 20%, #fff 80%);
+        {% endif %}
+        {% if theme.css_muted_color_dark_use and theme.css_muted_color_dark %}
+            --admin-interface-muted-color: {{ theme.css_muted_color_dark }};
+        {% endif %}
+        {% if theme.css_alert_color_dark_use and theme.css_alert_color_dark %}
+            --admin-interface-alert-color: {{ theme.css_alert_color_dark }};
+            --message-alert-bg: color-mix(in srgb, {{ theme.css_alert_color_dark }} 15%, #fff 85%);
+        {% endif %}
+        {% if theme.related_modal_background_color_dark_use and theme.related_modal_background_color_dark %}
+            --admin-interface-related-modal-background-color: {{ theme.related_modal_background_color_dark }};
+        {% endif %}
+        }
     </style>
     <link rel="stylesheet" href="{% get_admin_interface_static 'admin_interface/css/admin-interface.css' %}">
     <link rel="stylesheet" href="{% get_admin_interface_static 'admin_interface/css/changelist.css' %}">
