@@ -1,33 +1,23 @@
 {% extends "admin/change_form.html" %}
 {% load i18n %}
 
-{#
-  Custom change form for the Theme model.
-  Sections with colour pairs use the .color-table pseudo-table layout (fixed columns,
-  help text in its own row). All other sections fall through to the standard Django
-  fieldset renderer via {% include "admin/includes/fieldset.html" %}.
-
-  POC: Header section is custom. Remaining sections use standard rendering until converted.
-#}
-
 {% block field_sets %}
 {% with form=adminform.form %}
 {% for fieldset in adminform %}
 
 {% if fieldset.name == "Header" %}
 
-  {# ================================================================
-     HEADER — custom colour-table layout
-     Fields: css_header_background_color, css_header_text_color,
-             css_header_link_color, css_header_link_hover_color,
-             env_color  (all with dark pairs)
-     ================================================================ #}
   <fieldset class="module aligned wide theme-custom-section" id="section-header">
     <h2 class="theme-section-heading">{% trans "Header" %}</h2>
     <div class="theme-section-body">
-      {% if fieldset.description %}<p class="help theme-section-desc">{{ fieldset.description }}</p>{% endif %}
 
       <div class="color-table">
+
+        <div class="color-header-row">
+          <div class="col-label"></div>
+          <div class="col-light col-header">{% trans "Colour" %}</div>
+          <div class="col-dark-span col-header">{% trans "Specify different dark mode colour" %}</div>
+        </div>
 
         <div class="color-row">
           <div class="col-label">{% trans "Background color" %}</div>
@@ -104,13 +94,17 @@
         <div class="help-row"><div class="col-help">{{ form.env_color.help_text }}</div></div>
         {% endif %}
 
-      </div>{# /color-table #}
-    </div>{# /theme-section-body #}
+      </div><!-- /color-table -->
+
+      {% if fieldset.description %}
+      <p class="help theme-section-footer-note">{{ fieldset.description }}</p>
+      {% endif %}
+
+    </div><!-- /theme-section-body -->
   </fieldset>
 
 {% else %}
 
-  {# All other sections: standard Django fieldset rendering #}
   {% include "admin/includes/fieldset.html" %}
 
 {% endif %}

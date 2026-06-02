@@ -97,14 +97,36 @@
 /* Colour table */
 .color-table {
     width: 100%;
-    border-collapse: collapse;
 }
 
+/* Column header row */
+.color-header-row {
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--hairline-color, #e8e8e8);
+    margin-bottom: 2px;
+}
+
+.col-header {
+    font-size: 0.78em;
+    font-weight: bold;
+    color: var(--body-quiet-color, #666);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+/* Spans the toggle + dark columns in the header row */
+.col-dark-span {
+    flex: 0 0 280px;
+}
+
+/* Data rows */
 .color-row {
     display: flex;
     align-items: center;
-    padding: 5px 0;
-    border-bottom: 1px solid var(--hairline-color, #e8e8e8);
+    padding: 6px 0;
 }
 
 .col-label {
@@ -135,7 +157,8 @@
     padding-left: 8px;
 }
 
-/* Help text row — unrestricted width, sits below the colour row */
+/* Help text row — unrestricted width, sits below the colour row.
+   Border-bottom separates this group from the next colour row. */
 .help-row {
     padding: 3px 0 8px 0;
     border-bottom: 1px solid var(--hairline-color, #e8e8e8);
@@ -145,6 +168,13 @@
     font-size: 0.85em;
     color: var(--body-quiet-color, #666);
     padding-left: 4px;
+}
+
+/* Footer note below the last colour row (e.g. env_color context) */
+.theme-section-footer-note {
+    margin-top: 10px;
+    font-size: 0.85em;
+    color: var(--body-quiet-color, #666);
 }
 
 /* ---- Theme editor: image previews sit above the file input ---- */
