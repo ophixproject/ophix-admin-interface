@@ -227,13 +227,11 @@
 }
 
 .logo-col {
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 0 0 auto;
 }
 
 .favicon-col {
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 0 0 auto;
 }
 
 .file-col-heading {
@@ -260,7 +258,7 @@
 }
 
 .file-name-display {
-    flex: 1;
+    flex: 0 1 auto;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -286,10 +284,10 @@
     border-color: var(--delete-button-bg, #ba2121);
 }
 
-/* Styled Choose File button */
+/* Styled Choose File button — matches the theme's save button colours */
 .theme-file-btn {
-    background-color: var(--primary, #79aec8);
-    color: var(--button-fg, #fff);
+    background-color: var(--admin-interface-save-button-background-color, var(--primary, #79aec8));
+    color: var(--admin-interface-save-button-text-color, var(--button-fg, #fff));
     border: none;
     border-radius: var(--admin-interface-button-border-radius, 4px);
     padding: 6px 14px;
@@ -299,14 +297,14 @@
 }
 
 .theme-file-btn:hover {
-    background-color: var(--primary-hover, #609ab6);
+    background-color: var(--admin-interface-save-button-background-hover-color, var(--primary-hover, #609ab6));
 }
 
-/* Settings below the logo file widget */
-.file-settings {
-    margin-top: 12px;
+/* Logo settings — full-width rows below the logo/favicon file pickers */
+.logo-settings {
     border-top: 1px solid var(--hairline-color, #e8e8e8);
     padding-top: 8px;
+    margin-bottom: 12px;
 }
 
 /* Favicon preview image */

@@ -73,24 +73,6 @@
         <input type="file" name="logo" id="id_logo" style="display:none">
         <button type="button" class="theme-file-btn" data-target="id_logo">{% trans "Choose File" %}</button>
 
-        <!-- Logo-specific settings -->
-        <div class="file-settings">
-          <div class="simple-row">
-            <div class="col-label">{% trans "Logo max width" %}</div>
-            <div class="col-field">{{ form.logo_max_width.errors }}{{ form.logo_max_width }}</div>
-          </div>
-          {% if form.logo_max_width.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_width.help_text }}</div></div>{% endif %}
-          <div class="simple-row">
-            <div class="col-label">{% trans "Logo max height" %}</div>
-            <div class="col-field">{{ form.logo_max_height.errors }}{{ form.logo_max_height }}</div>
-          </div>
-          {% if form.logo_max_height.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_height.help_text }}</div></div>{% endif %}
-          <div class="simple-row boolean-row">
-            <div class="col-label"></div>
-            <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }} <label for="{{ form.logo_visible.id_for_label }}">{{ form.logo_visible.label }}</label></div>
-          </div>
-          {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
-        </div>
       </div>
 
       <!-- Favicon column -->
@@ -119,6 +101,25 @@
       </div>
 
     </div><!-- /logo-favicon-row -->
+
+    <!-- Logo settings — full-width rows below the file pickers -->
+    <div class="logo-settings">
+      <div class="simple-row">
+        <div class="col-label">{% trans "Logo max width" %}</div>
+        <div class="col-field">{{ form.logo_max_width.errors }}{{ form.logo_max_width }}</div>
+      </div>
+      {% if form.logo_max_width.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_width.help_text }}</div></div>{% endif %}
+      <div class="simple-row">
+        <div class="col-label">{% trans "Logo max height" %}</div>
+        <div class="col-field">{{ form.logo_max_height.errors }}{{ form.logo_max_height }}</div>
+      </div>
+      {% if form.logo_max_height.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_height.help_text }}</div></div>{% endif %}
+      <div class="simple-row boolean-row">
+        <div class="col-label"></div>
+        <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }} <label for="{{ form.logo_visible.id_for_label }}">{{ form.logo_visible.label }}</label></div>
+      </div>
+      {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
+    </div>
 
     <!-- Header bar colours -->
     <div class="color-table">
