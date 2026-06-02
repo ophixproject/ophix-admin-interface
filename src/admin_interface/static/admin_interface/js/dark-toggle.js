@@ -4,7 +4,9 @@
     function getDarkFieldBox(checkbox) {
         var darkName = checkbox.name.replace(/_dark_use$/, '_dark');
         var darkInput = document.querySelector('[name="' + darkName + '"]');
-        return darkInput ? darkInput.closest('.fieldBox') : null;
+        if (!darkInput) return null;
+        // Custom template sections use .col-dark; standard fieldset sections use .fieldBox
+        return darkInput.closest('.col-dark') || darkInput.closest('.fieldBox');
     }
 
     function applyToggle(checkbox) {

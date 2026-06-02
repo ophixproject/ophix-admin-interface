@@ -260,6 +260,7 @@ class ThemeAdmin(admin.ModelAdmin):
     )
 
     save_on_top = True
+    change_form_template = "admin/admin_interface/theme/change_form.html"
 
     class Media:
         css = {
@@ -269,4 +270,5 @@ class ThemeAdmin(admin.ModelAdmin):
             "admin_interface/colorfield/colorfield-swatch.js",
             "admin_interface/js/dark-toggle.js",
             "admin_interface/js/logo-preview.js",
+            "admin_interface/js/theme-sections.js",
         )

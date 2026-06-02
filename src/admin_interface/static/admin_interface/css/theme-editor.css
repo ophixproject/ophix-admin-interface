@@ -62,6 +62,91 @@
     display: inline;
 }
 
+/* ---- Theme editor: custom section layout (colour-table) ---- */
+
+/*
+ * Used by the Theme custom change_form template.
+ * Each colour section is a fieldset with a collapsible heading.
+ * Inside, a .color-table holds rows: fixed-width label | light picker | Dark? toggle | dark picker.
+ * Help text sits in a separate .help-row so it is not constrained to the light column.
+ */
+
+.theme-section-heading {
+    cursor: pointer;
+    user-select: none;
+}
+
+.theme-section-heading::after {
+    content: " \25BE"; /* ▾ */
+    font-size: 0.8em;
+    opacity: 0.6;
+}
+
+.theme-section-heading.section-collapsed::after {
+    content: " \25B8"; /* ▸ */
+}
+
+.theme-section-body.section-collapsed {
+    display: none;
+}
+
+.theme-section-desc {
+    margin-bottom: 10px;
+}
+
+/* Colour table */
+.color-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.color-row {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--hairline-color, #e8e8e8);
+}
+
+.col-label {
+    flex: 0 0 200px;
+    padding-right: 12px;
+    font-weight: normal;
+    color: var(--body-fg, #333);
+}
+
+.col-light {
+    flex: 0 0 190px;
+}
+
+.col-toggle {
+    flex: 0 0 90px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.col-toggle label {
+    display: block;
+    font-size: 0.85em;
+    color: var(--body-quiet-color, #666);
+}
+
+.col-dark {
+    flex: 0 0 190px;
+    padding-left: 8px;
+}
+
+/* Help text row — unrestricted width, sits below the colour row */
+.help-row {
+    padding: 3px 0 8px 0;
+    border-bottom: 1px solid var(--hairline-color, #e8e8e8);
+}
+
+.col-help {
+    font-size: 0.85em;
+    color: var(--body-quiet-color, #666);
+    padding-left: 4px;
+}
+
 /* ---- Theme editor: image previews sit above the file input ---- */
 
 .image-preview,
