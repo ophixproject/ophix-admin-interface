@@ -221,17 +221,20 @@
 
 .logo-favicon-row {
     display: flex;
-    gap: 32px;
+    gap: 0;
     margin-bottom: 16px;
-    align-items: flex-start;
+    align-items: flex-end;
 }
 
 .logo-col {
-    flex: 0 0 auto;
+    /* col-label(200) + col-light(190) + col-toggle(90) — aligns favicon with dark mode column */
+    flex: 0 0 480px;
 }
 
 .favicon-col {
-    flex: 0 0 auto;
+    flex: 1 1 0;
+    min-width: 0;
+    padding-left: 8px; /* matches col-dark padding-left */
 }
 
 .file-col-heading {
