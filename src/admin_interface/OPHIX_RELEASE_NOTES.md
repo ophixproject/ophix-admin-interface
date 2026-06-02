@@ -1,12 +1,12 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased (dark mode and theme editor improvements)
+## 2026.06.02.01
 
 - Added per-colour dark mode overrides. Each colour field in the theme editor now has a companion "dark?" checkbox and dark colour picker. When checked and a colour is set, that colour is applied under `[data-theme="dark"]`; if the checkbox is unchecked or the colour is blank, the light value is used as fallback. The `[data-theme="dark"]` CSS block is emitted in `base_site.html` alongside the existing `:root` block — only overrides with both checkbox and colour set are emitted.
 - Logo preview in the theme editor now shows the logo rendered against the current header background colour at the configured max-height and max-width — updating live as those fields are changed, before saving. Selecting a new logo file also previews it immediately.
 - Logo and favicon images now appear above (not beside) the file input controls.
 
-## Unreleased (theme editor structural changes)
+## 2026.06.01.01
 
 - Theme editor section renames: "Generic Links" → **Body Text**, "Save Buttons" → **Buttons**,
   "Delete Buttons" → **Alert Buttons**, "Extended Colors" → **Notification Colors**.
@@ -20,7 +20,7 @@
 - Color picker: clicking the text input now positions the cursor for direct hex editing only.
   The colour swatch button (to the left of the input) opens the picker as before.
 
-## Unreleased (settings split)
+## 2026.05.31.01
 
 - Moved server identity settings (title, title_visible, env_name, env_visible_in_header,
   env_visible_in_favicon) and language chooser settings to the new `ophix-admin-settings`
