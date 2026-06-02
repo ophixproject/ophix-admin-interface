@@ -232,7 +232,8 @@
 }
 
 .favicon-col {
-    flex: 0 0 240px;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .file-col-heading {

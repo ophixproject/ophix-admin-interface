@@ -1,4 +1,9 @@
+import os
+import shutil
+
+from django.conf import settings
 from django.contrib import admin
+from django.core.files.uploadedfile import UploadedFile
 from django.forms import ClearableFileInput
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -258,6 +263,59 @@ class ThemeAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            super().save_model(request, obj, form, change)
+            return
+
+        old = Theme.objects.get(pk=obj.pk)
+        old_name = old.name
+        new_name = obj.name
+        renamed = old_name != new_name
+
+        logo_is_new = isinstance(form.cleaned_data.get("logo"), UploadedFile)
+        logo_is_cleared = form.cleaned_data.get("logo") is False
+        fav_is_new = isinstance(form.cleaned_data.get("favicon"), UploadedFile)
+        fav_is_cleared = form.cleaned_data.get("favicon") is False
+
+        media_root = settings.MEDIA_ROOT
+        old_base = os.path.join(media_root, "admin-interface", "themes", old_name)
+        new_base = os.path.join(media_root, "admin-interface", "themes", new_name)
+
+        _slots = (
+            ("logo", "logo", logo_is_new, logo_is_cleared),
+            ("favicon", "favicon", fav_is_new, fav_is_cleared),
+        )
+
+        if renamed:
+            os.makedirs(new_base, exist_ok=True)
+            for subdir, field, is_new, is_cleared in _slots:
+                old_dir = os.path.join(old_base, subdir)
+                new_dir = os.path.join(new_base, subdir)
+                old_field = getattr(old, field)
+                if is_new or is_cleared:
+                    # Old subfolder replaced or cleared — remove it; new upload lands in new_base
+                    shutil.rmtree(old_dir, ignore_errors=True)
+                elif old_field and os.path.exists(old_dir):
+                    # Keeping the same file — move folder and update stored path
+                    shutil.move(old_dir, new_dir)
+                    new_path = old_field.name.replace(
+                        "admin-interface/themes/{}/{}/".format(old_name, subdir),
+                        "admin-interface/themes/{}/{}/".format(new_name, subdir),
+                    )
+                    getattr(obj, field).name = new_path
+        else:
+            for subdir, field, is_new, is_cleared in _slots:
+                old_field = getattr(old, field)
+                if (is_new or is_cleared) and old_field:
+                    shutil.rmtree(os.path.join(old_base, subdir), ignore_errors=True)
+
+        super().save_model(request, obj, form, change)
+
+        # After successful save, remove the old base folder (renamed away from it)
+        if renamed and os.path.exists(old_base):
+            shutil.rmtree(old_base, ignore_errors=True)
 
     save_on_top = True
     change_form_template = "admin/admin_interface/theme/change_form.html"
