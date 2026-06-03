@@ -302,7 +302,7 @@
     margin-left: 2px;
     color: var(--admin-interface-alert-color, var(--delete-button-bg, #ba2121));
     cursor: pointer;
-    font: inherit;
+    font-size: 1rem;
     font-weight: bold;
     line-height: 1;
 }
