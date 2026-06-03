@@ -244,6 +244,11 @@
     padding-left: 8px; /* matches col-dark padding-left */
 }
 
+.file-name-empty {
+    color: var(--body-quiet-color);
+    font-style: italic;
+}
+
 .logo-size-pair {
     display: flex;
     align-items: center;

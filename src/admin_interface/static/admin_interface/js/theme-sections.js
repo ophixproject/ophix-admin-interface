@@ -36,27 +36,34 @@
             var fileInput = document.getElementById('id_' + widgetId);
             if (!fileInput) return;
             fileInput.addEventListener('change', function () {
-                var file = this.files[0];
+                var file     = this.files[0];
                 if (!file) return;
-                var meta     = document.getElementById(widgetId + '-meta');
                 var nameSpan = document.getElementById(widgetId + '-name');
                 var clearBox = document.getElementById(widgetId + '-clear_id');
-                if (nameSpan) nameSpan.textContent = file.name;
-                if (meta)     meta.style.display = '';
+                var clearBtn = document.querySelector('.file-clear-btn[data-widget="' + widgetId + '"]');
+                if (nameSpan) {
+                    nameSpan.textContent = file.name;
+                    nameSpan.classList.remove('file-name-empty');
+                }
+                if (clearBtn) clearBtn.style.display = '';
                 if (clearBox) clearBox.checked = false;
             });
         });
 
-        // File widget — X button checks the hidden clear checkbox and hides the meta row
+        // File widget — X button resets to empty state (shows placeholder, hides X)
         document.querySelectorAll('.file-clear-btn[data-widget]').forEach(function (btn) {
             var widgetId = btn.getAttribute('data-widget');
             btn.addEventListener('click', function () {
                 var clearBox  = document.getElementById(widgetId + '-clear_id');
-                var meta      = document.getElementById(widgetId + '-meta');
+                var nameSpan  = document.getElementById(widgetId + '-name');
                 var fileInput = document.getElementById('id_' + widgetId);
                 if (clearBox)  clearBox.checked = true;
-                if (meta)      meta.style.display = 'none';
                 if (fileInput) fileInput.value = '';
+                if (nameSpan) {
+                    nameSpan.textContent = nameSpan.getAttribute('data-none-text') || '';
+                    nameSpan.classList.add('file-name-empty');
+                }
+                btn.style.display = 'none';
                 if (widgetId === 'logo') {
                     var img = document.getElementById('logo-preview-img');
                     if (img) img.style.display = 'none';

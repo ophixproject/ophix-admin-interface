@@ -62,10 +62,10 @@
         </div>
 
         <!-- Filename + clear -->
-        <div class="file-meta" id="logo-meta" {% if not form.logo.value %}style="display:none"{% endif %}>
+        <div class="file-meta" id="logo-meta">
           <span class="file-meta-label">{% trans "Filename:" %}</span>
-          <span class="file-name-display" id="logo-name">{% if form.logo.value %}{{ form.logo.value.name }}{% endif %}</span>
-          <button type="button" class="file-clear-btn" data-widget="logo" title="{% trans 'Remove' %}">✕</button>
+          <span class="file-name-display{% if not form.logo.value %} file-name-empty{% endif %}" id="logo-name" data-none-text="{% trans '<none selected>' %}">{% if form.logo.value %}{{ form.logo.value.name }}{% else %}{% trans "<none selected>" %}{% endif %}</span>
+          <button type="button" class="file-clear-btn" data-widget="logo" title="{% trans 'Remove' %}"{% if not form.logo.value %} style="display:none"{% endif %}>✕</button>
         </div>
         <input type="checkbox" name="logo-clear" id="logo-clear_id" style="display:none" aria-hidden="true">
         {{ form.logo.errors }}
@@ -88,10 +88,10 @@
         </div>
 
         <!-- Filename + clear -->
-        <div class="file-meta" id="favicon-meta" {% if not form.favicon.value %}style="display:none"{% endif %}>
+        <div class="file-meta" id="favicon-meta">
           <span class="file-meta-label">{% trans "Filename:" %}</span>
-          <span class="file-name-display" id="favicon-name">{% if form.favicon.value %}{{ form.favicon.value.name }}{% endif %}</span>
-          <button type="button" class="file-clear-btn" data-widget="favicon" title="{% trans 'Remove' %}">✕</button>
+          <span class="file-name-display{% if not form.favicon.value %} file-name-empty{% endif %}" id="favicon-name" data-none-text="{% trans '<none selected>' %}">{% if form.favicon.value %}{{ form.favicon.value.name }}{% else %}{% trans "<none selected>" %}{% endif %}</span>
+          <button type="button" class="file-clear-btn" data-widget="favicon" title="{% trans 'Remove' %}"{% if not form.favicon.value %} style="display:none"{% endif %}>✕</button>
         </div>
         <input type="checkbox" name="favicon-clear" id="favicon-clear_id" style="display:none" aria-hidden="true">
         {{ form.favicon.errors }}
