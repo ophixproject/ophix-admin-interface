@@ -30,7 +30,7 @@
 .admin-interface #branding h1 span {
     display: block;
     white-space: nowrap;
-    font-size: var(--admin-interface-title-font-size, 30px);
+    font-size: var(--admin-interface-title-font-size, 1.5rem);
     font-weight: var(--admin-interface-title-font-weight, 300);
 }
 

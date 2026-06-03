@@ -116,8 +116,8 @@
         </div>
       </div>
       <div class="simple-row boolean-row">
-        <div class="col-label"></div>
-        <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }} <label for="{{ form.logo_visible.id_for_label }}">{{ form.logo_visible.label }}</label></div>
+        <div class="col-label"><label for="{{ form.logo_visible.id_for_label }}">{% trans "Logo visible" %}</label></div>
+        <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }}</div>
       </div>
       {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
       <div class="simple-row">

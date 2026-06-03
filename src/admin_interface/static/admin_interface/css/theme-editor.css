@@ -1,7 +1,7 @@
 /* ---- Theme editor: logo contextual preview ---- */
 
 .logo-preview-container {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 12px;
@@ -22,7 +22,7 @@
 
 .logo-preview-title {
     white-space: nowrap;
-    font-size: var(--admin-interface-title-font-size, 30px);
+    font-size: var(--admin-interface-title-font-size, 1.5rem);
     font-weight: var(--admin-interface-title-font-weight, 300);
     /* color is set live by logo-preview.js */
 }
