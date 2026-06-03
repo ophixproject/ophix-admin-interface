@@ -1,14 +1,31 @@
 (function () {
     'use strict';
 
+    function isDarkMode() {
+        return document.documentElement.getAttribute('data-theme') === 'dark';
+    }
+
+    // Returns the appropriate color value for a field pair, respecting dark mode.
+    function resolveColor(lightSel, darkUseSel, darkSel) {
+        var lightInput   = document.querySelector(lightSel);
+        var darkUseInput = document.querySelector(darkUseSel);
+        var darkInput    = document.querySelector(darkSel);
+        if (isDarkMode() && darkUseInput && darkUseInput.checked && darkInput && darkInput.value) {
+            return darkInput.value;
+        }
+        return lightInput ? lightInput.value : '';
+    }
+
     function updatePreview(container, img) {
-        var bgInput   = document.querySelector('#id_css_header_background_color');
         var maxHInput = document.querySelector('#id_logo_max_height');
         var maxWInput = document.querySelector('#id_logo_max_width');
 
-        if (bgInput && bgInput.value) {
-            container.style.backgroundColor = bgInput.value;
-        }
+        var bgColor = resolveColor(
+            '#id_css_header_background_color',
+            '#id_css_header_background_color_dark_use',
+            '#id_css_header_background_color_dark'
+        );
+        if (bgColor) { container.style.backgroundColor = bgColor; }
 
         var maxH = maxHInput ? parseInt(maxHInput.value, 10) : 0;
         var maxW = maxWInput ? parseInt(maxWInput.value, 10) : 0;
@@ -35,12 +52,9 @@
         var headerSpan    = document.querySelector('#site-name span');
         var fontSizeInput = document.querySelector('#id_title_font_size');
         if (!titleEl) return;
-        // If the user has typed a new font size, apply it directly so the preview
-        // updates without needing a save + reload cycle.
         if (fontSizeInput && fontSizeInput.value.trim()) {
             titleEl.style.fontSize = fontSizeInput.value.trim();
         } else if (headerSpan) {
-            // No override — copy whatever the live header is rendering at.
             titleEl.style.fontSize = window.getComputedStyle(headerSpan).fontSize;
         }
         if (headerSpan) {
@@ -50,10 +64,13 @@
 
     function updateTitleColor() {
         var titleEl = document.getElementById('logo-preview-title');
-        var input   = document.querySelector('#id_title_color');
-        if (titleEl && input && input.value) {
-            titleEl.style.color = input.value;
-        }
+        if (!titleEl) return;
+        var color = resolveColor(
+            '#id_title_color',
+            '#id_title_color_dark_use',
+            '#id_title_color_dark'
+        );
+        if (color) { titleEl.style.color = color; }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -62,20 +79,37 @@
         if (!container || !img) return;
 
         function update() { updatePreview(container, img); }
+
+        function updateAll() {
+            update();
+            updateTitleColor();
+        }
+
         update();
         updateOffset(img);
         updateLogoVisibility(img);
         syncTitleFont();
         updateTitleColor();
 
-        // Live update: background colour and logo size constraints.
-        ['#id_css_header_background_color', '#id_logo_max_height', '#id_logo_max_width'].forEach(function (sel) {
+        // Re-run all color updates when dark mode is toggled.
+        new MutationObserver(function (mutations) {
+            mutations.forEach(function (m) {
+                if (m.attributeName === 'data-theme') { updateAll(); }
+            });
+        }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+        // Live update: background colour (light + dark pair) and logo size constraints.
+        ['#id_css_header_background_color', '#id_logo_max_height', '#id_logo_max_width',
+         '#id_css_header_background_color_dark',
+        ].forEach(function (sel) {
             var el = document.querySelector(sel);
             if (el) {
                 el.addEventListener('input', update);
                 el.addEventListener('change', update);
             }
         });
+        var bgDarkUse = document.querySelector('#id_css_header_background_color_dark_use');
+        if (bgDarkUse) { bgDarkUse.addEventListener('change', update); }
 
         // Live update: title font size.
         var fontSizeInput = document.querySelector('#id_title_font_size');
@@ -97,12 +131,16 @@
             offsetInput.addEventListener('change', function () { updateOffset(img); });
         }
 
-        // Live update: title colour.
-        var titleColorInput = document.querySelector('#id_title_color');
-        if (titleColorInput) {
-            titleColorInput.addEventListener('input',  updateTitleColor);
-            titleColorInput.addEventListener('change', updateTitleColor);
-        }
+        // Live update: title colour (light + dark pair).
+        ['#id_title_color', '#id_title_color_dark'].forEach(function (sel) {
+            var el = document.querySelector(sel);
+            if (el) {
+                el.addEventListener('input',  updateTitleColor);
+                el.addEventListener('change', updateTitleColor);
+            }
+        });
+        var titleDarkUse = document.querySelector('#id_title_color_dark_use');
+        if (titleDarkUse) { titleDarkUse.addEventListener('change', updateTitleColor); }
 
         // Preview a newly selected logo file before saving.
         var fileInput = document.querySelector('#id_logo');
