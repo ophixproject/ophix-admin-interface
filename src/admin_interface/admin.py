@@ -84,6 +84,7 @@ class ThemeAdmin(admin.ModelAdmin):
                     "logo_max_height",
                     ("logo_color", "logo_color_dark_use", "logo_color_dark"),
                     "logo_visible",
+                    "logo_vertical_offset",
                 ),
                 "description": _DARK_HINT,
             },

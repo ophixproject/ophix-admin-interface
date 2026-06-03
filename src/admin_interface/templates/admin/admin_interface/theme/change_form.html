@@ -58,6 +58,7 @@
           <img id="logo-preview-img" class="logo-preview-img"
                src="{% if form.logo.value %}{{ form.logo.value.url }}{% endif %}"
                alt="" {% if not form.logo.value %}style="display:none"{% endif %}>
+          <span id="logo-preview-title">{% if server_settings.title %}{{ server_settings.title }}{% else %}Server Name{% endif %}</span>
         </div>
 
         <!-- Filename + clear -->
@@ -105,20 +106,25 @@
     <!-- Logo settings — full-width rows below the file pickers -->
     <div class="logo-settings">
       <div class="simple-row">
-        <div class="col-label">{% trans "Logo max width" %}</div>
-        <div class="col-field">{{ form.logo_max_width.errors }}{{ form.logo_max_width }}</div>
+        <div class="col-label">{% trans "Logo max size" %}</div>
+        <div class="col-field">
+          <div class="logo-size-pair">
+            {{ form.logo_max_width.errors }}{{ form.logo_max_height.errors }}
+            <span class="size-label">{% trans "Width:" %}</span>{{ form.logo_max_width }}
+            <span class="size-label">{% trans "Height:" %}</span>{{ form.logo_max_height }}
+          </div>
+        </div>
       </div>
-      {% if form.logo_max_width.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_width.help_text }}</div></div>{% endif %}
-      <div class="simple-row">
-        <div class="col-label">{% trans "Logo max height" %}</div>
-        <div class="col-field">{{ form.logo_max_height.errors }}{{ form.logo_max_height }}</div>
-      </div>
-      {% if form.logo_max_height.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_max_height.help_text }}</div></div>{% endif %}
       <div class="simple-row boolean-row">
         <div class="col-label"></div>
         <div class="col-field">{{ form.logo_visible.errors }}{{ form.logo_visible }} <label for="{{ form.logo_visible.id_for_label }}">{{ form.logo_visible.label }}</label></div>
       </div>
       {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
+      <div class="simple-row">
+        <div class="col-label">{% trans "Logo vertical offset" %}</div>
+        <div class="col-field">{{ form.logo_vertical_offset.errors }}{{ form.logo_vertical_offset }}</div>
+      </div>
+      {% if form.logo_vertical_offset.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_vertical_offset.help_text }}</div></div>{% endif %}
     </div>
 
     <!-- Header bar colours -->

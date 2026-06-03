@@ -3,19 +3,28 @@
 .logo-preview-container {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 12px;
     min-width: 80px;
     min-height: 40px;
     padding: 8px 12px;
     border-radius: 4px;
     margin-bottom: 10px;
-    overflow: hidden;
-    /* background-color, height, and max-width are set live by logo-preview.js */
+    overflow: visible;
+    /* background-color is set live by logo-preview.js */
 }
 
 .logo-preview-img {
     object-fit: contain;
     display: block;
+    flex-shrink: 0;
+}
+
+.logo-preview-title {
+    white-space: nowrap;
+    font-size: var(--admin-interface-title-font-size, 30px);
+    font-weight: var(--admin-interface-title-font-weight, 300);
+    /* color is set live by logo-preview.js */
 }
 
 /* ---- Theme editor: dark pair rows — three fixed columns ---- */
@@ -235,6 +244,18 @@
     flex: 1 1 0;
     min-width: 0;
     padding-left: 8px; /* matches col-dark padding-left */
+}
+
+.logo-size-pair {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-size-pair .size-label {
+    font-size: 0.875em;
+    color: var(--body-quiet-color);
+    white-space: nowrap;
 }
 
 .file-col-heading {

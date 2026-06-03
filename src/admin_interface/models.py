@@ -120,6 +120,11 @@ class Theme(models.Model):
         default=True,
         verbose_name=_("visible"),
     )
+    logo_vertical_offset = models.SmallIntegerField(
+        default=0,
+        verbose_name=_("vertical offset"),
+        help_text=_("Pixels to shift the logo up (positive) or down (negative) relative to its natural position."),
+    )
     favicon = models.FileField(
         upload_to=_favicon_upload_to,
         blank=True,
