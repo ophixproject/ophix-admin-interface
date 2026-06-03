@@ -127,6 +127,15 @@
       {% if form.logo_vertical_offset.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_vertical_offset.help_text }}</div></div>{% endif %}
     </div>
 
+    <!-- Title settings -->
+    <div class="logo-settings">
+      <div class="simple-row">
+        <div class="col-label">{% trans "Title font size" %}</div>
+        <div class="col-field">{{ form.title_font_size.errors }}{{ form.title_font_size }}</div>
+      </div>
+      {% if form.title_font_size.help_text %}<div class="help-row"><div class="col-help">{{ form.title_font_size.help_text }}</div></div>{% endif %}
+    </div>
+
     <!-- Header bar colours -->
     <div class="color-table">
       <div class="color-header-row">

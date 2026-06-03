@@ -76,6 +76,9 @@
             --admin-interface-logo-max-height: unset;
         {% endif %}
             --admin-interface-logo-vertical-offset: {{ theme.logo_vertical_offset }}px;
+        {% if theme.title_font_size %}
+            --admin-interface-title-font-size: {{ theme.title_font_size }};
+        {% endif %}
 
         {% if theme.related_modal_rounded_corners %}
             --admin-interface-related-modal-border-radius: 4px;

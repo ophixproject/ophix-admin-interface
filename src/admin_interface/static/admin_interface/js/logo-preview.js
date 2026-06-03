@@ -30,6 +30,24 @@
         }
     }
 
+    function syncTitleFont() {
+        var titleEl       = document.getElementById('logo-preview-title');
+        var headerSpan    = document.querySelector('#site-name span');
+        var fontSizeInput = document.querySelector('#id_title_font_size');
+        if (!titleEl) return;
+        // If the user has typed a new font size, apply it directly so the preview
+        // updates without needing a save + reload cycle.
+        if (fontSizeInput && fontSizeInput.value.trim()) {
+            titleEl.style.fontSize = fontSizeInput.value.trim();
+        } else if (headerSpan) {
+            // No override — copy whatever the live header is rendering at.
+            titleEl.style.fontSize = window.getComputedStyle(headerSpan).fontSize;
+        }
+        if (headerSpan) {
+            titleEl.style.fontWeight = window.getComputedStyle(headerSpan).fontWeight;
+        }
+    }
+
     function updateTitleColor() {
         var titleEl = document.getElementById('logo-preview-title');
         var input   = document.querySelector('#id_title_color');
@@ -47,6 +65,7 @@
         update();
         updateOffset(img);
         updateLogoVisibility(img);
+        syncTitleFont();
         updateTitleColor();
 
         // Live update: background colour and logo size constraints.
@@ -57,6 +76,13 @@
                 el.addEventListener('change', update);
             }
         });
+
+        // Live update: title font size.
+        var fontSizeInput = document.querySelector('#id_title_font_size');
+        if (fontSizeInput) {
+            fontSizeInput.addEventListener('input',  syncTitleFont);
+            fontSizeInput.addEventListener('change', syncTitleFont);
+        }
 
         // Live update: logo visible toggle.
         var visibleCheckbox = document.querySelector('#id_logo_visible');

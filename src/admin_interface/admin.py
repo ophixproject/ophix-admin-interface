@@ -95,6 +95,7 @@ class ThemeAdmin(admin.ModelAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
+                    "title_font_size",
                     ("title_color", "title_color_dark_use", "title_color_dark"),
                 ),
                 "description": _DARK_HINT,

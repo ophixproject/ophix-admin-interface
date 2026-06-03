@@ -22,9 +22,7 @@
 
 .logo-preview-title {
     white-space: nowrap;
-    font-size: var(--admin-interface-title-font-size, 1.5rem);
-    font-weight: var(--admin-interface-title-font-weight, 300);
-    /* color is set live by logo-preview.js */
+    /* font-size and font-weight copied from #site-name span by logo-preview.js */
 }
 
 /* ---- Theme editor: dark pair rows — three fixed columns ---- */

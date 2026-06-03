@@ -61,6 +61,13 @@ class Theme(models.Model):
         verbose_name=_("active"),
     )
 
+    title_font_size = models.CharField(
+        max_length=20,
+        blank=True,
+        default="",
+        help_text=_("e.g. 1.5rem, 24px · Leave blank to use the theme default."),
+        verbose_name=_("font size"),
+    )
     title_color = ColorField(
         blank=True,
         default="#F5DD5D",
