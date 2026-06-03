@@ -33,6 +33,11 @@
         function update() { updatePreview(container, img); }
         update();
 
+        // Hide the preview container entirely when no logo is set.
+        if (img.style.display === 'none') {
+            container.style.display = 'none';
+        }
+
         // Live update when the user changes header background colour or size fields.
         // ColorField syncs the native colour picker → text input so listening to the
         // text input alone covers both entry paths; also add 'change' for programmatic
@@ -54,6 +59,7 @@
                     reader.onload = function (e) {
                         img.src = e.target.result;
                         img.style.display = '';
+                        container.style.display = '';
                     };
                     reader.readAsDataURL(this.files[0]);
                 }

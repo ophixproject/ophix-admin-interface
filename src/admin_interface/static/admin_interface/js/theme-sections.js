@@ -60,6 +60,8 @@
                 if (widgetId === 'logo') {
                     var img = document.getElementById('logo-preview-img');
                     if (img) img.style.display = 'none';
+                    var previewContainer = document.getElementById('logo-preview-container');
+                    if (previewContainer) previewContainer.style.display = 'none';
                 }
                 if (widgetId === 'favicon') {
                     var preview = document.getElementById('favicon-preview-container');
