@@ -293,22 +293,21 @@
     color: var(--body-fg, #333);
 }
 
-/* X clear button */
+/* X clear button — matches Django admin filter sidebar removal links */
 .file-clear-btn {
     flex: 0 0 auto;
     background: none;
-    border: 1px solid transparent;
-    border-radius: 50%;
-    color: var(--delete-button-bg, #ba2121);
+    border: none;
+    padding: 0;
+    margin-left: 2px;
+    color: var(--admin-interface-alert-color, var(--delete-button-bg, #ba2121));
     cursor: pointer;
-    font-size: 0.85em;
+    font-size: 1em;
     line-height: 1;
-    padding: 2px 5px;
 }
 
 .file-clear-btn:hover {
-    background: rgba(186, 33, 33, 0.08);
-    border-color: var(--delete-button-bg, #ba2121);
+    opacity: 0.7;
 }
 
 /* Styled Choose File button — matches the theme's save button colours */
