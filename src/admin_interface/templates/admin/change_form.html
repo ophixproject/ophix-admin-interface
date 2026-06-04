@@ -3,13 +3,17 @@
 
 {% block submit_buttons_top %}{% endblock %}
 
-{% block object-tools-items %}
-{% if show_save_as_new %}
-<li>
-    <button type="submit" name="_saveasnew" class="historylink">{% trans "Duplicate" %}</button>
-</li>
-{% endif %}
-{{ block.super }}
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+<ul class="object-tools">
+    {% if show_save_as_new %}
+    <li>
+        <button type="submit" name="_saveasnew" class="historylink">{% trans "Duplicate" %}</button>
+    </li>
+    {% endif %}
+    {% block object-tools-items %}{{ block.super }}{% endblock %}
+</ul>
+{% endif %}{% endif %}
 {% endblock %}
 
 {% block field_sets %}
