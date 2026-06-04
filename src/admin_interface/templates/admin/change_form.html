@@ -6,9 +6,11 @@
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
 <ul class="object-tools">
-    {% if change and has_add_permission and not is_popup %}
+    {% if change and save_as and has_add_permission and not is_popup %}
     <li>
-        <button type="submit" name="_saveasnew" class="historylink">{% trans "Duplicate" %}</button>
+        <button type="button" class="historylink"
+                onclick="var f=document.querySelector('#content-main form');var i=document.createElement('input');i.type='hidden';i.name='_saveasnew';i.value='1';f.appendChild(i);f.submit();">
+            {% trans "Duplicate" %}</button>
     </li>
     {% endif %}
     {% block object-tools-items %}{{ block.super }}{% endblock %}
