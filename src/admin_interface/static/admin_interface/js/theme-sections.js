@@ -86,12 +86,15 @@
         var nameUnlockBtn = document.getElementById('name-unlock-btn');
         var nameInput     = document.getElementById('id_name');
         if (nameUnlockBtn && nameInput) {
+            var btnImg        = nameUnlockBtn.querySelector('img');
+            var iconLocked    = nameUnlockBtn.getAttribute('data-icon-locked');
+            var iconUnlocked  = nameUnlockBtn.getAttribute('data-icon-unlocked');
             nameUnlockBtn.addEventListener('click', function () {
                 if (nameInput.hasAttribute('readonly')) {
                     nameInput.removeAttribute('readonly');
                     nameInput.classList.remove('theme-name-locked');
                     nameUnlockBtn.classList.add('name-unlock-active');
-                    nameUnlockBtn.textContent = '✓';
+                    if (btnImg) btnImg.src = iconUnlocked;
                     nameUnlockBtn.title = 'Lock name';
                     nameInput.focus();
                     nameInput.select();
@@ -99,7 +102,7 @@
                     nameInput.setAttribute('readonly', 'readonly');
                     nameInput.classList.add('theme-name-locked');
                     nameUnlockBtn.classList.remove('name-unlock-active');
-                    nameUnlockBtn.textContent = '✎';
+                    if (btnImg) btnImg.src = iconLocked;
                     nameUnlockBtn.title = 'Rename';
                 }
             });

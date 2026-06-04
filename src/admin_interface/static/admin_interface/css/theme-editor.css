@@ -199,26 +199,28 @@
 .name-unlock-btn {
     background: none;
     border: none;
-    padding: 2px 6px;
-    margin-left: 8px;
-    font-size: 1.6rem !important;
+    padding: 2px 4px;
+    margin-left: 6px;
     line-height: 1;
     cursor: pointer;
-    color: var(--body-quiet-color, #666);
     border-radius: var(--admin-interface-button-border-radius, 4px);
-    opacity: 0.5;
-    transition: opacity 0.15s, color 0.15s;
+    opacity: 0.6;
+    transition: opacity 0.15s;
     vertical-align: middle;
+}
+
+.name-unlock-btn img {
+    width: 14px;
+    height: 14px;
+    display: block;
 }
 
 .name-unlock-btn:hover {
     opacity: 1;
-    color: var(--admin-interface-save-button-background-color);
 }
 
 .name-unlock-btn.name-unlock-active {
     opacity: 1;
-    color: var(--admin-interface-save-button-background-color);
 }
 
 /* Simple (non-colour) field rows — label + input, consistent with colour table alignment */
