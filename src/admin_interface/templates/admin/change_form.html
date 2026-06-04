@@ -4,7 +4,7 @@
 {% block submit_buttons_top %}{% endblock %}
 
 {% block object-tools-items %}
-{% if change and has_add_permission and not is_popup %}
+{% if show_save_as_new %}
 <li>
     <button type="submit" name="_saveasnew" class="historylink">{% trans "Duplicate" %}</button>
 </li>

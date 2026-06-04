@@ -31,6 +31,28 @@
     text-transform: none;
 }
 
+/* Style button.historylink (e.g. Duplicate) to match a.historylink in object-tools */
+.admin-interface .object-tools button.historylink {
+    background-color: var(--object-tools-bg, #888);
+    color: var(--object-tools-fg, #fff);
+    border: none;
+    border-radius: 15px;
+    padding: 3px 12px;
+    font-size: 0.6875rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: inherit;
+}
+
+.admin-interface .object-tools button.historylink:hover,
+.admin-interface .object-tools button.historylink:focus {
+    background-color: var(--object-tools-hover-bg, #747474);
+    color: var(--object-tools-fg, #fff);
+}
+
 /* fix help-text horizontal alignment when using show-fieldsets-as-tabs / show-inlines-as-tabs options - #317 */
 .admin-interface.show-fieldsets-as-tabs fieldset > .form-row .help,
 .admin-interface.show-inlines-as-tabs .inline-related > fieldset .help {
