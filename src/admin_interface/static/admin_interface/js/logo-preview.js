@@ -41,7 +41,7 @@
     }
 
     function updateLogoVisibility(img) {
-        var checkbox = document.querySelector('#id_logo_visible');
+        var checkbox = document.querySelector('#id_logo_visible[type="checkbox"]');
         img.style.display = (checkbox && !checkbox.checked) ? 'none' : '';
     }
 
@@ -117,7 +117,7 @@
         }
 
         // Live update: logo visible toggle (checkbox hidden; kept for future use).
-        var visibleCheckbox = document.querySelector('#id_logo_visible');
+        var visibleCheckbox = document.querySelector('#id_logo_visible[type="checkbox"]');
         if (visibleCheckbox) {
             visibleCheckbox.addEventListener('change', function () { updateLogoVisibility(img); });
         }
