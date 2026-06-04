@@ -6,7 +6,7 @@
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
 <ul class="object-tools">
-    {% if show_save_as_new %}
+    {% if change and save_as and has_add_permission and not is_popup %}
     <li>
         <button type="submit" name="_saveasnew" class="historylink">{% trans "Duplicate" %}</button>
     </li>
