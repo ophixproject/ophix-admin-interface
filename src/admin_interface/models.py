@@ -519,8 +519,8 @@ class Theme(models.Model):
         verbose_name=_("sticky pagination"),
     )
 
-    # Placeholder fields restored for fixture compatibility — removed in 0041
-    # (moved to ophix-admin-settings or retired). Drop when migrations are squashed.
+    # Placeholder fields restored for fixture compatibility — removed in various migrations.
+    # Drop when migrations are squashed.
     title = models.CharField(max_length=50, blank=True, default="")
     title_visible = models.BooleanField(default=True)
     env_name = models.CharField(max_length=50, blank=True, default="")
@@ -531,6 +531,7 @@ class Theme(models.Model):
     language_chooser_display = models.CharField(max_length=100, blank=True, default="name")
     dark_mode_link_lightness = models.CharField(max_length=20, blank=True, default="70")
     custom_css_vars = models.JSONField(default=dict)
+    css_module_rounded_corners = models.BooleanField(default=True)
 
     objects = ThemeQuerySet.as_manager()
 
