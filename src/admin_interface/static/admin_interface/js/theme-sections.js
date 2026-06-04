@@ -81,7 +81,8 @@
             if (text) el.textContent = text.split('/').pop();
         });
 
-        // Theme name Rename toggle — pencil button toggles readonly on the name input
+        // Theme name Rename toggle — icon button toggles readonly on the name input
+        // Locked state: ✎ (rename)  |  Unlocked state: ✓ (confirm / lock)
         var nameUnlockBtn = document.getElementById('name-unlock-btn');
         var nameInput     = document.getElementById('id_name');
         if (nameUnlockBtn && nameInput) {
@@ -90,12 +91,16 @@
                     nameInput.removeAttribute('readonly');
                     nameInput.classList.remove('theme-name-locked');
                     nameUnlockBtn.classList.add('name-unlock-active');
+                    nameUnlockBtn.textContent = '✓';
+                    nameUnlockBtn.title = 'Lock name';
                     nameInput.focus();
                     nameInput.select();
                 } else {
                     nameInput.setAttribute('readonly', 'readonly');
                     nameInput.classList.add('theme-name-locked');
                     nameUnlockBtn.classList.remove('name-unlock-active');
+                    nameUnlockBtn.textContent = '✎';
+                    nameUnlockBtn.title = 'Rename';
                 }
             });
         }
