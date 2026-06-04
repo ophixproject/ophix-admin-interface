@@ -42,9 +42,7 @@
 
     function updateLogoVisibility(img) {
         var checkbox = document.querySelector('#id_logo_visible');
-        if (checkbox) {
-            img.style.display = checkbox.checked ? '' : 'none';
-        }
+        img.style.display = (checkbox && !checkbox.checked) ? 'none' : '';
     }
 
     function syncTitleFont() {
@@ -118,7 +116,7 @@
             fontSizeInput.addEventListener('change', syncTitleFont);
         }
 
-        // Live update: logo visible toggle.
+        // Live update: logo visible toggle (checkbox hidden; kept for future use).
         var visibleCheckbox = document.querySelector('#id_logo_visible');
         if (visibleCheckbox) {
             visibleCheckbox.addEventListener('change', function () { updateLogoVisibility(img); });
