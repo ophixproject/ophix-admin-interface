@@ -81,19 +81,21 @@
             if (text) el.textContent = text.split('/').pop();
         });
 
-        // Theme name Rename toggle — readonly is set in HTML; JS only handles the checkbox
-        var nameUnlock = document.getElementById('name-unlock-checkbox');
-        var nameInput  = document.getElementById('id_name');
-        if (nameUnlock && nameInput) {
-            nameUnlock.addEventListener('change', function () {
-                if (this.checked) {
+        // Theme name Rename toggle — pencil button toggles readonly on the name input
+        var nameUnlockBtn = document.getElementById('name-unlock-btn');
+        var nameInput     = document.getElementById('id_name');
+        if (nameUnlockBtn && nameInput) {
+            nameUnlockBtn.addEventListener('click', function () {
+                if (nameInput.hasAttribute('readonly')) {
                     nameInput.removeAttribute('readonly');
                     nameInput.classList.remove('theme-name-locked');
+                    nameUnlockBtn.classList.add('name-unlock-active');
                     nameInput.focus();
                     nameInput.select();
                 } else {
                     nameInput.setAttribute('readonly', 'readonly');
                     nameInput.classList.add('theme-name-locked');
+                    nameUnlockBtn.classList.remove('name-unlock-active');
                 }
             });
         }

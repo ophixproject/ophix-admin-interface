@@ -319,7 +319,6 @@ class ThemeAdmin(admin.ModelAdmin):
         if renamed and os.path.exists(old_base):
             shutil.rmtree(old_base, ignore_errors=True)
 
-    save_on_top = True
     change_form_template = "admin/admin_interface/theme/change_form.html"
 
     class Media:

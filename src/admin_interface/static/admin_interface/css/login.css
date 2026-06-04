@@ -1,6 +1,6 @@
 .admin-interface.login #container {
-    width: 100%;
-    max-width: 360px;
+    width: fit-content;
+    min-width: 360px;
     margin: 15px auto;
     box-sizing: border-box;
     -moz-box-sizing: border-box;

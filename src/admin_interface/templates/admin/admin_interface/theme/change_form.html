@@ -10,9 +10,7 @@
      ============================================================ -->
 {% if not fieldset.name %}
 <fieldset class="module aligned wide theme-custom-section" id="section-identity">
-  <h2 class="theme-section-heading">
-    {% if original %}{% trans "Theme:" %} {{ original.name }}{% else %}{% trans "New Theme" %}{% endif %}
-  </h2>
+  <h2 class="theme-section-heading">{% trans "Theme Naming" %}</h2>
   <div class="theme-section-body">
     {{ form.active.as_hidden }}
     {{ form.foldable_apps.as_hidden }}
@@ -23,10 +21,10 @@
         {% if original %}
           {% if form.name.errors %}
             <input type="text" name="name" id="id_name" value="{{ form.name.value }}" class="vTextField">
-            <label class="rename-label"><input type="checkbox" id="name-unlock-checkbox" checked> {% trans "Rename" %}</label>
+            <button type="button" id="name-unlock-btn" class="name-unlock-btn name-unlock-active" title="{% trans 'Rename' %}">✏</button>
           {% else %}
             <input type="text" name="name" id="id_name" value="{{ form.name.value }}" readonly class="vTextField theme-name-locked">
-            <label class="rename-label"><input type="checkbox" id="name-unlock-checkbox"> {% trans "Rename" %}</label>
+            <button type="button" id="name-unlock-btn" class="name-unlock-btn" title="{% trans 'Rename' %}">✏</button>
           {% endif %}
         {% else %}
           {{ form.name }}
@@ -106,13 +104,10 @@
     <!-- Logo settings — full-width rows below the file pickers -->
     <div class="logo-settings">
       <div class="simple-row">
-        <div class="col-label">{% trans "Logo max size" %}</div>
+        <div class="col-label">{% trans "Logo width" %}</div>
         <div class="col-field">
-          <div class="logo-size-pair">
-            {{ form.logo_max_width.errors }}{{ form.logo_max_height.errors }}
-            <span class="size-label">{% trans "Width:" %}</span>{{ form.logo_max_width }}
-            <span class="size-label">{% trans "Height:" %}</span>{{ form.logo_max_height }}
-          </div>
+          {{ form.logo_max_width.errors }}{{ form.logo_max_width }}
+          <input type="hidden" name="logo_max_height" id="id_logo_max_height" value="0">
         </div>
       </div>
       <div class="simple-row boolean-row">
@@ -121,10 +116,14 @@
       </div>
       {% if form.logo_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_visible.help_text }}</div></div>{% endif %}
       <div class="simple-row">
-        <div class="col-label">{% trans "Logo vertical offset" %}</div>
-        <div class="col-field">{{ form.logo_vertical_offset.errors }}{{ form.logo_vertical_offset }}</div>
+        <div class="col-label">{% trans "Move logo by:" %}</div>
+        <div class="col-field">
+          <div class="logo-offset-input">
+            {{ form.logo_vertical_offset.errors }}{{ form.logo_vertical_offset }}<span class="offset-unit">{% trans "px" %}</span>
+          </div>
+        </div>
       </div>
-      {% if form.logo_vertical_offset.help_text %}<div class="help-row"><div class="col-help">{{ form.logo_vertical_offset.help_text }}</div></div>{% endif %}
+      <div class="help-row"><div class="col-help">{% trans "Move up (positive), move down (negative)" %}</div></div>
     </div>
 
     <!-- Title settings -->

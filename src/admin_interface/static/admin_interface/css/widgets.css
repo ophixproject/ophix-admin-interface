@@ -201,3 +201,12 @@
         margin-top: 5px;
     }
 }
+
+/* Normalize select2 autocomplete font size.
+   The closed-state rendered value inherits from the surrounding context (e.g. inline table
+   cells) and can be larger than the dropdown options, which render in their own layer.
+   Force both to the Django admin body font size so they match. */
+.admin-interface .select2-container--admin-autocomplete .select2-selection__rendered,
+.admin-interface .select2-container--admin-autocomplete .select2-results__option {
+    font-size: 0.8125rem;
+}

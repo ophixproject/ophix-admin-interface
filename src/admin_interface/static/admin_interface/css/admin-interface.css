@@ -53,7 +53,11 @@
 .admin-interface .button,
 .admin-interface input[type="submit"],
 .admin-interface input[type="button"],
-.admin-interface a.button {
+.admin-interface button[type="submit"],
+.admin-interface button[type="button"],
+.admin-interface button:not([type]),
+.admin-interface a.button,
+.admin-interface a.deletelink {
     font-size: var(--admin-interface-button-font-size, 13px);
     border-radius: var(--admin-interface-button-border-radius, initial);
 }
