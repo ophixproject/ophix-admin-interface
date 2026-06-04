@@ -64,9 +64,4 @@ class Migration(migrations.Migration):
             name="custom_css_vars",
             field=models.JSONField(default=dict),
         ),
-        migrations.AddField(
-            model_name="theme",
-            name="css_module_rounded_corners",
-            field=models.BooleanField(default=True),
-        ),
     ]
