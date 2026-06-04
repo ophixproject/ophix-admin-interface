@@ -485,125 +485,29 @@
   </div>
 </fieldset>
 
-<!-- ============================================================
-     FORM CONTROLS
-     ============================================================ -->
 {% elif fieldset.name == "Form Controls" %}
-<fieldset class="module aligned wide theme-custom-section" id="section-form-controls">
-  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
-  <div class="theme-section-body">
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.form_actions_sticky.errors }}{{ form.form_actions_sticky }} <label for="{{ form.form_actions_sticky.id_for_label }}">{{ form.form_actions_sticky.label }}</label></div>
-    </div>
-    {% if form.form_actions_sticky.help_text %}<div class="help-row"><div class="col-help">{{ form.form_actions_sticky.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.form_submit_sticky.errors }}{{ form.form_submit_sticky }} <label for="{{ form.form_submit_sticky.id_for_label }}">{{ form.form_submit_sticky.label }}</label></div>
-    </div>
-    {% if form.form_submit_sticky.help_text %}<div class="help-row"><div class="col-help">{{ form.form_submit_sticky.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.form_pagination_sticky.errors }}{{ form.form_pagination_sticky }} <label for="{{ form.form_pagination_sticky.id_for_label }}">{{ form.form_pagination_sticky.label }}</label></div>
-    </div>
-    {% if form.form_pagination_sticky.help_text %}<div class="help-row"><div class="col-help">{{ form.form_pagination_sticky.help_text }}</div></div>{% endif %}
-  </div>
-</fieldset>
+<input type="hidden" name="form_actions_sticky" value="on">
+<input type="hidden" name="form_submit_sticky" value="on">
+<input type="hidden" name="form_pagination_sticky" value="on">
 
-<!-- ============================================================
-     LIST FILTER
-     ============================================================ -->
 {% elif fieldset.name == "List Filter" %}
-<fieldset class="module aligned wide theme-custom-section" id="section-list-filter">
-  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
-  <div class="theme-section-body">
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.list_filter_highlight.errors }}{{ form.list_filter_highlight }} <label for="{{ form.list_filter_highlight.id_for_label }}">{{ form.list_filter_highlight.label }}</label></div>
-    </div>
-    {% if form.list_filter_highlight.help_text %}<div class="help-row"><div class="col-help">{{ form.list_filter_highlight.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.list_filter_dropdown.errors }}{{ form.list_filter_dropdown }} <label for="{{ form.list_filter_dropdown.id_for_label }}">{{ form.list_filter_dropdown.label }}</label></div>
-    </div>
-    {% if form.list_filter_dropdown.help_text %}<div class="help-row"><div class="col-help">{{ form.list_filter_dropdown.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.list_filter_sticky.errors }}{{ form.list_filter_sticky }} <label for="{{ form.list_filter_sticky.id_for_label }}">{{ form.list_filter_sticky.label }}</label></div>
-    </div>
-    {% if form.list_filter_sticky.help_text %}<div class="help-row"><div class="col-help">{{ form.list_filter_sticky.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.list_filter_removal_links.errors }}{{ form.list_filter_removal_links }} <label for="{{ form.list_filter_removal_links.id_for_label }}">{{ form.list_filter_removal_links.label }}</label></div>
-    </div>
-    {% if form.list_filter_removal_links.help_text %}<div class="help-row"><div class="col-help">{{ form.list_filter_removal_links.help_text }}</div></div>{% endif %}
-  </div>
-</fieldset>
+<input type="hidden" name="list_filter_highlight" value="on">
+<input type="hidden" name="list_filter_dropdown" value="on">
+<input type="hidden" name="list_filter_sticky" value="on">
+<input type="hidden" name="list_filter_removal_links" value="on">
 
-<!-- ============================================================
-     CHANGE FORM
-     ============================================================ -->
 {% elif fieldset.name == "Change Form" %}
-<fieldset class="module aligned wide theme-custom-section" id="section-change-form">
-  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
-  <div class="theme-section-body">
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.show_fieldsets_as_tabs.errors }}{{ form.show_fieldsets_as_tabs }} <label for="{{ form.show_fieldsets_as_tabs.id_for_label }}">{{ form.show_fieldsets_as_tabs.label }}</label></div>
-    </div>
-    {% if form.show_fieldsets_as_tabs.help_text %}<div class="help-row"><div class="col-help">{{ form.show_fieldsets_as_tabs.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.show_inlines_as_tabs.errors }}{{ form.show_inlines_as_tabs }} <label for="{{ form.show_inlines_as_tabs.id_for_label }}">{{ form.show_inlines_as_tabs.label }}</label></div>
-    </div>
-    {% if form.show_inlines_as_tabs.help_text %}<div class="help-row"><div class="col-help">{{ form.show_inlines_as_tabs.help_text }}</div></div>{% endif %}
-  </div>
-</fieldset>
+<input type="hidden" name="show_fieldsets_as_tabs" value="false">
+<input type="hidden" name="show_inlines_as_tabs" value="on">
 
-<!-- ============================================================
-     INLINES
-     ============================================================ -->
 {% elif fieldset.name == "Inlines" %}
-<fieldset class="module aligned wide theme-custom-section" id="section-inlines">
-  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
-  <div class="theme-section-body">
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.collapsible_stacked_inlines.errors }}{{ form.collapsible_stacked_inlines }} <label for="{{ form.collapsible_stacked_inlines.id_for_label }}">{{ form.collapsible_stacked_inlines.label }}</label></div>
-    </div>
-    {% if form.collapsible_stacked_inlines.help_text %}<div class="help-row"><div class="col-help">{{ form.collapsible_stacked_inlines.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.collapsible_stacked_inlines_collapsed.errors }}{{ form.collapsible_stacked_inlines_collapsed }} <label for="{{ form.collapsible_stacked_inlines_collapsed.id_for_label }}">{{ form.collapsible_stacked_inlines_collapsed.label }}</label></div>
-    </div>
-    {% if form.collapsible_stacked_inlines_collapsed.help_text %}<div class="help-row"><div class="col-help">{{ form.collapsible_stacked_inlines_collapsed.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.collapsible_tabular_inlines.errors }}{{ form.collapsible_tabular_inlines }} <label for="{{ form.collapsible_tabular_inlines.id_for_label }}">{{ form.collapsible_tabular_inlines.label }}</label></div>
-    </div>
-    {% if form.collapsible_tabular_inlines.help_text %}<div class="help-row"><div class="col-help">{{ form.collapsible_tabular_inlines.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.collapsible_tabular_inlines_collapsed.errors }}{{ form.collapsible_tabular_inlines_collapsed }} <label for="{{ form.collapsible_tabular_inlines_collapsed.id_for_label }}">{{ form.collapsible_tabular_inlines_collapsed.label }}</label></div>
-    </div>
-    {% if form.collapsible_tabular_inlines_collapsed.help_text %}<div class="help-row"><div class="col-help">{{ form.collapsible_tabular_inlines_collapsed.help_text }}</div></div>{% endif %}
-  </div>
-</fieldset>
+<input type="hidden" name="collapsible_stacked_inlines" value="on">
+<input type="hidden" name="collapsible_stacked_inlines_collapsed" value="on">
+<input type="hidden" name="collapsible_tabular_inlines" value="on">
+<input type="hidden" name="collapsible_tabular_inlines_collapsed" value="on">
 
-<!-- ============================================================
-     RECENT ACTIONS
-     ============================================================ -->
 {% elif fieldset.name == "Recent Actions" %}
-<fieldset class="module aligned wide theme-custom-section" id="section-recent-actions">
-  <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
-  <div class="theme-section-body">
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.recent_actions_visible.errors }}{{ form.recent_actions_visible }} <label for="{{ form.recent_actions_visible.id_for_label }}">{{ form.recent_actions_visible.label }}</label></div>
-    </div>
-    {% if form.recent_actions_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.recent_actions_visible.help_text }}</div></div>{% endif %}
-  </div>
-</fieldset>
+<input type="hidden" name="recent_actions_visible" value="false">
 
 <!-- Fallback for any future fieldsets not yet converted -->
 {% else %}
