@@ -77,6 +77,10 @@
     border-color: var(--border-color);
 }
 
+[data-theme="dark"] ul.messagelist li {
+    color: var(--body-loud-color, #000);
+}
+
 .admin-interface {
     overflow-x: hidden;
 }
