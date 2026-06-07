@@ -89,6 +89,19 @@ if (typeof(django) !== 'undefined' && typeof(django.jQuery) !== 'undefined') {
                     });
                 }
 
+                // propagate dark mode to the iframe after its document is loaded
+                iframeEl.on('load', function() {
+                    try {
+                        const theme = document.documentElement.getAttribute('data-theme');
+                        const iframeHtml = $(this).get(0).contentWindow.document.documentElement;
+                        if (theme) {
+                            iframeHtml.setAttribute('data-theme', theme);
+                        } else {
+                            iframeHtml.removeAttribute('data-theme');
+                        }
+                    } catch (e) {}
+                });
+
                 // the modal css class
                 let iframeInternalModalClass = 'related-modal';
 
