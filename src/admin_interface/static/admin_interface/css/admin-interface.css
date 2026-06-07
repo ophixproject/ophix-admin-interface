@@ -1,5 +1,5 @@
 @media (prefers-color-scheme: dark) {
-    :root .admin-interface {
+    :root:not([data-theme="dark"]) .admin-interface {
         --primary: #79aec8;
         --secondary: #417690;
         --accent: #f5dd5d;
