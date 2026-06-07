@@ -89,19 +89,6 @@ if (typeof(django) !== 'undefined' && typeof(django.jQuery) !== 'undefined') {
                     });
                 }
 
-                // propagate dark mode to the iframe after its document is loaded
-                iframeEl.on('load', function() {
-                    try {
-                        const theme = document.documentElement.getAttribute('data-theme');
-                        const iframeHtml = $(this).get(0).contentWindow.document.documentElement;
-                        if (theme) {
-                            iframeHtml.setAttribute('data-theme', theme);
-                        } else {
-                            iframeHtml.removeAttribute('data-theme');
-                        }
-                    } catch (e) {}
-                });
-
                 // the modal css class
                 let iframeInternalModalClass = 'related-modal';
 
@@ -120,6 +107,24 @@ if (typeof(django) !== 'undefined' && typeof(django.jQuery) !== 'undefined') {
                     items: {
                         src: modalEl,
                         type: 'inline'
+                    },
+                    callbacks: {
+                        open: function() {
+                            // propagate dark mode to the iframe — called after the popup and
+                            // iframe are in the DOM but before the browser loads the iframe URL
+                            var iframe = document.getElementById('related-modal-iframe');
+                            if (!iframe) return;
+                            iframe.addEventListener('load', function() {
+                                try {
+                                    var theme = document.documentElement.getAttribute('data-theme');
+                                    if (theme) {
+                                        iframe.contentWindow.document.documentElement.setAttribute('data-theme', theme);
+                                    } else {
+                                        iframe.contentWindow.document.documentElement.removeAttribute('data-theme');
+                                    }
+                                } catch (e) {}
+                            });
+                        }
                     }
                 });
 
