@@ -61,19 +61,16 @@
         li.textContent = MSG_TEXT[msgType];
         ul.appendChild(li);
 
-        // Insert in the same position as Django's "messages" block —
-        // before the top-level <h1> inside #content (not nested h1s).
+        // Insert at the top of the messages area — before any existing messagelist,
+        // or before the top-level <h1> if no messages are present.
         var content = document.getElementById("content");
-        var h1 = content ? content.querySelector(":scope > h1") : null;
-        if (h1) {
-            h1.parentNode.insertBefore(ul, h1);
-        } else {
-            var contentMain = document.getElementById("content-main");
-            if (contentMain) {
-                contentMain.parentNode.insertBefore(ul, contentMain);
-            } else if (content) {
-                content.appendChild(ul);
-            }
+        var anchor = content
+            ? (content.querySelector(":scope > ul.messagelist") || content.querySelector(":scope > h1"))
+            : null;
+        if (anchor) {
+            anchor.parentNode.insertBefore(ul, anchor);
+        } else if (content) {
+            content.insertBefore(ul, content.firstChild);
         }
 
         // Auto-remove after 3 seconds, restore CSS vars
