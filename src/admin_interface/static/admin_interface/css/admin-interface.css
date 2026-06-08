@@ -95,7 +95,7 @@
 }
 
 .admin-interface ul.messagelist li.info {
-    background: var(--message-info-bg) url(../img/icon-alert.svg) 5px 5px no-repeat;
+    background-color: var(--message-info-bg);
     color: var(--message-info-text);
 }
 
