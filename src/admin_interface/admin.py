@@ -5,6 +5,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.core.files.uploadedfile import UploadedFile
 from django.forms import ClearableFileInput
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -277,6 +279,20 @@ class ThemeAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+    def response_change(self, request, obj):
+        msg = _("%(verbose_name)s saved successfully.") % {
+            "verbose_name": self.model._meta.verbose_name.capitalize(),
+        }
+        self.message_user(request, msg)
+        if "_continue" in request.POST:
+            return HttpResponseRedirect(request.path)
+        return HttpResponseRedirect(
+            reverse(
+                f"admin:{self.model._meta.app_label}_{self.model._meta.model_name}_changelist",
+                current_app=self.admin_site.name,
+            )
+        )
 
     def save_model(self, request, obj, form, change):
         if not change:
