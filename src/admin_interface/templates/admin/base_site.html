@@ -312,7 +312,7 @@ admin-interface
 {% endblock branding %}
 
 {% block welcome-msg %}
-{% if server_settings.env_visible_in_header %}<span class="environment-label {{ server_settings.env_name }}">{{ server_settings.env_name }}</span><br>{% endif %}{{ block.super }}<br>
+{% if server_settings.env_visible_in_header %}<span class="environment-label">{{ server_settings.env_name }}</span>{% endif %}{{ block.super }}
 {% endblock welcome-msg %}
 
 {% block userlinks %}

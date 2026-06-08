@@ -113,29 +113,19 @@
 }
 
 .admin-interface .environment-label {
-}
-
-.admin-interface .environment-label::before {
-    content: "";
     display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-color: var(--admin-interface-env-color);
-    border-radius: 100%;
+    background-color: var(--admin-interface-env-color, #ddab52);
+    color: var(--admin-interface-env-text-color, #1a1a1a);
+    padding: 2px 9px;
+    border-radius: 9999px;
+    font-size: 0.75em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    vertical-align: middle;
     margin-right: 6px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-}
-
-.admin-interface .environment-label::after {
-    content: " - ";
-}
-
-@media (max-width: 1024px) {
-    .admin-interface .environment-label::after {
-        content: "";
-    }
+    line-height: 1.6;
+    white-space: nowrap;
 }
 
 .admin-interface .language-chooser {
