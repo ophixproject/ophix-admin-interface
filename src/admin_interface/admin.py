@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.core.files.uploadedfile import UploadedFile
 from django.forms import ClearableFileInput
+from django.contrib.messages import SUCCESS as MSG_SUCCESS
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.html import format_html
@@ -280,11 +281,41 @@ class ThemeAdmin(admin.ModelAdmin):
         ),
     )
 
-    def response_change(self, request, obj):
-        msg = _("%(verbose_name)s saved successfully.") % {
+    def _clean_save_msg(self, verb):
+        return _("%(verbose_name)s %(verb)s successfully.") % {
             "verbose_name": self.model._meta.verbose_name.capitalize(),
+            "verb": verb,
         }
-        self.message_user(request, msg)
+
+    def response_add(self, request, obj, post_url_continue=None):
+        if "_popup" in request.POST:
+            return super().response_add(request, obj, post_url_continue)
+        self.message_user(request, self._clean_save_msg("added"), MSG_SUCCESS)
+        opts = self.model._meta
+        if "_continue" in request.POST:
+            return HttpResponseRedirect(
+                reverse(
+                    f"admin:{opts.app_label}_{opts.model_name}_change",
+                    args=[obj.pk],
+                    current_app=self.admin_site.name,
+                )
+            )
+        if "_addanother" in request.POST:
+            return HttpResponseRedirect(
+                reverse(
+                    f"admin:{opts.app_label}_{opts.model_name}_add",
+                    current_app=self.admin_site.name,
+                )
+            )
+        return HttpResponseRedirect(
+            reverse(
+                f"admin:{opts.app_label}_{opts.model_name}_changelist",
+                current_app=self.admin_site.name,
+            )
+        )
+
+    def response_change(self, request, obj):
+        self.message_user(request, self._clean_save_msg("saved"), MSG_SUCCESS)
         if "_continue" in request.POST:
             return HttpResponseRedirect(request.path)
         return HttpResponseRedirect(
