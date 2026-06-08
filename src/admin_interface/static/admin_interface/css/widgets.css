@@ -1,4 +1,4 @@
-.admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a, .deletelink) {
+.admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a) {
     text-decoration: inherit;
 }
 .admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a, .deletelink):hover,
