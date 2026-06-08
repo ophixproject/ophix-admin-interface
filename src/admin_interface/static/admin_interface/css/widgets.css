@@ -1,8 +1,8 @@
-.admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a) {
+.admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a, .deletelink) {
     text-decoration: inherit;
 }
-.admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a):hover,
-.admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a):focus {
+.admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a, .deletelink):hover,
+.admin-interface a:not([role="button"], #header a, #nav-sidebar a, #content-main.app-list a, .object-tools a, .deletelink):focus {
     text-decoration: underline;
 }
 
