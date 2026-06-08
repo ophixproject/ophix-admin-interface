@@ -53,7 +53,7 @@ class Theme(models.Model):
     name = models.CharField(
         unique=True,
         max_length=50,
-        default="Django",
+        default="",
         verbose_name=_("name"),
     )
     active = models.BooleanField(
@@ -70,7 +70,7 @@ class Theme(models.Model):
     )
     title_color = ColorField(
         blank=True,
-        default="#F5DD5D",
+        default="#fffdfa",
         help_text=_("Colour of the title text in the header bar"),
         max_length=10,
         verbose_name=_("color"),
@@ -144,29 +144,9 @@ class Theme(models.Model):
         verbose_name=_("favicon"),
     )
 
-    env_color = ColorField(
-        blank=True,
-        default="#E74C3C",
-        help_text=_(
-            "(red: #E74C3C, orange: #E67E22, yellow: #F1C40F, "
-            "green: #2ECC71, blue: #3498DB)"
-        ),
-        max_length=10,
-        verbose_name=_("color"),
-    )
-    env_color_dark_use = models.BooleanField(
-        default=False,
-        verbose_name=_("dark?"),
-    )
-    env_color_dark = ColorField(
-        blank=True,
-        default="",
-        max_length=10,
-        verbose_name=_("dark"),
-    )
     css_header_background_color = ColorField(
         blank=True,
-        default="#0C4B33",
+        default="#0c0c0d",
         help_text=_("Background colour of the top header bar"),
         max_length=10,
         verbose_name=_("background color"),
@@ -175,7 +155,7 @@ class Theme(models.Model):
     css_header_background_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_header_text_color = ColorField(
         blank=True,
-        default="#44B78B",
+        default="#fffdfa",
         help_text=_("Colour of plain text in the header bar"),
         max_length=10,
         verbose_name=_("text color"),
@@ -193,7 +173,7 @@ class Theme(models.Model):
     css_header_link_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_header_link_hover_color = ColorField(
         blank=True,
-        default="#C9F0DD",
+        default="#ade9f4",
         help_text=_("Header link colour on hover"),
         max_length=10,
         verbose_name=_("link hover color"),
@@ -203,7 +183,7 @@ class Theme(models.Model):
 
     css_module_background_color = ColorField(
         blank=True,
-        default="#44B78B",
+        default="#0c0c0d",
         help_text=_("Background colour of section header bars (module titles)"),
         max_length=10,
         verbose_name=_("background color"),
@@ -212,7 +192,7 @@ class Theme(models.Model):
     css_module_background_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_module_background_selected_color = ColorField(
         blank=True,
-        default="#FFFFCC",
+        default="#f1fcfe",
         help_text=_("Background colour of selected / highlighted rows"),
         max_length=10,
         verbose_name=_("background selected color"),
@@ -248,7 +228,7 @@ class Theme(models.Model):
     css_module_link_selected_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_module_link_hover_color = ColorField(
         blank=True,
-        default="#C9F0DD",
+        default="#ade9f4",
         help_text=_("Link colour on hover inside section header bars"),
         max_length=10,
         verbose_name=_("link hover color"),
@@ -258,7 +238,7 @@ class Theme(models.Model):
     css_module_border_radius = models.CharField(
         max_length=20,
         blank=True,
-        default="4px",
+        default="0",
         help_text=_("e.g. 4px · 0px · 0.5rem"),
         verbose_name=_("border radius"),
     )
@@ -279,7 +259,7 @@ class Theme(models.Model):
     )
     css_generic_link_color = ColorField(
         blank=True,
-        default="#0C3C26",
+        default="#0096c7",
         help_text=_("Default link colour in page content"),
         max_length=10,
         verbose_name=_("link color"),
@@ -288,7 +268,7 @@ class Theme(models.Model):
     css_generic_link_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_generic_link_hover_color = ColorField(
         blank=True,
-        default="#156641",
+        default="#023e8a",
         help_text=_("Page content link colour on hover"),
         max_length=10,
         verbose_name=_("link hover color"),
@@ -297,7 +277,7 @@ class Theme(models.Model):
     css_generic_link_hover_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_generic_link_active_color = ColorField(
         blank=True,
-        default="#29B864",
+        default="#48cae4",
         help_text=_("Page content link colour when active / pressed"),
         max_length=10,
         verbose_name=_("link active color"),
@@ -307,7 +287,7 @@ class Theme(models.Model):
 
     css_save_button_background_color = ColorField(
         blank=True,
-        default="#0C4B33",
+        default="#0096c7",
         help_text=_("Background colour of Save / primary action buttons"),
         max_length=10,
         verbose_name=_("background color"),
@@ -316,7 +296,7 @@ class Theme(models.Model):
     css_save_button_background_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_save_button_background_hover_color = ColorField(
         blank=True,
-        default="#0C3C26",
+        default="#023e8a",
         help_text=_("Save button background colour on hover"),
         max_length=10,
         verbose_name=_("background hover color"),
@@ -342,14 +322,14 @@ class Theme(models.Model):
     css_button_border_radius = models.CharField(
         max_length=20,
         blank=True,
-        default="",
+        default="0.3rem",
         help_text=_("e.g. 4px · 50% · Leave blank for no rounding."),
         verbose_name=_("border radius"),
     )
 
     css_delete_button_background_color = ColorField(
         blank=True,
-        default="#BA2121",
+        default="#d81a00",
         help_text=_("Background colour of Delete / danger buttons"),
         max_length=10,
         verbose_name=_("background color"),
@@ -358,7 +338,7 @@ class Theme(models.Model):
     css_delete_button_background_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_delete_button_background_hover_color = ColorField(
         blank=True,
-        default="#A41515",
+        default="#a31500",
         help_text=_("Delete button background colour on hover"),
         max_length=10,
         verbose_name=_("background hover color"),
@@ -386,8 +366,8 @@ class Theme(models.Model):
     css_success_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_warning_color = ColorField(
         blank=True,
-        default="#E67E22",
-        help_text=_("#E67E22 — used for paused items, warnings, and amber UI states"),
+        default="#ddab52",
+        help_text=_("#ddab52 — used for paused items, warnings, and amber UI states"),
         max_length=10,
         verbose_name=_("warning / paused color"),
     )
@@ -411,6 +391,83 @@ class Theme(models.Model):
     )
     css_alert_color_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
     css_alert_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+
+    css_message_success_bg = ColorField(
+        blank=True,
+        default="#dff2e3",
+        help_text=_("Background colour of success (green) system message banners"),
+        max_length=10,
+        verbose_name=_("success background"),
+    )
+    css_message_success_bg_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_message_success_bg_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+
+    css_message_warning_bg = ColorField(
+        blank=True,
+        default="#faf3e5",
+        help_text=_("Background colour of warning (amber) system message banners"),
+        max_length=10,
+        verbose_name=_("warning background"),
+    )
+    css_message_warning_bg_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_message_warning_bg_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+
+    css_message_error_bg = ColorField(
+        blank=True,
+        default="#f5dede",
+        help_text=_("Background colour of error (red) system message banners"),
+        max_length=10,
+        verbose_name=_("error background"),
+    )
+    css_message_error_bg_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_message_error_bg_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+
+    css_message_info_bg = ColorField(
+        blank=True,
+        default="#d9f0f7",
+        help_text=_("Background colour of info (cyan) system message banners"),
+        max_length=10,
+        verbose_name=_("info background"),
+    )
+    css_message_info_bg_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_message_info_bg_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+
+    css_message_success_text = ColorField(
+        blank=True,
+        default="#1a5c2b",
+        help_text=_("Text colour of success (green) system message banners"),
+        max_length=10,
+        verbose_name=_("success text"),
+    )
+    css_message_success_text_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_message_success_text_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+    css_message_warning_text = ColorField(
+        blank=True,
+        default="#7a5000",
+        help_text=_("Text colour of warning (amber) system message banners"),
+        max_length=10,
+        verbose_name=_("warning text"),
+    )
+    css_message_warning_text_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_message_warning_text_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+    css_message_error_text = ColorField(
+        blank=True,
+        default="#6b0f0f",
+        help_text=_("Text colour of error (red) system message banners"),
+        max_length=10,
+        verbose_name=_("error text"),
+    )
+    css_message_error_text_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_message_error_text_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+    css_message_info_text = ColorField(
+        blank=True,
+        default="#004d66",
+        help_text=_("Text colour of info (cyan) system message banners"),
+        max_length=10,
+        verbose_name=_("info text"),
+    )
+    css_message_info_text_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_message_info_text_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
 
     related_modal_active = models.BooleanField(
         default=True,
@@ -518,20 +575,6 @@ class Theme(models.Model):
         default=True,
         verbose_name=_("sticky pagination"),
     )
-
-    # Placeholder fields restored for fixture compatibility — removed in various migrations.
-    # Drop when migrations are squashed.
-    title = models.CharField(max_length=50, blank=True, default="")
-    title_visible = models.BooleanField(default=True)
-    env_name = models.CharField(max_length=50, blank=True, default="")
-    env_visible_in_header = models.BooleanField(default=True)
-    env_visible_in_favicon = models.BooleanField(default=True)
-    language_chooser_active = models.BooleanField(default=True)
-    language_chooser_control = models.CharField(max_length=100, blank=True, default="minimal-select")
-    language_chooser_display = models.CharField(max_length=100, blank=True, default="name")
-    dark_mode_link_lightness = models.CharField(max_length=20, blank=True, default="70")
-    custom_css_vars = models.JSONField(default=dict)
-    css_module_rounded_corners = models.BooleanField(default=True)
 
     objects = ThemeQuerySet.as_manager()
 

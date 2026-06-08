@@ -384,6 +384,37 @@
     border-bottom: none;
 }
 
+/* ---- Theme editor: Message Banners — group separators and Test button ---- */
+
+/* Thin rule between message type groups (warning, error, info start rows) */
+.color-group-start {
+    border-top: 1px solid var(--hairline-color, #e8e8e8);
+    margin-top: 4px;
+    padding-top: 4px;
+}
+
+
+
+.col-test {
+    flex: 0 0 70px;
+    padding-left: 8px;
+}
+
+.msg-test-btn {
+    background-color: var(--admin-interface-save-button-background-color, var(--primary, #79aec8));
+    color: var(--admin-interface-save-button-text-color, var(--button-fg, #fff));
+    border: none;
+    border-radius: var(--admin-interface-button-border-radius, 4px);
+    padding: 4px 10px;
+    font-size: 0.85em;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.msg-test-btn:hover {
+    background-color: var(--admin-interface-save-button-background-hover-color, var(--primary-hover, #609ab6));
+}
+
 /* Logo vertical offset — inline px unit */
 .logo-offset-input {
     display: inline-flex;

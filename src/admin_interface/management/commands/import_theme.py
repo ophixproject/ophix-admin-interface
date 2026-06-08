@@ -27,18 +27,6 @@ class Command(BaseCommand):
             help="Rename the theme during import",
         )
         parser.add_argument(
-            "--title",
-            type=str,
-            default=None,
-            help="Override title during import",
-        )
-        parser.add_argument(
-            "--env-name",
-            type=str,
-            default=None,
-            help="Override env_name during import",
-        )
-        parser.add_argument(
             "--force",
             action="store_true",
             help="Overwrite existing theme if one with the same name exists",
@@ -48,8 +36,6 @@ class Command(BaseCommand):
         Theme = apps.get_model("admin_interface", "Theme")
         tar_path = Path(options["tar_file"]).resolve()
         rename = options["rename"]
-        title_override = options["title"]
-        env_override = options["env_name"]
         force = options["force"]
 
         if not tar_path.exists():
@@ -99,11 +85,6 @@ class Command(BaseCommand):
                 fields = obj.get("fields", {})
                 obj.pop("id", None)
                 fields["name"] = theme_name
-
-                if title_override is not None:
-                    fields["title"] = title_override
-                if env_override is not None:
-                    fields["env_name"] = env_override
 
                 for field_name in ("logo", "favicon"):
                     media_path = fields.get(field_name)

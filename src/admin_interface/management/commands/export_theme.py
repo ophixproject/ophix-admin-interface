@@ -27,16 +27,6 @@ class Command(BaseCommand):
             help="Output directory for the exported theme tar.gz",
         )
         parser.add_argument(
-            "--strip-title",
-            action="store_true",
-            help="Remove title from exported theme (set to empty string)",
-        )
-        parser.add_argument(
-            "--strip-env-name",
-            action="store_true",
-            help="Remove env_name from exported theme (set to empty string)",
-        )
-        parser.add_argument(
             "--rename",
             type=str,
             default=None,
@@ -47,8 +37,6 @@ class Command(BaseCommand):
         Theme = apps.get_model("admin_interface", "Theme")
         theme_name = options["theme_name"]
         output_dir = Path(options["output"] or settings.BASE_DIR)
-        strip_title = options["strip_title"]
-        strip_env = options["strip_env_name"]
         rename = options["rename"]
 
         try:
@@ -82,10 +70,6 @@ class Command(BaseCommand):
                 fields = obj.get("fields", {})
                 obj.pop("pk", None)
 
-                if strip_title:
-                    fields["title"] = ""
-                if strip_env:
-                    fields["env_name"] = ""
                 if rename:
                     fields["name"] = rename
 

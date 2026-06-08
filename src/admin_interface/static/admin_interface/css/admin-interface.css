@@ -22,9 +22,14 @@
         --hairline-color: #e8e8e8;
         --border-color: #ccc;
         --error-fg: #ba2121;
-        --message-success-bg: #dfd;
-        --message-warning-bg: #ffc;
-        --message-error-bg: #ffefef;
+        --message-success-bg: #dff2e3;
+        --message-success-text: #1a5c2b;
+        --message-warning-bg: #faf3e5;
+        --message-warning-text: #7a5000;
+        --message-error-bg: #f5dede;
+        --message-error-text: #6b0f0f;
+        --message-info-bg: #d9f0f7;
+        --message-info-text: #004d66;
         --darkened-bg: #f8f8f8;
         --selected-bg: #e4e4e4;
         --selected-row: #ffc;
@@ -77,8 +82,21 @@
     border-color: var(--border-color);
 }
 
-[data-theme="dark"] ul.messagelist li {
-    color: var(--body-loud-color, #000);
+.admin-interface ul.messagelist li {
+    color: var(--message-success-text);
+}
+
+.admin-interface ul.messagelist li.warning {
+    color: var(--message-warning-text);
+}
+
+.admin-interface ul.messagelist li.error {
+    color: var(--message-error-text);
+}
+
+.admin-interface ul.messagelist li.info {
+    background: var(--message-info-bg) url(../img/icon-alert.svg) 5px 5px no-repeat;
+    color: var(--message-info-text);
 }
 
 .admin-interface {

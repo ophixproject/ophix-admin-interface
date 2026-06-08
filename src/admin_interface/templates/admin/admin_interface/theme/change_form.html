@@ -1,6 +1,101 @@
 {% extends "admin/change_form.html" %}
 {% load i18n static %}
 
+{% block extrahead %}{{ block.super }}
+<script>
+(function () {
+    "use strict";
+
+    var MSG_TEXT = {
+        success: "{% trans 'This is a test success message.' %}",
+        warning: "{% trans 'This is a test warning message.' %}",
+        error:   "{% trans 'This is a test error message.' %}",
+        info:    "{% trans 'This is a test info message.' %}",
+    };
+
+    var BG_VAR = {
+        success: "--message-success-bg",
+        warning: "--message-warning-bg",
+        error:   "--message-error-bg",
+        info:    "--message-info-bg",
+    };
+
+    var TEXT_VAR = {
+        success: "--message-success-text",
+        warning: "--message-warning-text",
+        error:   "--message-error-text",
+        info:    "--message-info-text",
+    };
+
+    function resolveColor(lightId, darkId, darkUseId, isDark) {
+        if (isDark) {
+            var darkUseEl = document.getElementById(darkUseId);
+            var darkEl    = document.getElementById(darkId);
+            if (darkUseEl && darkUseEl.checked && darkEl && darkEl.value) {
+                return darkEl.value;
+            }
+        }
+        var lightEl = document.getElementById(lightId);
+        return lightEl ? lightEl.value : "";
+    }
+
+    function showTestMessage(msgType, bgColor, textColor) {
+        var adminEl = document.querySelector(".admin-interface") || document.body;
+
+        // Remove any previous preview
+        var prev = document.getElementById("msg-preview-container");
+        if (prev) prev.remove();
+
+        // Apply colors as inline CSS properties so they override the theme's variables
+        adminEl.style.setProperty(BG_VAR[msgType], bgColor);
+        if (textColor) {
+            adminEl.style.setProperty(TEXT_VAR[msgType], textColor);
+        }
+
+        // Build message DOM
+        var ul = document.createElement("ul");
+        ul.className = "messagelist";
+        ul.id = "msg-preview-container";
+        var li = document.createElement("li");
+        li.className = msgType;
+        li.textContent = MSG_TEXT[msgType];
+        ul.appendChild(li);
+
+        // Insert after the page <h1>
+        var content = document.getElementById("content");
+        var h1 = content ? content.querySelector("h1") : null;
+        if (h1 && h1.parentNode) {
+            h1.parentNode.insertBefore(ul, h1.nextSibling);
+        } else if (content) {
+            content.insertBefore(ul, content.firstChild);
+        }
+
+        // Auto-remove after 3 seconds, restore CSS vars
+        setTimeout(function () {
+            ul.remove();
+            adminEl.style.removeProperty(BG_VAR[msgType]);
+            adminEl.style.removeProperty(TEXT_VAR[msgType]);
+        }, 3000);
+    }
+
+    document.addEventListener("click", function (e) {
+        var btn = e.target.closest(".msg-test-btn");
+        if (!btn) return;
+
+        var msgType = btn.dataset.msgType;
+        var isDark  = document.documentElement.getAttribute("data-theme") === "dark";
+
+        var bgColor   = resolveColor(btn.dataset.bgInput, btn.dataset.bgDarkInput, btn.dataset.bgDarkUse, isDark);
+        var textColor = resolveColor(btn.dataset.textInput, btn.dataset.textDarkInput, btn.dataset.textDarkUse, isDark);
+
+        if (bgColor) {
+            showTestMessage(msgType, bgColor, textColor);
+        }
+    });
+}());
+</script>
+{% endblock extrahead %}
+
 {% block field_sets %}
 {% with form=adminform.form %}
 {% for fieldset in adminform %}
@@ -184,13 +279,6 @@
         <div class="col-dark" id="dark-css_header_link_hover_color">{{ form.css_header_link_hover_color_dark.errors }}{{ form.css_header_link_hover_color_dark }}</div>
       </div>
       {% if form.css_header_link_hover_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_header_link_hover_color.help_text }}</div></div>{% endif %}
-      <div class="color-row">
-        <div class="col-label">{% trans "Env badge color" %}</div>
-        <div class="col-light">{{ form.env_color.errors }}{{ form.env_color }}</div>
-        <div class="col-toggle">{{ form.env_color_dark_use }}</div>
-        <div class="col-dark" id="dark-env_color">{{ form.env_color_dark.errors }}{{ form.env_color_dark }}</div>
-      </div>
-      {% if form.env_color.help_text %}<div class="help-row"><div class="col-help">{{ form.env_color.help_text }}</div></div>{% endif %}
     </div>
 
   </div>
@@ -443,6 +531,120 @@
         <div class="col-dark" id="dark-css_alert_color">{{ form.css_alert_color_dark.errors }}{{ form.css_alert_color_dark }}</div>
       </div>
       {% if form.css_alert_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_alert_color.help_text }}</div></div>{% endif %}
+    </div>
+  </div>
+</fieldset>
+
+<!-- ============================================================
+     MESSAGE BANNERS
+     ============================================================ -->
+{% elif fieldset.name == "Message Banners" %}
+<fieldset class="module aligned wide theme-custom-section" id="section-message-banners">
+  <h2 class="theme-section-heading">{% trans "Message Banners" %}</h2>
+  <div class="theme-section-body">
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+        <div class="col-test col-header"></div>
+      </div>
+      <!-- Success -->
+      <div class="color-row">
+        <div class="col-label">{% trans "Success background" %}</div>
+        <div class="col-light">{{ form.css_message_success_bg.errors }}{{ form.css_message_success_bg }}</div>
+        <div class="col-toggle">{{ form.css_message_success_bg_dark_use }}</div>
+        <div class="col-dark" id="dark-css_message_success_bg">{{ form.css_message_success_bg_dark.errors }}{{ form.css_message_success_bg_dark }}</div>
+        <div class="col-test">
+          <button type="button" class="msg-test-btn"
+            data-msg-type="success"
+            data-bg-input="id_css_message_success_bg"
+            data-bg-dark-input="id_css_message_success_bg_dark"
+            data-bg-dark-use="id_css_message_success_bg_dark_use"
+            data-text-input="id_css_message_success_text"
+            data-text-dark-input="id_css_message_success_text_dark"
+            data-text-dark-use="id_css_message_success_text_dark_use">{% trans "Test" %}</button>
+        </div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Success text" %}</div>
+        <div class="col-light">{{ form.css_message_success_text.errors }}{{ form.css_message_success_text }}</div>
+        <div class="col-toggle">{{ form.css_message_success_text_dark_use }}</div>
+        <div class="col-dark" id="dark-css_message_success_text">{{ form.css_message_success_text_dark.errors }}{{ form.css_message_success_text_dark }}</div>
+        <div class="col-test"></div>
+      </div>
+      <!-- Warning -->
+      <div class="color-row color-group-start">
+        <div class="col-label">{% trans "Warning background" %}</div>
+        <div class="col-light">{{ form.css_message_warning_bg.errors }}{{ form.css_message_warning_bg }}</div>
+        <div class="col-toggle">{{ form.css_message_warning_bg_dark_use }}</div>
+        <div class="col-dark" id="dark-css_message_warning_bg">{{ form.css_message_warning_bg_dark.errors }}{{ form.css_message_warning_bg_dark }}</div>
+        <div class="col-test">
+          <button type="button" class="msg-test-btn"
+            data-msg-type="warning"
+            data-bg-input="id_css_message_warning_bg"
+            data-bg-dark-input="id_css_message_warning_bg_dark"
+            data-bg-dark-use="id_css_message_warning_bg_dark_use"
+            data-text-input="id_css_message_warning_text"
+            data-text-dark-input="id_css_message_warning_text_dark"
+            data-text-dark-use="id_css_message_warning_text_dark_use">{% trans "Test" %}</button>
+        </div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Warning text" %}</div>
+        <div class="col-light">{{ form.css_message_warning_text.errors }}{{ form.css_message_warning_text }}</div>
+        <div class="col-toggle">{{ form.css_message_warning_text_dark_use }}</div>
+        <div class="col-dark" id="dark-css_message_warning_text">{{ form.css_message_warning_text_dark.errors }}{{ form.css_message_warning_text_dark }}</div>
+        <div class="col-test"></div>
+      </div>
+      <!-- Error -->
+      <div class="color-row color-group-start">
+        <div class="col-label">{% trans "Error background" %}</div>
+        <div class="col-light">{{ form.css_message_error_bg.errors }}{{ form.css_message_error_bg }}</div>
+        <div class="col-toggle">{{ form.css_message_error_bg_dark_use }}</div>
+        <div class="col-dark" id="dark-css_message_error_bg">{{ form.css_message_error_bg_dark.errors }}{{ form.css_message_error_bg_dark }}</div>
+        <div class="col-test">
+          <button type="button" class="msg-test-btn"
+            data-msg-type="error"
+            data-bg-input="id_css_message_error_bg"
+            data-bg-dark-input="id_css_message_error_bg_dark"
+            data-bg-dark-use="id_css_message_error_bg_dark_use"
+            data-text-input="id_css_message_error_text"
+            data-text-dark-input="id_css_message_error_text_dark"
+            data-text-dark-use="id_css_message_error_text_dark_use">{% trans "Test" %}</button>
+        </div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Error text" %}</div>
+        <div class="col-light">{{ form.css_message_error_text.errors }}{{ form.css_message_error_text }}</div>
+        <div class="col-toggle">{{ form.css_message_error_text_dark_use }}</div>
+        <div class="col-dark" id="dark-css_message_error_text">{{ form.css_message_error_text_dark.errors }}{{ form.css_message_error_text_dark }}</div>
+        <div class="col-test"></div>
+      </div>
+      <!-- Info -->
+      <div class="color-row color-group-start">
+        <div class="col-label">{% trans "Info background" %}</div>
+        <div class="col-light">{{ form.css_message_info_bg.errors }}{{ form.css_message_info_bg }}</div>
+        <div class="col-toggle">{{ form.css_message_info_bg_dark_use }}</div>
+        <div class="col-dark" id="dark-css_message_info_bg">{{ form.css_message_info_bg_dark.errors }}{{ form.css_message_info_bg_dark }}</div>
+        <div class="col-test">
+          <button type="button" class="msg-test-btn"
+            data-msg-type="info"
+            data-bg-input="id_css_message_info_bg"
+            data-bg-dark-input="id_css_message_info_bg_dark"
+            data-bg-dark-use="id_css_message_info_bg_dark_use"
+            data-text-input="id_css_message_info_text"
+            data-text-dark-input="id_css_message_info_text_dark"
+            data-text-dark-use="id_css_message_info_text_dark_use">{% trans "Test" %}</button>
+        </div>
+      </div>
+      <div class="color-row">
+        <div class="col-label">{% trans "Info text" %}</div>
+        <div class="col-light">{{ form.css_message_info_text.errors }}{{ form.css_message_info_text }}</div>
+        <div class="col-toggle">{{ form.css_message_info_text_dark_use }}</div>
+        <div class="col-dark" id="dark-css_message_info_text">{{ form.css_message_info_text_dark.errors }}{{ form.css_message_info_text_dark }}</div>
+        <div class="col-test"></div>
+      </div>
     </div>
   </div>
 </fieldset>

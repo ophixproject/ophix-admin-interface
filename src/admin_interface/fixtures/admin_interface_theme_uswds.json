@@ -4,9 +4,7 @@
         "fields": {
             "name": "USWDS",
             "active": true,
-            "title": "Django administration",
             "title_color": "#FFFFFF",
-            "title_visible": false,
             "logo": "",
             "logo_color": "#FFFFFF",
             "logo_visible": true,
@@ -18,7 +16,6 @@
             "css_module_text_color": "#FFFFFF",
             "css_module_link_color": "#FFFFFF",
             "css_module_link_hover_color": "#E1F3F8",
-            "css_module_rounded_corners": true,
             "css_generic_link_color": "#205493",
             "css_generic_link_hover_color": "#0071BC",
             "css_save_button_background_color": "#205493",

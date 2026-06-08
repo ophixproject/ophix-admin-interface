@@ -62,7 +62,7 @@ class Command(BaseCommand):
 
         pkg_map = _build_theme_package_map()
 
-        headers = ["ID", "Name", "Active", "Title", "Env Name", "Package", "Version"]
+        headers = ["ID", "Name", "Active", "Package", "Version"]
         rows = []
 
         for theme in themes:
@@ -71,8 +71,6 @@ class Command(BaseCommand):
                 str(theme.id),
                 theme.name,
                 "Yes" if theme.active else "No",
-                theme.title or "-",
-                theme.env_name or "-",
                 pkg_name,
                 pkg_version,
             ])

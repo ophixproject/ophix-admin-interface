@@ -4,9 +4,7 @@
         "fields": {
             "name": "Foundation",
             "active": true,
-            "title": "Django administration",
             "title_color": "#DDDDDD",
-            "title_visible": false,
             "logo": "",
             "logo_color": "#CCCCCC",
             "logo_visible": true,
@@ -18,7 +16,6 @@
             "css_module_text_color": "#FFFFFF",
             "css_module_link_color": "#FFFFFF",
             "css_module_link_hover_color": "#DDDDDD",
-            "css_module_rounded_corners": true,
             "css_generic_link_color": "#000000",
             "css_generic_link_hover_color": "#074E68",
             "css_save_button_background_color": "#2199E8",
