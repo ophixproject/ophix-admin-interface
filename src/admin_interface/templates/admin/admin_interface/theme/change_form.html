@@ -61,7 +61,7 @@
         li.textContent = MSG_TEXT[msgType];
         ul.appendChild(li);
 
-        // Insert in the same position as Django's {% block messages %} —
+        // Insert in the same position as Django's "messages" block —
         // before the top-level <h1> inside #content (not nested h1s).
         var content = document.getElementById("content");
         var h1 = content ? content.querySelector(":scope > h1") : null;
