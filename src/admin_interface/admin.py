@@ -133,6 +133,23 @@ class ThemeAdmin(admin.ModelAdmin):
             },
         ),
         (
+            _("Message Banners"),
+            {
+                "classes": ("wide",),
+                "fields": (
+                    ("css_message_success_bg", "css_message_success_bg_dark_use", "css_message_success_bg_dark"),
+                    ("css_message_success_text", "css_message_success_text_dark_use", "css_message_success_text_dark"),
+                    ("css_message_warning_bg", "css_message_warning_bg_dark_use", "css_message_warning_bg_dark"),
+                    ("css_message_warning_text", "css_message_warning_text_dark_use", "css_message_warning_text_dark"),
+                    ("css_message_error_bg", "css_message_error_bg_dark_use", "css_message_error_bg_dark"),
+                    ("css_message_error_text", "css_message_error_text_dark_use", "css_message_error_text_dark"),
+                    ("css_message_info_bg", "css_message_info_bg_dark_use", "css_message_info_bg_dark"),
+                    ("css_message_info_text", "css_message_info_text_dark_use", "css_message_info_text_dark"),
+                ),
+                "description": _DARK_HINT,
+            },
+        ),
+        (
             _("Body Text"),
             {
                 "classes": ("wide",),
@@ -181,23 +198,6 @@ class ThemeAdmin(admin.ModelAdmin):
                     ("css_warning_color", "css_warning_color_dark_use", "css_warning_color_dark"),
                     ("css_muted_color", "css_muted_color_dark_use", "css_muted_color_dark"),
                     ("css_alert_color", "css_alert_color_dark_use", "css_alert_color_dark"),
-                ),
-                "description": _DARK_HINT,
-            },
-        ),
-        (
-            _("Message Banners"),
-            {
-                "classes": ("wide",),
-                "fields": (
-                    ("css_message_success_bg", "css_message_success_bg_dark_use", "css_message_success_bg_dark"),
-                    ("css_message_success_text", "css_message_success_text_dark_use", "css_message_success_text_dark"),
-                    ("css_message_warning_bg", "css_message_warning_bg_dark_use", "css_message_warning_bg_dark"),
-                    ("css_message_warning_text", "css_message_warning_text_dark_use", "css_message_warning_text_dark"),
-                    ("css_message_error_bg", "css_message_error_bg_dark_use", "css_message_error_bg_dark"),
-                    ("css_message_error_text", "css_message_error_text_dark_use", "css_message_error_text_dark"),
-                    ("css_message_info_bg", "css_message_info_bg_dark_use", "css_message_info_bg_dark"),
-                    ("css_message_info_text", "css_message_info_text_dark_use", "css_message_info_text_dark"),
                 ),
                 "description": _DARK_HINT,
             },
