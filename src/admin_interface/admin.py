@@ -315,6 +315,8 @@ class ThemeAdmin(admin.ModelAdmin):
         )
 
     def response_change(self, request, obj):
+        if "_popup" in request.POST:
+            return super().response_change(request, obj)
         self.message_user(request, self._clean_save_msg("saved"), MSG_SUCCESS)
         if "_continue" in request.POST:
             return HttpResponseRedirect(request.path)
