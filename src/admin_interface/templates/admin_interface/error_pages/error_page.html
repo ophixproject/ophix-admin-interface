@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site_title }} | {{ error_code }} {{ error_title }}</title>
     <style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url('/static/admin/fonts/Roboto-Light-webfont.woff2') format('woff2'),
+                 url('/static/admin/fonts/Roboto-Light-webfont.woff') format('woff');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Roboto';
+            src: url('/static/admin/fonts/Roboto-Regular-webfont.woff2') format('woff2'),
+                 url('/static/admin/fonts/Roboto-Regular-webfont.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Roboto';
+            src: url('/static/admin/fonts/Roboto-Bold-webfont.woff2') format('woff2'),
+                 url('/static/admin/fonts/Roboto-Bold-webfont.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
         :root {
             --ep-header-bg:   {{ theme.css_header_background_color }};
             --ep-title-color: {{ theme.title_color }};
