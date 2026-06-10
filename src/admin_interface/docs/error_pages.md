@@ -20,7 +20,7 @@ configuration and the automatic call during installation are handled by `ophix-s
 active theme's colours in as inline CSS variables. The output is written to
 `INSTALL_DIR/static/error_pages/` — one file per code:
 
-```
+```text
 INSTALL_DIR/static/error_pages/
     400.html
     403.html
@@ -103,16 +103,57 @@ ophix-manage generate_error_pages
 ophix-manage collectstatic --noinput
 ```
 
-**Step 2 — Add nginx directives manually** to your server block (adjust the static path
-to match your `INSTALL_DIR`):
+**Step 2 — Add nginx directives manually.** The `error_page` lines belong inside the
+`server` block, before the `location /` block. A complete server block looks like this
+(your paths will differ — check `INSTALL_DIR` in your `.env`):
 
 ```nginx
-error_page 400 /static/error_pages/400.html;
-error_page 403 /static/error_pages/403.html;
-error_page 404 /static/error_pages/404.html;
-error_page 500 502 /static/error_pages/500.html;
-error_page 503 504 /static/error_pages/503.html;
+server {
+    listen 443 ssl;
+    server_name myserver.example.com;
+
+    ssl_certificate     /home/ophix/myserver/ssl/certs/myserver.crt;
+    ssl_certificate_key /home/ophix/myserver/ssl/private/myserver.key;
+
+    ssl_protocols       TLSv1.2 TLSv1.3;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+
+    access_log /home/ophix/myserver/logs/myserver.access.log;
+    error_log  /home/ophix/myserver/logs/myserver.error.log;
+
+    # Custom error pages — served directly from static files
+    # (503 is served even when Gunicorn is down because /static/ is a direct alias)
+    error_page 400 /static/error_pages/400.html;
+    error_page 403 /static/error_pages/403.html;
+    error_page 404 /static/error_pages/404.html;
+    error_page 500 502 /static/error_pages/500.html;
+    error_page 503 504 /static/error_pages/503.html;
+
+    location / {
+        proxy_pass         http://unix:/home/ophix/myserver/run/myserver.sock;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
+    location /static/ {
+        alias /home/ophix/myserver/static/;
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location /media/ {
+        alias /home/ophix/myserver/media/;
+    }
+}
 ```
+
+The 503 page works when Gunicorn is down because `error_page 503` triggers an internal
+nginx redirect to `/static/error_pages/503.html`, which is matched by `location /static/`
+— a direct filesystem alias, not a proxy pass. The 502 and 504 codes are mapped to the
+500 and 503 pages respectively.
 
 **Step 3 — Reload nginx:**
 
