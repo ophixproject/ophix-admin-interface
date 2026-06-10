@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.06.11.01
 
 - Added `css_body_background_color` field (with dark-mode pair) to the Theme model —
   controls the overall page background for all admin pages. Leave blank to inherit Django's
