@@ -1,2 +1,2 @@
-__version__ = "2026.06.10.07"
+__version__ = "2026.06.11.01"
 __package_name__ = "ophix-admin-interface"
