@@ -92,6 +92,13 @@ class Command(BaseCommand):
             except Exception:
                 pass
 
+        favicon_url = ""
+        if theme.favicon:
+            try:
+                favicon_url = theme.favicon.url
+            except Exception:
+                pass
+
         logo_visible = getattr(theme, "logo_visible", True)
         logo_max_width = getattr(theme, "logo_max_width", 400) or 400
         logo_max_height = getattr(theme, "logo_max_height", 100) or 100
@@ -131,6 +138,7 @@ class Command(BaseCommand):
                 "server_name": server_name,
                 "site_title": site_title,
                 "logo_url": logo_url,
+                "favicon_url": favicon_url,
                 "logo_visible": logo_visible,
                 "logo_max_width": logo_max_width,
                 "logo_max_height": logo_max_height,
