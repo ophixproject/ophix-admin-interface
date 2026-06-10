@@ -79,6 +79,21 @@ class Command(BaseCommand):
 
         server_name = getattr(settings, "SERVER_NAME", "Ophix")
 
+        site_title = (
+            (server_settings.title if server_settings and server_settings.title else None)
+            or server_name
+            or "Ophix"
+        )
+
+        logo_url = ""
+        if theme.logo:
+            try:
+                logo_url = theme.logo.url
+            except Exception:
+                pass
+
+        logo_max_height = getattr(theme, "logo_max_height", 0) or 40
+
         # Determine output directory
         if options.get("output_dir"):
             output_dir = Path(options["output_dir"])
@@ -110,6 +125,9 @@ class Command(BaseCommand):
                 "theme": theme,
                 "server_settings": server_settings,
                 "server_name": server_name,
+                "site_title": site_title,
+                "logo_url": logo_url,
+                "logo_max_height": logo_max_height,
                 "error_code": code,
                 "error_title": title,
                 "error_message": message,
