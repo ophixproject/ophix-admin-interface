@@ -1,5 +1,30 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Added `generate_error_pages` management command — renders static HTML error pages
+  (400, 403, 404, 500, 503) with the active theme's colors baked in as inline CSS
+  variables. Output goes to `INSTALL_DIR/static/error_pages/`. Dark mode uses
+  `@media (prefers-color-scheme: dark)` with per-color overrides from the theme's
+  dark-mode fields. Run standalone or called automatically by `run_install`.
+- `post_save` signal on `Theme`: when an active theme is saved and
+  `INSTALL_DIR/static/error_pages/` already exists, `generate_error_pages` runs
+  automatically so error pages stay in sync with theme changes. Skips silently on
+  fresh installs before `run_install` has created the directory.
+- Fixed `ThemeAdmin.response_change` missing `_popup` guard — when a theme was opened
+  in a Magnific Popup and saved, the response redirected to the changelist instead of
+  returning Django's popup-closing response. Added `if "_popup" in request.POST: return
+  super().response_change(request, obj)` as the first line of the override.
+- Fixed `0002_remove_theme_placeholder_fields` migration idempotency — replaced plain
+  `RemoveField` operations with `SeparateDatabaseAndState` using
+  `ALTER TABLE ... DROP COLUMN IF EXISTS` SQL, so the migration is safe to re-run on
+  servers where the columns were already dropped by an earlier cleanup script.
+- `dismiss.js` moved to a static file loaded in `{% block extrastyle %}` in
+  `base_site.html` — previously in `{% block extrascript %}` which is overridden by
+  `change_form.html`.
+- Test message insertion now correctly targets the parent wrapper sibling of `#content`.
+- `.deletelink` excluded from the link hover underline rule in `widgets.css`.
+
 ## 2026.06.02.01
 
 - Added per-colour dark mode overrides. Each colour field in the theme editor now has a companion "dark?" checkbox and dark colour picker. When checked and a colour is set, that colour is applied under `[data-theme="dark"]`; if the checkbox is unchecked or the colour is blank, the light value is used as fallback. The `[data-theme="dark"]` CSS block is emitted in `base_site.html` alongside the existing `:root` block — only overrides with both checkbox and colour set are emitted.

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if server_settings and server_settings.title %}{{ server_settings.title }}{% elif server_name %}{{ server_name }}{% else %}Ophix{% endif %} | {{ error_code }} {{ error_title }}</title>
+    <style>
+        :root {
+            --ep-header-bg: {{ theme.css_header_background_color }};
+            --ep-header-text: {{ theme.css_header_text_color }};
+            --ep-body-bg: #f0f2f5;
+            --ep-card-bg: {{ theme.css_module_background_color }};
+            --ep-text: {{ theme.css_module_text_color }};
+            --ep-btn-bg: {{ theme.css_save_button_background_color }};
+            --ep-btn-hover: {{ theme.css_save_button_background_hover_color }};
+            --ep-btn-text: {{ theme.css_save_button_text_color }};
+            --ep-radius: {{ theme.css_module_border_radius }};
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ep-body-bg: #111113;
+{% if theme.css_header_background_color_dark_use and theme.css_header_background_color_dark %}
+                --ep-header-bg: {{ theme.css_header_background_color_dark }};
+{% endif %}
+{% if theme.css_header_text_color_dark_use and theme.css_header_text_color_dark %}
+                --ep-header-text: {{ theme.css_header_text_color_dark }};
+{% endif %}
+{% if theme.css_module_background_color_dark_use and theme.css_module_background_color_dark %}
+                --ep-card-bg: {{ theme.css_module_background_color_dark }};
+{% else %}
+                --ep-card-bg: #27272a;
+{% endif %}
+{% if theme.css_module_text_color_dark_use and theme.css_module_text_color_dark %}
+                --ep-text: {{ theme.css_module_text_color_dark }};
+{% else %}
+                --ep-text: #eeeeee;
+{% endif %}
+{% if theme.css_save_button_background_color_dark_use and theme.css_save_button_background_color_dark %}
+                --ep-btn-bg: {{ theme.css_save_button_background_color_dark }};
+{% endif %}
+{% if theme.css_save_button_background_hover_color_dark_use and theme.css_save_button_background_hover_color_dark %}
+                --ep-btn-hover: {{ theme.css_save_button_background_hover_color_dark }};
+{% endif %}
+{% if theme.css_save_button_text_color_dark_use and theme.css_save_button_text_color_dark %}
+                --ep-btn-text: {{ theme.css_save_button_text_color_dark }};
+{% endif %}
+            }
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1.5;
+            background-color: var(--ep-body-bg);
+            color: var(--ep-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--ep-header-bg);
+            padding: 0 24px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        header a {
+            color: var(--ep-header-text);
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+        }
+
+        .error-card {
+            background-color: var(--ep-card-bg);
+            border-radius: var(--ep-radius, 4px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+            padding: 48px 56px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .error-code {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--ep-header-bg);
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--ep-text);
+        }
+
+        .error-message {
+            opacity: 0.75;
+            margin-bottom: 36px;
+        }
+
+        .back-link {
+            display: inline-block;
+            background-color: var(--ep-btn-bg);
+            color: var(--ep-btn-text);
+            text-decoration: none;
+            padding: 9px 22px;
+            border-radius: var(--ep-radius, 4px);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            background-color: var(--ep-btn-hover);
+            color: var(--ep-btn-text);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">{% if server_settings and server_settings.title %}{{ server_settings.title }}{% elif server_name %}{{ server_name }}{% else %}Ophix{% endif %}</a>
+    </header>
+    <main>
+        <div class="error-card">
+            <div class="error-code">{{ error_code }}</div>
+            <h1>{{ error_title }}</h1>
+            <p class="error-message">{{ error_message }}</p>
+            <a href="/" class="back-link">&#8592; Return to home</a>
+        </div>
+    </main>
+</body>
+</html>
