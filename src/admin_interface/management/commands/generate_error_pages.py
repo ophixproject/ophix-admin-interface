@@ -92,7 +92,11 @@ class Command(BaseCommand):
             except Exception:
                 pass
 
-        logo_max_height = getattr(theme, "logo_max_height", 0) or 40
+        logo_visible = getattr(theme, "logo_visible", True)
+        logo_max_width = getattr(theme, "logo_max_width", 400) or 400
+        logo_max_height = getattr(theme, "logo_max_height", 100) or 100
+        logo_vertical_offset = getattr(theme, "logo_vertical_offset", 0) or 0
+        title_font_size = getattr(theme, "title_font_size", "") or ""
 
         # Determine output directory
         if options.get("output_dir"):
@@ -127,7 +131,11 @@ class Command(BaseCommand):
                 "server_name": server_name,
                 "site_title": site_title,
                 "logo_url": logo_url,
+                "logo_visible": logo_visible,
+                "logo_max_width": logo_max_width,
                 "logo_max_height": logo_max_height,
+                "logo_vertical_offset": logo_vertical_offset,
+                "title_font_size": title_font_size,
                 "error_code": code,
                 "error_title": title,
                 "error_message": message,

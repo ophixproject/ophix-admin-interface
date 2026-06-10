@@ -7,21 +7,24 @@
     <style>
         :root {
             --ep-header-bg:   {{ theme.css_header_background_color }};
-            --ep-header-text: {{ theme.css_header_text_color }};
+            --ep-title-color: {{ theme.title_color }};
             --ep-body-bg:     {{ theme.css_module_background_color }};
             --ep-text:        {{ theme.css_module_text_color }};
             --ep-btn-bg:      {{ theme.css_save_button_background_color }};
             --ep-btn-hover:   {{ theme.css_save_button_background_hover_color }};
             --ep-btn-text:    {{ theme.css_save_button_text_color }};
             --ep-radius:      {{ theme.css_module_border_radius }};
+{% if title_font_size %}
+            --ep-title-font-size: {{ title_font_size }};
+{% endif %}
         }
         @media (prefers-color-scheme: dark) {
             :root {
 {% if theme.css_header_background_color_dark_use and theme.css_header_background_color_dark %}
                 --ep-header-bg: {{ theme.css_header_background_color_dark }};
 {% endif %}
-{% if theme.css_header_text_color_dark_use and theme.css_header_text_color_dark %}
-                --ep-header-text: {{ theme.css_header_text_color_dark }};
+{% if theme.title_color_dark_use and theme.title_color_dark %}
+                --ep-title-color: {{ theme.title_color_dark }};
 {% endif %}
 {% if theme.css_module_background_color_dark_use and theme.css_module_background_color_dark %}
                 --ep-body-bg: {{ theme.css_module_background_color_dark }};
@@ -77,15 +80,18 @@
         }
 
         #branding img {
+            max-width: {{ logo_max_width }}px;
             max-height: {{ logo_max_height }}px;
             width: auto;
+            height: auto;
             display: block;
+            transform: translateY(calc(-1px * {{ logo_vertical_offset }}));
         }
 
         #branding .site-name {
-            color: var(--ep-header-text);
-            font-size: 17px;
-            font-weight: 600;
+            color: var(--ep-title-color);
+            font-size: var(--ep-title-font-size, 1.5rem);
+            font-weight: normal;
             white-space: nowrap;
         }
 
@@ -146,7 +152,7 @@
 <body>
     <div id="header">
         <a id="branding" href="/">
-            {% if logo_url %}<img src="{{ logo_url }}" alt="">{% endif %}
+            {% if logo_url and logo_visible %}<img src="{{ logo_url }}" alt="">{% endif %}
             <span class="site-name">{{ site_title }}</span>
         </a>
     </div>
