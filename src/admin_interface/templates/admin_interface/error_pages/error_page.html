@@ -39,6 +39,12 @@
 {% if title_font_size %}
             --ep-title-font-size: {{ title_font_size }};
 {% endif %}
+{% if theme.css_body_font_family %}
+            --ep-font-family: {{ theme.css_body_font_family }};
+{% endif %}
+{% if theme.css_body_font_size %}
+            --ep-font-size: {{ theme.css_body_font_size }};
+{% endif %}
         }
         @media (prefers-color-scheme: dark) {
             :root {
@@ -73,8 +79,8 @@
         }
 
         body {
-            font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
-            font-size: 14px;
+            font-family: var(--ep-font-family, "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif);
+            font-size: var(--ep-font-size, 14px);
             line-height: 1.5;
             background-color: var(--ep-body-bg);
             color: var(--ep-text);
