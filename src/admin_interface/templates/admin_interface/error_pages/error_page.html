@@ -64,11 +64,12 @@
         /* Header — matches Django admin #header structure */
         #header {
             background-color: var(--ep-header-bg);
-            height: 50px;
-            padding: 0 12px;
+            height: auto;
+            padding: 10px 40px;
             display: flex;
             align-items: center;
             flex-shrink: 0;
+            box-sizing: border-box;
         }
 
         #branding {
@@ -91,7 +92,7 @@
         #branding .site-name {
             color: var(--ep-title-color);
             font-size: var(--ep-title-font-size, 1.5rem);
-            font-weight: normal;
+            font-weight: 300;
             white-space: nowrap;
         }
 
