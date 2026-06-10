@@ -157,6 +157,7 @@ class ThemeAdmin(admin.ModelAdmin):
                 "fields": (
                     "css_body_font_family",
                     "css_body_font_size",
+                    ("css_body_background_color", "css_body_background_color_dark_use", "css_body_background_color_dark"),
                     ("css_generic_link_color", "css_generic_link_color_dark_use", "css_generic_link_color_dark"),
                     ("css_generic_link_hover_color", "css_generic_link_hover_color_dark_use", "css_generic_link_hover_color_dark"),
                     ("css_generic_link_active_color", "css_generic_link_active_color_dark_use", "css_generic_link_active_color_dark"),

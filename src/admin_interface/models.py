@@ -243,6 +243,16 @@ class Theme(models.Model):
         verbose_name=_("border radius"),
     )
 
+    css_body_background_color = ColorField(
+        blank=True,
+        default="",
+        help_text=_("Overall page background colour for all admin pages. Leave blank to use the browser default."),
+        max_length=10,
+        verbose_name=_("background color"),
+    )
+    css_body_background_color_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_body_background_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+
     css_body_font_family = models.CharField(
         max_length=200,
         blank=True,

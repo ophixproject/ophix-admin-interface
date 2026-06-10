@@ -638,3 +638,7 @@
     transition: none;
     filter: invert(100%);
 }
+
+body.admin-interface {
+    background: var(--admin-interface-body-background-color, var(--body-bg));
+}

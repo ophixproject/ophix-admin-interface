@@ -50,6 +50,9 @@
             --close-button-bg: var(--admin-interface-save-button-background-color);
             --close-button-hover-bg: var(--admin-interface-save-button-background-hover-color);
             --close-button-fg: var(--admin-interface-save-button-text-color);
+        {% if theme.css_body_background_color %}
+            --admin-interface-body-background-color: {{ theme.css_body_background_color }};
+        {% endif %}
         {% if theme.css_body_font_family %}
             --admin-interface-body-font-family: {{ theme.css_body_font_family }};
         {% endif %}
@@ -209,6 +212,9 @@
         {% if theme.css_message_info_text_dark_use and theme.css_message_info_text_dark %}
             --message-info-text: {{ theme.css_message_info_text_dark }};
         {% endif %}
+        {% if theme.css_body_background_color_dark_use and theme.css_body_background_color_dark %}
+            --admin-interface-body-background-color: {{ theme.css_body_background_color_dark }};
+        {% endif %}
         {% if theme.related_modal_background_color_dark_use and theme.related_modal_background_color_dark %}
             --admin-interface-related-modal-background-color: {{ theme.related_modal_background_color_dark }};
         {% endif %}
@@ -251,6 +257,9 @@
 
 {% block ophix_extra_head %}{% endblock ophix_extra_head %}
 
+{% if server_settings.message_autohide_enabled %}
+<script>window.OPHIX_AUTOHIDE = {enabled: true, delay: {{ server_settings.message_autohide_delay }}};</script>
+{% endif %}
 <script src="{% get_admin_interface_static 'admin_interface/js/dismiss.js' %}"></script>
 
 {% endblock extrastyle %}

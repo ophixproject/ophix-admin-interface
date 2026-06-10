@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Added `css_body_background_color` field (with dark-mode pair) to the Theme model —
+  controls the overall page background for all admin pages. Leave blank to inherit Django's
+  default. Placed at the top of the Body Text section in the theme editor.
+  Applied via `body.admin-interface { background: var(--admin-interface-body-background-color, var(--body-bg)); }`.
+  Error pages use this field for `--ep-body-bg`; when blank they fall back to
+  `css_module_background_color` (previous behaviour unchanged).
+- Auto-dismiss for message banners: reads `window.OPHIX_AUTOHIDE` config (emitted by
+  `ophix-admin-settings` when enabled) and auto-removes success and info banners after
+  the configured delay. Hover cancels the timer. Errors and warnings are never auto-hidden.
+  Dismiss button (×) behaviour is unchanged.
+
 - Added `generate_error_pages` management command — renders static HTML error pages
   (400, 403, 404, 500, 503) with the active theme's colors baked in as inline CSS
   variables. Output goes to `INSTALL_DIR/static/error_pages/`. Dark mode uses
