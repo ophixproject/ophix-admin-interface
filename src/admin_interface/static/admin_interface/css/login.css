@@ -28,6 +28,10 @@
     justify-content: center;
 }
 
+.admin-interface.login #header #branding {
+    flex: 0 0 auto;
+}
+
 .admin-interface.login #header #branding h1 {
     margin-right:0;
 }
