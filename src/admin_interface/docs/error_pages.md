@@ -90,22 +90,17 @@ ophix-manage generate_error_pages --output-dir /path/to/error_pages/
 
 ---
 
-## Adding error pages to an existing server
+## nginx configuration
 
-If your server was installed before error pages were introduced, `run_install` was not
-called with the new nginx template, so the `error_page` directives are absent from your
-nginx configuration.
-
-**Step 1 — Generate the pages:**
+**Step 1 — Generate the error pages:**
 
 ```bash
 ophix-manage generate_error_pages
 ophix-manage collectstatic --noinput
 ```
 
-**Step 2 — Add nginx directives manually.** The `error_page` lines belong inside the
-`server` block, before the location blocks. A complete server block looks like this
-(your paths will differ — check `INSTALL_DIR` in your `.env`):
+**Step 2 — Edit your nginx config to match this structure** (your paths will differ —
+check `INSTALL_DIR` in your `.env`):
 
 ```nginx
 server {
