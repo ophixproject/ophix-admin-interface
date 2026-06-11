@@ -41,8 +41,13 @@
     text-align: center;
 }
 
+/* The logo's max-width uses a percentage (min(180px, 100%)) which is ignored
+   during intrinsic sizing — the <a> is sized as if the image were its natural
+   width, leaving phantom free space inside the flex container after the image
+   is capped at render time. Center the content within that space. */
 .admin-interface.login #header #branding h1 a {
     display: inline-flex;
+    justify-content: center;
 }
 
 .admin-interface.login #header #branding h1 img.logo,
