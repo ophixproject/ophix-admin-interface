@@ -28,7 +28,7 @@
 }
 
 .admin-interface.login #header #branding {
-    text-align: center;
+    justify-content: center;
 }
 
 .admin-interface.login #header #branding h1 {
