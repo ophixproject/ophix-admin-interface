@@ -99,6 +99,14 @@ ophix-manage generate_error_pages
 ophix-manage collectstatic --noinput
 ```
 
+**Test links** — click each to preview the generated page in this browser:
+
+- [Page not found — 404.html](/static/error_pages/404.html)
+- [Bad request — 400.html](/static/error_pages/400.html)
+- [Forbidden — 403.html](/static/error_pages/403.html)
+- [Server error — 500.html](/static/error_pages/500.html)
+- [Service unavailable — 503.html](/static/error_pages/503.html)
+
 **Step 2 — Edit your nginx config to match this structure** (your paths will differ —
 check `INSTALL_DIR` in your `.env`):
 
