@@ -10,7 +10,9 @@
             --ep-header-bg:   {{ theme.css_header_background_color }};
             --ep-title-color: {{ theme.title_color }};
             --ep-body-bg:     {% if theme.css_body_background_color %}{{ theme.css_body_background_color }}{% else %}{{ theme.css_module_background_color }}{% endif %};
+            --ep-module-bg:   {{ theme.css_module_background_color }};
             --ep-text:        {{ theme.css_module_text_color }};
+            --ep-link:        {{ theme.css_generic_link_color }};
             --ep-btn-bg:      {{ theme.css_save_button_background_color }};
             --ep-btn-hover:   {{ theme.css_save_button_background_hover_color }};
             --ep-btn-text:    {{ theme.css_save_button_text_color }};
@@ -42,8 +44,14 @@
                 --ep-body-bg: {{ theme.css_module_background_color_dark }};
 {% endif %}
 {% endif %}
+{% if theme.css_module_background_color_dark_use and theme.css_module_background_color_dark %}
+                --ep-module-bg: {{ theme.css_module_background_color_dark }};
+{% endif %}
 {% if theme.css_module_text_color_dark_use and theme.css_module_text_color_dark %}
                 --ep-text: {{ theme.css_module_text_color_dark }};
+{% endif %}
+{% if theme.css_generic_link_color_dark_use and theme.css_generic_link_color_dark %}
+                --ep-link: {{ theme.css_generic_link_color_dark }};
 {% endif %}
 {% if theme.css_save_button_background_color_dark_use and theme.css_save_button_background_color_dark %}
                 --ep-btn-bg: {{ theme.css_save_button_background_color_dark }};
@@ -68,7 +76,6 @@
             font-size: var(--ep-font-size, 14px);
             line-height: 1.5;
             background-color: var(--ep-body-bg);
-            color: var(--ep-text);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -109,6 +116,23 @@
             white-space: nowrap;
         }
 
+        /* Breadcrumb bar — matches Django admin #breadcrumbs structure */
+        #breadcrumbs {
+            background-color: var(--ep-module-bg);
+            padding: 8px 40px;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        #breadcrumbs a {
+            color: var(--ep-link);
+            text-decoration: none;
+        }
+
+        #breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
         /* Error content */
         main {
             flex: 1;
@@ -119,6 +143,10 @@
         }
 
         .error-content {
+            background-color: var(--ep-module-bg);
+            color: var(--ep-text);
+            border-radius: var(--ep-radius, 4px);
+            padding: 48px 56px;
             text-align: center;
             max-width: 480px;
             width: 100%;
@@ -137,7 +165,6 @@
             font-size: 22px;
             font-weight: 600;
             margin-bottom: 10px;
-            color: var(--ep-text);
         }
 
         .error-message {
@@ -169,6 +196,9 @@
             {% if logo_url and logo_visible %}<img src="{{ logo_url }}" alt="">{% endif %}
             <span class="site-name">{{ site_title }}</span>
         </a>
+    </div>
+    <div id="breadcrumbs">
+        <a href="/">Home</a>
     </div>
     <main>
         <div class="error-content">
