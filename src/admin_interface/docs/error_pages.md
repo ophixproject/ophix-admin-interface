@@ -130,6 +130,16 @@ server {
     error_page 500 502 /static/error_pages/500.html;
     error_page 503 504 /static/error_pages/503.html;
 
+    # API — error responses pass through as-is (clients expect JSON, not HTML)
+    location /api/ {
+        proxy_pass         http://unix:/home/ophix/myserver/run/myserver.sock;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
+    # Admin and everything else — intercept upstream errors to serve custom pages
     location / {
         proxy_pass         http://unix:/home/ophix/myserver/run/myserver.sock;
         proxy_set_header   Host $host;
@@ -139,6 +149,7 @@ server {
 
         # Required: intercept upstream errors so the error_page directives above
         # apply to responses from Django/Gunicorn (not just nginx-generated errors).
+        # Not applied to /api/ — API clients expect JSON error responses, not HTML.
         proxy_intercept_errors on;
     }
 
@@ -156,7 +167,8 @@ server {
 
 The `proxy_intercept_errors on` directive is essential: without it, nginx passes error
 responses from Django/Gunicorn straight through to the browser and the `error_page`
-directives never fire. The 503 page works when Gunicorn is down because `error_page 503`
+directives never fire. It must **not** be placed on the `/api/` location — API clients
+expect JSON error responses and would break if they received an HTML page instead. The 503 page works when Gunicorn is down because `error_page 503`
 triggers an internal nginx redirect to `/static/error_pages/503.html`, which is matched
 by `location /static/` — a direct filesystem alias, not a proxy pass. The 502 and 504
 codes are mapped to the 500 and 503 pages respectively.
