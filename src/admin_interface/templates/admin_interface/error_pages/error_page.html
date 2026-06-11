@@ -10,9 +10,10 @@
             --ep-header-bg:   {{ theme.css_header_background_color }};
             --ep-title-color: {{ theme.title_color }};
             --ep-body-bg:     {% if theme.css_body_background_color %}{{ theme.css_body_background_color }}{% else %}{{ theme.css_module_background_color }}{% endif %};
-            --ep-module-bg:   {{ theme.css_module_background_color }};
-            --ep-text:        {{ theme.css_module_text_color }};
-            --ep-link:        {{ theme.css_generic_link_color }};
+            --ep-module-bg:        {{ theme.css_module_background_color }};
+            --ep-text:             {{ theme.css_module_text_color }};
+            --ep-module-link:      {{ theme.css_module_link_color }};
+            --ep-module-link-hover: {{ theme.css_module_link_hover_color }};
             --ep-btn-bg:      {{ theme.css_save_button_background_color }};
             --ep-btn-hover:   {{ theme.css_save_button_background_hover_color }};
             --ep-btn-text:    {{ theme.css_save_button_text_color }};
@@ -50,8 +51,11 @@
 {% if theme.css_module_text_color_dark_use and theme.css_module_text_color_dark %}
                 --ep-text: {{ theme.css_module_text_color_dark }};
 {% endif %}
-{% if theme.css_generic_link_color_dark_use and theme.css_generic_link_color_dark %}
-                --ep-link: {{ theme.css_generic_link_color_dark }};
+{% if theme.css_module_link_color_dark_use and theme.css_module_link_color_dark %}
+                --ep-module-link: {{ theme.css_module_link_color_dark }};
+{% endif %}
+{% if theme.css_module_link_hover_color_dark_use and theme.css_module_link_hover_color_dark %}
+                --ep-module-link-hover: {{ theme.css_module_link_hover_color_dark }};
 {% endif %}
 {% if theme.css_save_button_background_color_dark_use and theme.css_save_button_background_color_dark %}
                 --ep-btn-bg: {{ theme.css_save_button_background_color_dark }};
@@ -120,16 +124,17 @@
         #breadcrumbs {
             background-color: var(--ep-module-bg);
             padding: 8px 40px;
-            font-size: 13px;
+            font-size: var(--ep-font-size, 14px);
             flex-shrink: 0;
         }
 
         #breadcrumbs a {
-            color: var(--ep-link);
+            color: var(--ep-module-link);
             text-decoration: none;
         }
 
         #breadcrumbs a:hover {
+            color: var(--ep-module-link-hover);
             text-decoration: underline;
         }
 
