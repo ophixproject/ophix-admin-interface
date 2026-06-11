@@ -34,9 +34,11 @@
     justify-content: center;
 }
 
-/* Kill #site-name's margin-inline-end: 20px so the title sits dead centre */
+/* Kill #site-name's margin-inline-end: 20px so the title sits dead centre.
+   text-align centers the inline-flex <a> if the h1 is stretched full-width. */
 .admin-interface.login #header #branding h1 {
     margin: 0;
+    text-align: center;
 }
 
 .admin-interface.login #header #branding h1 a {
