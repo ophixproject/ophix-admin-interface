@@ -389,7 +389,6 @@ class ThemeAdmin(admin.ModelAdmin):
         }
         js = (
             "admin_interface/colorfield/colorfield-swatch.js",
-            "admin_interface/js/dark-toggle.js",
             "admin_interface/js/logo-preview.js",
             "admin_interface/js/theme-sections.js",
         )
