@@ -89,6 +89,25 @@ def install_bundled_theme(app_config):
                             theme_name, field_name, filename
                         )
 
+            # Validate all CSS-emitting fields before writing to the database.
+            # loaddata calls save() without full_clean(), so this is the only
+            # gate that catches malicious theme.json payloads from third-party
+            # theme packages.
+            from .validators import check_theme_json_fields
+
+            for obj in data:
+                problems = check_theme_json_fields(theme_name, obj["fields"])
+                if problems:
+                    lines = [
+                        f"Theme '{theme_name}' contains invalid field values "
+                        f"and was NOT installed:"
+                    ]
+                    for field_name, display_val, message in problems:
+                        lines.append(f"  {field_name}")
+                        lines.append(f"    Value:   {display_val!r}")
+                        lines.append(f"    Problem: {message}")
+                    raise ValueError("\n".join(lines))
+
             fd, temp_path = tempfile.mkstemp(suffix=".json")
             try:
                 with os.fdopen(fd, "w", encoding="utf-8") as f:

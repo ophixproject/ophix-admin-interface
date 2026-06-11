@@ -588,6 +588,43 @@ class Theme(models.Model):
 
     objects = ThemeQuerySet.as_manager()
 
+    def clean(self):
+        from django.core.exceptions import ValidationError
+
+        from .validators import (
+            THEME_COLOR_FIELDS,
+            THEME_DIMENSION_FIELDS,
+            validate_css_color,
+            validate_css_dimension,
+            validate_css_font_family,
+            validate_theme_name,
+        )
+
+        errors = {}
+
+        def _check(field_name, validator):
+            try:
+                validator(getattr(self, field_name) or "")
+            except ValidationError as exc:
+                errors[field_name] = exc
+
+        for field_name in THEME_COLOR_FIELDS:
+            value = (getattr(self, field_name) or "").strip()
+            setattr(self, field_name, value)
+            try:
+                validate_css_color(value)
+            except ValidationError as exc:
+                errors[field_name] = exc
+
+        for field_name in THEME_DIMENSION_FIELDS:
+            _check(field_name, validate_css_dimension)
+
+        _check("css_body_font_family", validate_css_font_family)
+        _check("name", validate_theme_name)
+
+        if errors:
+            raise ValidationError(errors)
+
     def set_active(self):
         self.active = True
         self.save()

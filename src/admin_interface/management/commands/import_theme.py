@@ -104,6 +104,30 @@ class Command(BaseCommand):
                                 f"admin-interface/themes/{theme_name}/{field_name}/{filename}"
                             )
 
+            # Validate all CSS-emitting fields before writing to the database.
+            # loaddata calls save() without full_clean(), so this is the only
+            # gate between the theme.json payload and the CSS <style> block.
+            from admin_interface.validators import check_theme_json_fields
+
+            validation_failed = False
+            for obj in data:
+                problems = check_theme_json_fields(theme_name, obj.get("fields", {}))
+                if problems:
+                    if not validation_failed:
+                        self.stderr.write(self.style.ERROR(
+                            f"Theme '{theme_name}' contains invalid field values "
+                            f"and was NOT imported.\n"
+                        ))
+                        validation_failed = True
+                    for f_name, display_val, message in problems:
+                        self.stderr.write(f"  {f_name}")
+                        self.stderr.write(f"    Value:   {display_val!r}")
+                        self.stderr.write(f"    Problem: {message}\n")
+
+            if validation_failed:
+                self.stderr.write("Fix the values in theme.json and try again.")
+                return
+
             temp_json_path = extracted_theme_dir / "theme_mutated.json"
             with open(temp_json_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
