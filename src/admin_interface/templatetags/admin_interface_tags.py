@@ -11,7 +11,6 @@ from django.urls import NoReverseMatch, reverse
 from django.utils import translation
 from slugify import slugify
 
-from admin_interface.cache import get_cached_active_theme, set_cached_active_theme
 from admin_interface.metadata import __version__
 from admin_interface.models import Theme
 
@@ -59,11 +58,7 @@ def admin_interface_language_chooser(context):
 
 @register.simple_tag()
 def get_admin_interface_theme():
-    theme = get_cached_active_theme()
-    if not theme:
-        theme = Theme.objects.get_active()
-        set_cached_active_theme(theme)
-    return theme
+    return Theme.objects.get_active()
 
 
 @register.simple_tag()
