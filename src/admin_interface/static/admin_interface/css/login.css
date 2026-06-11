@@ -20,19 +20,23 @@
     }
 }
 
+/* The free space sits in #header (Django gives it justify-content: space-between,
+   and #user-tools is absent on login) — so centering must happen at this level. */
 .admin-interface.login #header {
     min-height: auto;
     padding: 10px 30px;
     line-height: 30px;
     align-items: center;
+    justify-content: center;
 }
 
 .admin-interface.login #header #branding {
     justify-content: center;
 }
 
+/* Kill #site-name's margin-inline-end: 20px so the title sits dead centre */
 .admin-interface.login #header #branding h1 {
-    margin: 0 auto;
+    margin: 0;
 }
 
 .admin-interface.login #header #branding h1 a {
