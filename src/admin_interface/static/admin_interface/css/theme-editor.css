@@ -2,7 +2,7 @@
 
 .logo-preview-container {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-start;
     gap: 12px;
     min-width: 80px;
@@ -11,6 +11,7 @@
     border-radius: 4px;
     margin-bottom: 10px;
     overflow: visible;
+    flex: 1;
     /* background-color is set live by logo-preview.js */
 }
 
@@ -246,18 +247,22 @@
     display: flex;
     gap: 0;
     margin-bottom: 16px;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .logo-col {
     /* col-label(200) + col-light(190) + col-toggle(90) — aligns favicon with dark mode column */
     flex: 0 0 480px;
+    display: flex;
+    flex-direction: column;
 }
 
 .favicon-col {
     flex: 1 1 0;
     min-width: 0;
     padding-left: 24px;
+    display: flex;
+    flex-direction: column;
 }
 
 .file-name-empty {
@@ -348,6 +353,14 @@
     border-top: 1px solid var(--hairline-color, #e8e8e8);
     padding-top: 8px;
     margin-bottom: 12px;
+}
+
+/* Favicon preview container — grows to match logo column height, image sits at bottom */
+.favicon-preview-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 /* Favicon preview image */
