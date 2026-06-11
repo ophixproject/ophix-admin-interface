@@ -73,7 +73,7 @@
         {% endif %}
 
         {% if theme.logo_max_width > 0 %}
-            --admin-interface-logo-max-width: min({{ theme.logo_max_width }}px, 100%);
+            --admin-interface-logo-max-width: {{ theme.logo_max_width }}px;
         {% else %}
             --admin-interface-logo-max-width: 100%;
         {% endif %}

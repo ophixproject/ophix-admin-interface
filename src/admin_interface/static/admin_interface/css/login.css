@@ -21,17 +21,13 @@
 }
 
 /* The free space sits in #header (Django gives it justify-content: space-between,
-   and #user-tools is absent on login) — so centering must happen at this level.
-   contain: inline-size stops the header's intrinsic width (inflated by the logo's
-   natural width — see the h1 a comment below) from driving the fit-content
-   #container wider than the form; the header stretches to the form width instead. */
+   and #user-tools is absent on login) — so centering must happen at this level. */
 .admin-interface.login #header {
     min-height: auto;
     padding: 10px 30px;
     line-height: 30px;
     align-items: center;
     justify-content: center;
-    contain: inline-size;
 }
 
 .admin-interface.login #header #branding {

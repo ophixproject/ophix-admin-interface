@@ -197,7 +197,14 @@
     background-image: var(--admin-interface-logo-default-background-image);
 }
 
-.admin-interface #branding h1 img.logo,
+.admin-interface #branding h1 img.logo {
+    max-width: min(var(--admin-interface-logo-max-width), 100%);
+    max-height: var(--admin-interface-logo-max-height);
+}
+
+/* Login: plain length, no percentage. A percentage in max-width is ignored during
+   intrinsic sizing, so the logo would contribute its natural width to the header's
+   max-content — inflating the fit-content login #container past the form width. */
 .admin-interface.login #header #branding h1 img.logo {
     max-width: var(--admin-interface-logo-max-width);
     max-height: var(--admin-interface-logo-max-height);
