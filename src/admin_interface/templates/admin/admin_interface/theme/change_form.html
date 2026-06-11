@@ -382,6 +382,13 @@
         <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
       </div>
       <div class="color-row">
+        <div class="col-label">{% trans "Background color" %}</div>
+        <div class="col-light">{{ form.css_body_background_color.errors }}{{ form.css_body_background_color }}</div>
+        <div class="col-toggle">{{ form.css_body_background_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_body_background_color">{{ form.css_body_background_color_dark.errors }}{{ form.css_body_background_color_dark }}</div>
+      </div>
+      {% if form.css_body_background_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_body_background_color.help_text }}</div></div>{% endif %}
+      <div class="color-row">
         <div class="col-label">{% trans "Link color" %}</div>
         <div class="col-light">{{ form.css_generic_link_color.errors }}{{ form.css_generic_link_color }}</div>
         <div class="col-toggle">{{ form.css_generic_link_color_dark_use }}</div>
