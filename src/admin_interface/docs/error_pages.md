@@ -104,7 +104,7 @@ ophix-manage collectstatic --noinput
 ```
 
 **Step 2 — Add nginx directives manually.** The `error_page` lines belong inside the
-`server` block, before the `location /` block. A complete server block looks like this
+`server` block, before the location blocks. A complete server block looks like this
 (your paths will differ — check `INSTALL_DIR` in your `.env`):
 
 ```nginx
@@ -168,10 +168,12 @@ server {
 The `proxy_intercept_errors on` directive is essential: without it, nginx passes error
 responses from Django/Gunicorn straight through to the browser and the `error_page`
 directives never fire. It must **not** be placed on the `/api/` location — API clients
-expect JSON error responses and would break if they received an HTML page instead. The 503 page works when Gunicorn is down because `error_page 503`
-triggers an internal nginx redirect to `/static/error_pages/503.html`, which is matched
-by `location /static/` — a direct filesystem alias, not a proxy pass. The 502 and 504
-codes are mapped to the 500 and 503 pages respectively.
+expect JSON error responses and would receive an HTML page instead.
+
+The 503 page works when Gunicorn is down because `error_page 503` triggers an internal
+nginx redirect to `/static/error_pages/503.html`, which is matched by `location /static/`
+— a direct filesystem alias, not a proxy pass. The 502 and 504 codes are mapped to the
+500 and 503 pages respectively.
 
 **Step 3 — Reload nginx:**
 
