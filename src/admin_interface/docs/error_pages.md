@@ -136,6 +136,10 @@ server {
         proxy_set_header   X-Real-IP $remote_addr;
         proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto $scheme;
+
+        # Required: intercept upstream errors so the error_page directives above
+        # apply to responses from Django/Gunicorn (not just nginx-generated errors).
+        proxy_intercept_errors on;
     }
 
     location /static/ {
@@ -150,10 +154,12 @@ server {
 }
 ```
 
-The 503 page works when Gunicorn is down because `error_page 503` triggers an internal
-nginx redirect to `/static/error_pages/503.html`, which is matched by `location /static/`
-— a direct filesystem alias, not a proxy pass. The 502 and 504 codes are mapped to the
-500 and 503 pages respectively.
+The `proxy_intercept_errors on` directive is essential: without it, nginx passes error
+responses from Django/Gunicorn straight through to the browser and the `error_page`
+directives never fire. The 503 page works when Gunicorn is down because `error_page 503`
+triggers an internal nginx redirect to `/static/error_pages/503.html`, which is matched
+by `location /static/` — a direct filesystem alias, not a proxy pass. The 502 and 504
+codes are mapped to the 500 and 503 pages respectively.
 
 **Step 3 — Reload nginx:**
 
