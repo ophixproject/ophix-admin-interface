@@ -213,6 +213,7 @@
 .admin-interface #header #user-tools a,
 .admin-interface #header #user-tools #logout-form button {
     color: var(--admin-interface-header-link-color);
+    text-decoration: none;
 }
 
 .admin-interface #header #user-tools a:hover,
@@ -220,7 +221,6 @@
 .admin-interface #header #user-tools #logout-form button:hover,
 .admin-interface #header #user-tools #logout-form button:active {
     color: var(--admin-interface-header-link-hover-color);
-    border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
 .admin-interface #header #user-tools button.theme-toggle svg {
