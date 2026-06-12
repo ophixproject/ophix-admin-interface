@@ -594,7 +594,6 @@ class Theme(models.Model):
         from .validators import (
             THEME_COLOR_FIELDS,
             THEME_DIMENSION_FIELDS,
-            validate_css_color,
             validate_css_dimension,
             validate_css_font_family,
             validate_theme_name,
@@ -611,10 +610,6 @@ class Theme(models.Model):
         for field_name in THEME_COLOR_FIELDS:
             value = (getattr(self, field_name) or "").strip()
             setattr(self, field_name, value)
-            try:
-                validate_css_color(value)
-            except ValidationError as exc:
-                errors[field_name] = exc
 
         for field_name in THEME_DIMENSION_FIELDS:
             _check(field_name, validate_css_dimension)

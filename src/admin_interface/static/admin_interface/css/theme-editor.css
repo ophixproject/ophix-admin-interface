@@ -435,6 +435,14 @@
     margin: 0;
 }
 
+/* Override Django's form .wide ul.errorlist { padding-left: 50px } and
+   form .aligned ul { margin-left: 160px; padding-left: 10px }.
+   Specificity (0,2,2) ties .wide rule and wins by cascade order (our file loads last). */
+form .field-error-row ul.errorlist {
+    margin-left: 0;
+    padding-left: 0;
+}
+
 /* Logo vertical offset — inline px unit */
 .logo-offset-input {
     display: inline-flex;
