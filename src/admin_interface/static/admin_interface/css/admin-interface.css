@@ -214,6 +214,7 @@
 .admin-interface #header #user-tools #logout-form button {
     color: var(--admin-interface-header-link-color);
     text-decoration: none;
+    border-bottom: none;
 }
 
 .admin-interface #header #user-tools a:hover,
