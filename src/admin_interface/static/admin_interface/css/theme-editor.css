@@ -227,7 +227,7 @@
 /* Simple (non-colour) field rows — label + input, consistent with colour table alignment */
 .simple-row {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     padding: 6px 0;
     border-bottom: 1px solid var(--hairline-color, #e8e8e8);
 }
@@ -424,6 +424,15 @@
 
 .msg-test-btn:hover {
     background-color: var(--admin-interface-save-button-background-hover-color, var(--primary-hover, #609ab6));
+}
+
+/* Full-width error row below a simple-row field — left-aligned with the section edge */
+.field-error-row {
+    padding: 2px 0 4px 0;
+}
+
+.field-error-row .errorlist {
+    margin: 0;
 }
 
 /* Logo vertical offset — inline px unit */

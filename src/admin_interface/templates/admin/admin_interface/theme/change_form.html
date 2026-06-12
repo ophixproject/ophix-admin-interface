@@ -114,7 +114,6 @@
     <div class="simple-row">
       <div class="col-label">{{ form.name.label }}</div>
       <div class="col-field">
-        {{ form.name.errors }}
         {% if original %}
           {% if form.name.errors %}
             <input type="text" name="name" id="id_name" value="{{ form.name.value }}" class="vTextField">
@@ -138,6 +137,7 @@
         {% endif %}
       </div>
     </div>
+    {% if form.name.errors %}<div class="field-error-row">{{ form.name.errors }}</div>{% endif %}
     {% if form.name.help_text %}<div class="help-row"><div class="col-help">{{ form.name.help_text }}</div></div>{% endif %}
   </div>
 </fieldset>
@@ -213,19 +213,21 @@
       <div class="simple-row">
         <div class="col-label">{% trans "Logo width" %}</div>
         <div class="col-field">
-          {{ form.logo_max_width.errors }}{{ form.logo_max_width }}
+          {{ form.logo_max_width }}
           <input type="hidden" name="logo_max_height" id="id_logo_max_height" value="0">
         </div>
       </div>
+      {% if form.logo_max_width.errors %}<div class="field-error-row">{{ form.logo_max_width.errors }}</div>{% endif %}
       {{ form.logo_visible.as_hidden }}
       <div class="simple-row">
         <div class="col-label">{% trans "Move logo by:" %}</div>
         <div class="col-field">
           <div class="logo-offset-input">
-            {{ form.logo_vertical_offset.errors }}{{ form.logo_vertical_offset }}<span class="offset-unit">{% trans "px" %}</span>
+            {{ form.logo_vertical_offset }}<span class="offset-unit">{% trans "px" %}</span>
           </div>
         </div>
       </div>
+      {% if form.logo_vertical_offset.errors %}<div class="field-error-row">{{ form.logo_vertical_offset.errors }}</div>{% endif %}
       <div class="help-row"><div class="col-help">{% trans "Move up (positive), move down (negative)" %}</div></div>
     </div>
 
@@ -233,8 +235,9 @@
     <div class="logo-settings">
       <div class="simple-row">
         <div class="col-label">{% trans "Title font size" %}</div>
-        <div class="col-field">{{ form.title_font_size.errors }}{{ form.title_font_size }}</div>
+        <div class="col-field">{{ form.title_font_size }}</div>
       </div>
+      {% if form.title_font_size.errors %}<div class="field-error-row">{{ form.title_font_size.errors }}</div>{% endif %}
       {% if form.title_font_size.help_text %}<div class="help-row"><div class="col-help">{{ form.title_font_size.help_text }}</div></div>{% endif %}
     </div>
 
@@ -352,8 +355,9 @@
     </div>
     <div class="simple-row">
       <div class="col-label">{{ form.css_module_border_radius.label }}</div>
-      <div class="col-field">{{ form.css_module_border_radius.errors }}{{ form.css_module_border_radius }}</div>
+      <div class="col-field">{{ form.css_module_border_radius }}</div>
     </div>
+    {% if form.css_module_border_radius.errors %}<div class="field-error-row">{{ form.css_module_border_radius.errors }}</div>{% endif %}
     {% if form.css_module_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_border_radius.help_text }}</div></div>{% endif %}
   </div>
 </fieldset>
@@ -367,13 +371,15 @@
   <div class="theme-section-body">
     <div class="simple-row">
       <div class="col-label">{{ form.css_body_font_family.label }}</div>
-      <div class="col-field">{{ form.css_body_font_family.errors }}{{ form.css_body_font_family }}</div>
+      <div class="col-field">{{ form.css_body_font_family }}</div>
     </div>
+    {% if form.css_body_font_family.errors %}<div class="field-error-row">{{ form.css_body_font_family.errors }}</div>{% endif %}
     {% if form.css_body_font_family.help_text %}<div class="help-row"><div class="col-help">{{ form.css_body_font_family.help_text }}</div></div>{% endif %}
     <div class="simple-row">
       <div class="col-label">{{ form.css_body_font_size.label }}</div>
-      <div class="col-field">{{ form.css_body_font_size.errors }}{{ form.css_body_font_size }}</div>
+      <div class="col-field">{{ form.css_body_font_size }}</div>
     </div>
+    {% if form.css_body_font_size.errors %}<div class="field-error-row">{{ form.css_body_font_size.errors }}</div>{% endif %}
     {% if form.css_body_font_size.help_text %}<div class="help-row"><div class="col-help">{{ form.css_body_font_size.help_text }}</div></div>{% endif %}
     <div class="color-table">
       <div class="color-header-row">
@@ -450,13 +456,15 @@
     </div>
     <div class="simple-row">
       <div class="col-label">{{ form.css_button_font_size.label }}</div>
-      <div class="col-field">{{ form.css_button_font_size.errors }}{{ form.css_button_font_size }}</div>
+      <div class="col-field">{{ form.css_button_font_size }}</div>
     </div>
+    {% if form.css_button_font_size.errors %}<div class="field-error-row">{{ form.css_button_font_size.errors }}</div>{% endif %}
     {% if form.css_button_font_size.help_text %}<div class="help-row"><div class="col-help">{{ form.css_button_font_size.help_text }}</div></div>{% endif %}
     <div class="simple-row">
       <div class="col-label">{{ form.css_button_border_radius.label }}</div>
-      <div class="col-field">{{ form.css_button_border_radius.errors }}{{ form.css_button_border_radius }}</div>
+      <div class="col-field">{{ form.css_button_border_radius }}</div>
     </div>
+    {% if form.css_button_border_radius.errors %}<div class="field-error-row">{{ form.css_button_border_radius.errors }}</div>{% endif %}
     {% if form.css_button_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_button_border_radius.help_text }}</div></div>{% endif %}
   </div>
 </fieldset>
@@ -690,8 +698,9 @@
     </div>
     <div class="simple-row">
       <div class="col-label">{{ form.related_modal_background_opacity.label }}</div>
-      <div class="col-field">{{ form.related_modal_background_opacity.errors }}{{ form.related_modal_background_opacity }}</div>
+      <div class="col-field">{{ form.related_modal_background_opacity }}</div>
     </div>
+    {% if form.related_modal_background_opacity.errors %}<div class="field-error-row">{{ form.related_modal_background_opacity.errors }}</div>{% endif %}
     {% if form.related_modal_background_opacity.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_background_opacity.help_text }}</div></div>{% endif %}
     <div class="simple-row boolean-row">
       <div class="col-label"></div>
