@@ -426,7 +426,7 @@
     background-color: var(--admin-interface-save-button-background-hover-color, var(--primary-hover, #609ab6));
 }
 
-/* Full-width error row below a simple-row field — left-aligned with the section edge */
+/* Full-width error row above a field row — left-aligned, layout-agnostic */
 .field-error-row {
     padding: 2px 0 4px 0;
 }
