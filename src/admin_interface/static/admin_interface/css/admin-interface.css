@@ -225,6 +225,7 @@
     color: var(--admin-interface-header-link-hover-color);
     border-bottom: none;
     text-decoration: none;
+    margin-bottom: 0;
 }
 
 .admin-interface #header #user-tools button.theme-toggle svg {
