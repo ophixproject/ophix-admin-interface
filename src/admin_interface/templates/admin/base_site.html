@@ -328,7 +328,11 @@ admin-interface
 {% endblock welcome-msg %}
 
 {% block userlinks %}
-{{ block.super }}
+{% if user.is_active and user.is_staff %}
+    {% url 'admin:password_change' as password_change_url %}
+    {% if password_change_url %}<a href="{{ password_change_url }}">{% translate 'Change password' %}</a> / {% endif %}
+{% endif %}
+<a href="{% url 'admin:logout' %}">{% translate 'Log out' %}</a>
 {% if server_settings.language_chooser_active %}
     {% admin_interface_language_chooser %}
 {% endif %}
