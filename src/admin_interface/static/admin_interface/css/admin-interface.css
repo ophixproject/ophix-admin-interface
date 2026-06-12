@@ -215,6 +215,7 @@
     color: var(--admin-interface-header-link-color);
     text-decoration: none;
     border-bottom: none;
+    transition: color 0.15s;
 }
 
 .admin-interface #header #user-tools a:hover,
@@ -222,6 +223,8 @@
 .admin-interface #header #user-tools #logout-form button:hover,
 .admin-interface #header #user-tools #logout-form button:active {
     color: var(--admin-interface-header-link-hover-color);
+    border-bottom: none;
+    text-decoration: none;
 }
 
 .admin-interface #header #user-tools button.theme-toggle svg {
