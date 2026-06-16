@@ -62,8 +62,39 @@
 .admin-interface button[type="button"],
 .admin-interface button:not([type]),
 .admin-interface a.button,
+.admin-interface a.closelink,
 .admin-interface a.deletelink {
     font-size: var(--admin-interface-button-font-size, 13px);
+    border-radius: var(--admin-interface-button-border-radius, initial);
+}
+
+/* Restore modal close button size — button:not([type]) above accidentally shrinks it */
+.admin-interface button.mfp-close {
+    font-size: 1.375rem;
+    border-radius: 0;
+    color: var(--body-loud-color, #000);
+}
+
+[data-theme="dark"] .admin-interface .mfp-close-btn-in .mfp-close,
+[data-theme="dark"] .admin-interface button.mfp-close {
+    color: var(--body-fg, #eee);
+}
+
+/* Changelist search button — override Django's higher-specificity #changelist-search rule */
+.admin-interface #changelist-search input[type="submit"] {
+    background: var(--admin-interface-save-button-background-color);
+    color: var(--admin-interface-save-button-text-color);
+    border-radius: var(--admin-interface-button-border-radius, initial);
+}
+
+.admin-interface #changelist-search input[type="submit"]:hover,
+.admin-interface #changelist-search input[type="submit"]:focus {
+    background: var(--admin-interface-save-button-background-hover-color);
+}
+
+/* Delete button border-radius — higher-specificity override so it isn't lost to Django rules */
+.admin-interface .submit-row .deletelink-box a.deletelink,
+.admin-interface.delete-confirmation form input[type="submit"].default {
     border-radius: var(--admin-interface-button-border-radius, initial);
 }
 
@@ -397,7 +428,8 @@
 .admin-interface input[type=submit],
 .admin-interface input[type=button],
 .admin-interface .submit-row input,
-.admin-interface a.button {
+.admin-interface a.button,
+.admin-interface a.closelink {
     background: var(--admin-interface-save-button-background-color);
     color: var(--admin-interface-save-button-text-color);
 }
@@ -410,7 +442,10 @@
 .admin-interface input[type=submit]:hover,
 .admin-interface input[type=button]:active,
 .admin-interface input[type=button]:focus,
-.admin-interface input[type=button]:hover {
+.admin-interface input[type=button]:hover,
+.admin-interface a.closelink:active,
+.admin-interface a.closelink:focus,
+.admin-interface a.closelink:hover {
     background: var(--admin-interface-save-button-background-hover-color);
     color: var(--admin-interface-save-button-text-color);
     outline: none;
@@ -662,4 +697,15 @@
 
 body.admin-interface {
     background: var(--admin-interface-body-background-color, var(--body-bg));
+}
+
+/* #40 — Nav sidebar: current model link uses the selected-link colour, not the default link colour */
+.admin-interface #nav-sidebar .current-model th a:link,
+.admin-interface #nav-sidebar .current-model th a:visited {
+    color: var(--admin-interface-module-link-selected-color);
+}
+
+.admin-interface #nav-sidebar .current-model th a:hover,
+.admin-interface #nav-sidebar .current-model th a:focus {
+    color: var(--admin-interface-module-link-hover-color);
 }

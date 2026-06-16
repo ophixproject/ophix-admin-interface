@@ -18,6 +18,7 @@
             --ep-btn-hover:   {{ theme.css_save_button_background_hover_color }};
             --ep-btn-text:    {{ theme.css_save_button_text_color }};
             --ep-radius:      {{ theme.css_module_border_radius }};
+            --ep-btn-radius:  {% if theme.css_button_border_radius %}{{ theme.css_button_border_radius }}{% else %}{{ theme.css_module_border_radius }}{% endif %};
 {% if title_font_size %}
             --ep-title-font-size: {{ title_font_size }};
 {% endif %}
@@ -185,7 +186,7 @@
             color: var(--ep-btn-text);
             text-decoration: none;
             padding: 9px 22px;
-            border-radius: var(--ep-radius, 4px);
+            border-radius: var(--ep-btn-radius, 4px);
             font-size: 13px;
             font-weight: 500;
         }

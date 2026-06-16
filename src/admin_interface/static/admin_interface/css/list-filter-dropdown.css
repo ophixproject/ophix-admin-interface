@@ -18,7 +18,7 @@ list-filter-dropdown
 }
 
 .admin-interface #changelist-filter .list-filter-dropdown select {
-    background-color: var(--body-bg, #FFFFFF);
+    background-color: var(--admin-interface-module-background-selected-color, var(--body-bg, #FFFFFF));
     color: var(--body-fg);
     width: calc(100% - 30px);
     margin-right: 15px;
