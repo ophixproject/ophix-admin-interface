@@ -38,13 +38,6 @@
     max-width: 100%;
 }
 
-/* hide nav-sidebar below 1280px to prevent horizontal overflow issues */
-@media (max-width:1279px) {
-    .admin-interface #nav-sidebar,
-    .admin-interface #toggle-nav-sidebar {
-        display: none;
-    }
-}
 
 .admin-interface #nav-sidebar {
     flex: 0 0 360px;

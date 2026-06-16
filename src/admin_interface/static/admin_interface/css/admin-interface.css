@@ -146,6 +146,7 @@
     vertical-align: middle;
     margin-right: 6px;
     line-height: 1.6;
+    min-height: 0.825rem;
     white-space: nowrap;
 }
 
@@ -215,7 +216,15 @@
     color: var(--admin-interface-header-link-color);
     text-decoration: none;
     border-bottom: none;
-    transition: color 0.15s;
+}
+
+.admin-interface #header #user-tools a {
+    padding-inline: 0.5rem;
+    font-weight: 400;
+}
+
+.admin-interface #header #user-tools #logout-form {
+    padding-left: 0.5rem;
 }
 
 .admin-interface #header #user-tools a:hover,
@@ -224,7 +233,7 @@
 .admin-interface #header #user-tools #logout-form button:active {
     color: var(--admin-interface-header-link-hover-color);
     border-bottom: none;
-    text-decoration: none;
+    text-decoration: underline;
     margin-bottom: 0;
 }
 

@@ -151,7 +151,7 @@ class ThemeAdmin(admin.ModelAdmin):
             },
         ),
         (
-            _("Body Text"),
+            _("Body"),
             {
                 "classes": ("wide",),
                 "fields": (
@@ -314,6 +314,11 @@ class ThemeAdmin(admin.ModelAdmin):
                 current_app=self.admin_site.name,
             )
         )
+
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        extra_context = extra_context or {}
+        extra_context["title"] = _("Edit Theme")
+        return super().change_view(request, object_id, form_url, extra_context)
 
     def response_change(self, request, obj):
         if "_popup" in request.POST:
