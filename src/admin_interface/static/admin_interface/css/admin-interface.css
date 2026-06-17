@@ -450,6 +450,7 @@
     background: var(--admin-interface-save-button-background-hover-color);
     color: var(--admin-interface-save-button-text-color);
     outline: none;
+    text-decoration: none;
 }
 
 .admin-interface .button.default,
