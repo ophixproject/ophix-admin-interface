@@ -85,11 +85,15 @@
     background: var(--admin-interface-save-button-background-color);
     color: var(--admin-interface-save-button-text-color);
     border-radius: var(--admin-interface-button-border-radius, initial);
+    border: none;
+    outline: none;
 }
 
 .admin-interface #changelist-search input[type="submit"]:hover,
 .admin-interface #changelist-search input[type="submit"]:focus {
     background: var(--admin-interface-save-button-background-hover-color);
+    border: none;
+    outline: none;
 }
 
 /* Higher-specificity border-radius overrides so Django rules can't win */
