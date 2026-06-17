@@ -96,11 +96,18 @@
     outline: none;
 }
 
-/* Higher-specificity border-radius overrides so Django rules can't win */
+/* Higher-specificity overrides so Django rules can't win */
 .admin-interface .submit-row a.closelink,
 .admin-interface .submit-row .deletelink-box a.deletelink,
 .admin-interface.delete-confirmation form input[type="submit"].default {
     border-radius: var(--admin-interface-button-border-radius, initial);
+}
+
+.admin-interface .submit-row a.closelink,
+.admin-interface .submit-row a.closelink:hover,
+.admin-interface .submit-row a.closelink:focus,
+.admin-interface .submit-row a.closelink:active {
+    text-decoration: none;
 }
 
 [data-theme="dark"] .admin-interface select,
