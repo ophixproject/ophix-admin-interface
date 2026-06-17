@@ -20,17 +20,9 @@ list-filter-dropdown
 .admin-interface #changelist-filter .list-filter-dropdown select {
     background-color: var(--body-bg, #FFFFFF);
     color: var(--body-fg);
+    accent-color: var(--admin-interface-module-background-color);
     width: calc(100% - 30px);
     margin-right: 15px;
-}
-
-.admin-interface #changelist-filter .list-filter-dropdown select option:checked {
-    background: linear-gradient(
-        0deg,
-        var(--admin-interface-module-background-color) 0%,
-        var(--admin-interface-module-background-color) 100%
-    );
-    color: var(--admin-interface-module-header-color, #fff);
 }
 
 .admin-interface.list-filter-highlight #changelist-filter .list-filter-dropdown h3.active + div select {
