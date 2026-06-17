@@ -677,9 +677,81 @@
     border-radius: var(--admin-interface-module-border-radius);
 }
 
-.admin-interface .select2-container--admin-autocomplete .select2-results__option--highlighted[aria-selected] {
+.admin-interface .select2-container--admin-autocomplete .select2-results__option--highlighted[aria-selected],
+.admin-interface .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: var(--admin-interface-module-background-color);
     color: var(--admin-interface-module-text-color);
+}
+
+/* Show the currently-selected option in a muted tint when not highlighted */
+.admin-interface .select2-container--default .select2-results__option[aria-selected="true"]:not(.select2-results__option--highlighted) {
+    background-color: color-mix(in srgb, var(--admin-interface-module-background-color) 15%, transparent);
+}
+
+/* Select2 default-theme — base styling for programmatically-initialized instances */
+.admin-interface .select2-container--default .select2-selection--single {
+    border-color: var(--border-color, #ccc);
+    background-color: var(--body-bg, #fff);
+    height: auto;
+    min-height: 30px;
+    padding: 1px 0;
+}
+
+.admin-interface .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--body-fg);
+    line-height: 28px;
+}
+
+.admin-interface .select2-container--default .select2-dropdown {
+    background-color: var(--body-bg, #fff);
+    border-color: var(--border-color, #ccc);
+}
+
+.admin-interface .select2-container--default .select2-search--dropdown .select2-search__field {
+    background-color: var(--body-bg, #fff);
+    color: var(--body-fg);
+    border-color: var(--border-color, #ccc);
+}
+
+/* Dark mode — Select2 default and autocomplete themes */
+[data-theme="dark"] .admin-interface .select2-container--default .select2-selection--single,
+[data-theme="dark"] .admin-interface .select2-container--default .select2-dropdown {
+    background-color: var(--darkened-bg, #1a1a1a);
+    border-color: var(--border-color, #333);
+    color: var(--body-fg);
+}
+
+[data-theme="dark"] .admin-interface .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--body-fg);
+}
+
+[data-theme="dark"] .admin-interface .select2-container--default .select2-selection__arrow b {
+    border-color: var(--body-fg) transparent transparent transparent;
+}
+
+[data-theme="dark"] .admin-interface .select2-container--default.select2-container--open .select2-selection__arrow b {
+    border-color: transparent transparent var(--body-fg) transparent;
+}
+
+[data-theme="dark"] .admin-interface .select2-container--default .select2-search--dropdown .select2-search__field {
+    background-color: var(--body-bg, #111);
+    color: var(--body-fg);
+    border-color: var(--border-color, #333);
+}
+
+[data-theme="dark"] .admin-interface .select2-container--admin-autocomplete .select2-dropdown {
+    background-color: var(--darkened-bg, #1a1a1a);
+    border-color: var(--border-color, #333);
+}
+
+[data-theme="dark"] .admin-interface .select2-container--admin-autocomplete .select2-results__option {
+    color: var(--body-fg);
+}
+
+[data-theme="dark"] .admin-interface .select2-container--admin-autocomplete .select2-search--dropdown .select2-search__field {
+    background-color: var(--body-bg, #111);
+    color: var(--body-fg);
+    border-color: var(--border-color, #333);
 }
 
 .admin-interface #toggle-nav-sidebar {
