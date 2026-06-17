@@ -441,7 +441,9 @@
 .admin-interface input[type=button],
 .admin-interface .submit-row input,
 .admin-interface a.button,
-.admin-interface a.closelink {
+.admin-interface a.closelink,
+.admin-interface a.closelink:link,
+.admin-interface a.closelink:visited {
     background: var(--admin-interface-save-button-background-color);
     color: var(--admin-interface-save-button-text-color);
 }
