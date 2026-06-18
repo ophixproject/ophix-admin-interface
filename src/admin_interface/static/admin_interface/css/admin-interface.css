@@ -767,13 +767,15 @@
     border-color: var(--border-color, #333);
 }
 
-/* FK/M2M Select2 width — matches Django admin .vTextField (610px).
-   width:'style' in select2-init.js ensures no competing inline style.width.
-   flex:0 1 610px handles the flex layout Django admin uses in .related-widget-wrapper. */
+/* FK/M2M Select2 width — fill available space in .related-widget-wrapper, capped at 610px.
+   flex:1 grows into the wrapper's actual width (set by the form field cell), so the Select2
+   tracks the layout rather than forcing the wrapper to expand. min-width:0 prevents the
+   flex item's intrinsic minimum from overflowing. width:'style' in select2-init.js ensures
+   no competing inline style overrides this. */
 .admin-interface .related-widget-wrapper .select2-container {
-    flex: 0 1 610px;
-    width: 610px;
-    max-width: 100%;
+    flex: 1;
+    min-width: 0;
+    max-width: 610px;
 }
 
 /* Filter sidebar — tighten vertical spacing between groups.

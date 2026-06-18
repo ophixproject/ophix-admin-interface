@@ -1,7 +1,7 @@
 (function() {
     function initSelect2($) {
         // FK/M2M selects in change forms.
-        // width:'style' means Select2 injects no inline width — CSS controls it.
+        // width:'style' means Select2 injects no inline width — CSS controls it via flex: 1.
         $('.related-widget-wrapper select:not(.select2-hidden-accessible)').each(function() {
             $(this).select2({
                 minimumResultsForSearch: 10,
