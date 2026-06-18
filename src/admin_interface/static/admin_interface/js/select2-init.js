@@ -1,13 +1,24 @@
 (function() {
     function initSelect2($) {
-        // FK/M2M selects in change forms only.
-        // Use width:'style' so Select2 does not inject an inline style.width —
-        // width is controlled entirely by CSS.
-        // Filter sidebar dropdowns are left as native <select> elements.
+        // FK/M2M selects in change forms.
+        // width:'style' means Select2 injects no inline width — CSS controls it.
         $('.related-widget-wrapper select:not(.select2-hidden-accessible)').each(function() {
             $(this).select2({
                 minimumResultsForSearch: 10,
                 width: 'style',
+            });
+        });
+
+        // Filter sidebar dropdowns.
+        // Navigation via select2:select is reliable; jQuery's trigger('change') does not
+        // consistently reach native addEventListener listeners wired by dropdown-filter.js.
+        $('.list-filter-dropdown select:not(.select2-hidden-accessible)').each(function() {
+            $(this).select2({
+                minimumResultsForSearch: Infinity,
+                width: 'style',
+            }).on('select2:select', function(e) {
+                var url = e.params.data.id;
+                if (url) window.location = url;
             });
         });
     }
