@@ -12,7 +12,7 @@
             if (!$(select).hasClass('select2-hidden-accessible')) {
                 $(select).select2({
                     minimumResultsForSearch: Infinity,
-                    width: 'resolve',
+                    width: '100%',
                 });
             }
         });
