@@ -783,6 +783,11 @@
     margin: 0.25rem 0.5rem;
 }
 
+/* Bold the displayed value when an active filter is set (h3.active mirrors the native select behaviour). */
+.admin-interface .list-filter-dropdown:has(h3.active) .select2-selection__rendered {
+    font-weight: 600;
+}
+
 .admin-interface #toggle-nav-sidebar {
     border-top-right-radius: var(--admin-interface-module-border-radius);
     border-bottom-right-radius: var(--admin-interface-module-border-radius);
