@@ -9,18 +9,6 @@
 
         {% if cl.is_facets_optional or cl.has_active_filters %}
         <div id="changelist-filter-extra-actions">
-            {% if cl.is_facets_optional %}
-            <h3>
-                {% if cl.add_facets %}
-                {# Translators: don't translate this, the django catalog already contains it #}
-                <a href="{{ cl.remove_facet_link }}" class="hidelink">{% translate "Hide counts" %}</a>
-                {% else %}
-                {# Translators: don't translate this, the django catalog already contains it #}
-                <a href="{{ cl.add_facet_link }}" class="viewlink">{% translate "Show counts" %}</a>
-                {% endif %}
-            </h3>
-            {% endif %}
-
             <!-- {# begin "list_filter_removal_links" #} -->
             {% get_admin_interface_active_date_hierarchy cl as active_date_hierarchy %}
             {% get_admin_interface_setting "list_filter_removal_links" as list_filter_removal_links %}
