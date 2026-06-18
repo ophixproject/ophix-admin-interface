@@ -776,11 +776,18 @@
     max-width: 100%;
 }
 
-/* Filter sidebar Select2 — width with space from panel edges.
+/* Filter sidebar — tighten vertical spacing between groups.
+   Django's default h3 margin-top (~10px) creates too much gap between filters. */
+.admin-interface #changelist-filter h3 {
+    margin-top: 6px;
+}
+
+/* Filter sidebar Select2 — width with space from panel edges; no bottom margin so
+   the h3 margin-top alone controls the gap to the next filter group.
    width:'style' in select2-init.js means Select2 injects no competing inline width. */
 .admin-interface .list-filter-dropdown .select2-container {
     width: calc(100% - 1rem);
-    margin: 0.25rem 0.5rem;
+    margin: 0.15rem 0.5rem 0;
 }
 
 /* Bold the displayed value when an active filter is set (h3.active mirrors the native select behaviour). */
