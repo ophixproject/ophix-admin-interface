@@ -767,16 +767,20 @@
     border-color: var(--border-color, #333);
 }
 
-/* FK/M2M Select2 width — match .vTextField { width: 20em } so FK selects align with text
-   inputs. Django admin's own widgets.css already sets flex-grow:1 on .related-widget-wrapper
+/* FK/M2M Select2 width — match .vTextField total rendered width.
+   Django admin's own widgets.css already sets flex-grow:1 on .related-widget-wrapper
    so the wrapper fills the full form column (~580px); without max-width the Select2 would
-   expand to match. 20em at the admin's 13px body font = 260px = standard text input width.
+   expand to match.
+   .vTextField { width: 20em } uses content-box sizing, so total outer width =
+   20em + 12px (padding 6px×2) + 2px (border 1px×2) = 20em + 14px.
+   The select2-container has no external border or padding, so its outer width = max-width.
+   calc(20em + 14px) makes both right-edges land at the same x position.
    min-width:0 prevents intrinsic-size overflow; width:'style' in select2-init.js ensures
    no competing inline style overrides this. */
 .admin-interface .related-widget-wrapper .select2-container {
     flex: 1;
     min-width: 0;
-    max-width: 20em;
+    max-width: calc(20em + 14px);
 }
 
 /* Filter sidebar — tighten vertical spacing between groups.
