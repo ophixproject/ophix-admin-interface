@@ -2,7 +2,7 @@
 
 <div class="list-filter-dropdown">
     <h3 {% if spec.lookup_val or spec.value %}class="active"{% endif %}>{% blocktranslate with filter_title=title %} By {{ filter_title }} {% endblocktranslate %}</h3>
-    <div align="right">
+    <div>
         <select>
         {% for choice in choices %}
             <option {% if choice.selected %}selected{% endif %} value="{{ choice.query_string|iriencode }}">{{ choice.display }}</option>
