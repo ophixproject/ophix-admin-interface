@@ -72,14 +72,18 @@
 /* begin fix issue #10 - Related widget broken in long tabular inline */
 .admin-interface .related-widget-wrapper {
     display: flex;
+    flex: 1;
+    min-width: 0;
     flex-wrap: nowrap;
     max-width: 1000px;
     height: fit-content;
     gap: 0;
 }
-/* white-space:nowrap was here globally but caused the wrapper to size to max-content
-   width in block layout (Chrome behaviour), making FK Select2 overflow the form field
-   cell. Scoped to tabular inlines only, where it prevents table cell collapse. */
+/* flex:1/min-width:0 above make the wrapper grow into .flex-container's available space
+   (after the label takes its natural width), constraining Select2 to the form field cell.
+   Has no effect in non-flex parents (tabular table cells), so it's safe globally.
+   white-space:nowrap was here globally but caused the wrapper to size to max-content
+   width in block layout. Scoped to tabular inlines only, where it prevents cell collapse. */
 .admin-interface .tabular .related-widget-wrapper {
     white-space: nowrap;
 }
