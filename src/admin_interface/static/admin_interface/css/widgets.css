@@ -79,11 +79,11 @@
     height: fit-content;
     gap: 0;
 }
-/* flex:1/min-width:0 above make the wrapper grow into .flex-container's available space
-   (after the label takes its natural width), constraining Select2 to the form field cell.
-   Has no effect in non-flex parents (tabular table cells), so it's safe globally.
-   white-space:nowrap was here globally but caused the wrapper to size to max-content
-   width in block layout. Scoped to tabular inlines only, where it prevents cell collapse. */
+/* Django admin's own widgets.css already sets flex-grow:1 on .related-widget-wrapper.
+   flex:1 here adds flex-basis:0% (start from zero, not content size) which is harmless.
+   min-width:0 prevents the wrapper from overflowing its flex container when content is wide.
+   white-space:nowrap scoped to tabular inlines only (globally it caused the wrapper to size
+   to max-content width in block layout, which we don't want). */
 .admin-interface .tabular .related-widget-wrapper {
     white-space: nowrap;
 }
