@@ -754,9 +754,11 @@
     border-color: var(--border-color, #333);
 }
 
-/* Constrain FK/M2M Select2 width to match Django admin text input width */
+/* FK/M2M Select2 width — matches Django admin .vTextField (610px).
+   width:'style' in select2-init.js ensures no competing inline style.width. */
 .admin-interface .related-widget-wrapper .select2-container {
-    max-width: 610px;
+    width: 610px;
+    max-width: 100%;
 }
 
 .admin-interface #toggle-nav-sidebar {

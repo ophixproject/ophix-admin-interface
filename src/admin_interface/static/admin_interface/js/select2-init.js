@@ -1,10 +1,12 @@
 (function() {
     function initSelect2($) {
         // FK/M2M selects in change forms
+        // Use width:'style' so Select2 does not inject an inline style.width —
+        // the container width is then controlled entirely by CSS.
         $('.related-widget-wrapper select:not(.select2-hidden-accessible)').each(function() {
             $(this).select2({
                 minimumResultsForSearch: 10,
-                width: '100%',
+                width: 'style',
             });
         });
         // Filter sidebar dropdowns (no search, navigate on change)
