@@ -73,10 +73,15 @@
 .admin-interface .related-widget-wrapper {
     display: flex;
     flex-wrap: nowrap;
-    white-space: nowrap;
     max-width: 1000px;
     height: fit-content;
     gap: 0;
+}
+/* white-space:nowrap was here globally but caused the wrapper to size to max-content
+   width in block layout (Chrome behaviour), making FK Select2 overflow the form field
+   cell. Scoped to tabular inlines only, where it prevents table cell collapse. */
+.admin-interface .tabular .related-widget-wrapper {
+    white-space: nowrap;
 }
 /* end fix */
 
