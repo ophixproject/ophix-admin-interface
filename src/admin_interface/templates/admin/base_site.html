@@ -260,6 +260,9 @@
 {% if server_settings.message_autohide_enabled %}
 <script>window.OPHIX_AUTOHIDE = {enabled: true, delay: {{ server_settings.message_autohide_delay }}};</script>
 {% endif %}
+<link rel="stylesheet" href="{% get_admin_interface_static 'admin/css/vendor/select2/select2.min.css' %}">
+<link rel="stylesheet" href="{% get_admin_interface_static 'admin/css/autocomplete.css' %}">
+<span id="ophix-select2-loader" data-js="{% get_admin_interface_static 'admin/js/vendor/select2/select2.full.min.js' %}" hidden></span>
 <script src="{% get_admin_interface_static 'admin_interface/js/dismiss.js' %}"></script>
 <script src="{% get_admin_interface_static 'admin_interface/js/dark-toggle.js' %}"></script>
 <script src="{% get_admin_interface_static 'admin_interface/js/select2-init.js' %}"></script>

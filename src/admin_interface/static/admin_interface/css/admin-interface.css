@@ -754,6 +754,11 @@
     border-color: var(--border-color, #333);
 }
 
+/* Constrain FK/M2M Select2 width to match Django admin text input width */
+.admin-interface .related-widget-wrapper .select2-container {
+    max-width: 610px;
+}
+
 .admin-interface #toggle-nav-sidebar {
     border-top-right-radius: var(--admin-interface-module-border-radius);
     border-bottom-right-radius: var(--admin-interface-module-border-radius);
