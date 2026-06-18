@@ -755,10 +755,30 @@
 }
 
 /* FK/M2M Select2 width — matches Django admin .vTextField (610px).
-   width:'style' in select2-init.js ensures no competing inline style.width. */
+   width:'style' in select2-init.js ensures no competing inline style.width.
+   flex:0 1 610px handles the flex layout Django admin uses in .related-widget-wrapper. */
 .admin-interface .related-widget-wrapper .select2-container {
+    flex: 0 1 610px;
     width: 610px;
     max-width: 100%;
+}
+
+/* Filter sidebar: leave as native <select> but style with theme variables so
+   colors track the active theme. Space is added via width+margin to avoid
+   the select touching the panel edges. */
+.admin-interface .list-filter-dropdown select {
+    display: block;
+    width: calc(100% - 1rem);
+    margin: 0.25rem 0.5rem;
+    padding: 3px 6px;
+    background: var(--darkened-bg);
+    color: var(--body-fg);
+    border: 1px solid var(--border-color, #ccc);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: normal;
+    box-sizing: border-box;
 }
 
 .admin-interface #toggle-nav-sidebar {
