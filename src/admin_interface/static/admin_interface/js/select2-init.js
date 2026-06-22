@@ -1,8 +1,11 @@
 (function() {
     function initSelect2($) {
         // FK/M2M selects in change forms.
+        // Excludes .admin-autocomplete: those are autocomplete_fields handled by Django's own
+        // autocomplete.js — initialising them here too creates a second Select2 container in
+        // the same flex row, making both narrow.
         // width:'style' means Select2 injects no inline width — CSS controls it via flex: 1.
-        $('.related-widget-wrapper select:not(.select2-hidden-accessible)').each(function() {
+        $('.related-widget-wrapper select:not(.select2-hidden-accessible):not(.admin-autocomplete)').each(function() {
             $(this).select2({
                 minimumResultsForSearch: 10,
                 width: 'style',
