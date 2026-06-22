@@ -224,6 +224,16 @@
     opacity: 1;
 }
 
+/* Sub-section heading within a colour section (e.g. "Action buttons" inside Buttons) */
+.color-table-subheading {
+    margin: 16px 0 4px 0;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--body-quiet-color, #666);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
 /* Simple (non-colour) field rows — label + input, consistent with colour table alignment */
 .simple-row {
     display: flex;

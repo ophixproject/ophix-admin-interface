@@ -19,7 +19,7 @@
     -webkit-appearance: none;
     border: 1px solid transparent;
     border-bottom: 1px solid var(--border-color);
-    border-radius: var(--admin-interface-module-border-radius);
+    border-radius: var(--admin-interface-tab-border-radius);
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     flex-shrink: 0;

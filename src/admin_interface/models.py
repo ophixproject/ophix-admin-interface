@@ -242,6 +242,13 @@ class Theme(models.Model):
         help_text=_("e.g. 4px · 0px · 0.5rem"),
         verbose_name=_("border radius"),
     )
+    css_tab_border_radius = models.CharField(
+        max_length=20,
+        blank=True,
+        default="0",
+        help_text=_("e.g. 4px · 0px · 0.5rem. Controls tab and nav sidebar toggle handle border-radius independently of modules."),
+        verbose_name=_("tab border radius"),
+    )
 
     css_body_background_color = ColorField(
         blank=True,
@@ -267,6 +274,15 @@ class Theme(models.Model):
         help_text=_("e.g. 14px · 0.875rem · Leave blank to use the browser default."),
         verbose_name=_("font size"),
     )
+    css_body_text_color = ColorField(
+        blank=True,
+        default="",
+        help_text=_("Body text colour. Leave blank to use the browser default."),
+        max_length=10,
+        verbose_name=_("text color"),
+    )
+    css_body_text_color_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_body_text_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
     css_generic_link_color = ColorField(
         blank=True,
         default="#0096c7",
@@ -336,6 +352,34 @@ class Theme(models.Model):
         help_text=_("e.g. 4px · 50% · Leave blank for no rounding."),
         verbose_name=_("border radius"),
     )
+
+    css_action_button_background_color = ColorField(
+        blank=True,
+        default="#888888",
+        help_text=_("Background colour of capsule-shaped action buttons (History, Duplicate, etc.)"),
+        max_length=10,
+        verbose_name=_("background color"),
+    )
+    css_action_button_background_color_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_action_button_background_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+    css_action_button_background_hover_color = ColorField(
+        blank=True,
+        default="#747474",
+        help_text=_("Action button background colour on hover"),
+        max_length=10,
+        verbose_name=_("hover background"),
+    )
+    css_action_button_background_hover_color_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_action_button_background_hover_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+    css_action_button_text_color = ColorField(
+        blank=True,
+        default="#FFFFFF",
+        help_text=_("Text colour on action buttons"),
+        max_length=10,
+        verbose_name=_("text color"),
+    )
+    css_action_button_text_color_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_action_button_text_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
 
     css_delete_button_background_color = ColorField(
         blank=True,

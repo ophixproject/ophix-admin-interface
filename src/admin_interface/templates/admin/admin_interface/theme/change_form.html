@@ -375,6 +375,13 @@
     </div>
 
     {% if form.css_module_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_module_border_radius.help_text }}</div></div>{% endif %}
+    {% if form.css_tab_border_radius.errors %}<div class="field-error-row">{{ form.css_tab_border_radius.errors }}</div>{% endif %}
+    <div class="simple-row">
+      <div class="col-label">{{ form.css_tab_border_radius.label }}</div>
+      <div class="col-field">{{ form.css_tab_border_radius }}</div>
+    </div>
+
+    {% if form.css_tab_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_tab_border_radius.help_text }}</div></div>{% endif %}
   </div>
 </fieldset>
 
@@ -405,6 +412,14 @@
         <div class="col-light col-header">{% trans "Value" %}</div>
         <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
       </div>
+      {% if form.css_body_text_color.errors or form.css_body_text_color_dark.errors %}<div class="field-error-row">{{ form.css_body_text_color.errors }}{{ form.css_body_text_color_dark.errors }}</div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Text color" %}</div>
+        <div class="col-light">{{ form.css_body_text_color }}</div>
+        <div class="col-toggle">{{ form.css_body_text_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_body_text_color">{{ form.css_body_text_color_dark }}</div>
+      </div>
+      {% if form.css_body_text_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_body_text_color.help_text }}</div></div>{% endif %}
       {% if form.css_body_background_color.errors or form.css_body_background_color_dark.errors %}<div class="field-error-row">{{ form.css_body_background_color.errors }}{{ form.css_body_background_color_dark.errors }}</div>{% endif %}
       <div class="color-row">
         <div class="col-label">{% trans "Background color" %}</div>
@@ -493,6 +508,36 @@
     </div>
 
     {% if form.css_button_border_radius.help_text %}<div class="help-row"><div class="col-help">{{ form.css_button_border_radius.help_text }}</div></div>{% endif %}
+
+    <p class="color-table-subheading">{% trans "Action buttons (History, Back, etc.)" %}</p>
+    <div class="color-table">
+      <div class="color-header-row">
+        <div class="col-label"></div>
+        <div class="col-light col-header">{% trans "Value" %}</div>
+        <div class="col-dark-span col-header">{% trans "Dark Mode Value" %}</div>
+      </div>
+      {% if form.css_action_button_background_color.errors or form.css_action_button_background_color_dark.errors %}<div class="field-error-row">{{ form.css_action_button_background_color.errors }}{{ form.css_action_button_background_color_dark.errors }}</div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Background color" %}</div>
+        <div class="col-light">{{ form.css_action_button_background_color }}</div>
+        <div class="col-toggle">{{ form.css_action_button_background_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_action_button_background_color">{{ form.css_action_button_background_color_dark }}</div>
+      </div>
+      {% if form.css_action_button_background_hover_color.errors or form.css_action_button_background_hover_color_dark.errors %}<div class="field-error-row">{{ form.css_action_button_background_hover_color.errors }}{{ form.css_action_button_background_hover_color_dark.errors }}</div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Background hover color" %}</div>
+        <div class="col-light">{{ form.css_action_button_background_hover_color }}</div>
+        <div class="col-toggle">{{ form.css_action_button_background_hover_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_action_button_background_hover_color">{{ form.css_action_button_background_hover_color_dark }}</div>
+      </div>
+      {% if form.css_action_button_text_color.errors or form.css_action_button_text_color_dark.errors %}<div class="field-error-row">{{ form.css_action_button_text_color.errors }}{{ form.css_action_button_text_color_dark.errors }}</div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Text color" %}</div>
+        <div class="col-light">{{ form.css_action_button_text_color }}</div>
+        <div class="col-toggle">{{ form.css_action_button_text_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_action_button_text_color">{{ form.css_action_button_text_color_dark }}</div>
+      </div>
+    </div>
   </div>
 </fieldset>
 

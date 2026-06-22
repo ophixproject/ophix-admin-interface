@@ -53,6 +53,15 @@
         {% if theme.css_body_background_color %}
             --admin-interface-body-background-color: {{ theme.css_body_background_color }};
         {% endif %}
+        {% if theme.css_body_text_color %}
+            --admin-interface-body-text-color: {{ theme.css_body_text_color }};
+        {% endif %}
+            --admin-interface-action-button-background-color: {{ theme.css_action_button_background_color }};
+            --admin-interface-action-button-background-hover-color: {{ theme.css_action_button_background_hover_color }};
+            --admin-interface-action-button-text-color: {{ theme.css_action_button_text_color }};
+            --object-tools-bg: var(--admin-interface-action-button-background-color);
+            --object-tools-hover-bg: var(--admin-interface-action-button-background-hover-color);
+            --object-tools-fg: var(--admin-interface-action-button-text-color);
         {% if theme.css_body_font_family %}
             --admin-interface-body-font-family: {{ theme.css_body_font_family }};
         {% endif %}
@@ -95,6 +104,7 @@
         {% endif %}
 
             --admin-interface-module-border-radius: {{ theme.css_module_border_radius }};
+            --admin-interface-tab-border-radius: {{ theme.css_tab_border_radius }};
             --admin-interface-jsoneditor-border-radius: var(--admin-interface-module-border-radius);
             --admin-interface-jsoneditor-overflow: hidden;
 
@@ -175,6 +185,18 @@
         {% endif %}
         {% if theme.css_delete_button_text_color_dark_use and theme.css_delete_button_text_color_dark %}
             --admin-interface-delete-button-text-color: {{ theme.css_delete_button_text_color_dark }};
+        {% endif %}
+        {% if theme.css_body_text_color_dark_use and theme.css_body_text_color_dark %}
+            --admin-interface-body-text-color: {{ theme.css_body_text_color_dark }};
+        {% endif %}
+        {% if theme.css_action_button_background_color_dark_use and theme.css_action_button_background_color_dark %}
+            --admin-interface-action-button-background-color: {{ theme.css_action_button_background_color_dark }};
+        {% endif %}
+        {% if theme.css_action_button_background_hover_color_dark_use and theme.css_action_button_background_hover_color_dark %}
+            --admin-interface-action-button-background-hover-color: {{ theme.css_action_button_background_hover_color_dark }};
+        {% endif %}
+        {% if theme.css_action_button_text_color_dark_use and theme.css_action_button_text_color_dark %}
+            --admin-interface-action-button-text-color: {{ theme.css_action_button_text_color_dark }};
         {% endif %}
         {% if theme.css_success_color_dark_use and theme.css_success_color_dark %}
             --admin-interface-success-color: {{ theme.css_success_color_dark }};

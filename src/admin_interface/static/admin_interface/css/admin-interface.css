@@ -42,16 +42,22 @@
         --close-button-hover-bg: var(--admin-interface-save-button-background-hover-color);
         --delete-button-bg: #ba2121;
         --delete-button-hover-bg: #a41515;
-        --object-tools-fg: var(--button-fg);
-        --object-tools-bg: #888;
-        --object-tools-hover-bg: #747474;
+        --object-tools-fg: var(--admin-interface-action-button-text-color);
+        --object-tools-bg: var(--admin-interface-action-button-background-color);
+        --object-tools-hover-bg: var(--admin-interface-action-button-background-hover-color);
     }
 }
 
-/* Body font — only applied when operator sets a value in the theme editor */
+/* Body font and text color — only applied when operator sets a value in the theme editor */
 .admin-interface body {
     font-family: var(--admin-interface-body-font-family, inherit);
     font-size: var(--admin-interface-body-font-size, inherit);
+    color: var(--admin-interface-body-text-color, inherit);
+}
+
+/* Color picker swatch buttons — always square; --admin-interface-button-border-radius must not apply */
+.admin-interface .clr-field button[type="button"] {
+    border-radius: 0;
 }
 
 /* Button font size and border radius */
@@ -807,8 +813,8 @@
 }
 
 .admin-interface #toggle-nav-sidebar {
-    border-top-right-radius: var(--admin-interface-module-border-radius);
-    border-bottom-right-radius: var(--admin-interface-module-border-radius);
+    border-top-right-radius: var(--admin-interface-tab-border-radius);
+    border-bottom-right-radius: var(--admin-interface-tab-border-radius);
     color: var(--admin-interface-generic-link-color);
 }
 
