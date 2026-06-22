@@ -844,3 +844,51 @@ body.admin-interface {
     background: var(--admin-interface-body-background-color, var(--body-bg));
 }
 
+/* ---- DateTime widget in .aligned fieldsets (#6a) ---- */
+/* Make p.datetime flow inline after its label so Date/Time sub-rows align with the rest of the form */
+.aligned p.datetime {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* DateTime shortcuts: flex row so Today/Now link and icon are vertically centred (#6b) */
+.datetimeshortcuts {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* Fixed-width Today/Now link text so the calendar/clock icon always lands at the same x position (#6d) */
+.datetimeshortcuts > a:first-child {
+    display: inline-block;
+    min-width: 2rem;
+}
+
+/* Calendar/clock icons: replace Django's hardcoded SVG sprite with theme-colorable mask icons (#6e) */
+.admin-interface .datetimeshortcuts .date-icon,
+.admin-interface .datetimeshortcuts .clock-icon {
+    background-image: none;
+    background-color: var(--admin-interface-generic-link-color, var(--link-fg, #447e9b));
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    top: 0;
+}
+.admin-interface .datetimeshortcuts .date-icon {
+    -webkit-mask-image: url('../img/icon-calendar.svg');
+    mask-image: url('../img/icon-calendar.svg');
+}
+.admin-interface .datetimeshortcuts .clock-icon {
+    -webkit-mask-image: url('../img/icon-clock.svg');
+    mask-image: url('../img/icon-clock.svg');
+}
+.admin-interface .datetimeshortcuts a:hover .date-icon,
+.admin-interface .datetimeshortcuts a:hover .clock-icon {
+    background-color: var(--admin-interface-generic-link-hover-color, var(--link-hover-fg, #204a87));
+}
+
