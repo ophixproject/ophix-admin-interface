@@ -17,7 +17,7 @@
                     <div class="changelist-filter-clear-container">
                         <h3 id="changelist-filter-clear">
                             {# Translators: don't translate this, the django catalog already contains it #}
-                            <a href="{{ cl.clear_all_filters_qs }}">&#10006; {% translate "Clear all filters" %}</a>
+                            <a href="{{ cl.clear_all_filters_qs }}"><span class="filter-remove-x">&#10006;&#xFE0E;</span> {% translate "Clear all filters" %}</a>
                         </h3>
                         {% if active_date_hierarchy %}
                             {% admin_interface_date_hierarchy_removal_link cl active_date_hierarchy %}
@@ -33,7 +33,7 @@
                 <!-- {# use default django template code #} -->
                 {% if cl.has_active_filters %}
                 <h3>
-                    <a href="{{ cl.clear_all_filters_qs }}">&#10006; {% translate "Clear all filters" %}</a>
+                    <a href="{{ cl.clear_all_filters_qs }}"><span class="filter-remove-x">&#10006;&#xFE0E;</span> {% translate "Clear all filters" %}</a>
                 </h3>
                 {% endif %}
                 <!-- {# end use default django template code #} -->

@@ -598,6 +598,10 @@
     font-weight: bold;
 }
 
+.admin-interface .module.filtered #changelist-filter .filter-remove-x {
+    color: var(--admin-interface-delete-button-background-color);
+}
+
 .admin-interface .module.filtered #changelist-filter li a:focus,
 .admin-interface .module.filtered #changelist-filter li a:hover {
     color: #666;
