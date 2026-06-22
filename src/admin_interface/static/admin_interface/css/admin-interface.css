@@ -49,7 +49,7 @@
 }
 
 /* Body font and text color — only applied when operator sets a value in the theme editor */
-.admin-interface body {
+body.admin-interface {
     font-family: var(--admin-interface-body-font-family, inherit);
     font-size: var(--admin-interface-body-font-size, inherit);
     color: var(--admin-interface-body-text-color, inherit);
