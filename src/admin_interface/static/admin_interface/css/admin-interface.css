@@ -845,17 +845,45 @@ body.admin-interface {
 }
 
 /* ---- DateTime widget in .aligned fieldsets (#6a) ---- */
-/* Render "Date:" / "Time:" sub-labels as block elements so they sit on their own line
-   above each input — inputs therefore start at x=0 of p.datetime with no inline prefix. */
-.admin-interface .datetime-sublabel {
-    display: block;
-    font-size: 0.8125em;
-    color: var(--body-quiet-color);
-    line-height: 1;
-    margin-bottom: 2px;
+/* Outer flex-container wraps: "Run at:" label takes its own full-width row,
+   then p.datetime follows at full width so its internal label column starts at x=0. */
+.admin-interface .aligned .flex-container:has(p.datetime) {
+    flex-wrap: wrap;
 }
-/* The <br> in split_datetime.html is for the non-block layout; suppress it here
-   since the block sublabels already separate the two rows. */
+.admin-interface .aligned .flex-container:has(p.datetime) > label {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+    padding-bottom: 2px;
+}
+.admin-interface .aligned .flex-container:has(p.datetime) > p.datetime {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+/* p.datetime: two rows (date, time) stacked vertically */
+.admin-interface .aligned p.datetime {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+/* Each row: sublabel + input + shortcuts in a horizontal line */
+.admin-interface .aligned p.datetime .datetime-row {
+    display: flex;
+    align-items: center;
+}
+/* Sublabel matches Django's .aligned label column (160px + 10px right padding)
+   so date/time inputs line up with Interval, Name, etc. */
+.admin-interface .aligned p.datetime .datetime-sublabel {
+    display: block;
+    flex-shrink: 0;
+    width: 160px;
+    min-width: 160px;
+    padding: 0 10px 0 0;
+    box-sizing: content-box;
+}
+/* <br> in the original split_datetime template is for inline layout; suppress it */
 .admin-interface .aligned p.datetime br {
     display: none;
 }
