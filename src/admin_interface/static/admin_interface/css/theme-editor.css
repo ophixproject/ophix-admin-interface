@@ -464,3 +464,19 @@ form .field-error-row ul.errorlist {
     font-size: 0.875em;
     color: var(--body-quiet-color, #666);
 }
+
+/* ---- Test message preview inside a theme section ---- */
+
+fieldset.theme-custom-section > ul.messagelist {
+    margin: 0 0 12px 0;
+}
+
+/* ---- Admin Settings: cross-link to active theme section ---- */
+
+.admin-settings-cross-link {
+    margin: 10px 0 2px 0;
+    padding: 6px 12px;
+    font-size: 0.85em;
+    color: var(--admin-interface-module-text-color, inherit);
+    opacity: 0.75;
+}

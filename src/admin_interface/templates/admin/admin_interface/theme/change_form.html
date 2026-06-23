@@ -39,7 +39,7 @@
         return lightEl ? lightEl.value : "";
     }
 
-    function showTestMessage(msgType, bgColor, textColor) {
+    function showTestMessage(msgType, bgColor, textColor, triggerBtn) {
         var adminEl = document.querySelector(".admin-interface") || document.body;
 
         // Remove any previous preview
@@ -61,15 +61,23 @@
         li.textContent = MSG_TEXT[msgType];
         ul.appendChild(li);
 
-        // Real Django messages are siblings of #content inside the main wrapper,
-        // not inside #content itself. Insert at the same level for identical width/position.
-        var content = document.getElementById("content");
-        var parent = content ? content.parentNode : null;
-        if (parent) {
-            var existingUl = parent.querySelector(":scope > ul.messagelist");
-            parent.insertBefore(ul, existingUl || content);
+        // Insert at the top of the containing section (after the h2 heading),
+        // so the result appears right where the operator is looking.
+        var section = triggerBtn ? triggerBtn.closest("fieldset.theme-custom-section") : null;
+        if (section) {
+            var h2 = section.querySelector("h2");
+            var anchor = (h2 && h2.nextSibling) ? h2.nextSibling : section.firstChild;
+            section.insertBefore(ul, anchor);
         } else {
-            document.body.appendChild(ul);
+            // Fallback: sibling of #content (original behaviour)
+            var content = document.getElementById("content");
+            var parent = content ? content.parentNode : null;
+            if (parent) {
+                var existingUl = parent.querySelector(":scope > ul.messagelist");
+                parent.insertBefore(ul, existingUl || content);
+            } else {
+                document.body.appendChild(ul);
+            }
         }
 
         // Auto-remove after 3 seconds, restore CSS vars
@@ -91,7 +99,7 @@
         var textColor = resolveColor(btn.dataset.textInput, btn.dataset.textDarkInput, btn.dataset.textDarkUse, isDark);
 
         if (bgColor) {
-            showTestMessage(msgType, bgColor, textColor);
+            showTestMessage(msgType, bgColor, textColor, btn);
         }
     });
 }());
