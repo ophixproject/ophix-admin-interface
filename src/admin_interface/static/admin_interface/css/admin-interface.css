@@ -845,10 +845,21 @@ body.admin-interface {
 }
 
 /* ---- DateTime widget in .aligned fieldsets (#6a) ---- */
-/* Make p.datetime flow inline after its label so Date/Time sub-rows align with the rest of the form */
-.aligned p.datetime {
-    display: inline-block;
-    vertical-align: top;
+/* Hide sub-labels ("Date:", "Time:") visually so inputs start at the 160px column boundary;
+   keep them in the DOM for screen readers (the time input has no outer <label>). */
+.admin-interface .datetime-sublabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+.admin-interface .aligned p.datetime {
+    position: relative;
 }
 
 /* DateTime shortcuts: flex row so Today/Now link and icon are vertically centred (#6b) */
