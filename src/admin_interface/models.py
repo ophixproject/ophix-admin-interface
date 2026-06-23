@@ -449,7 +449,7 @@ class Theme(models.Model):
     css_message_success_bg = ColorField(
         blank=True,
         default="#dff2e3",
-        help_text=_("Background colour of success (green) system message banners"),
+        help_text=_("Background colour of success (green) system notifications"),
         max_length=10,
         verbose_name=_("success background"),
     )
@@ -459,7 +459,7 @@ class Theme(models.Model):
     css_message_warning_bg = ColorField(
         blank=True,
         default="#faf3e5",
-        help_text=_("Background colour of warning (amber) system message banners"),
+        help_text=_("Background colour of warning (amber) system notifications"),
         max_length=10,
         verbose_name=_("warning background"),
     )
@@ -469,7 +469,7 @@ class Theme(models.Model):
     css_message_error_bg = ColorField(
         blank=True,
         default="#f5dede",
-        help_text=_("Background colour of error (red) system message banners"),
+        help_text=_("Background colour of error (red) system notifications"),
         max_length=10,
         verbose_name=_("error background"),
     )
@@ -479,7 +479,7 @@ class Theme(models.Model):
     css_message_info_bg = ColorField(
         blank=True,
         default="#d9f0f7",
-        help_text=_("Background colour of info (cyan) system message banners"),
+        help_text=_("Background colour of info (cyan) system notifications"),
         max_length=10,
         verbose_name=_("info background"),
     )
@@ -489,7 +489,7 @@ class Theme(models.Model):
     css_message_success_text = ColorField(
         blank=True,
         default="#1a5c2b",
-        help_text=_("Text colour of success (green) system message banners"),
+        help_text=_("Text colour of success (green) system notifications"),
         max_length=10,
         verbose_name=_("success text"),
     )
@@ -498,7 +498,7 @@ class Theme(models.Model):
     css_message_warning_text = ColorField(
         blank=True,
         default="#7a5000",
-        help_text=_("Text colour of warning (amber) system message banners"),
+        help_text=_("Text colour of warning (amber) system notifications"),
         max_length=10,
         verbose_name=_("warning text"),
     )
@@ -507,7 +507,7 @@ class Theme(models.Model):
     css_message_error_text = ColorField(
         blank=True,
         default="#6b0f0f",
-        help_text=_("Text colour of error (red) system message banners"),
+        help_text=_("Text colour of error (red) system notifications"),
         max_length=10,
         verbose_name=_("error text"),
     )
@@ -516,7 +516,7 @@ class Theme(models.Model):
     css_message_info_text = ColorField(
         blank=True,
         default="#004d66",
-        help_text=_("Text colour of info (cyan) system message banners"),
+        help_text=_("Text colour of info (cyan) system notifications"),
         max_length=10,
         verbose_name=_("info text"),
     )
