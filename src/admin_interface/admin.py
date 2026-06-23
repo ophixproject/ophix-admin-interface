@@ -323,6 +323,21 @@ class ThemeAdmin(admin.ModelAdmin):
     def change_view(self, request, object_id, form_url="", extra_context=None):
         extra_context = extra_context or {}
         extra_context["title"] = _("Edit Theme")
+        from django.conf import settings as django_settings
+        if getattr(django_settings, "SHOW_SETTINGS_MODEL", False):
+            try:
+                from ophix_admin_settings.models import ServerSettings
+                from django.urls import reverse as _reverse
+                obj = ServerSettings.load()
+                extra_context["settings_change_url"] = _reverse(
+                    "admin:ophix_admin_settings_serversettings_change",
+                    args=[obj.pk],
+                    current_app=self.admin_site.name,
+                )
+            except Exception:
+                extra_context["settings_change_url"] = None
+        else:
+            extra_context["settings_change_url"] = None
         return super().change_view(request, object_id, form_url, extra_context)
 
     def response_change(self, request, obj):

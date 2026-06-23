@@ -303,6 +303,7 @@
       {% if form.css_header_link_hover_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_header_link_hover_color.help_text }}</div></div>{% endif %}
     </div>
 
+    {% if settings_change_url %}<div class="admin-settings-cross-link">{% trans "Settings:" %} <a href="{{ settings_change_url }}#fieldset-server-identity">{% trans "Server Identity" %} →</a></div>{% endif %}
   </div>
 </fieldset>
 
@@ -758,6 +759,7 @@
         <div class="col-test"></div>
       </div>
     </div>
+    {% if settings_change_url %}<div class="admin-settings-cross-link">{% trans "Settings:" %} <a href="{{ settings_change_url }}#fieldset-notifications">{% trans "Notifications" %} →</a></div>{% endif %}
   </div>
 </fieldset>
 
