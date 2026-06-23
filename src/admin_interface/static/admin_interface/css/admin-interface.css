@@ -442,6 +442,14 @@ body.admin-interface {
     color: #666666;
 }
 
+[data-theme="dark"] .admin-interface thead th a,
+[data-theme="dark"] .admin-interface thead th a:link,
+[data-theme="dark"] .admin-interface thead th a:visited,
+[data-theme="dark"] .admin-interface thead th a:focus,
+[data-theme="dark"] .admin-interface thead th a:hover {
+    color: inherit;
+}
+
 .admin-interface .button,
 .admin-interface input[type=submit],
 .admin-interface input[type=button],
