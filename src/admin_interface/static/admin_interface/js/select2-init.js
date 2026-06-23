@@ -12,6 +12,14 @@
             });
         });
 
+        // Plain choice selects opted-in via Select2Widget (class vSelect2).
+        $('select.vSelect2:not(.select2-hidden-accessible)').each(function() {
+            $(this).select2({
+                minimumResultsForSearch: Infinity,
+                width: 'resolve',
+            });
+        });
+
         // Filter sidebar dropdowns.
         // Navigation via select2:select is reliable; jQuery's trigger('change') does not
         // consistently reach native addEventListener listeners wired by dropdown-filter.js.
