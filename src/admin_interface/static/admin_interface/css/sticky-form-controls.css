@@ -61,7 +61,7 @@
 
 @media (min-width:1280px) {
     .admin-interface.sticky-pagination.change-list:not(.popup) #main.shifted > #nav-sidebar + .content #changelist .changelist-footer {
-        width: calc(100% - 360px);
+        width: calc(100% - 300px);
     }
 }
 
@@ -109,6 +109,6 @@
 
 @media (min-width:1280px) {
     .admin-interface.sticky-submit.change-form:not(.popup) #main.shifted > #nav-sidebar + .content .submit-row:last-of-type {
-        width: calc(100% - 359px);
+        width: calc(100% - 299px);
     }
 }

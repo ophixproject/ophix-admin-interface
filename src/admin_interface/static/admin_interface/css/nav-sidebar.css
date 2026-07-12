@@ -40,9 +40,9 @@
 
 
 .admin-interface #nav-sidebar {
-    flex: 0 0 360px;
-    left: -360px;
-    margin-left: -360px;
+    flex: 0 0 300px;
+    left: -300px;
+    margin-left: -300px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -60,7 +60,7 @@
 
 @media (min-width:1280px) {
     .admin-interface #main.shifted > #toggle-nav-sidebar {
-        left: 359px;
+        left: 299px;
     }
     .admin-interface #main.shifted > #nav-sidebar {
         left: 0px;
@@ -71,7 +71,7 @@
     }
     .admin-interface.change-list:not(.popup) #main.shifted > #nav-sidebar + .content,
     .admin-interface.change-form:not(.popup) #main.shifted > #nav-sidebar + .content {
-        max-width: calc(100% - 360px);
+        max-width: calc(100% - 300px);
     }
 }
 
