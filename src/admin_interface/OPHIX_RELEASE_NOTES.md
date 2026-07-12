@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.07.12.01
 
 - #30: Nav sidebar width reduced from 360px to 300px. Updated in lockstep across
   `nav-sidebar.css`, `sticky-form-controls.css` (sticky pagination/submit-row widths),
