@@ -18,13 +18,13 @@
 }
 
 [dir="rtl"] .admin-interface #main.shifted > #toggle-nav-sidebar {
-    right: 359px !important;
+    right: 299px !important;
 }
 
 [dir="rtl"] .admin-interface #main > #nav-sidebar {
-    margin-right: -360px !important;
+    margin-right: -300px !important;
     margin-left: 0px !important;
-    right: -320px !important;
+    right: -260px !important;
 }
 
 [dir="rtl"] .admin-interface #main.shifted > #nav-sidebar {
