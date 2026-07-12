@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.07.12.02
 
 - Migration `0002_remove_theme_placeholder_fields` no longer uses raw SQL — it used
   MySQL/MariaDB backtick-quoted identifiers (`` `admin_interface_theme` ``), which are a
