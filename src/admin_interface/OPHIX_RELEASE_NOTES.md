@@ -1,5 +1,13 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- #30: Nav sidebar width reduced from 360px to 300px. Updated in lockstep across
+  `nav-sidebar.css`, `sticky-form-controls.css` (sticky pagination/submit-row widths),
+  and `rtl.css` (mirrored values, including a derived `-260px` for a padding-offset
+  value that isn't independently verified — RTL is not in active use anywhere in the
+  fleet).
+
 ## 2026.06.11.01
 
 - Added `css_body_background_color` field (with dark-mode pair) to the Theme model —
