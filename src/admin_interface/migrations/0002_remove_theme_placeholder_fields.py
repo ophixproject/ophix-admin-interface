@@ -15,12 +15,28 @@ FIELDS = [
     "css_module_rounded_corners",
 ]
 
-# Build a single ALTER TABLE with IF EXISTS for each column so the migration is
-# safe to run even if some or all columns were already dropped (e.g. when the
-# django_migrations row was removed during the post-squash cleanup).
-_drop_sql = "ALTER TABLE `admin_interface_theme` " + ", ".join(
-    f"DROP COLUMN IF EXISTS `{f}`" for f in FIELDS
-)
+
+def drop_columns_if_present(apps, schema_editor):
+    """
+    Drop each column only if it's actually present, via Django's own schema
+    editor + introspection rather than backend-specific raw SQL (the previous
+    RunSQL version used MySQL/MariaDB backtick-quoted identifiers, which are
+    a syntax error on Postgres/Oracle/SQL Server/CockroachDB). Safe to run
+    even if some or all columns were already dropped (e.g. when the
+    django_migrations row was removed during the post-squash cleanup).
+    """
+    Theme = apps.get_model("admin_interface", "Theme")
+    table_name = Theme._meta.db_table
+    connection = schema_editor.connection
+    with connection.cursor() as cursor:
+        existing = {
+            col.name
+            for col in connection.introspection.get_table_description(cursor, table_name)
+        }
+    for field_name in FIELDS:
+        if field_name in existing:
+            field = Theme._meta.get_field(field_name)
+            schema_editor.remove_field(Theme, field)
 
 
 class Migration(migrations.Migration):
@@ -32,7 +48,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.SeparateDatabaseAndState(
             database_operations=[
-                migrations.RunSQL(_drop_sql, migrations.RunSQL.noop),
+                migrations.RunPython(drop_columns_if_present, migrations.RunPython.noop),
             ],
             state_operations=[
                 migrations.RemoveField(model_name="theme", name=f)

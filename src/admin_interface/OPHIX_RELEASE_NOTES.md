@@ -1,5 +1,16 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Migration `0002_remove_theme_placeholder_fields` no longer uses raw SQL — it used
+  MySQL/MariaDB backtick-quoted identifiers (`` `admin_interface_theme` ``), which are a
+  syntax error on Postgres, Oracle, SQL Server, and CockroachDB. Replaced with a portable
+  `RunPython` that uses Django's own `SchemaEditor.remove_field()` plus a backend-agnostic
+  introspection check (`connection.introspection.get_table_description()`), so the same
+  idempotent "only drop the column if it's actually there" behaviour now works on every
+  supported engine, not just MariaDB. Found while scoping out multi-engine Docker-based
+  testing for the `ophix-dbengine-*` plugins.
+
 ## 2026.07.12.01
 
 - #30: Nav sidebar width reduced from 360px to 300px. Updated in lockstep across
