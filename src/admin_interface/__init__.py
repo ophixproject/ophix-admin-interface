@@ -18,3 +18,18 @@ __all__ = [
     "__title__",
     "__version__",
 ]
+
+
+def get_revisions_targets():
+    """
+    Optional hook discovered by ophix-revisions (if installed).
+    """
+    return [
+        {
+            "name": "theme",
+            "app_label": "admin_interface",
+            "export_command": "export_theme",
+            "encrypted": False,
+            "stable": True,
+        },
+    ]

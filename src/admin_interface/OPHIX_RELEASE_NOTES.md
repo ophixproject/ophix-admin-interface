@@ -11,6 +11,9 @@
   via an explicit `gzip.GzipFile(mtime=0)` and a `tarfile.add(..., filter=...)` callback).
   Verified standalone: two `--stable` runs of unchanged content now produce byte-identical
   archives (`cmp` on the raw bytes, not just the extracted content).
+- `admin_interface` gains `get_revisions_targets()`, declaring its own `theme` target for
+  `ophix-revisions` (if installed) to discover at runtime — no separate registration
+  needed anywhere else.
 
 ## 2026.07.12.02
 
