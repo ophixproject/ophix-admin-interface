@@ -1,5 +1,17 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- `export_theme` gains a `--stable` flag, written for `ophix-revisions`. This command
+  doesn't follow the `_build_meta`/payload-envelope pattern used elsewhere — it's a
+  `dumpdata`-based `.tar.gz` bundle, so `--stable` fixes two independent embedded-timestamp
+  sources instead: `sort_keys=True` on the fixture JSON, and zeroed mtime/ownership on every
+  tar entry plus a zeroed gzip header timestamp (Python's `tarfile.open(path, "w:gz")`
+  shortcut has no way to override either of the latter two — fixed by building the archive
+  via an explicit `gzip.GzipFile(mtime=0)` and a `tarfile.add(..., filter=...)` callback).
+  Verified standalone: two `--stable` runs of unchanged content now produce byte-identical
+  archives (`cmp` on the raw bytes, not just the extracted content).
+
 ## 2026.07.12.02
 
 - Migration `0002_remove_theme_placeholder_fields` no longer uses raw SQL — it used

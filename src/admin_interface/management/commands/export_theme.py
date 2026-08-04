@@ -1,3 +1,4 @@
+import gzip
 import json
 import re
 import shutil
@@ -9,6 +10,19 @@ from django.apps import apps
 from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand
+
+
+def _zero_tarinfo(tarinfo):
+    """tarfile.add()'s `filter` callback for --stable: every entry's mtime
+    and ownership metadata otherwise reflects real filesystem state (when
+    the file was written into the temp export dir, and by which uid/gid),
+    which differs run-to-run even for byte-identical content."""
+    tarinfo.mtime = 0
+    tarinfo.uid = 0
+    tarinfo.gid = 0
+    tarinfo.uname = ""
+    tarinfo.gname = ""
+    return tarinfo
 
 
 class Command(BaseCommand):
@@ -32,12 +46,20 @@ class Command(BaseCommand):
             default=None,
             help="Rename the theme inside the exported JSON (also affects paths and tar.gz name)",
         )
+        parser.add_argument(
+            "--stable",
+            action="store_true",
+            help="Produce a byte-identical archive across runs of the same unchanged "
+                 "theme (deterministic JSON key order, zeroed tar entry mtimes/ownership, "
+                 "zeroed gzip header timestamp). Used by ophix-revisions.",
+        )
 
     def handle(self, *args, **options):
         Theme = apps.get_model("admin_interface", "Theme")
         theme_name = options["theme_name"]
         output_dir = Path(options["output"] or settings.BASE_DIR)
         rename = options["rename"]
+        stable = options["stable"]
 
         try:
             theme = Theme.objects.get(name=theme_name)
@@ -92,7 +114,7 @@ class Command(BaseCommand):
                             )
 
             with open(json_path, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2)
+                json.dump(data, f, indent=2, sort_keys=stable)
 
             for field_name in ("logo", "favicon"):
                 field_file = getattr(theme, field_name)
@@ -118,8 +140,20 @@ class Command(BaseCommand):
                     self.stdout.write(f"Copied media file: {dest_relative_path}")
 
             tar_path = output_dir / f"{export_name}_theme.tar.gz"
-            with tarfile.open(tar_path, "w:gz") as tar:
-                tar.add(theme_dir, arcname=export_name)
+            if stable:
+                # tarfile.open(path, "w:gz")'s built-in gzip shortcut writes
+                # the current wall-clock time into the gzip header's own
+                # MTIME field, with no way to override it via that API —
+                # constructing the GzipFile explicitly (mtime=0, no embedded
+                # filename) and handing it to tarfile as a fileobj is the
+                # only way to zero that second, independent timestamp source.
+                with open(tar_path, "wb") as raw_f:
+                    with gzip.GzipFile(filename="", fileobj=raw_f, mode="wb", mtime=0) as gz_f:
+                        with tarfile.open(fileobj=gz_f, mode="w:") as tar:
+                            tar.add(theme_dir, arcname=export_name, filter=_zero_tarinfo)
+            else:
+                with tarfile.open(tar_path, "w:gz") as tar:
+                    tar.add(theme_dir, arcname=export_name)
 
         finally:
             shutil.rmtree(export_dir, ignore_errors=True)
