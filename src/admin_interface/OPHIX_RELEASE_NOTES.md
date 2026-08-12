@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.08.04.01
 
 - `export_theme` gains a `--stable` flag, written for `ophix-revisions`. This command
   doesn't follow the `_build_meta`/payload-envelope pattern used elsewhere — it's a
