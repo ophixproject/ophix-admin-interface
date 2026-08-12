@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ophix-admin-interface"
-version = "2026.08.04.01"
+version = "2026.08.12.01"
 description = "Ophix fork of django-admin-interface: theme management, extended CSS vars, namespaced media, bundled theme API"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -28,7 +28,8 @@ classifiers = [
     "Topic :: System :: Systems Administration",
 ]
 dependencies = [
-    "Django>=4.2",
+    "Django>=4.2,<6.0; python_version < '3.12'",
+    "Django>=4.2; python_version >= '3.12'",
     "django-colorfield>=0.11",
     "python-slugify>=8.0",
 ]
