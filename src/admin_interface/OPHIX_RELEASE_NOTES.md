@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.08.29.02
 
 - Fixed a second Django 6.1 layout regression from the same root cause as
   `2026.08.29.01`'s `.flex-container` fix, missed there because it's a different half
