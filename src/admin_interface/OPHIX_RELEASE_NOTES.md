@@ -1,5 +1,23 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Fixed wide fields (Description/Command textareas, URL fields, etc.) rendering
+  full-width on their own row instead of staying beside the label — a side effect of
+  `2026.08.29.03`'s `flex-wrap: wrap` addition (needed so `.help`/`.errorlist` fall
+  onto their own line). Django's own `.vLargeTextField`/`.vXMLLargeTextField` is a
+  fixed 48em, `.vURLField` 30em — wider than the space left after the 160px label
+  column. Flexbox gives form controls an "automatic minimum size" floor based on
+  their intrinsic/specified size rather than zero, unless overridden; with wrapping
+  now enabled, a field whose floor still exceeds the remaining row space wraps onto
+  its own line instead of shrinking below it, landing at the container's own left
+  edge rather than indented past the label. Fixed with `min-width: 0` on the field
+  (deliberately not touching `flex-grow`, which stays at its default `0` — ordinary
+  fields keep their natural/specified width, e.g. `.vTextField`'s 20em, rather than
+  stretching to fill leftover row space, which would be a new visual change, not a
+  restoration of the old behaviour). `.related-widget-wrapper` (FK fields) already
+  had this protection; ordinary fields never did.
+
 ## 2026.08.29.03
 
 - Fixed the remaining pieces of the same Django 6.1 `fieldset.html` restructure from

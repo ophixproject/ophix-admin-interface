@@ -43,6 +43,34 @@
 }
 /* end-fix */
 
+/* Wide fields (Description/Command textareas, URL fields, etc.) rendered full-width
+   instead of staying beside the label. Django's own vLargeTextField/vXMLLargeTextField
+   is a fixed 48em, vURLField 30em — wider than the space left after the 160px label
+   column. Before `flex-wrap: wrap` was added above (needed so .help/.errorlist fall
+   onto their own line), an oversized flex item had no option but to shrink to fit.
+   With wrapping now enabled, a field whose *automatic minimum size* (flexbox gives
+   form controls a floor based on their intrinsic/specified size, not zero, unless
+   overridden) is still wider than the remaining row space can wrap onto its own line
+   instead of shrinking below that floor — landing at the container's own left edge
+   rather than indented past the label. `min-width: 0` removes that floor so the field
+   shrinks as needed instead of wrapping; deliberately NOT touching `flex-grow` (stays
+   at its default 0), so ordinary fields keep their natural/specified width exactly as
+   before (e.g. `.vTextField`'s 20em) rather than stretching to fill leftover row
+   space — that would be a new visual change, not a restoration of the old behaviour.
+   `.related-widget-wrapper` (FK fields) already had its own `min-width: 0` protecting
+   it from this; ordinary fields never did. The field is reliably the last DOM child
+   per fieldset.html's render order (label -> help -> errors -> field) regardless of
+   the `order` reshuffle above, which only affects visual position, not :last-child's
+   DOM-structural matching — so this targets exactly the field, whatever it renders
+   as, without needing to enumerate every widget type. Excludes checkbox-row (no
+   separate field child to target — the input lives inside .checkbox instead) and the
+   datetime-with-p case (already fully handled by its own flex:0 0 100% rules
+   elsewhere in this file). */
+.admin-interface .flex-container.fieldBox:not(.checkbox-row):not(:has(p.datetime)) > :last-child {
+    min-width: 0;
+}
+/* end-fix */
+
 /* fix flex container for boolean fields */
 .admin-interface .flex-container.checkbox-row {
     align-items: center;
