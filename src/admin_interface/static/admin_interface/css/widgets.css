@@ -8,6 +8,7 @@
 
 /* fix generic flex container */
 .admin-interface .flex-container {
+    display: flex;
     width: 100%;
 }
 /* end-fix */
@@ -15,6 +16,7 @@
 /* fix flex container for boolean fields */
 .admin-interface .flex-container.checkbox-row {
     align-items: center;
+    flex-direction: row;
 }
 .admin-interface .flex-container.checkbox-row label.vCheckboxLabel {
     margin-top: 0 !important;

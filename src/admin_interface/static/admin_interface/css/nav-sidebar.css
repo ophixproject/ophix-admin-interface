@@ -1,4 +1,12 @@
 /* fix nav-sidebar (added in django 3.1.0) */
+
+/* #main's flex layout (nav-sidebar + .content side by side) is otherwise entirely
+   supplied by Django's own admin CSS — declare it explicitly so this doesn't silently
+   break if Django ever changes its own default (see widgets.css .flex-container fix). */
+.admin-interface #main {
+    display: flex;
+}
+
 .admin-interface #toggle-nav-sidebar {
     top: 10px;
     left: 0;

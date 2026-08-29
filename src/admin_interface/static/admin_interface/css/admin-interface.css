@@ -335,18 +335,31 @@ body.admin-interface {
     color: var(--admin-interface-module-link-hover-color);
 }
 
-.admin-interface div.breadcrumbs {
+/* Class-only selector (not div.breadcrumbs) — Django 6.1 changed its own breadcrumb
+   markup from <div class="breadcrumbs"> to <ol class="breadcrumbs"><li>...</li></ol>
+   (accessibility improvement). A tag-locked selector here would only match one of the
+   two forms depending on Django version, silently losing theme colors on every normal
+   admin page while an unrelated custom template (a hardcoded <div class="breadcrumbs">,
+   e.g. client_management.html) kept working — see the padding note below for the other
+   half of that same regression. padding/border/margin are declared explicitly rather
+   than left to Django's own base.css, since Django dropped its div.breadcrumbs rule
+   entirely when it moved to <ol> — a custom template still using <div> would otherwise
+   silently lose all spacing with no CSS providing it at all. */
+.admin-interface .breadcrumbs {
     background: var(--admin-interface-module-background-color);
     color: var(--admin-interface-module-text-color);
+    padding: 10px 40px;
+    margin: 0;
+    border: none;
 }
 
-.admin-interface div.breadcrumbs a {
+.admin-interface .breadcrumbs a {
     color: var(--admin-interface-module-link-color);
 }
 
-.admin-interface div.breadcrumbs a:active,
-.admin-interface div.breadcrumbs a:focus,
-.admin-interface div.breadcrumbs a:hover {
+.admin-interface .breadcrumbs a:active,
+.admin-interface .breadcrumbs a:focus,
+.admin-interface .breadcrumbs a:hover {
     color: var(--admin-interface-module-link-hover-color);
 }
 

@@ -1,5 +1,35 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Fixed several layout regressions under Django 6.1, all caused by the same root pattern:
+  our CSS relied on Django's own base admin CSS to supply a `display`/direction/spacing
+  declaration we never set explicitly ourselves, and Django 6.1 changed several of those
+  defaults.
+  - **Boolean field checkboxes rendered stacked/centered instead of in a row.** Django
+    6.1's `.flex-container` base rule gained `flex-direction: column` (previously
+    undeclared, defaulting to the browser's `row`). Our `.flex-container.checkbox-row`
+    override never declared its own direction, so it silently inherited whichever default
+    Django supplied. Fixed by declaring `display: flex` on the `.flex-container` base rule
+    and `flex-direction: row` on `.checkbox-row` explicitly.
+  - **Breadcrumbs lost their theme color on every standard admin page, and lost their
+    padding on custom pages with a hardcoded breadcrumb (e.g. the Client Management Status
+    page).** Django 6.1 changed its own breadcrumb markup from `<div class="breadcrumbs">`
+    to a semantic `<ol class="breadcrumbs"><li>...</li></ol>` (accessibility improvement)
+    and dropped its `div.breadcrumbs` CSS rule entirely in favor of `ol.breadcrumbs`. Our
+    own `.admin-interface div.breadcrumbs` selector was tag-locked, so it stopped matching
+    Django's own breadcrumb block (theme color silently lost, falling back to Django's
+    generic un-themed blue) while a custom template hardcoding its own `<div
+    class="breadcrumbs">` kept matching our rule but lost all padding (nothing supplied it
+    anymore, since Django removed its own `div.breadcrumbs` rule). Fixed by broadening the
+    selector to `.admin-interface .breadcrumbs` (class-only, matches both forms) and
+    declaring `padding`/`margin`/`border` explicitly instead of relying on Django's base
+    CSS for them.
+  - Also hardened two spots that hadn't broken yet but shared the identical risk: `.submit-row`
+    (Save/Continue/Delete button ordering) and `#main` (the nav-sidebar/content flex split)
+    now both declare `display: flex` explicitly instead of depending on Django's own base
+    CSS to supply it.
+
 ## 2026.08.12.01
 
 - Django dependency split by `python_version` marker: `Django>=4.2,<6.0` on Python < 3.12,
