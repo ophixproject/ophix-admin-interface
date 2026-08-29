@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.08.29.01
 
 - Fixed several layout regressions under Django 6.1, all caused by the same root pattern:
   our CSS relied on Django's own base admin CSS to supply a `display`/direction/spacing
