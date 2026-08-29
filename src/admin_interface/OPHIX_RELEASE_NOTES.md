@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.08.29.03
 
 - Fixed the remaining pieces of the same Django 6.1 `fieldset.html` restructure from
   `2026.08.29.02`. Django 6.1's per-field DOM order inside `.flex-container` is
