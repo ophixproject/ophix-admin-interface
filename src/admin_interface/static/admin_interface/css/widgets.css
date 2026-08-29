@@ -18,7 +18,19 @@
 .admin-interface .flex-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
+}
+/* end-fix */
+
+/* Django 6.1's fieldset.html also moved the help-text <div class="help"> from a
+   sibling *after* .flex-container (6.0.7) to a child *inside* it, sandwiched between
+   the label and the field. Under row direction that makes help text a third item in
+   the same row instead of falling below — force it onto its own full-width line with
+   the same flex-wrap + flex-basis:100% technique already used below for
+   .aligned .flex-container:has(p.datetime). */
+.admin-interface .flex-container > .help {
+    flex: 0 0 100%;
 }
 /* end-fix */
 

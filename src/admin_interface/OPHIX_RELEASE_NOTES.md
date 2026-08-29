@@ -1,5 +1,19 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Fixed a third piece of the same Django 6.1 `fieldset.html` restructure from
+  `2026.08.29.02`: **help text now rendered between the label and the field on the
+  same line, instead of below the row.** Django 6.1 moved `<div class="help">` from a
+  sibling positioned *after* the closing `.flex-container` div (6.0.7) to a child
+  positioned *inside* it, between the label and the field. Once `.flex-container` was
+  pinned to `flex-direction: row` to fix label/field placement, the help text became a
+  third item in that same row instead of falling below it as a block-level sibling.
+  Fixed with the same `flex-wrap` + `flex: 0 0 100%` technique already used elsewhere
+  in this file for `.aligned .flex-container:has(p.datetime)` — `.flex-container`
+  itself now wraps, and `.flex-container > .help` is forced onto its own full-width
+  line.
+
 ## 2026.08.29.02
 
 - Fixed a second Django 6.1 layout regression from the same root cause as
