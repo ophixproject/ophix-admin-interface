@@ -23,13 +23,22 @@
 }
 /* end-fix */
 
-/* Django 6.1's fieldset.html also moved the help-text <div class="help"> from a
-   sibling *after* .flex-container (6.0.7) to a child *inside* it, sandwiched between
-   the label and the field. Under row direction that makes help text a third item in
-   the same row instead of falling below — force it onto its own full-width line with
-   the same flex-wrap + flex-basis:100% technique already used below for
-   .aligned .flex-container:has(p.datetime). */
-.admin-interface .flex-container > .help {
+/* Django 6.1's fieldset.html also moved <div class="help"> AND <ul class="errorlist">
+   (field/line validation errors) from siblings *after* .flex-container (6.0.7) to
+   children *inside* it — and critically, both now render BEFORE the actual field in
+   DOM order (label -> help -> errors -> field). flex-wrap doesn't backfill earlier
+   rows once one has wrapped, so forcing .help alone onto its own row with
+   flex-basis:100% would also push everything after it in DOM order — the errorlist,
+   and the field itself — onto their own separate rows, undoing the label/field
+   pairing above for any field that has help text or a validation error (i.e. most
+   fields). `order` pulls both out of the DOM-order-driven wrap entirely: label and
+   the field (whatever it renders as — input/select/textarea/.related-widget-wrapper/
+   .readonly, all left at the default order) settle onto row one together in their
+   relative DOM order, while help/errors (order pushed past everything else, each
+   still flex-basis:100%) wrap onto their own full-width row(s) afterward. */
+.admin-interface .flex-container > .help,
+.admin-interface .flex-container > ul.errorlist {
+    order: 999;
     flex: 0 0 100%;
 }
 /* end-fix */

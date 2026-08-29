@@ -2,17 +2,27 @@
 
 ## Unreleased
 
-- Fixed a third piece of the same Django 6.1 `fieldset.html` restructure from
-  `2026.08.29.02`: **help text now rendered between the label and the field on the
-  same line, instead of below the row.** Django 6.1 moved `<div class="help">` from a
-  sibling positioned *after* the closing `.flex-container` div (6.0.7) to a child
-  positioned *inside* it, between the label and the field. Once `.flex-container` was
-  pinned to `flex-direction: row` to fix label/field placement, the help text became a
-  third item in that same row instead of falling below it as a block-level sibling.
-  Fixed with the same `flex-wrap` + `flex: 0 0 100%` technique already used elsewhere
-  in this file for `.aligned .flex-container:has(p.datetime)` — `.flex-container`
-  itself now wraps, and `.flex-container > .help` is forced onto its own full-width
-  line.
+- Fixed the remaining pieces of the same Django 6.1 `fieldset.html` restructure from
+  `2026.08.29.02`. Django 6.1's per-field DOM order inside `.flex-container` is
+  `label -> help -> errors -> field` — both `<div class="help">` and
+  `<ul class="errorlist">` (field/line validation errors) now render *before* the
+  field itself, whereas in 6.0.7 both were siblings positioned *after* the closing
+  `.flex-container` div entirely. Two problems followed from pinning
+  `.flex-container` to `flex-direction: row` to fix label/field placement:
+  - Help text and errors became ordinary items in that same row instead of falling
+    below it (help sat between the label and the field on one line).
+  - Naively forcing just `.help` onto its own full-width row via `flex-wrap` +
+    `flex: 0 0 100%` doesn't work on its own: flex-wrap doesn't backfill earlier
+    rows once one has wrapped, so anything *after* help in DOM order — the
+    errorlist, and critically the field itself — would also get pushed onto their
+    own separate rows, undoing the label/field pairing for any field with help text
+    or a validation error (i.e. most fields).
+  - Fixed with `order: 999` on both `.flex-container > .help` and
+    `.flex-container > ul.errorlist`, alongside `flex: 0 0 100%`: label and the
+    field (whatever it renders as — input/select/textarea/`.related-widget-wrapper`/
+    `.readonly`, all left at the default order) settle onto row one together
+    regardless of what sits between them in the DOM, while help and errors each
+    wrap onto their own full-width row afterward.
 
 ## 2026.08.29.02
 
