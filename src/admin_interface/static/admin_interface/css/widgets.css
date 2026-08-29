@@ -6,9 +6,18 @@
     text-decoration: underline;
 }
 
-/* fix generic flex container */
+/* fix generic flex container
+   Django's own fieldset.html wraps every ordinary field's label+widget pair in
+   <div class="flex-container fieldBox ...">, not just checkboxes/related-lookups —
+   Django 6.1's own .flex-container base rule defaults to flex-direction:column
+   (previously undeclared, browser default was row), so every plain field row
+   silently started stacking label-above-field. Declaring row explicitly here
+   restores the classic side-by-side layout for every .flex-container derivative
+   (checkbox-row, raw_id_fields wrapper, ordinary fieldBox) in one place, unless a
+   more specific rule below overrides it. */
 .admin-interface .flex-container {
     display: flex;
+    flex-direction: row;
     width: 100%;
 }
 /* end-fix */
@@ -16,12 +25,29 @@
 /* fix flex container for boolean fields */
 .admin-interface .flex-container.checkbox-row {
     align-items: center;
-    flex-direction: row;
 }
 .admin-interface .flex-container.checkbox-row label.vCheckboxLabel {
     margin-top: 0 !important;
     padding-left: 5px !important;
     padding-bottom: 0;
+}
+/* end-fix */
+
+/* Restore the fixed-width label column for aligned fieldsets. Django 6.1 removed
+   `.aligned legend, .aligned label { display: block; width: 160px; ... }` entirely
+   from its own forms.css — it's the other half of the same redesign that changed
+   .flex-container's default to column (Django's new intended layout no longer needs
+   a fixed label width once labels sit above fields). Restoring the classic side-by-side
+   layout above means we also need to restore this ourselves, since nothing upstream
+   provides it anymore. Values match Django's own pre-6.1 rule exactly — the 160px
+   width is also depended on directly by .aligned p.datetime .datetime-sublabel
+   below, which was already written to match this column. */
+.admin-interface .aligned label {
+    display: block;
+    padding: 4px 10px 0 0;
+    min-width: 160px;
+    width: 160px;
+    word-wrap: break-word;
 }
 /* end-fix */
 

@@ -1,5 +1,25 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Fixed a second Django 6.1 layout regression from the same root cause as
+  `2026.08.29.01`'s `.flex-container` fix, missed there because it's a different half
+  of the same upstream redesign: **every ordinary field's label and input rendered
+  stacked in a single column instead of side by side.** Checked Django's actual
+  `fieldset.html` include template directly (not just CSS) — every field, not just
+  checkboxes, is wrapped in `<div class="flex-container fieldBox ...">{{ label }}{{
+  field }}</div>` in both 6.0.7 and 6.1. The `2026.08.29.01` fix only pinned
+  `flex-direction: row` on `.flex-container.checkbox-row`, missing that the *base*
+  `.flex-container` rule needed it too, since ordinary fields use only the base class.
+  Django 6.1 also deleted `.aligned legend, .aligned label { display: block; width:
+  160px; ... }` from its own forms.css entirely with no replacement — the other half of
+  the same redesign (their new column-based layout no longer needs a fixed label
+  width). Fixed by moving `flex-direction: row` onto the base `.flex-container` rule
+  (removing it from `.checkbox-row`, now redundant) and restoring the `.aligned label`
+  rule verbatim from Django's own pre-6.1 CSS. The 160px value isn't arbitrary — it's
+  already depended on directly by `.aligned p.datetime .datetime-sublabel`'s own
+  comment ("matches Django's .aligned label column").
+
 ## 2026.08.29.01
 
 - Fixed several layout regressions under Django 6.1, all caused by the same root pattern:
