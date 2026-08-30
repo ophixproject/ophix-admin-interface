@@ -1,5 +1,28 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.30.08
+
+- Fixed the history-page "Back" button not rendering at all on pre-6.1 Django
+  (confirmed missing from the raw HTML source on a real 6.0.6 install, not just
+  mispositioned) — root cause found by checking Django's real `base.html` on both
+  versions directly: `object_history.html` has never once defined
+  `{% block object-tools %}` inside its own `content` override, on *any* Django
+  version. On 6.1 that doesn't matter, since `object-tools` was promoted to an
+  independent top-level block there (a sibling of `content`, inside the new
+  `.titles-and-tools` wrapper), so it renders regardless of what `content` does.
+  On 5.2/6.0.6, `object-tools` is nested *inside* `content` — and since
+  `object_history.html`'s own `content` override never mentions that block name,
+  it doesn't exist anywhere in the actual render tree for this page, so
+  `2026.08.30.04`'s `{% block object-tools %}` override had nowhere to render on
+  anything older than 6.1. A block override can't fix this — its very existence is
+  version-dependent. Rewrote the template to render the button unconditionally
+  inside `{% block content %}` (a safe, version-independent slot every Django
+  version provides), then added `object-history-tools.js` (loaded globally,
+  no-op elsewhere) to relocate it into `.titles-and-tools` on page load only when
+  that wrapper actually exists (6.1+); on older Django it's left exactly where it
+  rendered, where the existing float/margin-top hack already positions every other
+  object-tools button correctly.
+
 ## 2026.08.30.07
 
 - Fixed `2026.08.30.05`'s removal of the `float`/`margin-top`/`width` hack from
