@@ -1,0 +1,14 @@
+{% extends "admin/object_history.html" %}
+{% load i18n admin_urls %}
+
+{% block content %}
+{% if object %}
+<ul class="object-tools">
+    <li>
+        {% url opts|admin_urlname:'change' object.pk|admin_urlquote as back_url %}
+        <a href="{% add_preserved_filters back_url %}" class="historylink">{% trans "Back" %}</a>
+    </li>
+</ul>
+{% endif %}
+{{ block.super }}
+{% endblock %}
