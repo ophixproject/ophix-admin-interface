@@ -1,5 +1,13 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.30.10
+
+- `.object-tools` position tuning (structural fix landed in `2026.08.30.08`; this
+  is purely the `top`/`right` offset values against `#content`, now that they're
+  simple, low-risk numbers rather than a fragile per-page float calibration):
+  `2026.08.30.09`'s `top: -15px; right: 10px` tested too high vertically and not
+  far enough left horizontally. Adjusted to `top: 20px; right: 30px`.
+
 ## 2026.08.30.08
 
 - Replaced `.object-tools`'s `float`/negative-`margin-top` positioning
