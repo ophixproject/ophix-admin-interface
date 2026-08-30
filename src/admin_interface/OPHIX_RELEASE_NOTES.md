@@ -1,12 +1,15 @@
 # Ophix Admin Interface Release Notes
 
-## 2026.08.30.02
+## 2026.08.30.03
 
 - Added a "Back" button (`object-tools`, styled like "History") to the object history
   page, linking back to the change view for the object being viewed. Django's own
   `object_history.html` has no `object-tools` block at all, so the only ways back
   from a history page were breadcrumbs or the left nav — no direct equivalent to the
   "History" button's round trip.
+
+## 2026.08.30.02
+
 - Fixed "LOG OUT" (`#logout-form button`) not picking up the `2026.08.30.01`
   `#user-tools` font-weight fix. Django's own `base.css` sets `font-weight: 300`
   directly on `#logout-form button`, which bypasses inheritance from the
