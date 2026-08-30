@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.08.29.04
 
 - Fixed wide fields (Description/Command textareas, URL fields, etc.) rendering
   full-width on their own row instead of staying beside the label — a side effect of
