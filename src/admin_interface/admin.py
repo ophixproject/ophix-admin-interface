@@ -205,6 +205,7 @@ class ThemeAdmin(admin.ModelAdmin):
                     ("css_warning_color", "css_warning_color_dark_use", "css_warning_color_dark"),
                     ("css_muted_color", "css_muted_color_dark_use", "css_muted_color_dark"),
                     ("css_alert_color", "css_alert_color_dark_use", "css_alert_color_dark"),
+                    ("css_disabled_color", "css_disabled_color_dark_use", "css_disabled_color_dark"),
                 ),
                 "description": _DARK_HINT,
             },

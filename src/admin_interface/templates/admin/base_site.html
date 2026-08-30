@@ -39,6 +39,7 @@
             --admin-interface-related-modal-background-color: {{ theme.related_modal_background_color }};
             --admin-interface-related-modal-background-opacity: {{ theme.related_modal_background_opacity }};
             --admin-interface-alert-color: {{ theme.css_alert_color }};
+            --admin-interface-disabled-color: {{ theme.css_disabled_color }};
             --message-success-bg: {{ theme.css_message_success_bg }};
             --message-success-text: {{ theme.css_message_success_text }};
             --message-warning-bg: {{ theme.css_message_warning_bg }};
@@ -209,6 +210,9 @@
         {% endif %}
         {% if theme.css_alert_color_dark_use and theme.css_alert_color_dark %}
             --admin-interface-alert-color: {{ theme.css_alert_color_dark }};
+        {% endif %}
+        {% if theme.css_disabled_color_dark_use and theme.css_disabled_color_dark %}
+            --admin-interface-disabled-color: {{ theme.css_disabled_color_dark }};
         {% endif %}
         {% if theme.css_message_success_bg_dark_use and theme.css_message_success_bg_dark %}
             --message-success-bg: {{ theme.css_message_success_bg_dark }};

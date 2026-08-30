@@ -445,6 +445,15 @@ class Theme(models.Model):
     )
     css_alert_color_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
     css_alert_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
+    css_disabled_color = ColorField(
+        blank=True,
+        default="#666666",
+        help_text=_("#666666 — used for disabled rows and records, distinct from ordinary muted/secondary text"),
+        max_length=10,
+        verbose_name=_("disabled color"),
+    )
+    css_disabled_color_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    css_disabled_color_dark = ColorField(blank=True, default="", max_length=10, verbose_name=_("dark"))
 
     css_message_success_bg = ColorField(
         blank=True,

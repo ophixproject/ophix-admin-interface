@@ -636,6 +636,14 @@
         <div class="col-dark" id="dark-css_alert_color">{{ form.css_alert_color_dark }}</div>
       </div>
       {% if form.css_alert_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_alert_color.help_text }}</div></div>{% endif %}
+      {% if form.css_disabled_color.errors or form.css_disabled_color_dark.errors %}<div class="field-error-row">{{ form.css_disabled_color.errors }}{{ form.css_disabled_color_dark.errors }}</div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Disabled" %}</div>
+        <div class="col-light">{{ form.css_disabled_color }}</div>
+        <div class="col-toggle">{{ form.css_disabled_color_dark_use }}</div>
+        <div class="col-dark" id="dark-css_disabled_color">{{ form.css_disabled_color_dark }}</div>
+      </div>
+      {% if form.css_disabled_color.help_text %}<div class="help-row"><div class="col-help">{{ form.css_disabled_color.help_text }}</div></div>{% endif %}
     </div>
   </div>
 </fieldset>

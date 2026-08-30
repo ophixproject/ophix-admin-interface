@@ -1,5 +1,14 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.30.11
+
+- Theme: added a dedicated "Disabled" colour to the Status Colors section
+  (`css_disabled_color` + `css_disabled_color_dark_use`/`_dark` pair, migration
+  `0010`) — for styling disabled rows/records, distinct from `css_muted_color`
+  (ordinary secondary/muted text). Emitted as `--admin-interface-disabled-color`.
+  Ophix's own bundled default theme set to `#666666` (darker than the existing
+  `#999999` muted colour), adjustable per-theme like any other status colour.
+
 ## 2026.08.30.10
 
 - `.object-tools` position tuning (structural fix landed in `2026.08.30.08`; this
