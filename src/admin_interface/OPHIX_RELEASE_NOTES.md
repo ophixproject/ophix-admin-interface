@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- `.admin-settings-cross-link` (the "Theme: ... →" pre-label on Admin Settings)
+  was coloured with `--admin-interface-module-text-color` — the variable meant for
+  text sitting inside a coloured module header bar, not a plain-background label —
+  so it read in a mismatched tint in both light and dark mode instead of the normal
+  label/body text colour. Removed the override; it now inherits the same colour as
+  every other label on the page, same as light and dark mode already work for those.
 - `#toggle-nav-sidebar` (the chevron handle): the rule only zeroed/set the two right
   corners (`border-top-right-radius`/`border-bottom-right-radius` from
   `--admin-interface-tab-border-radius`) — the left corners were left to inherit

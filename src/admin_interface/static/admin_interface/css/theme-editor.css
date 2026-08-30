@@ -477,6 +477,5 @@ fieldset.theme-custom-section > ul.messagelist {
     margin: 10px 0 2px 0;
     padding: 6px 12px;
     font-size: 0.85em;
-    color: var(--admin-interface-module-text-color, inherit);
     opacity: 0.75;
 }
