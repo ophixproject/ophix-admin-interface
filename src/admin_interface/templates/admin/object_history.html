@@ -1,7 +1,7 @@
 {% extends "admin/object_history.html" %}
 {% load i18n admin_urls %}
 
-{% block content %}
+{% block object-tools %}
 {% if object %}
 <ul class="object-tools">
     <li>
@@ -10,5 +10,4 @@
     </li>
 </ul>
 {% endif %}
-{{ block.super }}
 {% endblock %}

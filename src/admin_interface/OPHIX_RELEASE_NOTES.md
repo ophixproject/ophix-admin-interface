@@ -1,5 +1,26 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.30.04
+
+- Fixed the `2026.08.30.03` history-page "Back" button being unclickable (no hover
+  feedback, no click, no navigation) — it was rendered by overriding
+  `{% block content %}` instead of `{% block object-tools %}`, which placed it
+  *outside* Django 6.1's new `.titles-and-tools` flex wrapper — a div pairing the
+  page title with `{% block object-tools %}`, replacing the old
+  `float`/negative-`margin-top` positioning entirely.
+  Sitting outside that wrapper, the button still inherited `ophix-admin-interface`'s
+  own legacy `object-tools.css` (`float: right; margin-top: -45px; width: 55–70%`) —
+  a hack designed for the pre-6.1 layout where `object-tools` sat *inside* `content`.
+  Applied to an element now sitting *outside* `.titles-and-tools` instead, the negative
+  margin visually pulled it up beside the `<h1>` (looking correctly placed) while the
+  `<h1>` itself won the actual stacking/hit-test — clicking it always hit the title,
+  never the link. Confirmed by diffing a real Django 6.1 install's `admin/base.html`
+  and `base.css` against the vendored 5.2 copy previously checked, per the session-52
+  diffing technique. Fixed by overriding `object-tools` (the same block name
+  `change_form.html` already uses correctly) instead of `content`, so the Back button
+  now renders in the exact same DOM position/CSS context as "History"/"Duplicate" on
+  every other page.
+
 ## 2026.08.30.03
 
 - Added a "Back" button (`object-tools`, styled like "History") to the object history
