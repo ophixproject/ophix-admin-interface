@@ -25,6 +25,21 @@
   project wants surfaced this way). A blank required field already gets its own clear
   "This field is required." error on submit, so the extra visual hint wasn't valued
   and the inconsistent weight across a form read as untidy instead.
+- Fixed every ordinary field sitting 10px further right than intended, discovered via
+  the `ScheduledTask` date/time widget looking "slightly off" relative to everything
+  around it — the datetime widget hadn't moved, everything else had. Root cause:
+  Django 6.1's own `.flex-container` rule added `gap: 10px` (6.0.7 had none at all),
+  which none of this session's earlier fixes reset. The label already provides 10px
+  of separation via its own `padding: 4px 10px 0 0` — `gap`'s column-gap component
+  added a second, independent 10px on top of that, double-counting the spacing for
+  every ordinary field. `.datetime-sublabel`'s hand-built CSS doesn't route through
+  this same generic container, so it wasn't affected and looked out of step by
+  comparison. Fixed with `column-gap: 0` (not the `gap` shorthand) on the base
+  `.flex-container` rule — `row-gap` must stay at Django's 10px, since `.help`/
+  `div.help` (Django's own `base.css`) carries no margin of its own at all; the
+  vertical space between a field's row and its wrapped help-text row underneath
+  comes entirely from `row-gap`, and zeroing it too would collapse that spacing
+  instead of just the horizontal double-count.
 
 ## 2026.08.29.03
 

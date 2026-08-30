@@ -14,11 +14,25 @@
    silently started stacking label-above-field. Declaring row explicitly here
    restores the classic side-by-side layout for every .flex-container derivative
    (checkbox-row, raw_id_fields wrapper, ordinary fieldBox) in one place, unless a
-   more specific rule below overrides it. */
+   more specific rule below overrides it.
+   Django 6.1's own rule also added `gap: 10px` (6.0.7 had none at all). The label
+   already provides its own 10px separation via `padding: 4px 10px 0 0` (restored
+   below) — gap's column-gap component adds a second, independent 10px on top of
+   that, so every ordinary field ended up 20px from the label instead of the
+   intended 10px, i.e. shifted 10px further right than before. `.datetime-sublabel`'s
+   own hand-built CSS doesn't go through this same generic gap-affected container,
+   so it wasn't shifted and looked "slightly off" relative to everything around it —
+   the datetime widget never moved, everything else did. Zeroing column-gap (not the
+   `gap` shorthand) removes only that horizontal double-count, restoring the 6.0.7
+   spacing exactly. row-gap must stay at Django's 10px: `.help`/`div.help` (base.css)
+   has no margin of its own at all, so the vertical space between a field's row and
+   its wrapped help-text row underneath (see the .help/.errorlist rule below) comes
+   entirely from row-gap — zeroing it too would collapse that spacing instead. */
 .admin-interface .flex-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    column-gap: 0;
     width: 100%;
 }
 /* end-fix */
