@@ -1,5 +1,23 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.30.07
+
+- Fixed `2026.08.30.05`'s removal of the `float`/`margin-top`/`width` hack from
+  `.object-tools` breaking positioning on pre-6.1 Django (tested against a real
+  6.0.6 install): "History"/"Duplicate" rendered far below the title instead of
+  beside it, and "Back" was pushed low enough to go unnoticed. Checked the real
+  Django 6.0.6 source directly — its own `.object-tools` CSS is
+  `text-align:right; margin:0 0 15px` with no float or negative margin at all, so
+  `ophix-admin-interface`'s hack was the *only* thing making buttons sit next to
+  the title on that version; `2026.08.30.05` removed it unconditionally, correct
+  for 6.1 but wrong for everything older. Restored the pre-6.1 hack as the default
+  (unconditional, since older Django is still in the fleet), and instead scoped
+  its cancellation to `.titles-and-tools .object-tools` specifically — a selector
+  that can only ever match on Django 6.1+, since that wrapper doesn't exist at all
+  on older Django (confirmed against real 5.2/6.0.6/6.1 source). Both the
+  `2026.08.30.06` `align-items: flex-start` fix and the `float:none;
+  margin-top:0; width:auto` cancellation now live under that same scoped selector.
+
 ## 2026.08.30.06
 
 - Fixed `2026.08.30.05`'s `object-tools` positioning still drifting noticeably
