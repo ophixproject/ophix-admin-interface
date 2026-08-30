@@ -855,6 +855,8 @@ body.admin-interface {
 .admin-interface #toggle-nav-sidebar {
     border-top-right-radius: var(--admin-interface-tab-border-radius);
     border-bottom-right-radius: var(--admin-interface-tab-border-radius);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     color: var(--admin-interface-generic-link-color);
 }
 

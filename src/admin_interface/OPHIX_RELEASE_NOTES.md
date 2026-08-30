@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- `#toggle-nav-sidebar` (the chevron handle): the rule only zeroed/set the two right
+  corners (`border-top-right-radius`/`border-bottom-right-radius` from
+  `--admin-interface-tab-border-radius`) — the left corners were left to inherit
+  whatever a broader button/border-radius rule set elsewhere, giving the flush left
+  edge a mismatched radius. Added explicit `border-top-left-radius: 0` and
+  `border-bottom-left-radius: 0`.
 - Modal close button (`button.mfp-close`, Magnific Popup): moved off the default
   `right: 0` (which sat flush against the modal edge, overlapping the scrollbar in
   taller modals like the schedule editor) to `right: 10px`, made the position rule
