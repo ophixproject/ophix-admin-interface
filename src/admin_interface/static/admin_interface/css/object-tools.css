@@ -24,8 +24,8 @@
 }
 .admin-interface .object-tools {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -15px;
+    right: 10px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
