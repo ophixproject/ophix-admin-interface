@@ -1,23 +1,19 @@
 /* top-right buttons color on hover -> just a lighten grey */
+/* Positioning of .object-tools itself (float/negative margin-top/percentage width)
+   was removed here — Django 6.1's own .titles-and-tools flex row (.titles has
+   flex-grow:1) already places object-tools correctly at the row's trailing edge,
+   at the same height as the title. The old float+margin-top trick was designed for
+   pre-6.1 Django, where object-tools sat nested inside {% block content %} instead
+   of this flex row; applied to a real flex item it produces content-length-sensitive
+   drift (confirmed: the same "Back"/"History" button landing at visibly different
+   positions on different pages). What's kept here is purely the internal layout of
+   multiple buttons *within* object-tools itself. */
 @media (min-width:768px) {
     .admin-interface .object-tools {
-        margin-top: -45px;
-        width: 55%;
-        float: right;
         display: flex;
         justify-content: flex-end;
         align-items: center;
         flex-wrap: wrap;
-    }
-}
-@media (min-width:1024px) {
-    .admin-interface .object-tools {
-        width: 60%;
-    }
-}
-@media (min-width:1280px) {
-    .admin-interface .object-tools {
-        width: 70%;
     }
 }
 .admin-interface .object-tools li {

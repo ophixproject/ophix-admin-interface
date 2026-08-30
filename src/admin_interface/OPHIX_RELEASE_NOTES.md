@@ -1,5 +1,24 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.30.05
+
+- Fixed `2026.08.30.04`'s history-page "Back" button (and by extension, every
+  `object-tools` button, e.g. "History"/"Duplicate") rendering slightly too high
+  once correctly nested inside Django 6.1's `.titles-and-tools` flex row.
+  `object-tools.css` still carried a pre-6.1 `float: right; margin-top: -45px;
+  width: 55–70%` hack meant to manually pull `object-tools` up beside the title
+  when it sat outside any flex context (older Django). Now that it's a genuine flex
+  item, `float` is simply ignored per spec, the negative `margin-top` still applies
+  and pulls it above its natural row position, and the fixed percentage `width`
+  fights `.titles`'s `flex-grow: 1` — together producing content-length-sensitive
+  drift, which is why "Back" and "History" (same CSS, different pages) landed at
+  visibly different vertical positions. Removed the `float`/`margin-top`/`width`
+  entirely; Django 6.1's own `.titles-and-tools` flex row already places
+  `object-tools` correctly at the trailing edge of the title row with no extra
+  positioning needed. Kept the internal `display:flex; justify-content:flex-end;
+  align-items:center; flex-wrap:wrap` used to lay out multiple buttons within
+  `object-tools` itself.
+
 ## 2026.08.30.04
 
 - Fixed the `2026.08.30.03` history-page "Back" button being unclickable (no hover
