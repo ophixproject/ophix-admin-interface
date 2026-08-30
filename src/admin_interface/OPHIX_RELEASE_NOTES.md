@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Modal close button (`button.mfp-close`, Magnific Popup): moved off the default
+  `right: 0` (which sat flush against the modal edge, overlapping the scrollbar in
+  taller modals like the schedule editor) to `right: 10px`, made the position rule
+  explicit (`position: absolute; top: 0;`), and enlarged from `1.375rem` to `2rem`
+  so it's easier to see and click.
 - Finished the `#user-tools` (top-right "WELCOME,ADMIN. CHANGE PASSWORD / LOG OUT")
   font-weight/alignment fix from the marketing manager's review list — the earlier
   pass only set `font-weight: 400` on the `a` elements, leaving the plain

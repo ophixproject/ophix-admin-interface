@@ -88,7 +88,10 @@ body.admin-interface {
 
 /* Restore modal close button size — button:not([type]) above accidentally shrinks it */
 .admin-interface button.mfp-close {
-    font-size: 1.375rem;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 2rem;
     border-radius: 0;
     color: var(--body-loud-color, #000);
 }
