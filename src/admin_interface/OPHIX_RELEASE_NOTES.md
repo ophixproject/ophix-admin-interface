@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.08.30.01
 
 - Filter sidebar: tightened vertical spacing between a filter's label and its
   dropdown, and between consecutive filter groups. `.module.filtered
