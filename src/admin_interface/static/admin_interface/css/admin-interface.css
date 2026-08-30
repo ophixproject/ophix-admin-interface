@@ -284,6 +284,7 @@ body.admin-interface {
 
 .admin-interface #header #user-tools #logout-form button {
     line-height: 1;
+    font-weight: 400;
 }
 
 .admin-interface #header #user-tools a {
