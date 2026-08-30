@@ -1,13 +1,17 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.30.02
+
+- Fixed "LOG OUT" (`#logout-form button`) not picking up the `2026.08.30.01`
+  `#user-tools` font-weight fix. Django's own `base.css` sets `font-weight: 300`
+  directly on `#logout-form button`, which bypasses inheritance from the
+  `#user-tools` container entirely — the div-level `font-weight: 400` added for
+  "CHANGE PASSWORD" (an `<a>`) never reached the logout button because it's a direct
+  rule on the button itself, not an inherited value. Added an explicit
+  `font-weight: 400` to the button rule.
+
 ## 2026.08.30.01
 
-- Fixed "LOG OUT" (`#logout-form button`) not picking up the earlier `#user-tools`
-  font-weight fix. Django's own `base.css` sets `font-weight: 300` directly on
-  `#logout-form button`, which bypasses inheritance from the `#user-tools` container
-  entirely — the div-level `font-weight: 400` added for "CHANGE PASSWORD" (an `<a>`)
-  never reached the logout button because it's a direct rule on the button itself,
-  not an inherited value. Added an explicit `font-weight: 400` to the button rule.
 - Filter sidebar: tightened vertical spacing between a filter's label and its
   dropdown, and between consecutive filter groups. `.module.filtered
   #changelist-filter h3` margin-bottom 12px → 4px; `#changelist-filter
