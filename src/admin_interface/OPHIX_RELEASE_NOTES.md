@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Filter sidebar: tightened vertical spacing between a filter's label and its
+  dropdown, and between consecutive filter groups. `.module.filtered
+  #changelist-filter h3` margin-bottom 12px → 4px; `#changelist-filter
+  .list-filter-dropdown` margin-bottom 15px → 8px.
 - `.admin-settings-cross-link` (the "Theme: ... →" pre-label on Admin Settings)
   was coloured with `--admin-interface-module-text-color` — the variable meant for
   text sitting inside a coloured module header bar, not a plain-background label —

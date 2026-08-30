@@ -4,7 +4,7 @@ list-filter-dropdown
 
 .admin-interface #changelist-filter .list-filter-dropdown {
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 
 .admin-interface #changelist-filter h2 + .list-filter-dropdown,

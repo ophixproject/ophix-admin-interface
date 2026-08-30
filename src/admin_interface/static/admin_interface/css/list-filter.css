@@ -32,7 +32,7 @@
 
 .admin-interface .module.filtered #changelist-filter h3 {
     margin-top: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 4px;
 }
 
 /* fix summary shift when expanding/collapsing list filter */
