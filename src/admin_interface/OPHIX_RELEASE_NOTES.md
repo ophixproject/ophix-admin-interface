@@ -6,7 +6,8 @@
   is purely the `top`/`right` offset values against `#content`, now that they're
   simple, low-risk numbers rather than a fragile per-page float calibration):
   `2026.08.30.09`'s `top: -15px; right: 10px` tested too high vertically and not
-  far enough left horizontally. Adjusted to `top: 20px; right: 30px`.
+  far enough left horizontally. Tuned live in DevTools against the real page to
+  `top: 20px; right: 40px`.
 
 ## 2026.08.30.08
 
