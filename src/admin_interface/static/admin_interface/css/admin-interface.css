@@ -55,6 +55,18 @@ body.admin-interface {
     color: var(--admin-interface-body-text-color, inherit);
 }
 
+/* All labels render at a uniform weight, deliberately overriding Django's own
+   required-vs-optional bold/normal distinction (label { font-weight: normal } /
+   label.required { font-weight: bold }, unchanged by us elsewhere). A blank required
+   field already surfaces its own clear "This field is required." error on submit, so
+   the extra visual hint isn't valued here and the inconsistent weight across a form
+   reads as untidy instead. legend included since Django applies the same required
+   class to fieldset legends. */
+.admin-interface label,
+.admin-interface legend {
+    font-weight: 700;
+}
+
 /* Color picker swatch buttons — always square; --admin-interface-button-border-radius must not apply */
 .admin-interface .clr-field button[type="button"] {
     border-radius: 0;

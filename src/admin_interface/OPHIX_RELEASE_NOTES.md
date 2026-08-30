@@ -17,6 +17,14 @@
   stretching to fill leftover row space, which would be a new visual change, not a
   restoration of the old behaviour). `.related-widget-wrapper` (FK fields) already
   had this protection; ordinary fields never did.
+- All labels and legends now render at a uniform `font-weight: 700`, deliberately
+  overriding Django's own required-vs-optional bold/normal distinction
+  (`label { font-weight: normal }` / `label.required { font-weight: bold }` — this
+  mechanism is unchanged between Django versions, confirmed identical in both CSS and
+  `AdminField.label_tag()`; it was never a bug, just no longer a distinction this
+  project wants surfaced this way). A blank required field already gets its own clear
+  "This field is required." error on submit, so the extra visual hint wasn't valued
+  and the inconsistent weight across a form read as untidy instead.
 
 ## 2026.08.29.03
 
