@@ -279,6 +279,10 @@ body.admin-interface {
     border-bottom: none;
 }
 
+.admin-interface #header #user-tools #logout-form button {
+    line-height: 1;
+}
+
 .admin-interface #header #user-tools a {
     padding-inline: 0.5rem;
     font-weight: 400;

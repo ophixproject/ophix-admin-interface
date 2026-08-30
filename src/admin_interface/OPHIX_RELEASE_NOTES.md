@@ -1,5 +1,18 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Finished the `#user-tools` (top-right "WELCOME,ADMIN. CHANGE PASSWORD / LOG OUT")
+  font-weight/alignment fix from the marketing manager's review list — the earlier
+  pass only set `font-weight: 400` on the `a` elements, leaving the plain
+  "WELCOME,ADMIN." text node and the `#logout-form button` off the same rule; moved
+  it onto the `#user-tools` container itself in `header.css` so every child inherits
+  consistently. Also added `line-height: 1` to `#logout-form button` (was unset,
+  relying on the browser's default button line-height, which is not guaranteed to
+  match the surrounding text's line-height across browsers/zoom levels — this is
+  what caused "LOG OUT" to look vertically offset from "CHANGE PASSWORD" in one
+  browser but not another).
+
 ## 2026.08.29.04
 
 - Fixed wide fields (Description/Command textareas, URL fields, etc.) rendering
