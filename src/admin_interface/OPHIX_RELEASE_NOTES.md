@@ -1,5 +1,19 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.30.06
+
+- Fixed `2026.08.30.05`'s `object-tools` positioning still drifting noticeably
+  page-to-page (compared "History"/"Duplicate" on several change forms, "Add
+  Schedule" on a changelist, and "Back" on a history page — all visibly different
+  heights). Root cause: `.titles-and-tools` has no `align-items` of its own, so it
+  defaults to `stretch` — `.object-tools` stretches to match `.titles`'s height
+  (which varies with title text length/wrapping across pages), then centers its
+  buttons *within* that stretched box, so the button's vertical position tracked
+  however tall the title happened to be on each specific page. Added
+  `align-items: flex-start` to `.titles-and-tools` so both it and `object-tools`
+  anchor to the top of the row regardless of title height — the button's position
+  no longer depends on page-specific title content.
+
 ## 2026.08.30.05
 
 - Fixed `2026.08.30.04`'s history-page "Back" button (and by extension, every

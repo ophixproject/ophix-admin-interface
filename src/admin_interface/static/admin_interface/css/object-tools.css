@@ -1,13 +1,24 @@
 /* top-right buttons color on hover -> just a lighten grey */
 /* Positioning of .object-tools itself (float/negative margin-top/percentage width)
    was removed here — Django 6.1's own .titles-and-tools flex row (.titles has
-   flex-grow:1) already places object-tools correctly at the row's trailing edge,
-   at the same height as the title. The old float+margin-top trick was designed for
-   pre-6.1 Django, where object-tools sat nested inside {% block content %} instead
-   of this flex row; applied to a real flex item it produces content-length-sensitive
-   drift (confirmed: the same "Back"/"History" button landing at visibly different
-   positions on different pages). What's kept here is purely the internal layout of
-   multiple buttons *within* object-tools itself. */
+   flex-grow:1) places object-tools at the row's trailing edge horizontally. The old
+   float+margin-top trick was designed for pre-6.1 Django, where object-tools sat
+   nested inside {% block content %} instead of this flex row; applied to a real
+   flex item it produces content-length-sensitive drift (confirmed: the same
+   "Back"/"History" button landing at visibly different positions on different
+   pages). What's kept here is purely the internal layout of multiple buttons
+   *within* object-tools itself.
+
+   VERTICAL alignment needed a second fix: .titles-and-tools has no align-items of
+   its own, so it defaults to `stretch` — .object-tools stretches to match
+   .titles's height (which varies: single-line vs. wrapped titles, different H1
+   text per page), then centers its buttons *within* that stretched box, so the
+   button's vertical position still drifted with title height. `align-items:
+   flex-start` below anchors both .titles and .object-tools to the top of the row,
+   so the button's position no longer depends on how tall the title happens to be. */
+.admin-interface .titles-and-tools {
+    align-items: flex-start;
+}
 @media (min-width:768px) {
     .admin-interface .object-tools {
         display: flex;
