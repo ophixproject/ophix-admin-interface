@@ -1,54 +1,35 @@
 /* top-right buttons color on hover -> just a lighten grey */
-/* float/negative margin-top/percentage width position .object-tools next to the
-   title on pre-6.1 Django, where it's nested inside {% block content %} (no flex
-   context of its own — confirmed against real Django 5.2/6.0.6 source, both of
-   which ship no float/negative-margin of their own for .object-tools, so without
-   this ophix-specific rule the buttons render as a plain in-flow block well below
-   the title instead of floating up beside it). This must stay unconditional
-   (not gated behind a Django-version check) since older Django is still in the
-   fleet. */
-@media (min-width:768px) {
-    .admin-interface .object-tools {
-        margin-top: -45px;
-        width: 55%;
-        float: right;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        flex-wrap: wrap;
-    }
+/* .object-tools is anchored with position:absolute against #content instead of
+   Django's own float+negative-margin-top approach. Reasoning, after several
+   rounds of chasing float/margin drift across Django versions and pages:
+   - #content ("colM") is the one ancestor that exists, in the same structural
+     role, on every Django version — pre-6.1 (object-tools nested inside
+     {% block content %}) and 6.1+ (object-tools promoted to an independent
+     top-level block inside the new .titles-and-tools wrapper). Anchoring to it
+     works regardless of which structure a given Django version/page uses, with
+     no per-version CSS branch needed.
+   - A fixed negative margin-top (the old approach) is calibrated for one
+     specific title height and drifts whenever that height changes — confirmed
+     in the wild: a plain <h1> vs. an <h1>+<h2> subtitle pair (e.g. Plugin
+     Versions' "View Plugin" / "ophix-server-base") is tall enough to throw off
+     a fixed -45px, landing the button visibly low. top:0; right:0 against
+     #content has no such dependency — it's the same regardless of how tall the
+     title/subtitle/breadcrumb happens to be on a given page.
+   - Positioned elements always paint above normal-flow/floated content
+     (independent of DOM order), which also fixes the original bug this whole
+     chain started from: a floated object-tools sitting outside its "natural"
+     flow could lose the hit-test to the title sitting above it. */
+.admin-interface #content {
+    position: relative;
 }
-@media (min-width:1024px) {
-    .admin-interface .object-tools {
-        width: 60%;
-    }
-}
-@media (min-width:1280px) {
-    .admin-interface .object-tools {
-        width: 70%;
-    }
-}
-
-/* Django 6.1+ only: object-tools is nested inside .titles-and-tools as a real flex
-   sibling of .titles instead (new in 6.1 — this wrapper doesn't exist at all on
-   older Django, confirmed against real 5.2/6.0.6/6.1 source, so this selector can
-   only ever match there). The pre-6.1 hack above is wrong in that context: float
-   is ignored on flex items per spec, the negative margin-top still applies and
-   pulls it above its natural row position, and the fixed width fights .titles's
-   flex-grow:1 — together producing content-length-sensitive drift (confirmed: the
-   same button landing at visibly different positions on different pages). Also
-   sets align-items:flex-start on the row itself, since it otherwise defaults to
-   stretch — without it, .object-tools stretches to match .titles's height (which
-   varies with title text length/wrapping per page) and centers within that
-   stretched box, so its vertical position still tracked title height even with
-   the float/margin/width hack neutralized. */
-.admin-interface .titles-and-tools {
-    align-items: flex-start;
-}
-.admin-interface .titles-and-tools .object-tools {
-    float: none;
-    margin-top: 0;
-    width: auto;
+.admin-interface .object-tools {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .admin-interface .object-tools li {
     margin-bottom: 4px;

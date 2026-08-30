@@ -2,26 +2,33 @@
 
 ## 2026.08.30.08
 
-- Fixed the history-page "Back" button not rendering at all on pre-6.1 Django
-  (confirmed missing from the raw HTML source on a real 6.0.6 install, not just
-  mispositioned) — root cause found by checking Django's real `base.html` on both
-  versions directly: `object_history.html` has never once defined
-  `{% block object-tools %}` inside its own `content` override, on *any* Django
-  version. On 6.1 that doesn't matter, since `object-tools` was promoted to an
-  independent top-level block there (a sibling of `content`, inside the new
-  `.titles-and-tools` wrapper), so it renders regardless of what `content` does.
-  On 5.2/6.0.6, `object-tools` is nested *inside* `content` — and since
-  `object_history.html`'s own `content` override never mentions that block name,
-  it doesn't exist anywhere in the actual render tree for this page, so
-  `2026.08.30.04`'s `{% block object-tools %}` override had nowhere to render on
-  anything older than 6.1. A block override can't fix this — its very existence is
-  version-dependent. Rewrote the template to render the button unconditionally
-  inside `{% block content %}` (a safe, version-independent slot every Django
-  version provides), then added `object-history-tools.js` (loaded globally,
-  no-op elsewhere) to relocate it into `.titles-and-tools` on page load only when
-  that wrapper actually exists (6.1+); on older Django it's left exactly where it
-  rendered, where the existing float/margin-top hack already positions every other
-  object-tools button correctly.
+- Replaced `.object-tools`'s `float`/negative-`margin-top` positioning
+  (Django's own long-standing approach, still carried through several rounds of
+  `2026.08.30.0[4-7]`) with `position: absolute; top: 0; right: 0;` anchored
+  against `#content`. This fixes two problems that a fixed float/margin
+  calibration can never fully solve:
+  - The history-page "Back" button was rendering with no HTML output at all on
+    pre-6.1 Django (confirmed against a real 6.0.6 install) — Django's own
+    `object_history.html` has never defined `{% block object-tools %}` inside
+    its own `content` override, on any version, so a block-override approach
+    only ever had somewhere to render on 6.1 (where `object-tools` was promoted
+    to an independent top-level block). `#content` exists, in the same
+    structural role, on every version, so anchoring to it sidesteps the whole
+    question of which block nests where.
+  - "Duplicate"/"History" rendering visibly low on some change-form pages but
+    not others, on the same Django version — root cause confirmed via DevTools:
+    pages with a subtitle (e.g. Plugin Versions' "View Plugin" / h2
+    "ophix-server-base") have a taller title block than a plain single-`<h1>`
+    page, and a fixed `-45px` margin was calibrated for the shorter case.
+    `top: 0; right: 0` against `#content` has no such dependency.
+
+  As a side effect, this also closes out the original click-stacking bug this
+  whole chain started from: positioned elements always paint above
+  normal-flow/floated content regardless of DOM order, so there's no longer any
+  way for a title element to win the hit-test over the button sitting "beside"
+  it. The object-history template is back to a plain `{% block content %}`
+  override with no JS involved — nesting position no longer matters once
+  everything is anchored the same way.
 
 ## 2026.08.30.07
 
