@@ -27,8 +27,7 @@ class Migration(migrations.Migration):
                 blank=True,
                 default="14px",
                 help_text=(
-                    "e.g. 14px · 0.875rem · Leave blank to fall back to the "
-                    "browser default, which varies inconsistently page to page."
+                    "e.g. 14px · 0.875rem · Leave blank to fall back to the browser default."
                 ),
                 max_length=20,
                 verbose_name="font size",
