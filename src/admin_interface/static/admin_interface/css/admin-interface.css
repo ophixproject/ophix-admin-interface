@@ -373,7 +373,17 @@ body.admin-interface {
     border: none;
 }
 
-.admin-interface .breadcrumbs a {
+/* :link/:visited (not a bare "a") deliberately, to break a specificity tie:
+   .admin-interface .breadcrumbs a and .admin-interface a:link (the generic
+   link colour rule, further down this file) both compute to the same
+   specificity (:link counts as a class, same tier as .breadcrumbs), so the
+   generic rule — declared later — was winning and breadcrumb links always
+   showed the generic link colour instead of the module link colour. Adding
+   :link/:visited here matches the pseudo-class the generic rule uses while
+   keeping the extra .breadcrumbs class, so this wins outright rather than by
+   file order. */
+.admin-interface .breadcrumbs a:link,
+.admin-interface .breadcrumbs a:visited {
     color: var(--admin-interface-module-link-color);
 }
 

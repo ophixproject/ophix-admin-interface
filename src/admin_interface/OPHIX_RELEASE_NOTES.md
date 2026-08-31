@@ -1,5 +1,18 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.08.31.01
+
+- Fixed breadcrumb links always showing the generic link colour instead of
+  the theme's module link colour (hover already worked correctly). Root cause
+  was a specificity tie, not a Django-version regression: `.admin-interface
+  .breadcrumbs a` and the generic `.admin-interface a:link` rule computed to
+  identical specificity (`:link` counts in the same tier as a class), so the
+  generic rule — declared later in the file — won by cascade order alone.
+  Changed the breadcrumbs rule to target `a:link`/`a:visited` explicitly,
+  matching the generic rule's own pseudo-classes while keeping the extra
+  `.breadcrumbs` class, so it now wins outright rather than depending on
+  declaration order.
+
 ## 2026.08.30.11
 
 - Theme: added a dedicated "Disabled" colour to the Status Colors section
