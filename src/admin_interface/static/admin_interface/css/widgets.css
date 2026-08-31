@@ -49,11 +49,19 @@
    the field (whatever it renders as — input/select/textarea/.related-widget-wrapper/
    .readonly, all left at the default order) settle onto row one together in their
    relative DOM order, while help/errors (order pushed past everything else, each
-   still flex-basis:100%) wrap onto their own full-width row(s) afterward. */
+   still flex-basis:100%) wrap onto their own full-width row(s) afterward.
+
+   The row is also indented 170px on the left so the text starts under the field
+   itself, not flush with the container's left edge (i.e. the label) — 170px
+   matches the label column's own width + right padding (160px + 10px, see
+   .aligned label / .datetime-sublabel elsewhere in this file) so this lines up
+   with wherever the field actually starts. flex-basis is reduced by the same
+   amount so the margin doesn't push the item wider than its row. */
 .admin-interface .flex-container > .help,
 .admin-interface .flex-container > ul.errorlist {
     order: 999;
-    flex: 0 0 100%;
+    flex: 0 0 calc(100% - 170px);
+    margin-left: 170px;
 }
 /* end-fix */
 

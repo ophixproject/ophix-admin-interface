@@ -2,6 +2,14 @@
 
 ## 2026.08.31.01
 
+- Help text and validation errors under a field (`.flex-container > .help` /
+  `> ul.errorlist`) now indent to start under the field itself, matching the
+  input's left edge, instead of starting flush with the container's left edge
+  (i.e. under the label). Indented 170px — the label column's own width plus
+  right padding (`160px + 10px`, the same value used by `.aligned label` and
+  `.datetime-sublabel` elsewhere in this file) — with `flex-basis` reduced by
+  the same amount so the added margin doesn't push the row wider than its
+  container.
 - Fixed breadcrumb links always showing the generic link colour instead of
   the theme's module link colour (hover already worked correctly). Root cause
   was a specificity tie, not a Django-version regression: `.admin-interface
