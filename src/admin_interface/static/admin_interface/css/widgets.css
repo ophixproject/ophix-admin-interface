@@ -51,16 +51,23 @@
    relative DOM order, while help/errors (order pushed past everything else, each
    still flex-basis:100%) wrap onto their own full-width row(s) afterward.
 
-   The row is also indented 170px on the left so the text starts under the field
-   itself, not flush with the container's left edge (i.e. the label) — 170px
-   matches the label column's own width + right padding (160px + 10px, see
-   .aligned label / .datetime-sublabel elsewhere in this file) so this lines up
-   with wherever the field actually starts. flex-basis is reduced by the same
-   amount so the margin doesn't push the item wider than its row. */
+   Ordinary (non-checkbox) rows are also indented 170px on the left so the text
+   starts under the field itself, not flush with the container's left edge (i.e.
+   the label) — 170px matches the label column's own width + right padding
+   (160px + 10px, see .aligned label / .datetime-sublabel elsewhere in this file)
+   so this lines up with wherever the field actually starts. flex-basis is
+   reduced by the same amount so the margin doesn't push the item wider than its
+   row. Checkbox rows are excluded: there's no separate label column there (the
+   checkbox and its label sit together at the row's own left edge), so their
+   help text stays flush left to match. */
 .admin-interface .flex-container > .help,
 .admin-interface .flex-container > ul.errorlist {
     order: 999;
-    flex: 0 0 calc(100% - 170px);
+    flex: 0 0 100%;
+}
+.admin-interface .flex-container:not(.checkbox-row) > .help,
+.admin-interface .flex-container:not(.checkbox-row) > ul.errorlist {
+    flex-basis: calc(100% - 170px);
     margin-left: 170px;
 }
 /* end-fix */

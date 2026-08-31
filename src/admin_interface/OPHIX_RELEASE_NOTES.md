@@ -9,7 +9,9 @@
   right padding (`160px + 10px`, the same value used by `.aligned label` and
   `.datetime-sublabel` elsewhere in this file) — with `flex-basis` reduced by
   the same amount so the added margin doesn't push the row wider than its
-  container.
+  container. Checkbox rows (`.checkbox-row`) are excluded from the indent —
+  there's no separate label column there (the checkbox and its label sit
+  together at the row's own left edge), so their help text stays flush left.
 - Fixed breadcrumb links always showing the generic link colour instead of
   the theme's module link colour (hover already worked correctly). Root cause
   was a specificity tie, not a Django-version regression: `.admin-interface
