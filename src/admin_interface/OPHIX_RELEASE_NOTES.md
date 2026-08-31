@@ -2,6 +2,15 @@
 
 ## 2026.08.31.01
 
+- Theme: `css_body_font_size` now defaults to `14px` instead of blank (migration
+  `0011`, which also backfills any existing theme row currently left blank).
+  The CSS variable this field drives is only ever emitted when the field is
+  non-blank; left blank, `body.admin-interface`'s `font-size` fell back to
+  plain CSS `inherit`, which resolves differently depending on what happens to
+  be above it in the DOM on a given page — the source of the inconsistent
+  13px/16px mix across pages. A real default means the variable is always
+  defined, so every page gets the same size unless a theme explicitly
+  overrides it.
 - Help text and validation errors under a field (`.flex-container > .help` /
   `> ul.errorlist`) now indent to start under the field itself, matching the
   input's left edge, instead of starting flush with the container's left edge

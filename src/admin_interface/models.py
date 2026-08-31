@@ -270,8 +270,9 @@ class Theme(models.Model):
     css_body_font_size = models.CharField(
         max_length=20,
         blank=True,
-        default="",
-        help_text=_("e.g. 14px · 0.875rem · Leave blank to use the browser default."),
+        default="14px",
+        help_text=_("e.g. 14px · 0.875rem · Leave blank to fall back to the "
+                     "browser default, which varies inconsistently page to page."),
         verbose_name=_("font size"),
     )
     css_body_text_color = ColorField(

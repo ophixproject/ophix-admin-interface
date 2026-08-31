@@ -52,7 +52,7 @@
       "css_body_background_color_dark_use": true,
       "css_body_background_color_dark": "#121212",
       "css_body_font_family": "",
-      "css_body_font_size": "",
+      "css_body_font_size": "14px",
       "css_generic_link_color": "#0096c7",
       "css_generic_link_color_dark_use": true,
       "css_generic_link_color_dark": "#ade9f4",
