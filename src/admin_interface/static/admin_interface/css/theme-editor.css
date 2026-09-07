@@ -251,6 +251,32 @@
     min-width: 0;
 }
 
+/* Checkbox + caption within a boolean-row's .col-field: Django's standard
+   .flex-container.checkbox-row pattern survives .aligned label's
+   display:block/min-width:160px (session-52 restoration for ordinary form
+   fields) because its container is itself display:flex — flex items ignore
+   their own block/inline display for layout purposes. .col-field here is not
+   a flex container, so that same leaking display:block instead pushes the
+   label onto its own line below the checkbox. Making .col-field a flex row
+   fixes the layout without fighting .aligned label's specificity, and the
+   label overrides also undo its block-sizing (min-width/padding meant for a
+   160px label column, wrong for a short checkbox caption) and match
+   .col-label's own font-weight:normal — these are toggle captions, not
+   required-field-style labels. */
+.boolean-row .col-field {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+.admin-interface .simple-row.boolean-row .col-field label {
+    display: inline;
+    min-width: 0;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+}
+
 /* ---- Theme editor: Logo / Favicon two-column layout ---- */
 
 .logo-favicon-row {

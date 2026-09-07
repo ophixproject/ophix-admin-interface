@@ -13,6 +13,18 @@
   colour, rather than the old standalone row) and `base_site.html`'s dark-mode
   CSS variable block; no JS changes needed since `dark-toggle.js` matches
   `*_dark_use`/`*_dark` pairs by field name generically.
+- Fixed theme editor boolean-row checkboxes (e.g. "Active", "Rounded corners",
+  "Close button visible") rendering with their caption dropped onto its own
+  line below the checkbox, in heavy bold. Root cause: the session-52
+  `.aligned label { display: block; min-width: 160px; }` restoration (for
+  ordinary Django form fields) leaks into these custom captions too, since the
+  editor's fieldsets carry `class="aligned"` for unrelated reasons. Django's
+  own `.flex-container.checkbox-row` pattern is immune to this because its
+  container is itself a flex row — flex items ignore their own block/inline
+  display for layout purposes — but the theme editor's `.col-field` wasn't.
+  Made `.boolean-row .col-field` a flex row (same fix, reused) and reset the
+  caption's block-sizing and font-weight back to normal, matching
+  `.col-label`'s own convention rather than a required-field-style bold label.
 
 ## 2026.08.31.01
 
