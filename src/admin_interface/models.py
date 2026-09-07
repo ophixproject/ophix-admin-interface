@@ -564,6 +564,14 @@ class Theme(models.Model):
         help_text=_("Opacity of the overlay behind related-object popups"),
         verbose_name=_("background opacity"),
     )
+    related_modal_background_opacity_dark_use = models.BooleanField(default=False, verbose_name=_("dark?"))
+    related_modal_background_opacity_dark = models.CharField(
+        max_length=5,
+        choices=related_modal_background_opacity_choices,
+        default="0.3",
+        blank=True,
+        verbose_name=_("dark"),
+    )
     related_modal_rounded_corners = models.BooleanField(
         default=True,
         verbose_name=_("rounded corners"),

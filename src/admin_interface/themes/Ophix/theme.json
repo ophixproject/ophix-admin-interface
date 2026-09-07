@@ -126,6 +126,8 @@
       "related_modal_background_color_dark_use": true,
       "related_modal_background_color_dark": "#FFFFFF",
       "related_modal_background_opacity": "0.8",
+      "related_modal_background_opacity_dark_use": false,
+      "related_modal_background_opacity_dark": "0.3",
       "related_modal_rounded_corners": true,
       "related_modal_close_button_visible": true,
       "list_filter_highlight": true,

@@ -801,13 +801,15 @@
         <div class="col-dark" id="dark-related_modal_background_color">{{ form.related_modal_background_color_dark }}</div>
       </div>
       {% if form.related_modal_background_color.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_background_color.help_text }}</div></div>{% endif %}
+      {% if form.related_modal_background_opacity.errors or form.related_modal_background_opacity_dark.errors %}<div class="field-error-row">{{ form.related_modal_background_opacity.errors }}{{ form.related_modal_background_opacity_dark.errors }}</div>{% endif %}
+      <div class="color-row">
+        <div class="col-label">{% trans "Background opacity" %}</div>
+        <div class="col-light">{{ form.related_modal_background_opacity }}</div>
+        <div class="col-toggle">{{ form.related_modal_background_opacity_dark_use }}</div>
+        <div class="col-dark" id="dark-related_modal_background_opacity">{{ form.related_modal_background_opacity_dark }}</div>
+      </div>
+      {% if form.related_modal_background_opacity.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_background_opacity.help_text }}</div></div>{% endif %}
     </div>
-    {% if form.related_modal_background_opacity.errors %}<div class="field-error-row">{{ form.related_modal_background_opacity.errors }}</div>{% endif %}
-    <div class="simple-row">
-      <div class="col-label">{{ form.related_modal_background_opacity.label }}</div>
-      <div class="col-field">{{ form.related_modal_background_opacity }}</div>
-    </div>
-    {% if form.related_modal_background_opacity.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_background_opacity.help_text }}</div></div>{% endif %}
     <div class="simple-row boolean-row">
       <div class="col-label"></div>
       <div class="col-field">{{ form.related_modal_rounded_corners.errors }}{{ form.related_modal_rounded_corners }} <label for="{{ form.related_modal_rounded_corners.id_for_label }}">{{ form.related_modal_rounded_corners.label }}</label></div>

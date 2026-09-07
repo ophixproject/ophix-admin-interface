@@ -228,7 +228,7 @@ class ThemeAdmin(admin.ModelAdmin):
                 "fields": (
                     "related_modal_active",
                     ("related_modal_background_color", "related_modal_background_color_dark_use", "related_modal_background_color_dark"),
-                    "related_modal_background_opacity",
+                    ("related_modal_background_opacity", "related_modal_background_opacity_dark_use", "related_modal_background_opacity_dark"),
                     "related_modal_rounded_corners",
                     "related_modal_close_button_visible",
                 ),

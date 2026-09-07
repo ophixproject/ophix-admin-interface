@@ -1,5 +1,19 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.09.07.01
+
+- Theme: added a dark-mode pair for the related-modal background opacity
+  (`related_modal_background_opacity_dark_use` + `related_modal_background_opacity_dark`,
+  migration `0012`) — previously only the modal background *colour* had a dark
+  variant, opacity did not. `_dark_use` defaults to `False`; `_dark` defaults to
+  `"0.3"`, matching `related_modal_background_opacity`'s own model default.
+  Reverses the earlier "not needed" call on this (marketing-manager item #24)
+  now that a wider pool of themes has shown it's actually wanted. Wired through
+  the theme editor (folded into the same colour-table row as the background
+  colour, rather than the old standalone row) and `base_site.html`'s dark-mode
+  CSS variable block; no JS changes needed since `dark-toggle.js` matches
+  `*_dark_use`/`*_dark` pairs by field name generically.
+
 ## 2026.08.31.01
 
 - Theme: `css_body_font_size` now defaults to `14px` instead of blank (migration

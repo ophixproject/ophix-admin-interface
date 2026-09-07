@@ -244,6 +244,9 @@
         {% if theme.related_modal_background_color_dark_use and theme.related_modal_background_color_dark %}
             --admin-interface-related-modal-background-color: {{ theme.related_modal_background_color_dark }};
         {% endif %}
+        {% if theme.related_modal_background_opacity_dark_use and theme.related_modal_background_opacity_dark %}
+            --admin-interface-related-modal-background-opacity: {{ theme.related_modal_background_opacity_dark }};
+        {% endif %}
         }
     </style>
     <link rel="stylesheet" href="{% get_admin_interface_static 'admin_interface/css/admin-interface.css' %}">
