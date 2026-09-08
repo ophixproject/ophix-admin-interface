@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ophix-admin-interface"
-version = "2026.09.08.01"
+version = "2026.09.08.02"
 description = "Ophix fork of django-admin-interface: theme management, extended CSS vars, namespaced media, bundled theme API"
 readme = "README.md"
 requires-python = ">=3.10"

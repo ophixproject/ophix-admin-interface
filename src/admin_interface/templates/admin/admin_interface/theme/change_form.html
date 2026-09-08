@@ -782,9 +782,9 @@
   <h2 class="theme-section-heading">{{ fieldset.name }}</h2>
   <div class="theme-section-body">
     {% if fieldset.description %}<p class="help theme-section-desc">{{ fieldset.description }}</p>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.related_modal_active.errors }}{{ form.related_modal_active }} <label for="{{ form.related_modal_active.id_for_label }}">{{ form.related_modal_active.label }}</label></div>
+    <div class="simple-row">
+      <div class="col-label">{{ form.related_modal_active.label }}</div>
+      <div class="col-light">{{ form.related_modal_active.errors }}{{ form.related_modal_active }}</div>
     </div>
     {% if form.related_modal_active.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_active.help_text }}</div></div>{% endif %}
     <div class="color-table">
@@ -810,14 +810,14 @@
       </div>
       {% if form.related_modal_background_opacity.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_background_opacity.help_text }}</div></div>{% endif %}
     </div>
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.related_modal_rounded_corners.errors }}{{ form.related_modal_rounded_corners }} <label for="{{ form.related_modal_rounded_corners.id_for_label }}">{{ form.related_modal_rounded_corners.label }}</label></div>
+    <div class="simple-row">
+      <div class="col-label">{{ form.related_modal_rounded_corners.label }}</div>
+      <div class="col-light">{{ form.related_modal_rounded_corners.errors }}{{ form.related_modal_rounded_corners }}</div>
     </div>
     {% if form.related_modal_rounded_corners.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_rounded_corners.help_text }}</div></div>{% endif %}
-    <div class="simple-row boolean-row">
-      <div class="col-label"></div>
-      <div class="col-field">{{ form.related_modal_close_button_visible.errors }}{{ form.related_modal_close_button_visible }} <label for="{{ form.related_modal_close_button_visible.id_for_label }}">{{ form.related_modal_close_button_visible.label }}</label></div>
+    <div class="simple-row">
+      <div class="col-label">{{ form.related_modal_close_button_visible.label }}</div>
+      <div class="col-light">{{ form.related_modal_close_button_visible.errors }}{{ form.related_modal_close_button_visible }}</div>
     </div>
     {% if form.related_modal_close_button_visible.help_text %}<div class="help-row"><div class="col-help">{{ form.related_modal_close_button_visible.help_text }}</div></div>{% endif %}
   </div>

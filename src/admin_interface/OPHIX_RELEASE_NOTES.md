@@ -1,5 +1,16 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.09.08.02
+
+- Redesigned the Related Modal section's three checkboxes ("Active", "Rounded
+  corners", "Close button visible") — changed of mind from `2026.09.08.01`'s
+  flush-left checkbox+caption layout. Now uses the same `col-label`/`col-light`
+  shape as "Background color"/"Background opacity" in the same section: the
+  label takes the left column, and the bare checkbox sits left-aligned in the
+  value column, lining up with the colour swatch/opacity dropdown above/below
+  it. The now-unused `.boolean-row` CSS from the previous two releases (no
+  longer referenced by any template) has been removed.
+
 ## 2026.09.08.01
 
 - Fixed two follow-on issues from `2026.09.07.01`'s theme editor boolean-row fix:

@@ -256,51 +256,9 @@
     border-bottom: 1px solid var(--hairline-color, #e8e8e8);
 }
 
-.boolean-row {
-    align-items: center;
-}
-
-/* Boolean rows have no separate label column to align with (unlike the other
-   simple-rows in the same section, e.g. "Background opacity"), so the empty
-   .col-label spacer above was pushing the checkbox in ~200px from the left
-   instead of sitting flush left the way Django's own checkbox fields do
-   (e.g. Enabled/Paused on a Scheduled Task). Collapsing it lets .col-field
-   start at the row's true left edge. */
-.boolean-row .col-label {
-    flex: 0 0 0;
-    width: 0;
-    padding: 0;
-}
-
 .col-field {
     flex: 1;
     min-width: 0;
-}
-
-/* Checkbox + caption within a boolean-row's .col-field: Django's standard
-   .flex-container.checkbox-row pattern survives .aligned label's
-   display:block/min-width:160px (session-52 restoration for ordinary form
-   fields) because its container is itself display:flex — flex items ignore
-   their own block/inline display for layout purposes. .col-field here is not
-   a flex container, so that same leaking display:block instead pushes the
-   label onto its own line below the checkbox. Making .col-field a flex row
-   fixes the layout without fighting .aligned label's specificity, and the
-   label overrides also undo its block-sizing (min-width/padding meant for a
-   160px label column, wrong for a short checkbox caption) and match
-   .col-label's own font-weight:normal — these are toggle captions, not
-   required-field-style labels. */
-.boolean-row .col-field {
-    display: flex;
-    align-items: center;
-    gap: 0.4em;
-}
-.admin-interface .simple-row.boolean-row .col-field label {
-    display: inline;
-    min-width: 0;
-    width: auto;
-    padding: 0;
-    margin: 0;
-    font-weight: normal;
 }
 
 /* ---- Theme editor: Logo / Favicon two-column layout ---- */
