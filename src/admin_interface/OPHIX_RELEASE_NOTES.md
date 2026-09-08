@@ -1,5 +1,22 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.09.08.01
+
+- Fixed two follow-on issues from `2026.09.07.01`'s theme editor boolean-row fix:
+  - The checkbox (e.g. "Active", "Rounded corners") was sitting ~200px in from
+    the left instead of flush left like Django's own checkbox fields (e.g.
+    Enabled/Paused on a Scheduled Task) — caused by an empty `.col-label`
+    spacer reserved for alignment with sibling rows that *do* have a label
+    (e.g. "Background opacity"). Boolean rows have no such label, so the
+    spacer is now collapsed to zero width for them specifically.
+  - The related-modal opacity dropdowns' light and dark values rendered at
+    different widths. Colour-picker inputs in these columns get a fixed width
+    from their own widget library (Coloris); a plain `<select>` has no such
+    enforced width and just auto-sizes, and `.col-dark`'s extra 8px
+    `padding-left` was leaving less room for its select than `.col-light`'s.
+    Both now get an explicit `width: 100%` so they fill their column
+    identically regardless of that padding difference.
+
 ## 2026.09.07.01
 
 - Theme: added a dark-mode pair for the related-modal background opacity

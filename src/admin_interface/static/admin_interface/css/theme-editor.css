@@ -170,6 +170,20 @@
     padding-left: 8px;
 }
 
+/* Colour-picker inputs in these columns get their fixed width from their own
+   widget library (Coloris), so light/dark always matched by construction. A
+   plain <select> (e.g. the opacity dropdowns) has no such enforced width and
+   just auto-sizes — mattering here because .col-dark's extra 8px padding-left
+   was leaving less room for its select than .col-light's, so the two selects
+   rendered at different widths. Forcing width:100% makes both fill their
+   column exactly, regardless of that padding difference or browser
+   auto-sizing quirks. */
+.color-row .col-light select,
+.color-row .col-dark select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 /* Help text row — unrestricted width, sits below the colour row.
    Border-bottom separates this group from the next colour row. */
 .help-row {
@@ -244,6 +258,18 @@
 
 .boolean-row {
     align-items: center;
+}
+
+/* Boolean rows have no separate label column to align with (unlike the other
+   simple-rows in the same section, e.g. "Background opacity"), so the empty
+   .col-label spacer above was pushing the checkbox in ~200px from the left
+   instead of sitting flush left the way Django's own checkbox fields do
+   (e.g. Enabled/Paused on a Scheduled Task). Collapsing it lets .col-field
+   start at the row's true left edge. */
+.boolean-row .col-label {
+    flex: 0 0 0;
+    width: 0;
+    padding: 0;
 }
 
 .col-field {
