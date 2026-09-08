@@ -170,17 +170,16 @@
     padding-left: 8px;
 }
 
-/* Colour-picker inputs in these columns get their fixed width from their own
-   widget library (Coloris), so light/dark always matched by construction. A
-   plain <select> (e.g. the opacity dropdowns) has no such enforced width and
-   just auto-sizes — mattering here because .col-dark's extra 8px padding-left
-   was leaving less room for its select than .col-light's, so the two selects
-   rendered at different widths. Forcing width:100% makes both fill their
-   column exactly, regardless of that padding difference or browser
-   auto-sizing quirks. */
+/* Colour-picker inputs in these columns render at a fixed 161px border-box
+   width (Coloris's own default, confirmed via DevTools: 147px content +
+   6px+6px padding + 1px+1px border), well short of .col-light/.col-dark's
+   190px column — so a plain <select> (e.g. the opacity dropdowns) at
+   width:100% overshoots the colour input's right edge rather than matching
+   it. Setting the same 161px explicitly, rather than 100%, lines the
+   dropdown's right edge up with the colour swatch's exactly. */
 .color-row .col-light select,
 .color-row .col-dark select {
-    width: 100%;
+    width: 161px;
     box-sizing: border-box;
 }
 

@@ -1,5 +1,15 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.09.08.03
+
+- Fixed the related-modal opacity dropdowns still overshooting the colour
+  picker's right edge after `2026.09.08.01`'s `width: 100%` fix — measured via
+  DevTools that Coloris renders its colour input at a fixed 161px border-box
+  width (147px content + 6px+6px padding + 1px+1px border), well short of the
+  190px column both share. Set the select's width to the same 161px explicitly
+  instead of 100%, so its right edge now lines up with the colour swatch's
+  exactly.
+
 ## 2026.09.08.02
 
 - Redesigned the Related Modal section's three checkboxes ("Active", "Rounded
