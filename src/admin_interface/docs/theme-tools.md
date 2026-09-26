@@ -45,8 +45,8 @@ separately):
 ophix-manage set_theme Midnight --no-collectstatic
 ```
 
-If the activated theme has no title set, `set_theme` will warn you and suggest running
-`set_title`.
+If the activated theme has no title set, set the server title in the **Settings** admin
+page (title is managed there, not per-theme — see `ophix-admin-settings`).
 
 ### Changing theme via the admin UI
 
@@ -58,40 +58,6 @@ switching, run:
 ophix-manage collectstatic --noinput
 sudo systemctl restart <slug>
 ```
-
----
-
-## set\_title
-
-Set the title displayed in the admin header on the active theme.
-
-```bash
-ophix-manage set_title "My Company"
-```
-
-Omit the argument to be prompted interactively (current title shown as default):
-
-```bash
-ophix-manage set_title
-```
-
-Copy the title from a previously active theme rather than typing it:
-
-```bash
-ophix-manage set_title --use-existing
-```
-
-Clear the title entirely:
-
-```bash
-ophix-manage set_title --clear
-```
-
-| Option | Description |
-| --- | --- |
-| `<title>` | New title to set |
-| `--use-existing` | Copy title from a previously active (now inactive) theme |
-| `--clear` | Clear the title without prompting |
 
 ---
 

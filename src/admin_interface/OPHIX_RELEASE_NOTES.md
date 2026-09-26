@@ -1,5 +1,13 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.09.26.01
+
+- Docs: removed `theme-tools.md`'s entire `set_title` section — that command
+  was retired when title moved to `ophix-admin-settings`'s Server Settings
+  page (see this file's own earlier "Retired `set_title`" entry), but the doc
+  was never updated to match. Title is now set via the Settings admin page
+  directly, or restored in bulk via `ophix-admin-settings`'s `import_settings`.
+
 ## 2026.09.08.03
 
 - Fixed the related-modal opacity dropdowns still overshooting the colour
