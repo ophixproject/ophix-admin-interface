@@ -4,6 +4,8 @@
 
 Nobody wants to run their infrastructure through something that visibly looks like generic open-source software. `ophix-admin-interface` makes full white-labelling a first-class, no-code feature: set your colours and logo through the admin UI itself, and every server looks unmistakably like it belongs to you.
 
+This package is automatically included in every Ophix server, no need to separately install it.
+
 ## What this package provides
 
 - Full theme management: per-server colour schemes, logos, and branding via the Django admin UI
@@ -14,12 +16,11 @@ Nobody wants to run their infrastructure through something that visibly looks li
 
 ## Installation
 
+Installed automatically with `ophix-server-base`. To install explicitly:
+
 ```bash
 pip install ophix-admin-interface
 ```
-
-This package is a declared dependency of `ophix-server-base` and is installed automatically
-as part of any Ophix server deployment. Operators do not normally need to install it directly.
 
 ## Theme packages
 
