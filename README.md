@@ -1,8 +1,8 @@
 # ophix-admin-interface
 
-The admin interface foundation for [Ophix Project](https://ophix.io) servers.
+**Make the admin UI look like yours** — customisable branding for every [Ophix](https://ophix.io) server, built on [django-admin-interface](https://github.com/fabiocaccamo/django-admin-interface).
 
-A fork of [django-admin-interface](https://github.com/fabiocaccamo/django-admin-interface), extended for the Ophix platform.
+Nobody wants to run their infrastructure through something that visibly looks like generic open-source software. `ophix-admin-interface` makes full white-labelling a first-class, no-code feature: set your colours and logo through the admin UI itself, and every server looks unmistakably like it belongs to you.
 
 ## What this package provides
 
