@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.10.04.01
 
 - Fixed a `migrate` warning on every fresh install since 2026-08-31: the hand-written
   migration `0011_theme_css_body_font_size_default` recorded an older, shorter
