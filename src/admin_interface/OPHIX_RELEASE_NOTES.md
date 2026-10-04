@@ -1,5 +1,19 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Fixed a `migrate` warning on every fresh install since 2026-08-31: the hand-written
+  migration `0011_theme_css_body_font_size_default` recorded an older, shorter
+  `help_text` for `Theme.css_body_font_size` than the wording `models.py` was changed
+  to in the same commit. Django tracks `help_text` as part of a field's migration
+  state, so the mismatch surfaced as "Your models in app(s): 'admin_interface' have
+  changes that are not yet reflected in a migration" on every `migrate` run since —
+  harmless to the actual schema (no column-level change), but noisy. Added migration
+  `0013_alter_theme_css_body_font_size` to bring the recorded state back in sync with
+  the model. Swept every other installed app for the same drift (`admin_settings`,
+  `ophix_core`, `ophix_tasks`, `ophix_docs`, `ophix_client_management`) and confirmed
+  nothing else was affected.
+
 ## 2026.09.26.02
 
 - Verified real compatibility under Python 3.14 (not just added the classifier) as part of the taskserver-release-wave compatibility sweep, and added `Programming Language :: Python :: 3.14` to the package classifiers.
