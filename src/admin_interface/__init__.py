@@ -28,6 +28,8 @@ def get_revisions_targets():
         {
             "name": "theme",
             "app_label": "admin_interface",
+            # Precise model match — export_theme exports Theme rows only.
+            "models": ["admin_interface.theme"],
             "export_command": "export_theme",
             "encrypted": False,
             "stable": True,

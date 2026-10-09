@@ -1,5 +1,11 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- `get_revisions_targets()`'s `theme` entry now declares a precise `"models"` list
+  (`["admin_interface.theme"]`) instead of relying on the coarser `app_label`-only
+  fallback. Requires `ophix-revisions>=2026.10.09.03`.
+
 ## 2026.10.04.01
 
 - Fixed a `migrate` warning on every fresh install since 2026-08-31: the hand-written
