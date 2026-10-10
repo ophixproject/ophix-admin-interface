@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.10.10.01
 
 - Added `export_themes`/`import_themes` management commands — export every Theme's
   field values (no media) to plain JSON, matching every other revisions target's
