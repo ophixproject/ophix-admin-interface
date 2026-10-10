@@ -2,6 +2,31 @@
 
 ## Unreleased
 
+- **Fixed a real, long-standing bug: selecting "All" (or any other option)
+  in a filter-sidebar dropdown could navigate to the correct URL and then
+  immediately revert to a stale, incorrect one.** Root cause:
+  `dropdown-filter.js`'s own `<script>` tag was embedded inside
+  `dropdown_filter.html`, which is `{% include %}`-ed once *per filter* in
+  the sidebar — a page with 4 filters loaded and executed the same script
+  4 times, each registering its own `DOMContentLoaded` listener. The
+  per-element `dataset.filterInitialized` guard was meant to stop a given
+  `<select>` from being bound/`select2()`-ed more than once across those
+  repeated executions, but relying on that to stay in sync across N
+  independent passes wasn't actually safe — confirmed live (multiple
+  changelists, not just one admin) by the reliably reproducing symptom of
+  a correct navigation being immediately undone by a stale one, the
+  signature of two competing `change` handlers. This was never specific to
+  `ophix-revisions`; every admin page with more than one filter active was
+  affected, which is why it looked unrelated to whatever model/data was
+  being filtered. Fixed two ways: the script now loads exactly once per
+  page (moved out of the per-filter include into `change_list.html`'s own
+  `filters` block), and the script itself now guards against ever running
+  its setup code more than once regardless of how many `<script>` tags end
+  up referencing it, so the fix holds even if something re-introduces a
+  duplicate include in the future. Verified the script now loads exactly
+  once (was 4, confirmed before and after via a real rendered page) and
+  that this restructuring didn't change the dropdown's own behavior
+  (11-check real-admin-page regression test, all passing).
 - **Breaking rename**: `get_revisions_targets()`'s `theme` entry renamed to
   `themes`. It was named for the old singular `export_theme`/`import_theme`
   flow this target used before the `2026.10.10.01` fix that pointed it at

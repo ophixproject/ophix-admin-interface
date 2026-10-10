@@ -11,4 +11,8 @@
     </div>
 </div>
 
-<script id="admin-interface-dropdown-filter" src="{% get_admin_interface_static 'admin_interface/dropdown-filter/dropdown-filter.js' %}"></script>
+{% comment %}
+dropdown-filter.js is loaded once per page in change_list.html's filters
+block, not here -- this template is included once PER FILTER, so a
+<script> tag here would be embedded (and executed) once per filter too.
+{% endcomment %}

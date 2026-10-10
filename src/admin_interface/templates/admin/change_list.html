@@ -46,6 +46,13 @@
         {% for spec in cl.filter_specs %}
             {% admin_list_filter cl spec %}
         {% endfor %}
+
+        {% comment %}
+        Loaded exactly once per page here, not inside dropdown_filter.html
+        (included once per filter) -- see that template's own comment and
+        dropdown-filter.js's own top-of-file comment for why this matters.
+        {% endcomment %}
+        <script id="admin-interface-dropdown-filter" src="{% get_admin_interface_static 'admin_interface/dropdown-filter/dropdown-filter.js' %}"></script>
     </nav>
     {% endif %}
 {% endblock filters %}
