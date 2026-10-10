@@ -1,5 +1,25 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Added `export_themes`/`import_themes` management commands — export every Theme's
+  field values (no media) to plain JSON, matching every other revisions target's
+  export/import convention, and import them back with `--name` cherry-pick support.
+  Separate from the existing singular `export_theme`, which exports exactly one named
+  theme plus its media as a tar.gz (the wrong shape for revisions history). `active`
+  is never restored, on create or update — a theme recreated from history always comes
+  back inactive, since `Theme.active`'s own model default (`True`) would otherwise
+  silently deactivate whichever theme is actually live on the server.
+- Fixed the `theme` revisions target, which had never actually worked: `worker.py`'s
+  call into `export_theme` (singular) used the wrong argument shape (missing the
+  required `theme_name` positional, and `--output-file` instead of the real
+  `--output` directory argument) — every save to a Theme would have crashed the
+  revisions worker outright rather than producing a commit. The `theme` target now
+  points at `export_themes` (plural, new) instead, and exports every theme that
+  exists (not just the active one), since a theme can be edited while inactive, and
+  tracking only the active one would silently miss history for every other theme.
+  Requires `ophix-revisions`'s `records_key`/`include_links_kwarg` hook fields.
+
 ## 2026.10.09.01
 
 - `get_revisions_targets()`'s `theme` entry now declares a precise `"models"` list

@@ -28,9 +28,16 @@ def get_revisions_targets():
         {
             "name": "theme",
             "app_label": "admin_interface",
-            # Precise model match — export_theme exports Theme rows only.
+            # Precise model match — Theme rows only.
             "models": ["admin_interface.theme"],
-            "export_command": "export_theme",
+            # export_themes (plural, new) — not export_theme (singular),
+            # which exports exactly one named theme + its media as a
+            # tar.gz, the wrong shape for revisions. export_themes dumps
+            # every theme's field values as plain JSON, no media, matching
+            # every other target's export/import convention so cherry-pick
+            # restore works the same way here as everywhere else.
+            "records_key": "themes",
+            "export_command": "export_themes",
             "encrypted": False,
             "stable": True,
         },
