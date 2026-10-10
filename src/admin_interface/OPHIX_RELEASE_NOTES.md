@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.10.10.03
 
 - **Fixed a real, long-standing bug: selecting "All" (or any other option)
   in a filter-sidebar dropdown could navigate to the correct URL and then
