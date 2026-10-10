@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.10.09.01
 
 - `get_revisions_targets()`'s `theme` entry now declares a precise `"models"` list
   (`["admin_interface.theme"]`) instead of relying on the coarser `app_label`-only
