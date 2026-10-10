@@ -1,5 +1,21 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- **Breaking rename**: `get_revisions_targets()`'s `theme` entry renamed to
+  `themes`. It was named for the old singular `export_theme`/`import_theme`
+  flow this target used before the `2026.10.10.01` fix that pointed it at
+  the new plural `export_themes`/`import_themes` instead (every theme, not
+  one) — the target's own `name` was never updated to match at the time,
+  leaving it inconsistent with its own `records_key="themes"` and with
+  every other collection-shaped target elsewhere in the project (`hosts`,
+  `clients`, `zones`, `dns_servers`, `settings`). Caught by direct question
+  ("why is it theme not themes") rather than review. Anyone who already
+  put `theme` in `REVISIONS_TARGETS`/`BACKUP_TARGETS` needs to update it to
+  `themes` — no fallback, same precedent as other breaking renames in this
+  project (e.g. `ophix-revisions`' own `REVISION_TARGETS` → `REVISIONS_TARGETS`,
+  same session).
+
 ## 2026.10.10.01
 
 - Added `export_themes`/`import_themes` management commands — export every Theme's

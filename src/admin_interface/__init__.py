@@ -26,7 +26,7 @@ def get_revisions_targets():
     """
     return [
         {
-            "name": "theme",
+            "name": "themes",
             "app_label": "admin_interface",
             # Precise model match — Theme rows only.
             "models": ["admin_interface.theme"],
