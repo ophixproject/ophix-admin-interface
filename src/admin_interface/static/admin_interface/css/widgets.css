@@ -77,29 +77,36 @@
    <fieldset><legend> instead of the ordinary label+flex-container pairing
    (the `field.is_fieldset` branch) -- the <legend> sits OUTSIDE
    .flex-container as a sibling, so this .flex-container's only children are
-   .help and .related-widget-wrapper (DOM order: help first, then the
+   .help and .related-widget-wrapper (DOM order: help FIRST, then the
    widget), with no label present in the row at all.
 
    First attempt (2026-10-11) tried keeping flex-row layout and just
-   zeroing the 170px offset, reasoning "no label, so no offset" -- wrong on
-   two counts, confirmed live: (1) the widget still needs to align with
-   where every other field's actual input starts (the 170px column), even
-   though THIS field has no label sharing its row to create that alignment
-   naturally; (2) relying on `order: 999` + flex-wrap to push .help below
-   the widget doesn't reliably work at the boundary this hits -- the
-   widget's hypothetical size is ~0 (flex-basis:0%, min-width:0) and
-   .help's is exactly 100%, summing to EXACTLY the line's full width, which
-   does not count as *exceeding* it, so browsers don't force a wrap; both
-   still shared one line, with .help now claiming the whole row and the
-   widget squeezed into whatever rounding error was left.
+   zeroing the 170px offset, reasoning "no label, so no offset" -- wrong:
+   the widget still needs to align with where every other field's actual
+   input starts (the 170px column), even though THIS field has no label
+   sharing its row to create that alignment naturally. Relying on
+   `order: 999` + flex-wrap to push .help below the widget also doesn't
+   reliably work at the boundary this hits -- the widget's hypothetical
+   size is ~0 (flex-basis:0%, min-width:0) and .help's is exactly 100%,
+   summing to EXACTLY the line's full width, which does not count as
+   *exceeding* it, so browsers don't force a wrap; both shared one line.
 
-   Fixed properly by taking this specific container out of flex-row layout
-   entirely -- plain block stacking needs no order/flex-basis arithmetic at
-   all, since the DOM order (widget, then help) already matches the wanted
-   visual order. Both children get the standard 170px field-column offset,
-   same as any ordinary field's control/help text. */
+   Second attempt switched to plain block stacking (display:block) to
+   sidestep the wrap-math entirely -- fixed the width, but wrongly assumed
+   DOM order already matched the wanted visual order. It doesn't: .help is
+   first in the DOM, so block stacking put it above the widget, not below.
+
+   Fixed by staying in flex layout but switching to flex-direction:column
+   instead of block -- this keeps the existing `order: 999` rule on .help
+   (declared above, applies to every .flex-container's .help regardless of
+   this scope) in effect, which correctly reorders it after the widget
+   (default order 0) in a column direction, with no row-wrap arithmetic
+   involved at all. Each child still gets the full available width via
+   flex's own default `align-items: stretch` along the cross axis. Both
+   children get the standard 170px field-column offset, same as any
+   ordinary field's control/help text. */
 .admin-interface fieldset > .flex-container:not(.checkbox-row) {
-    display: block;
+    flex-direction: column;
 }
 .admin-interface fieldset > .flex-container:not(.checkbox-row) > .related-widget-wrapper,
 .admin-interface fieldset > .flex-container:not(.checkbox-row) > .help,

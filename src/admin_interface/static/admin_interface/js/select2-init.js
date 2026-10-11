@@ -4,8 +4,13 @@
         // Excludes .admin-autocomplete: those are autocomplete_fields handled by Django's own
         // autocomplete.js — initialising them here too creates a second Select2 container in
         // the same flex row, making both narrow.
+        // Excludes .selectfilter/.selectfilterstacked: Django's own class names for the
+        // filter_horizontal/filter_vertical raw <select>, which its own SelectFilter2.js
+        // independently converts into the dual-listbox "selector" widget -- enhancing the
+        // same element with Select2 too produced a second, empty, non-functional dropdown
+        // sitting beside the real widget (confirmed live 2026-10-11, Users/Groups).
         // width:'style' means Select2 injects no inline width — CSS controls it via flex: 1.
-        $('.related-widget-wrapper select:not(.select2-hidden-accessible):not(.admin-autocomplete)').each(function() {
+        $('.related-widget-wrapper select:not(.select2-hidden-accessible):not(.admin-autocomplete):not(.selectfilter):not(.selectfilterstacked)').each(function() {
             $(this).select2({
                 minimumResultsForSearch: 10,
                 width: 'style',

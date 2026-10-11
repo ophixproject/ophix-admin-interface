@@ -1,5 +1,24 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- **Fixed two more issues on the M2M dual-listbox "selector" widget**
+  (`filter_horizontal`/`filter_vertical`, e.g. Users/Groups permissions),
+  found testing `2026.10.11.02`'s own fix live:
+  - A redundant, non-functional extra dropdown was appearing beside the
+    real widget. Django's `SelectFilter2.js` converts the field's raw
+    `<select multiple>` into the dual-listbox widget; Select2's own
+    generic FK/M2M enhancement rule was *also* matching that same
+    `<select>` and wrapping it a second time, producing an empty Select2
+    container doing nothing useful. Excluded Django's own
+    `selectfilter`/`selectfilterstacked` classes from that rule.
+  - The help text still rendered above the widget instead of below it —
+    `.02`'s fix assumed DOM order already put the widget before the help
+    text; it doesn't, help comes first. Switched the container from plain
+    block stacking to a column-direction flex layout instead, so the
+    existing `order: 999` rule on `.help` correctly pushes it after the
+    widget without needing any row-wrap arithmetic.
+
 ## 2026.10.11.02
 
 - **Fixed misaligned field layout on the M2M dual-listbox "selector"
