@@ -19,85 +19,47 @@
 
 ## 2026.10.10.05
 
-- **Fixed the real filter-sidebar "All" navigator — `2026.10.10.04`'s fix
-  patched the wrong file.** Confirmed live with a real mouse-driven select2
-  interaction (a scripted/extension-dispatched native `change` event takes
-  a different code path and gives a false "this works" result — which is
-  exactly what made `.04` look correct in automated testing while still
-  failing for real users): on every real changelist page, select2 is
-  lazy-loaded by `select2-init.js` *after* `dropdown-filter.js`'s own
-  `DOMContentLoaded` handler has already run, so that file's select2-aware
-  branch never actually executes — it always takes its native-listener
-  fallback instead, binding to an element at a point before select2 has
-  converted it. select2-init.js then loads asynchronously and initialises
-  the same element itself, attaching its *own* `select2:select` navigation
-  handler — which is what actually drives navigation for a real selection,
+- **Fixed the filter-sidebar "All" navigator for real.** The actual
+  navigator for a real select2 selection is `select2-init.js`, not
+  `dropdown-filter.js` — select2 loads lazily, after
+  `dropdown-filter.js`'s own setup has already run, so its select2-aware
+  code path never executes in practice; `select2-init.js`'s own
+  `select2:select` handler is what drives navigation for a real pick,
   including "All". That handler had no knowledge of the `sessionStorage`
-  reset flag `ophix-server-base`'s `custom.js` checks for before restoring
-  a saved filter from `localStorage`, so it never set it — meaning the
-  revert `.04` was meant to fix kept happening regardless. Fixed by setting
-  that same flag in `select2-init.js`'s actual navigator instead.
-  `dropdown-filter.js`'s own copy of this logic is kept (it's still correct
-  for the case where select2 genuinely fails to load, falling back to a
-  plain native select), with its comments corrected to describe reality —
-  it was never dead code in principle, just dead in the one case everyone
-  (including two earlier fix attempts here) assumed it covered.
+  flag `ophix-server-base`'s `custom.js` checks before restoring a saved
+  filter from `localStorage`, so the revert kept happening. Fixed by
+  setting that flag in `select2-init.js`'s actual navigator instead.
+  `dropdown-filter.js`'s own copy of the logic remains as a genuine
+  fallback for the case where select2 fails to load entirely.
 
 ## 2026.10.10.04
 
-- **Fixed the real remaining cause of the filter-sidebar "All navigates
-  then reverts" bug — a cross-package interaction with
-  `ophix-server-base`'s own changelist filter-persistence feature, not
-  the duplicate-script race already fixed in 2026.10.10.03.** That
-  earlier fix was real and necessary, but didn't fully close this bug:
-  `ophix-server-base`'s `custom.js` (added 2026-06-03, present in every
-  release since) saves active filter params to `localStorage` keyed by
-  pathname, and silently restores them whenever a changelist loads with
-  no filter params in the URL — *unless* a specific `sessionStorage`
-  "reset" flag was set first. That flag is only ever set by a click
-  handler bound to plain `<a href="?">` anchors inside the filter
-  sidebar (the "Clear all filters" link, and the last remaining filter's
-  own "X" removal link) — a dropdown-driven selection (including "All")
-  never goes through that code at all, since it navigates via a
-  `window.location` assignment inside a `change` handler, not a real
-  anchor click. So selecting "All" correctly cleared the URL for a
-  moment, then that script's own check on the next page load found no
-  reset flag, found the old saved filter in `localStorage`, and silently
-  redirected right back to it. Fixed by having `dropdown-filter.js` set
-  the identical `sessionStorage` key before navigating, matching exactly
-  what the "Clear all filters" link's own handler already does for a
-  plain anchor click. The two files live in separate packages and share
-  this key format by convention only (kept in sync by hand, documented in
-  both places) rather than any formal coordination mechanism between
-  them.
+- **Fixed a cross-package interaction causing the filter-sidebar "All
+  navigates then reverts" bug.** `ophix-server-base`'s `custom.js` saves
+  active filter params to `localStorage` keyed by pathname, and restores
+  them whenever a changelist loads with no filter params in the URL,
+  unless a `sessionStorage` reset flag was set first. That flag was only
+  ever set by a click on the "Clear all filters" link (or the last
+  remaining filter's own "X" removal link) — a dropdown-driven selection,
+  including "All", never went through that code path, so the flag never
+  got set and the saved filter was silently restored. Fixed by having the
+  filter dropdown set the identical flag before navigating. The two files
+  live in separate packages and share this key format by convention only,
+  documented in both places.
 
 ## 2026.10.10.03
 
-- **Fixed a real, long-standing bug: selecting "All" (or any other option)
-  in a filter-sidebar dropdown could navigate to the correct URL and then
-  immediately revert to a stale, incorrect one.** Root cause:
-  `dropdown-filter.js`'s own `<script>` tag was embedded inside
-  `dropdown_filter.html`, which is `{% include %}`-ed once *per filter* in
-  the sidebar — a page with 4 filters loaded and executed the same script
-  4 times, each registering its own `DOMContentLoaded` listener. The
-  per-element `dataset.filterInitialized` guard was meant to stop a given
-  `<select>` from being bound/`select2()`-ed more than once across those
-  repeated executions, but relying on that to stay in sync across N
-  independent passes wasn't actually safe — confirmed live (multiple
-  changelists, not just one admin) by the reliably reproducing symptom of
-  a correct navigation being immediately undone by a stale one, the
-  signature of two competing `change` handlers. This was never specific to
-  `ophix-revisions`; every admin page with more than one filter active was
-  affected, which is why it looked unrelated to whatever model/data was
-  being filtered. Fixed two ways: the script now loads exactly once per
-  page (moved out of the per-filter include into `change_list.html`'s own
-  `filters` block), and the script itself now guards against ever running
-  its setup code more than once regardless of how many `<script>` tags end
-  up referencing it, so the fix holds even if something re-introduces a
-  duplicate include in the future. Verified the script now loads exactly
-  once (was 4, confirmed before and after via a real rendered page) and
-  that this restructuring didn't change the dropdown's own behavior
-  (11-check real-admin-page regression test, all passing).
+- **Fixed a long-standing bug: selecting "All" (or any other option) in a
+  filter-sidebar dropdown could navigate to the correct URL and then
+  immediately revert to a stale, incorrect one.** `dropdown-filter.js`'s
+  own `<script>` tag was embedded inside `dropdown_filter.html`, which is
+  included once *per filter* in the sidebar — a page with 4 filters
+  loaded and executed the same script 4 times, each registering its own
+  setup. Affected every changelist with more than one active filter, not
+  just one admin page. Fixed two ways: the script now loads exactly once
+  per page (moved into `change_list.html`'s own `filters` block), and the
+  script itself now guards against running its setup more than once
+  regardless of how many `<script>` tags reference it.
 - **Breaking rename**: `get_revisions_targets()`'s `theme` entry renamed to
   `themes`. It was named for the old singular `export_theme`/`import_theme`
   flow this target used before the `2026.10.10.01` fix that pointed it at
