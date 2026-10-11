@@ -6,7 +6,7 @@ section: Getting Started
 ---
 
 `ophix-admin-interface` provides management commands for working with Django admin themes.
-Themes can be activated, titled, listed, exported, imported, and deleted — all via
+Themes can be activated, listed, exported, imported, and deleted — all via
 `ophix-manage`.
 
 ---
@@ -17,7 +17,7 @@ Activate a theme by name. Only one theme can be active at a time; activating a n
 automatically deactivates the current one.
 
 ```bash
-ophix-manage set_theme Midnight
+ophix-manage set_theme Ophix
 ```
 
 Omit the name to pick interactively from the list of installed themes:
@@ -35,18 +35,12 @@ activating the theme and reminds you to restart the service:
 sudo systemctl restart <slug>
 ```
 
-The restart is required because gunicorn workers cache the static file manifest in memory.
-Without it the server may still reference the old static file URLs.
-
 To skip `collectstatic` (for example, in a scripted workflow where you plan to run it
 separately):
 
 ```bash
-ophix-manage set_theme Midnight --no-collectstatic
+ophix-manage set_theme Ophix --no-collectstatic
 ```
-
-If the activated theme has no title set, set the server title in the **Settings** admin
-page (title is managed there, not per-theme — see `ophix-admin-settings`).
 
 ### Changing theme via the admin UI
 
@@ -69,7 +63,7 @@ List all themes currently in the database.
 ophix-manage list_themes
 ```
 
-Show full detail including active status, title, env name, source package, and version:
+Show full detail including ID, active status, source package, and version:
 
 ```bash
 ophix-manage list_themes --details
@@ -86,29 +80,28 @@ Export a theme to a portable `.tar.gz` archive containing the theme JSON and its
 files (logo, favicon).
 
 ```bash
-ophix-manage export_theme Midnight
-ophix-manage export_theme Midnight --output ./exports/
-```
-
-Strip environment-specific metadata before exporting (useful when sharing themes between
-servers):
-
-```bash
-ophix-manage export_theme Midnight --strip-title --strip-env-name
+ophix-manage export_theme Ophix
+ophix-manage export_theme Ophix --output ./exports/
 ```
 
 Rename the theme in the export:
 
 ```bash
-ophix-manage export_theme Midnight --rename MyBranding
+ophix-manage export_theme Ophix --rename MyBranding
+```
+
+Produce a byte-identical archive across runs of the same unchanged theme (deterministic
+JSON key order and tar/gzip metadata — used by `ophix-revisions`):
+
+```bash
+ophix-manage export_theme Ophix --stable
 ```
 
 | Option | Description |
 | --- | --- |
 | `--output <dir>` | Output directory (defaults to `BASE_DIR`) |
-| `--strip-title` | Remove the title from the exported JSON |
-| `--strip-env-name` | Remove the env\_name from the exported JSON |
 | `--rename <name>` | Rename the theme inside the export |
+| `--stable` | Produce a deterministic archive (no-op commits when nothing has changed) |
 
 ---
 
@@ -117,26 +110,24 @@ ophix-manage export_theme Midnight --rename MyBranding
 Import a theme from a `.tar.gz` archive produced by `export_theme`.
 
 ```bash
-ophix-manage import_theme exports/Midnight_theme.tar.gz
+ophix-manage import_theme exports/Ophix_theme.tar.gz
 ```
 
-Rename or override fields on import:
+Rename the theme on import:
 
 ```bash
-ophix-manage import_theme exports/Midnight_theme.tar.gz --rename Staging --title "Staging"
+ophix-manage import_theme exports/Ophix_theme.tar.gz --rename Staging
 ```
 
 Overwrite an existing theme with the same name:
 
 ```bash
-ophix-manage import_theme exports/Midnight_theme.tar.gz --force
+ophix-manage import_theme exports/Ophix_theme.tar.gz --force
 ```
 
 | Option | Description |
 | --- | --- |
 | `--rename <name>` | Rename the theme on import |
-| `--title <title>` | Override the theme title |
-| `--env-name <env>` | Override the env\_name |
 | `--force` | Overwrite an existing theme with the same name |
 
 ---
@@ -176,11 +167,3 @@ signal in `ophix-admin-interface`). If you delete it, it will come back on the n
 migration or upgrade. This is by design — the bundled theme is always available as a
 fallback. To use a different theme permanently, activate it with `set_theme` and leave
 the Ophix theme inactive; there is no need to delete it.
-
----
-
-## Server settings
-
-| Variable | Default | Description |
-| --- | --- | --- |
-| `SHOW_THEME_MODEL` | `False` | Show the Themes model in the admin navigation. Only needed if you want to manage themes directly through the database UI rather than via the commands above. |

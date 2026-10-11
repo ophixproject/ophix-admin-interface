@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Updated the Theme Tools docs page: examples now use the bundled "Ophix" theme
+  (guaranteed to exist) instead of the private "Midnight" theme; `export_theme`/
+  `import_theme` options corrected to match their real current flags (`--stable`
+  documented, `--strip-title`/`--strip-env-name`/`--title`/`--env-name` removed -
+  none of these exist anymore); removed a stale `SHOW_THEME_MODEL` setting
+  reference (no such setting exists - the Themes model is always registered) and
+  a stale note about per-theme titles (the server title lives solely in
+  `ServerSettings` now, not on `Theme`).
+
 - Refreshed the bundled default "Ophix" theme from a current server export —
   it now carries every `Theme` model field added since it was last synced
   (action button colors, tab border radius, body text color, and the
