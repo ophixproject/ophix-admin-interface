@@ -1,5 +1,15 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Refreshed the bundled default "Ophix" theme from a current server export —
+  it now carries every `Theme` model field added since it was last synced
+  (action button colors, tab border radius, body text color, and the
+  current disabled-row/related-modal dark-mode values), instead of falling
+  back to model defaults for fields that didn't exist yet. Logo and favicon
+  assets are unchanged (the favicon in that export was a stale 600×600
+  original from before it was resized to 32×32 — not re-applied).
+
 ## 2026.10.11.03
 
 - **Fixed two more issues on the M2M dual-listbox "selector" widget**
