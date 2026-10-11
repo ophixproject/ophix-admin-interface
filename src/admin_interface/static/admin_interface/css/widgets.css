@@ -77,23 +77,38 @@
    <fieldset><legend> instead of the ordinary label+flex-container pairing
    (the `field.is_fieldset` branch) -- the <legend> sits OUTSIDE
    .flex-container as a sibling, so this .flex-container's only children are
-   .help and .related-widget-wrapper, with no label present in the row at
-   all. The 170px offset above assumes a 160px label column always precedes
-   it on the same line -- untrue here, and the leftover 170px of slack was
-   just enough that both items landed on the SAME flex line instead of
-   wrapping, squeezing .related-widget-wrapper's own flex:1 growth (it has
-   min-width:0, near-zero hypothetical size before growth) into that sliver
-   instead of the real available row width -- the actual cause of the
-   narrow/overlapping selector widget seen live 2026-10-11. No label means
-   no offset to match, same reasoning as the existing checkbox-row
-   exclusion above (flush left, not indented). Confirmed via the real
-   rendered HTML for auth.User's permissions field, not guessed -- this
-   field type was never exercised by the earlier Django 6.1 alignment work
-   (ophix-tasks, Theme editor), neither of which has an instance of it. */
+   .help and .related-widget-wrapper (DOM order: help first, then the
+   widget), with no label present in the row at all.
+
+   First attempt (2026-10-11) tried keeping flex-row layout and just
+   zeroing the 170px offset, reasoning "no label, so no offset" -- wrong on
+   two counts, confirmed live: (1) the widget still needs to align with
+   where every other field's actual input starts (the 170px column), even
+   though THIS field has no label sharing its row to create that alignment
+   naturally; (2) relying on `order: 999` + flex-wrap to push .help below
+   the widget doesn't reliably work at the boundary this hits -- the
+   widget's hypothetical size is ~0 (flex-basis:0%, min-width:0) and
+   .help's is exactly 100%, summing to EXACTLY the line's full width, which
+   does not count as *exceeding* it, so browsers don't force a wrap; both
+   still shared one line, with .help now claiming the whole row and the
+   widget squeezed into whatever rounding error was left.
+
+   Fixed properly by taking this specific container out of flex-row layout
+   entirely -- plain block stacking needs no order/flex-basis arithmetic at
+   all, since the DOM order (widget, then help) already matches the wanted
+   visual order. Both children get the standard 170px field-column offset,
+   same as any ordinary field's control/help text. */
+.admin-interface fieldset > .flex-container:not(.checkbox-row) {
+    display: block;
+}
+.admin-interface fieldset > .flex-container:not(.checkbox-row) > .related-widget-wrapper,
 .admin-interface fieldset > .flex-container:not(.checkbox-row) > .help,
 .admin-interface fieldset > .flex-container:not(.checkbox-row) > ul.errorlist {
-    flex-basis: 100%;
-    margin-left: 0;
+    margin-left: 170px;
+}
+.admin-interface fieldset > .flex-container:not(.checkbox-row) > .help,
+.admin-interface fieldset > .flex-container:not(.checkbox-row) > ul.errorlist {
+    margin-top: 10px;
 }
 /* end-fix */
 
