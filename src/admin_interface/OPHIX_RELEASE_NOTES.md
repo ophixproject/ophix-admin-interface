@@ -1,5 +1,23 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- **Fixed misaligned field layout on the M2M dual-listbox "selector"
+  widget** (`filter_horizontal`/`filter_vertical` — e.g. the Users/Groups
+  permissions fields). Django wraps these fields differently from every
+  other field: in a nested `<fieldset><legend>` rather than the ordinary
+  label+flex-container pairing, with the legend sitting outside
+  `.flex-container` as a sibling — so this field's `.flex-container` has
+  no label among its children at all, just the help text and the widget
+  itself. The existing help-text layout rule assumes a label column always
+  precedes it on the same row and offsets accordingly; without a label
+  present, that left just enough slack for the help text and the widget to
+  land on the same flex line instead of wrapping onto separate ones,
+  squeezing the widget into a narrow sliver of its intended width. This
+  field type was never exercised by the earlier field-alignment work done
+  against the Scheduled Task and Theme editor forms, since neither has an
+  instance of it.
+
 ## 2026.10.11.01
 
 - **New: `admin_interface.filters.narrowing_filter()` — opt-in mutually-

@@ -70,6 +70,31 @@
     flex-basis: calc(100% - 170px);
     margin-left: 170px;
 }
+
+/* filter_horizontal/filter_vertical (the M2M dual-listbox "selector" widget,
+   e.g. Users/Groups permissions) are wrapped differently from every other
+   field: Django's fieldset.html puts them in their own nested
+   <fieldset><legend> instead of the ordinary label+flex-container pairing
+   (the `field.is_fieldset` branch) -- the <legend> sits OUTSIDE
+   .flex-container as a sibling, so this .flex-container's only children are
+   .help and .related-widget-wrapper, with no label present in the row at
+   all. The 170px offset above assumes a 160px label column always precedes
+   it on the same line -- untrue here, and the leftover 170px of slack was
+   just enough that both items landed on the SAME flex line instead of
+   wrapping, squeezing .related-widget-wrapper's own flex:1 growth (it has
+   min-width:0, near-zero hypothetical size before growth) into that sliver
+   instead of the real available row width -- the actual cause of the
+   narrow/overlapping selector widget seen live 2026-10-11. No label means
+   no offset to match, same reasoning as the existing checkbox-row
+   exclusion above (flush left, not indented). Confirmed via the real
+   rendered HTML for auth.User's permissions field, not guessed -- this
+   field type was never exercised by the earlier Django 6.1 alignment work
+   (ophix-tasks, Theme editor), neither of which has an instance of it. */
+.admin-interface fieldset > .flex-container:not(.checkbox-row) > .help,
+.admin-interface fieldset > .flex-container:not(.checkbox-row) > ul.errorlist {
+    flex-basis: 100%;
+    margin-left: 0;
+}
 /* end-fix */
 
 /* Wide fields (Description/Command textareas, URL fields, etc.) rendered full-width
