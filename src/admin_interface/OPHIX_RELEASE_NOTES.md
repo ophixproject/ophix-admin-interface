@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## 2026.10.11.03
+## 2026.10.11.02
 
 - **Fixed misaligned field layout on the M2M dual-listbox "selector"
   widget** (`filter_horizontal`/`filter_vertical` — e.g. the Users/Groups
