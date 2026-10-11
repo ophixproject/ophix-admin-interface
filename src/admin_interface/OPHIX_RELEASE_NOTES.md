@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.10.11.01
 
 - **New: `admin_interface.filters.narrowing_filter()` — opt-in mutually-
   narrowing changelist filters.** Any domain's `admin.py` can now declare
@@ -8,10 +8,7 @@
   list to whatever the *other* fields in the group currently have active
   — never by a field's own current value, so a selection already made
   through one of these filters can never become invalid purely because
-  another one in the group also narrowed. Nothing changes for any
-  existing admin until it's explicitly updated to use this — it's not a
-  global default, by design, given how much filter-dropdown behavior has
-  already shifted under everyone this session. Currently covers plain
+  another one in the group also narrowed. Currently covers plain
   CharField/TextField-style filters only (Django's default
   `AllValuesFieldListFilter`); FK-based filters (`RelatedFieldListFilter`)
   are a structurally different class and aren't supported yet, though the
