@@ -21,15 +21,36 @@
         });
 
         // Filter sidebar dropdowns.
-        // Navigation via select2:select is reliable; jQuery's trigger('change') does not
-        // consistently reach native addEventListener listeners wired by dropdown-filter.js.
+        // This is the real navigator for these on every changelist page: select2
+        // loads lazily (see below), which means it is never registered as a jQuery
+        // plugin yet by the time dropdown-filter.js's own DOMContentLoaded handler
+        // runs, so that file's select2-aware branch never actually executes here in
+        // practice -- confirmed live (2026-10-11): a real mouse-driven selection
+        // produces only this handler's `select2:select` event, never a jQuery
+        // `change` reaching dropdown-filter.js's `navigate()`. Navigation via
+        // select2:select is reliable; select2's own `change` notification is
+        // jQuery-trigger-only and does not reach a native addEventListener.
         $('.list-filter-dropdown select:not(.select2-hidden-accessible)').each(function() {
             $(this).select2({
                 minimumResultsForSearch: Infinity,
                 width: 'style',
             }).on('select2:select', function(e) {
                 var url = e.params.data.id;
-                if (url) window.location = url;
+                if (!url) return;
+                // ophix-server-base's custom.js persists changelist filter state
+                // in localStorage and silently restores it on any changelist load
+                // with no filter params in the URL, unless this exact
+                // sessionStorage key was set first. Setting it unconditionally
+                // here is safe: custom.js only ever reads it when the resulting
+                // URL has zero filter params, so it's simply ignored on every
+                // navigation that leaves other filters active. Same key
+                // convention as dropdown-filter.js's own (inert-on-changelists,
+                // see above) copy of this -- kept in sync by hand since the two
+                // live in separate packages.
+                try {
+                    sessionStorage.setItem('ophix-filter-reset:' + window.location.pathname, '1');
+                } catch (e) {}
+                window.location = url;
             });
         });
     }

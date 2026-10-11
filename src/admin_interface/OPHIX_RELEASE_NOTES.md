@@ -1,5 +1,31 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- **Fixed the real filter-sidebar "All" navigator — `2026.10.10.04`'s fix
+  patched the wrong file.** Confirmed live with a real mouse-driven select2
+  interaction (a scripted/extension-dispatched native `change` event takes
+  a different code path and gives a false "this works" result — which is
+  exactly what made `.04` look correct in automated testing while still
+  failing for real users): on every real changelist page, select2 is
+  lazy-loaded by `select2-init.js` *after* `dropdown-filter.js`'s own
+  `DOMContentLoaded` handler has already run, so that file's select2-aware
+  branch never actually executes — it always takes its native-listener
+  fallback instead, binding to an element at a point before select2 has
+  converted it. select2-init.js then loads asynchronously and initialises
+  the same element itself, attaching its *own* `select2:select` navigation
+  handler — which is what actually drives navigation for a real selection,
+  including "All". That handler had no knowledge of the `sessionStorage`
+  reset flag `ophix-server-base`'s `custom.js` checks for before restoring
+  a saved filter from `localStorage`, so it never set it — meaning the
+  revert `.04` was meant to fix kept happening regardless. Fixed by setting
+  that same flag in `select2-init.js`'s actual navigator instead.
+  `dropdown-filter.js`'s own copy of this logic is kept (it's still correct
+  for the case where select2 genuinely fails to load, falling back to a
+  plain native select), with its comments corrected to describe reality —
+  it was never dead code in principle, just dead in the one case everyone
+  (including two earlier fix attempts here) assumed it covered.
+
 ## 2026.10.10.04
 
 - **Fixed the real remaining cause of the filter-sidebar "All navigates

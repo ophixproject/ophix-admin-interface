@@ -5,3 +5,6 @@ dist/
 build/
 .venv/
 *.egg
+
+# Live-debugging scratch reports (browser-agent investigation notes, not source)
+FILTER_REVERT_BUG*.md
