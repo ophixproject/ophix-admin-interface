@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.10.10.05
 
 - **Fixed the real filter-sidebar "All" navigator — `2026.10.10.04`'s fix
   patched the wrong file.** Confirmed live with a real mouse-driven select2
