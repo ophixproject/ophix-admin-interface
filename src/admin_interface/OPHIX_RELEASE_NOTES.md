@@ -1,5 +1,25 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- **New: `admin_interface.filters.narrowing_filter()` — opt-in mutually-
+  narrowing changelist filters.** Any domain's `admin.py` can now declare
+  a group of `list_filter` fields that scope each other's own option
+  list to whatever the *other* fields in the group currently have active
+  — never by a field's own current value, so a selection already made
+  through one of these filters can never become invalid purely because
+  another one in the group also narrowed. Nothing changes for any
+  existing admin until it's explicitly updated to use this — it's not a
+  global default, by design, given how much filter-dropdown behavior has
+  already shifted under everyone this session. Currently covers plain
+  CharField/TextField-style filters only (Django's default
+  `AllValuesFieldListFilter`); FK-based filters (`RelatedFieldListFilter`)
+  are a structurally different class and aren't supported yet, though the
+  shared `NarrowingFilterMixin` is written so a sibling factory for those
+  can reuse it without reworking this one. First real use:
+  `ophix-revisions`' `RevisionCommitAdmin` (Record Type/Record Name/
+  Reason/Actor all mutually narrow each other).
+
 ## 2026.10.10.05
 
 - **Fixed the real filter-sidebar "All" navigator — `2026.10.10.04`'s fix
