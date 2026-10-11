@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.10.11.03
 
 - **Fixed misaligned field layout on the M2M dual-listbox "selector"
   widget** (`filter_horizontal`/`filter_vertical` — e.g. the Users/Groups
@@ -9,14 +9,14 @@
   label+flex-container pairing, with the legend sitting outside
   `.flex-container` as a sibling — so this field's `.flex-container` has
   no label among its children at all, just the help text and the widget
-  itself. The existing help-text layout rule assumes a label column always
-  precedes it on the same row and offsets accordingly; without a label
-  present, that left just enough slack for the help text and the widget to
-  land on the same flex line instead of wrapping onto separate ones,
-  squeezing the widget into a narrow sliver of its intended width. This
-  field type was never exercised by the earlier field-alignment work done
-  against the Scheduled Task and Theme editor forms, since neither has an
-  instance of it.
+  itself. The widget now aligns with the same field column every other
+  field's input starts at, with its help text following below it — this
+  container is laid out as a plain block stack rather than a flex row,
+  since there's no label sharing the row to justify flex-based
+  label/field pairing, and DOM order already matches the wanted visual
+  order (widget, then help). This field type was never exercised by the
+  earlier field-alignment work done against the Scheduled Task and Theme
+  editor forms, since neither has an instance of it.
 
 ## 2026.10.11.01
 
