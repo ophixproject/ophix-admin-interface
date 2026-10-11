@@ -1,6 +1,6 @@
 # Ophix Admin Interface Release Notes
 
-## Unreleased
+## 2026.10.11.03
 
 - **Fixed two more issues on the M2M dual-listbox "selector" widget**
   (`filter_horizontal`/`filter_vertical`, e.g. Users/Groups permissions),
