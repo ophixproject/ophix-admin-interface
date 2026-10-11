@@ -25,7 +25,29 @@
             select.dataset.filterInitialized = '1';
 
             function navigate(event) {
-                if (event.target.value) window.location = event.target.value;
+                if (!event.target.value) return;
+                // ophix-server-base's custom.js persists changelist filter
+                // state in localStorage (keyed by pathname) and silently
+                // restores it whenever a changelist loads with no filter
+                // params in the URL -- UNLESS this exact sessionStorage key
+                // was set first. Its own click handler sets this when the
+                // "Clear all filters" link (or the last remaining filter's
+                // own "X" removal link) is clicked, since those are plain
+                // <a href="?"> anchors it can bind to directly. A
+                // dropdown-driven selection (including "All") never goes
+                // through that handler at all -- it navigates via this
+                // window.location assignment instead -- so without this,
+                // selecting "All" here would clear the URL correctly for a
+                // moment, then get silently overwritten back to the old
+                // filtered URL the instant that script's own check runs on
+                // the next page load. Key format intentionally mirrors
+                // custom.js's own 'ophix-filter-reset:' + pathname exactly;
+                // kept in sync by hand since the two live in separate
+                // packages.
+                try {
+                    sessionStorage.setItem('ophix-filter-reset:' + window.location.pathname, '1');
+                } catch (e) {}
+                window.location = event.target.value;
             }
 
             if ($ && typeof $.fn.select2 === 'function') {

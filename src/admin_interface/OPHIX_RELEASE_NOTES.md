@@ -1,5 +1,33 @@
 # Ophix Admin Interface Release Notes
 
+## 2026.10.10.04
+
+- **Fixed the real remaining cause of the filter-sidebar "All navigates
+  then reverts" bug — a cross-package interaction with
+  `ophix-server-base`'s own changelist filter-persistence feature, not
+  the duplicate-script race already fixed in 2026.10.10.03.** That
+  earlier fix was real and necessary, but didn't fully close this bug:
+  `ophix-server-base`'s `custom.js` (added 2026-06-03, present in every
+  release since) saves active filter params to `localStorage` keyed by
+  pathname, and silently restores them whenever a changelist loads with
+  no filter params in the URL — *unless* a specific `sessionStorage`
+  "reset" flag was set first. That flag is only ever set by a click
+  handler bound to plain `<a href="?">` anchors inside the filter
+  sidebar (the "Clear all filters" link, and the last remaining filter's
+  own "X" removal link) — a dropdown-driven selection (including "All")
+  never goes through that code at all, since it navigates via a
+  `window.location` assignment inside a `change` handler, not a real
+  anchor click. So selecting "All" correctly cleared the URL for a
+  moment, then that script's own check on the next page load found no
+  reset flag, found the old saved filter in `localStorage`, and silently
+  redirected right back to it. Fixed by having `dropdown-filter.js` set
+  the identical `sessionStorage` key before navigating, matching exactly
+  what the "Clear all filters" link's own handler already does for a
+  plain anchor click. The two files live in separate packages and share
+  this key format by convention only (kept in sync by hand, documented in
+  both places) rather than any formal coordination mechanism between
+  them.
+
 ## 2026.10.10.03
 
 - **Fixed a real, long-standing bug: selecting "All" (or any other option)
