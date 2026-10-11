@@ -167,3 +167,11 @@ signal in `ophix-admin-interface`). If you delete it, it will come back on the n
 migration or upgrade. This is by design — the bundled theme is always available as a
 fallback. To use a different theme permanently, activate it with `set_theme` and leave
 the Ophix theme inactive; there is no need to delete it.
+
+---
+
+## Server settings
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `SHOW_THEME_MODEL` | `False` | Show the Themes model in the admin navigation. Only needed if you want to manage themes directly through the database UI rather than via the commands above. |

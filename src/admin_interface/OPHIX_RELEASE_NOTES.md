@@ -6,10 +6,10 @@
   (guaranteed to exist) instead of the private "Midnight" theme; `export_theme`/
   `import_theme` options corrected to match their real current flags (`--stable`
   documented, `--strip-title`/`--strip-env-name`/`--title`/`--env-name` removed -
-  none of these exist anymore); removed a stale `SHOW_THEME_MODEL` setting
-  reference (no such setting exists - the Themes model is always registered) and
-  a stale note about per-theme titles (the server title lives solely in
-  `ServerSettings` now, not on `Theme`).
+  none of these exist anymore); removed a stale note about per-theme titles (the
+  server title lives solely in `ServerSettings` now, not on `Theme`). The
+  `SHOW_THEME_MODEL` setting documented on this page is real (defined in
+  `ophix-server-base`) - unchanged.
 
 - Refreshed the bundled default "Ophix" theme from a current server export —
   it now carries every `Theme` model field added since it was last synced
