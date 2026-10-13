@@ -1,5 +1,12 @@
 # Ophix Admin Interface Release Notes
 
+## Unreleased
+
+- Corrected a comment in `select2-init.js` describing how the filter-sidebar
+  dropdown's selection handler interacts with `ophix-server-base`'s filter-
+  memory mechanism — no functional change here; the real fix landed in
+  `ophix-server-base`'s `custom.js` (see that package's release notes).
+
 ## 2026.10.11.04
 
 - Updated the Theme Tools docs page: examples now use the bundled "Ophix" theme

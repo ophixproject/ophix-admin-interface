@@ -46,12 +46,14 @@
                 // in localStorage and silently restores it on any changelist load
                 // with no filter params in the URL, unless this exact
                 // sessionStorage key was set first. Setting it unconditionally
-                // here is safe: custom.js only ever reads it when the resulting
-                // URL has zero filter params, so it's simply ignored on every
-                // navigation that leaves other filters active. Same key
-                // convention as dropdown-filter.js's own (inert-on-changelists,
-                // see above) copy of this -- kept in sync by hand since the two
-                // live in separate packages.
+                // here is fine even when other filters stay active: custom.js
+                // consumes (clears) this key on every page load regardless of
+                // outcome, so it never lingers to wrongly suppress a restore on
+                // some later, unrelated bare navigation (a real bug this project
+                // hit — see custom.js's own comment). Same key convention as
+                // dropdown-filter.js's own (inert-on-changelists, see above)
+                // copy of this -- kept in sync by hand since the two live in
+                // separate packages.
                 try {
                     sessionStorage.setItem('ophix-filter-reset:' + window.location.pathname, '1');
                 } catch (e) {}
